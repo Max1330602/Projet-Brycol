@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App_Brycol.VuesModele;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,25 +11,29 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace App_Brycol.Vues
 {
     /// <summary>
-    /// Logique d'interaction pour PlanDeTravail.xaml
+    /// Logique d'interaction pour Catalogue.xaml
     /// </summary>
-    public partial class PlanDeTravail : UserControl
+    public partial class Catalogue : Window
     {
-        public PlanDeTravail()
+        public Catalogue()
         {
             InitializeComponent();
+            DataContext = new Item_VM();
         }
 
-        private void btnCatalogue_Click(object sender, RoutedEventArgs e)
+        private void btnAjouter_Click(object sender, RoutedEventArgs e)
         {
-            Catalogue popUp = new Catalogue();
-            popUp.ShowDialog();
+
+        }
+
+        private void btnRetour_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

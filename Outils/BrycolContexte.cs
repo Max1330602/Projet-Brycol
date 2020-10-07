@@ -1,0 +1,22 @@
+﻿using App_Brycol.Modele;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace App_Brycol.Outils
+{
+    class BrycolContexte : DbContext
+    {
+        public DbSet<Item> Meubles { get; set; }
+
+        public BrycolContexte() : base("name=connexionBrycol")
+        {
+            //Database.SetInitializer<BrycolContexte>(new DropCreateDatabaseAlways<BrycolContexte>());
+            Database.SetInitializer<BrycolContexte>(new CreateDatabaseIfNotExists<BrycolContexte>());
+        }
+    }
+
+}

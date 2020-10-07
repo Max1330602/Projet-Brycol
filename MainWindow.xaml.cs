@@ -1,4 +1,5 @@
-﻿using App_Brycol.Vues;
+﻿using App_Brycol.Outils;
+using App_Brycol.Vues;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace App_Brycol
         public MainWindow()
         {
             InitializeComponent();
+            OutilEF outilEF = new OutilEF();
+
         }
 
         private void btnCreerPiece_Click(object sender, RoutedEventArgs e)
