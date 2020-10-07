@@ -1,0 +1,23 @@
+﻿<Window x:Class="App_Brycol.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:App_Brycol"
+        mc:Ignorable="d"
+        Title="Brycol" Height="600" Width="800">
+    <Grid Name="gridMainWindow">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="375"></RowDefinition>
+            <RowDefinition Height="125"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0" Background="LightGray" Grid.ColumnSpan="2"></Border>
+        <Image Grid.Row="0" Source="images/logo.png"></Image>
+        <Rectangle Stroke="Black" Grid.Row="1" Margin="75,65,75,90"></Rectangle>
+        <Button Background="Transparent" FontFamily="Constantia Bold"  FontSize="15" Name="btnCreerPiece" Click="btnCreerPiece_Click" Grid.Row="1" Content="Créer une pièce" Height="50" Width="150" VerticalAlignment="Top" Margin="260,100,270,0"></Button>
+        <Button Background="Transparent" FontFamily="Constantia Bold"  FontSize="15" Name="btnTeleverserPiece" Click="btnTeleverserPiece_Click" Grid.Row="1" Content="Téléverser une pièce" Height="50" Width="150" VerticalAlignment="Bottom" Margin="220,0,230,150"></Button>
+        <ContentPresenter Name="presenteurContenu" Grid.RowSpan="3"></ContentPresenter>
+    </Grid>
+</Window>
