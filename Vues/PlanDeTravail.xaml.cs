@@ -30,5 +30,40 @@ namespace App_Brycol.Vues
             Catalogue popUp = new Catalogue();
             popUp.ShowDialog();
         }
+
+        private void btnAide_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn2D_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn3D_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnModifierItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSupprimerItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnModifierPiece_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnProjet_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
