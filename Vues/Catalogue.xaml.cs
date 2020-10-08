@@ -26,11 +26,6 @@ namespace App_Brycol.Vues
             DataContext = new Item_VM();
         }
 
-        private void btnAjouter_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void btnRetour_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

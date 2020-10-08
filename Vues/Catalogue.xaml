@@ -47,7 +47,7 @@
             <TextBlock Grid.Row="5" Text="Pìèce:"></TextBlock>
             <TextBox Grid.Row="5" Grid.Column="1"></TextBox>
         </Grid>
-        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DG_items" Grid.Row="1" Grid.Column="1" ItemsSource="{ Binding SommaireItems}">
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DG_items" Grid.Row="1" Grid.Column="1" ItemsSource="{ Binding SommaireItems}" SelectedItem="{ Binding ItemSelectionne}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom" Binding="{ Binding Nom }"></DataGridTextColumn>
                 <DataGridTextColumn Header="Prix" Binding="{ Binding Cout }"></DataGridTextColumn>
@@ -63,9 +63,15 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Text="Liste des éléments ajoutés"></TextBlock>
-            <ListBox Grid.Row="1"></ListBox>  
+
+            <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DG_ListeItems" Grid.Row="1" Grid.Column="2" ItemsSource="{ Binding ListeItems}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{ Binding Nom }"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
         </Grid>
-        <Button Name="btnAjouter" Click="btnAjouter_Click" Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="1" Width="100" Height="25" Content="Ajouter" HorizontalAlignment="Right" Margin="0,0,10,10"></Button>
+        <Button Name="btnAjouter" Command="{ Binding cmdAjouterItem }" Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="1" Width="100" Height="25" Content="Ajouter" HorizontalAlignment="Right" Margin="0,0,10,10"></Button>
         <Button Name="btnRetour" Click="btnRetour_Click" Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="1" Width="100" Height="25" Content="Retour" HorizontalAlignment="Right" Margin="0,0,125,10"></Button>
 
     </Grid>

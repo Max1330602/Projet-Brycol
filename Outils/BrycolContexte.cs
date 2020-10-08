@@ -11,7 +11,7 @@ namespace App_Brycol.Outils
     class BrycolContexte : DbContext
     {
         public DbSet<Item> Meubles { get; set; }
-
+        public DbSet<ItemsPlan> lstItems { get; set; }
         public BrycolContexte() : base("name=connexionBrycol")
         {
             //Database.SetInitializer<BrycolContexte>(new DropCreateDatabaseAlways<BrycolContexte>());
