@@ -71,5 +71,10 @@ namespace App_Brycol.Vues
             Projet popUp = new Projet();
             popUp.ShowDialog();
         }
+
+        private void btnThemeSombre_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
