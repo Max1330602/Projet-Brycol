@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ubiety.Dns.Core;
 
 namespace App_Brycol.Vues
 {
@@ -23,17 +24,13 @@ namespace App_Brycol.Vues
         public PlanDeTravail()
         {
             InitializeComponent();
-        }
-
-        private void btnCatalogue_Click(object sender, RoutedEventArgs e)
-        {
-            Catalogue popUp = new Catalogue();
-            popUp.ShowDialog();
+            Piece2D Plan2D = new Piece2D();
         }
 
         private void btnAide_Click(object sender, RoutedEventArgs e)
         {
-
+            Aide popUp = new Aide();
+            popUp.ShowDialog();
         }
 
         private void btn2D_Click(object sender, RoutedEventArgs e)
@@ -43,27 +40,36 @@ namespace App_Brycol.Vues
 
         private void btn3D_Click(object sender, RoutedEventArgs e)
         {
+            
+        }
 
+        private void btnCatalogue_Click(object sender, RoutedEventArgs e)
+        {
+            Catalogue popUp = new Catalogue();
+            popUp.ShowDialog();
         }
 
         private void btnModifierItem_Click(object sender, RoutedEventArgs e)
         {
-
+            ModifierItem popUp = new ModifierItem();
+            popUp.ShowDialog();
         }
 
         private void btnSupprimerItem_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Voulez-vraiment supprimer cet item ?", "Suppression d'item", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
         }
 
         private void btnModifierPiece_Click(object sender, RoutedEventArgs e)
         {
-
+            DimensionsPiece popUp = new DimensionsPiece();
+            popUp.ShowDialog();
         }
 
         private void btnProjet_Click(object sender, RoutedEventArgs e)
         {
-
+            Projet popUp = new Projet();
+            popUp.ShowDialog();
         }
     }
 }
