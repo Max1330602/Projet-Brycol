@@ -125,8 +125,14 @@
     <Compile Include="Vues\Catalogue.xaml.cs">
       <DependentUpon>Catalogue.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vues\Cout.xaml.cs">
+      <DependentUpon>Cout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vues\DimensionsPiece.xaml.cs">
       <DependentUpon>DimensionsPiece.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Enregistrer.xaml.cs">
+      <DependentUpon>Enregistrer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vues\ModifierItem.xaml.cs">
       <DependentUpon>ModifierItem.xaml</DependentUpon>
@@ -160,7 +166,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Vues\Cout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Vues\DimensionsPiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\Enregistrer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

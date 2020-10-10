@@ -76,5 +76,17 @@ namespace App_Brycol.Vues
         {
 
         }
+
+        private void btnCoutPiece_Click(object sender, RoutedEventArgs e)
+        {
+            Cout popUp = new Cout();
+            popUp.ShowDialog();
+        }
+
+        private void btnEnregistrer_Click(object sender, RoutedEventArgs e)
+        {
+            Enregistrer popUp = new Enregistrer();
+            popUp.ShowDialog();
+        }
     }
 }
