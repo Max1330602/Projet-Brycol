@@ -23,5 +23,10 @@ namespace App_Brycol.Vues
         {
             InitializeComponent();
         }
+
+        private void btnTerminer_click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

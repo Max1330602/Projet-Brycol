@@ -7,6 +7,29 @@
         mc:Ignorable="d"
         Title="Aide" Height="450" Width="800">
     <Grid>
-        
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.ColumnSpan="3" Background="LightGray"></Border>
+
+        <Image Grid.Row="0" Grid.Column="1" Source="/images/logo.png" HorizontalAlignment="Right"></Image>
+
+        <Label Grid.Row="0" FontSize="20" Height="40" Width="500" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Aide pour l'application"/>
+        <TextBlock Grid.Row="1" FontSize="15" TextWrapping="Wrap" Margin="10,10,10,10"> 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam accumsan augue turpis, eget condimentum nulla placerat in. Nunc lacus eros, tincidunt ac luctus et, sollicitudin 
+            non urna. Donec consectetur ligula id lacus ullamcorper commodo vel vel dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum 
+            ornare nibh lectus, convallis lobortis lorem pretium et. Maecenas eu sollicitudin nulla, ac feugiat nunc. Duis aliquam lacus sit amet nisl dignissim consequat. Integer neque dui,
+            vulputate quis consequat eu, volutpat laoreet ante.
+        </TextBlock>
+
+        <Button x:Name="btnTerminer" Grid.Row="1" Height="40" Width="80" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,10,10,10" Click="btnTerminer_click"> 
+            Terminer
+        </Button>
     </Grid>
 </Window>
