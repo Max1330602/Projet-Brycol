@@ -79,7 +79,8 @@ namespace App_Brycol.Vues
 
         private void btnCoutPiece_Click(object sender, RoutedEventArgs e)
         {
-            Cout popUp = new Cout();
+            string UCEcran = "Piece";
+            Cout popUp = new Cout(UCEcran);
             popUp.ShowDialog();
         }
 

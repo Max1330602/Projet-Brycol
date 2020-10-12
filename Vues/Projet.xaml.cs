@@ -43,7 +43,8 @@ namespace App_Brycol.Vues
 
         private void btnCoutProjet_Click(object sender, RoutedEventArgs e)
         {
-            Cout popUp = new Cout();
+            string UCEcran = "Projet";
+            Cout popUp = new Cout(UCEcran);
             popUp.ShowDialog();
         }
 
