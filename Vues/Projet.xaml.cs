@@ -23,5 +23,34 @@ namespace App_Brycol.Vues
         {
             InitializeComponent();
         }
+
+        private void btnAjouterPiece_Click(object sender, RoutedEventArgs e)
+        {
+            DimensionsPiece popUp = new DimensionsPiece();
+            popUp.ShowDialog();
+        }
+
+        private void btnSupprimerPiece_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Voulez-vraiment supprimer cette pièce ?", "Suppression de pièce", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+        }
+
+        private void btnPlan_Click(object sender, RoutedEventArgs e)
+        {
+            // PlanDeTravail popUp = new PlanDeTravail();
+            // popUp.ShowDialog();
+        }
+
+        private void btnCoutProjet_Click(object sender, RoutedEventArgs e)
+        {
+            Cout popUp = new Cout();
+            popUp.ShowDialog();
+        }
+
+        private void btnQuitter_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }
