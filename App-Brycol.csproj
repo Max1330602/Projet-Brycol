@@ -147,6 +147,12 @@
     <Compile Include="Vues\Projet.xaml.cs">
       <DependentUpon>Projet.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vues\UCCoutPiece.xaml.cs">
+      <DependentUpon>UCCoutPiece.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\UCCoutProjet.xaml.cs">
+      <DependentUpon>UCCoutProjet.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -192,6 +198,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vues\Projet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\UCCoutPiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\UCCoutProjet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

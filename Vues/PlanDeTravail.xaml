@@ -36,10 +36,10 @@
         <Button Grid.Column="0" Grid.Row="1" Name="btnEnregistrer" Click="btnEnregistrer_Click"  Width="100" Height="25" Content="Enregistrer" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,265,0,0"></Button>
 
 
-        <!--<Rectangle Grid.Column="1" Grid.Row="1" Stroke="Black" StrokeThickness="2" Margin="10,10,10,10">
-        </Rectangle>-->
-        
-        <!-- Plan 2D de la pièce-->
+        <Rectangle Grid.Column="1" Grid.Row="1" Stroke="Black" StrokeThickness="2" Margin="10,10,10,10">
+        </Rectangle>
+
+            <!-- Plan 2D de la pièce-->
         <local:Piece2D Grid.Column="1" Grid.Row="1"></local:Piece2D>
 
         
