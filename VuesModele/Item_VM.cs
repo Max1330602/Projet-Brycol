@@ -4,10 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace App_Brycol.VuesModele
 {
@@ -23,7 +25,10 @@ namespace App_Brycol.VuesModele
             var iReq = from i in OutilEF.brycolContexte.Meubles select i;
             
             foreach (Item i in iReq)
-                SommaireItems.Add(i);
+                SommaireItems.Add(i);            
+
+
+
 
         }
         #region Propriétés
@@ -88,8 +93,6 @@ namespace App_Brycol.VuesModele
                 OnPropertyChanged("Nom");
             }
         }
-
-
         #endregion
 
 

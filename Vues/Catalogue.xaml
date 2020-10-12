@@ -53,7 +53,13 @@
                 <DataGridTextColumn Header="Prix" Binding="{ Binding Cout }"></DataGridTextColumn>
                 <DataGridTextColumn Header="Catégorie"></DataGridTextColumn>
                 <DataGridTextColumn Header="Pièce" Binding="{ Binding IdTypeDePiece }"></DataGridTextColumn>
-                <DataGridTextColumn Header="Image"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Image" Width="100" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Name="imgItem" Height="75" Width="75" Source="{ Binding ImgItem }"></Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 

@@ -1,6 +1,10 @@
-﻿using App_Brycol.VuesModele;
+﻿using App_Brycol.Outils;
+using App_Brycol.VuesModele;
+using MySqlX.XDevAPI.Relational;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -24,6 +29,7 @@ namespace App_Brycol.Vues
         {
             InitializeComponent();
             DataContext = new Item_VM();
+
         }
 
         private void btnRetour_Click(object sender, RoutedEventArgs e)

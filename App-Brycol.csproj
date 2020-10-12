@@ -89,6 +89,7 @@
     </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -227,6 +228,36 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\soleil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\item10.png" />
+    <Resource Include="images\Items\item11.png" />
+    <Resource Include="images\Items\item12.png" />
+    <Resource Include="images\Items\item13.png" />
+    <Resource Include="images\Items\item14.png" />
+    <Resource Include="images\Items\item15.png" />
+    <Resource Include="images\Items\item16.png" />
+    <Resource Include="images\Items\item17.png" />
+    <Resource Include="images\Items\item18.png" />
+    <Resource Include="images\Items\item19.png" />
+    <Resource Include="images\Items\item2.png" />
+    <Resource Include="images\Items\item20.png" />
+    <Resource Include="images\Items\item21.png" />
+    <Resource Include="images\Items\item22.png" />
+    <Resource Include="images\Items\item23.png" />
+    <Resource Include="images\Items\item3.png" />
+    <Resource Include="images\Items\item4.png" />
+    <Resource Include="images\Items\item5.png" />
+    <Resource Include="images\Items\item6.png" />
+    <Resource Include="images\Items\item7.png" />
+    <Resource Include="images\Items\item8.png" />
+    <Resource Include="images\Items\item9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\item1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\item0.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
