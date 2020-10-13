@@ -27,9 +27,6 @@ namespace App_Brycol.VuesModele
             foreach (Item i in iReq)
                 SommaireItems.Add(i);            
 
-
-
-
         }
         #region Propriétés
 
@@ -102,6 +99,7 @@ namespace App_Brycol.VuesModele
 
             i.Item = _itemSelectionne;
             i.emplacement = POS_PAR_DEFAUT;
+            // HARD CODE
             i.idPlan = 1;
 
             ListeItems.Add(i.Item);

@@ -48,6 +48,7 @@ namespace App_Brycol.Vues
 
         private void btnAnnuler_Click(object sender, RoutedEventArgs e)
         {
+            //RETOUR ÉCRAN PROJET
             this.Close();
         }
     }

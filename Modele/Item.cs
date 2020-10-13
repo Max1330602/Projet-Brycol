@@ -15,6 +15,7 @@ namespace App_Brycol.Modele
     {
         public int ID { get; set; }
         public int IdTypeDePiece { get; set; }
+        public int IdCategorie { get; set; }
         public string Nom { get; set; }
         public float Largeur { get; set; }
         public float Longueur { get; set; }
