@@ -39,13 +39,11 @@ namespace App_Brycol.Modele
                 }
                 catch (Exception e)
                 {
-                    if (e.Message.Contains("Impossible de trouver la ressource"))
-                    {
                         bmiItem = new BitmapImage();
                         bmiItem.BeginInit();
                         bmiItem.UriSource = new Uri("pack://application:,,,/images/Items/item0.png");
                         bmiItem.EndInit();
-                    }
+
 
                 }
                 return bmiItem;
