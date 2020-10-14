@@ -37,15 +37,15 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="Filtres" FontSize="15" FontWeight="Bold"></TextBlock>
             <TextBlock Grid.Row="1" Text="Nom:"></TextBlock>
-            <TextBox Grid.Row="1" Grid.Column="1"></TextBox>
+            <TextBox Text="{Binding FiltreNom, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"></TextBox>
             <TextBlock Grid.Row="2" Text="Prix min.:"></TextBlock>
-            <TextBox Grid.Row="2" Grid.Column="1"></TextBox>
-            <TextBlock Grid.Row="3" Text="Prix max.:"></TextBlock>
-            <TextBox Grid.Row="3" Grid.Column="1"></TextBox>
+            <TextBox Name="txtPrixMin" TextChanged="txt_TextChanged" Text="{Binding FiltrePrixMin, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2"></TextBox>
+            <TextBlock Grid.Row="3"  Text="Prix max.:"></TextBlock>
+            <TextBox Name="txtPrixMax"  Text="{Binding FiltrePrixMax, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="3"></TextBox>
             <TextBlock Grid.Row="4" Text="Catégorie:"></TextBlock>
-            <TextBox Grid.Row="4" Grid.Column="1"></TextBox>
+            <TextBox Text="{Binding FiltreCategorie, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="4"></TextBox>
             <TextBlock Grid.Row="5" Text="Pìèce:"></TextBlock>
-            <TextBox Grid.Row="5" Grid.Column="1"></TextBox>
+            <TextBox Text="{Binding FiltrePiece, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="5"></TextBox>
         </Grid>
         <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DG_items" Grid.Row="1" Grid.Column="1" ItemsSource="{ Binding SommaireItems}" SelectedItem="{ Binding ItemSelectionne}">
             <DataGrid.Columns>

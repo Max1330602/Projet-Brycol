@@ -27,6 +27,7 @@ namespace App_Brycol.Vues
 
         private void btnContinuer_Click(object sender, RoutedEventArgs e)
         {
+
             Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
             ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
             this.Close();
