@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App_Brycol.VuesModele;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace App_Brycol.Vues
         public UCCoutProjet()
         {
             InitializeComponent();
+            DataContext = new Item_VM();
         }
     }
 }

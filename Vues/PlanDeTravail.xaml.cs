@@ -68,7 +68,7 @@ namespace App_Brycol.Vues
 
         private void btnProjet_Click(object sender, RoutedEventArgs e)
         {
-            Projet popUp = new Projet();
+            GererProjet popUp = new GererProjet();
             popUp.ShowDialog();
         }
 

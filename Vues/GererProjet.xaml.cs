@@ -17,9 +17,9 @@ namespace App_Brycol.Vues
     /// <summary>
     /// Logique d'interaction pour Projet.xaml
     /// </summary>
-    public partial class Projet : Window
+    public partial class GererProjet : Window
     {
-        public Projet()
+        public GererProjet()
         {
             InitializeComponent();
         }

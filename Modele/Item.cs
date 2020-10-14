@@ -15,6 +15,7 @@ namespace App_Brycol.Modele
     {
         public int ID { get; set; }
         public int IdTypeDePiece { get; set; }
+        public int IdCategorie { get; set; }
         public string Nom { get; set; }
         public float Largeur { get; set; }
         public float Longueur { get; set; }
@@ -38,13 +39,11 @@ namespace App_Brycol.Modele
                 }
                 catch (Exception e)
                 {
-                    if (e.Message.Contains("Impossible de trouver la ressource"))
-                    {
                         bmiItem = new BitmapImage();
                         bmiItem.BeginInit();
                         bmiItem.UriSource = new Uri("pack://application:,,,/images/Items/item0.png");
                         bmiItem.EndInit();
-                    }
+
 
                 }
                 return bmiItem;

@@ -116,10 +116,13 @@
     </ApplicationDefinition>
     <Compile Include="Modele\Item.cs" />
     <Compile Include="Modele\ItemsPlan.cs" />
+    <Compile Include="Modele\Piece.cs" />
+    <Compile Include="Modele\Projet.cs" />
     <Compile Include="Outils\BrycolContexte.cs" />
     <Compile Include="Outils\Commande.cs" />
     <Compile Include="Outils\OutilEF.cs" />
     <Compile Include="VuesModele\Item_VM.cs" />
+    <Compile Include="VuesModele\Projet_VM.cs" />
     <Compile Include="Vues\Aide.xaml.cs">
       <DependentUpon>Aide.xaml</DependentUpon>
     </Compile>
@@ -144,8 +147,8 @@
     <Compile Include="Vues\PlanDeTravail.xaml.cs">
       <DependentUpon>PlanDeTravail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vues\Projet.xaml.cs">
-      <DependentUpon>Projet.xaml</DependentUpon>
+    <Compile Include="Vues\GererProjet.xaml.cs">
+      <DependentUpon>GererProjet.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vues\UCCoutPiece.xaml.cs">
       <DependentUpon>UCCoutPiece.xaml</DependentUpon>
@@ -197,7 +200,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vues\Projet.xaml">
+    <Page Include="Vues\GererProjet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
