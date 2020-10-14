@@ -20,18 +20,22 @@ namespace App_Brycol.VuesModele
             cmdAjouterItem = new Commande(AjouterItem);
 
             SommaireItems = new ObservableCollection<Item>();
-            ListeItems = new ObservableCollection<Item>();
-
+            FiltrePrixMax = PRIXMAX;
+            FiltrePrixMin = PRIXMIN;
             var iReq = from i in OutilEF.brycolContexte.Meubles select i;
             
             foreach (Item i in iReq)
-                SommaireItems.Add(i);            
+                SommaireItems.Add(i);
+            Items = SommaireItems;
 
         }
         #region Propriétés
 
         public ICommand cmdAjouterItem { get; set; }
         public const int POS_PAR_DEFAUT = 0;
+        public const int PRIXMAX = 1000000;
+        public const int PRIXMIN = 0;
+        public ObservableCollection<Item> Items;
 
         private ObservableCollection<Item> _sommaireItems;
         public ObservableCollection<Item> SommaireItems
@@ -42,7 +46,7 @@ namespace App_Brycol.VuesModele
                 _sommaireItems = value;
                 OnPropertyChanged("SommaireItems");
             }
-        }
+        }      
 
         private Item _itemSelectionne;
         public Item ItemSelectionne
@@ -53,10 +57,6 @@ namespace App_Brycol.VuesModele
                 if (value != null)
                 {
                     _itemSelectionne = value;
-                    if (_itemSelectionne != null)
-                    {
-
-                    }
                 }
                 else 
                 {
@@ -90,8 +90,73 @@ namespace App_Brycol.VuesModele
                 OnPropertyChanged("Nom");
             }
         }
+
+        private string _filtreNom;
+        public string FiltreNom
+        {
+            get 
+            {
+                return _filtreNom;
+            }
+            set
+            {
+                _filtreNom = value;
+                OnPropertyChanged("Filtre");
+                filtrer();
+            }
+        }
+
+        private decimal _filtrePrixMin;
+        public decimal FiltrePrixMin 
+        {
+            get
+            {
+                return _filtrePrixMin;
+            }
+            set
+            {
+                _filtrePrixMin = value;
+                OnPropertyChanged("FiltrePrixMin");
+                filtrer();
+            }
+        }
+
+        private decimal _filtrePrixMax;
+        public decimal FiltrePrixMax 
+        {
+            get
+            {
+                return _filtrePrixMax;
+            }
+            set
+            {
+                _filtrePrixMax = value;
+                OnPropertyChanged("FiltrePrixMax");
+                filtrer();
+            }
+        }
         #endregion
 
+
+        public void filtrer() 
+        {
+            if (SommaireItems != null && SommaireItems.Count != 0)
+            {
+                SommaireItems = Items;
+                if(FiltreNom == null)
+                    SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.Cout > FiltrePrixMin && si.Cout < FiltrePrixMax));
+                else
+                    SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.Nom.Contains(FiltreNom) && si.Cout > FiltrePrixMin && si.Cout < FiltrePrixMax));
+            }
+            else if (SommaireItems.Count == 0 && (FiltreNom != null  || FiltrePrixMin != 0 || FiltrePrixMax != 1000000)) 
+            {
+                SommaireItems = Items;
+                if (FiltreNom == null)
+                    SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.Cout > FiltrePrixMin && si.Cout < FiltrePrixMax));
+                else
+                    SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.Nom.Contains(FiltreNom) && si.Cout > FiltrePrixMin && si.Cout < FiltrePrixMax));
+            }
+        }
 
         public void AjouterItem(Object param)
         { 
@@ -101,11 +166,12 @@ namespace App_Brycol.VuesModele
             i.emplacement = POS_PAR_DEFAUT;
             // HARD CODE
             i.idPlan = 1;
-
-            ListeItems.Add(i.Item);
-            OutilEF.brycolContexte.lstItems.Add(i);
-            OutilEF.brycolContexte.SaveChanges();
-
+            if (i.Item != null)
+            {
+                ListeItems.Add(i.Item);
+                OutilEF.brycolContexte.lstItems.Add(i);
+                OutilEF.brycolContexte.SaveChanges();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
