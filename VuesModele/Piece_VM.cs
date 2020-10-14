@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -48,6 +49,7 @@ namespace App_Brycol.VuesModele
 
         public void CreerPiece(Object param)
         {
+
             Piece p = new Piece();
             p.IdProjet = 1;
             //HARDCODE
@@ -63,8 +65,8 @@ namespace App_Brycol.VuesModele
             OutilEF.brycolContexte.Pieces.Add(p);
             OutilEF.brycolContexte.SaveChanges();
 
-          
-            
+
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
