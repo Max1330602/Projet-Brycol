@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App_Brycol.VuesModele;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace App_Brycol.Vues
         public DimensionsPiece()
         {
             InitializeComponent();
+
+            DataContext = new Piece_VM();
         }
 
         private void btnContinuer_Click(object sender, RoutedEventArgs e)
