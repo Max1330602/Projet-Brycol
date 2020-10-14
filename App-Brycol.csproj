@@ -116,6 +116,7 @@
     </ApplicationDefinition>
     <Compile Include="Modele\Item.cs" />
     <Compile Include="Modele\ItemsPlan.cs" />
+    <Compile Include="Modele\Piece.cs" />
     <Compile Include="Modele\Projet.cs" />
     <Compile Include="Outils\BrycolContexte.cs" />
     <Compile Include="Outils\Commande.cs" />
