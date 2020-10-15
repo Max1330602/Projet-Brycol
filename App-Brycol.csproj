@@ -124,6 +124,7 @@
     <Compile Include="Outils\Commande.cs" />
     <Compile Include="Outils\OutilEF.cs" />
     <Compile Include="VuesModele\Item_VM.cs" />
+    <Compile Include="VuesModele\Piece_VM.cs" />
     <Compile Include="VuesModele\Projet_VM.cs" />
     <Compile Include="Vues\Aide.xaml.cs">
       <DependentUpon>Aide.xaml</DependentUpon>
