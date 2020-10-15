@@ -26,6 +26,7 @@ namespace App_Brycol.Vues
 
         private void btnAjouterPiece_Click(object sender, RoutedEventArgs e)
         {
+            this.Close();
             DimensionsPiece popUp = new DimensionsPiece();
             popUp.ShowDialog();
         }

@@ -3,6 +3,7 @@ using App_Brycol.Outils;
 using App_Brycol.Vues;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -16,9 +17,31 @@ namespace App_Brycol.VuesModele
         public Projet_VM()
         {
             cmdCreerProjet = new Commande(CreerProjet);
+
+            ListePieces = new ObservableCollection<Piece>();
+
+            var PReq = from p in OutilEF.brycolContexte.Pieces where p.IdProjet == ID select p;
+            foreach (Piece p in PReq)
+                ListePieces.Add(p);
+
+
         }
 
         public ICommand cmdCreerProjet { get; set; }
+
+        private int _id;
+        public int ID { get; set; }
+
+        private ObservableCollection<Piece> _listePieces;
+        public ObservableCollection<Piece> ListePieces
+        {
+            get { return _listePieces; }
+            set
+            {
+                _listePieces = value;
+                OnPropertyChanged("ListePieces");
+            }
+        }
 
         public void CreerProjet(Object param)
         {
@@ -34,6 +57,15 @@ namespace App_Brycol.VuesModele
             GererProjet popUp = new GererProjet();
             popUp.ShowDialog();
 
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string nomPropriete)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(nomPropriete));
+            }
         }
     }
 }
