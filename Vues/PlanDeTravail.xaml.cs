@@ -58,6 +58,7 @@ namespace App_Brycol.Vues
         private void btnSupprimerItem_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Voulez-vraiment supprimer cet item ?", "Suppression d'item", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+           
         }
 
         private void btnModifierPiece_Click(object sender, RoutedEventArgs e)
@@ -88,6 +89,16 @@ namespace App_Brycol.Vues
         {
             Enregistrer popUp = new Enregistrer();
             popUp.ShowDialog();
+        }
+
+        private void Piece2D_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void test(object sender, RoutedEventArgs e)
+        {
+            btnSupprimerItem.IsEnabled = true;
         }
     }
 }

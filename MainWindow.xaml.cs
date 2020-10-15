@@ -25,7 +25,7 @@ namespace App_Brycol
     {
 
 
-        public MainWindow()
+       public MainWindow()
         {
             InitializeComponent();
             OutilEF outilEF = new OutilEF();

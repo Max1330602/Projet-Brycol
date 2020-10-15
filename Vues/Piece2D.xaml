@@ -8,5 +8,143 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Rectangle Stroke="Black" StrokeThickness="2" Margin="10,10,10,10"></Rectangle>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Canvas x:Name="canvas"
+                MouseLeftButtonDown="CanvasMouseLeftButtonDown"
+                MouseLeftButtonUp="CanvasMouseLeftButtonUp"
+                MouseMove="CanvasMouseMove"
+                MouseWheel="Canvas_MouseWheel" Margin="10" ClipToBounds="true" Grid.RowSpan="2" >
+            </Canvas>
+
+            <Button Content="Ajouter meuble" Click="AddButtonClick" Margin="9,415,677,10"/>
+            <Button Content="+" Click="btnZoomIn" Margin="765,233,19,190" />
+            <Button Content="-" Click="btnZoomOut" Margin="765,274,19,144" />
+            <Button Margin="11,362,739,41" Click="btnRotation" RenderTransformOrigin="0.5,0.5">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-1.008"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+                <StackPanel>
+                    <Image Source="../images/rotation.png" Height="27" Width="27" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-1.231"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBlock><Run Text="Rotation de l'image"/></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Content="Delete" Click="btnDelete" Margin="10,330,739,94" />
+            <Grid Margin="128,413,10,13" DockPanel.Dock="Bottom" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <!-- empty space -->
+                    <ColumnDefinition Width="40" />
+                    <!-- the fill button -->
+                    <ColumnDefinition Width="5" />
+                    <!-- spacer -->
+                    <ColumnDefinition Width="40" />
+                    <!-- the 100% button -->
+                    <ColumnDefinition Width="5" />
+                    <!-- spacer -->
+                    <ColumnDefinition Width="25" />
+                    <!-- the zoom percentage label -->
+                    <ColumnDefinition Width="15" />
+                    <!-- the % symbol -->
+                    <ColumnDefinition Width="5" />
+                    <!-- spacer -->
+                    <ColumnDefinition Width="20" />
+                    <!-- the zoom out button -->
+                    <ColumnDefinition Width="5" />
+                    <!-- spacer -->
+                    <ColumnDefinition Width="120" />
+                    <!-- the zoom slider -->
+                    <ColumnDefinition Width="5" />
+                    <!-- spacer -->
+                    <ColumnDefinition Width="20" />
+                    <!-- the zoom in button -->
+                    <ColumnDefinition Width="10" />
+                    <!-- spacer -->
+                    <ColumnDefinition Width="Auto" />
+                    <!-- resize grip -->
+                    <!-- spacer -->
+                </Grid.ColumnDefinitions>
+
+                <!-- 
+            The fill button.  Causes the content to be scaled so that it fits in the viewport.
+            -->
+                <Button Grid.Column="1">
+                    Fill
+                </Button>
+                <!-- 
+            The 100% button.  Causes the content to be scaled to 100 percent.
+            -->
+                <Button Grid.Column="3">
+                    100%
+                </Button>
+
+                <!--
+            This is the label that shows what the current zoom level
+            is while zooming in and out.
+            -->
+                <TextBlock
+                Grid.Column="5"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                />
+
+                <TextBlock
+                Grid.Column="6"
+                VerticalAlignment="Center"
+                Text="%"
+                />
+
+                <!-- Button to zoom out. -->
+                <Button Grid.Column="8">
+                    -
+                </Button>
+
+                <!-- Slider to change the current zoom level. -->
+                <Slider
+                Grid.Column="10"
+                Minimum="10" 
+                LargeChange="20" 
+                TickFrequency="10" 
+                Maximum="200" 
+                SmallChange="10" 
+                TickPlacement="TopLeft"
+                
+                />
+
+                <!--
+            Button to zoom in.
+            -->
+                <Button Grid.Column="12">
+                    +
+                </Button>
+
+                <!-- Stick a resize grip in the bottom right corner of the window. -->
+                <ResizeGrip
+                Grid.Column="14"
+                />
+
+            </Grid>
+        </Grid>
+
+
     </Grid>
 </UserControl>
