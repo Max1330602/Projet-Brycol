@@ -114,10 +114,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Modele\Categorie.cs" />
     <Compile Include="Modele\Item.cs" />
     <Compile Include="Modele\ItemsPlan.cs" />
     <Compile Include="Modele\Piece.cs" />
     <Compile Include="Modele\Projet.cs" />
+    <Compile Include="Modele\Type.cs" />
     <Compile Include="Outils\BrycolContexte.cs" />
     <Compile Include="Outils\Commande.cs" />
     <Compile Include="Outils\OutilEF.cs" />

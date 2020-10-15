@@ -1,6 +1,7 @@
 ﻿using Renci.SshNet.Messages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
@@ -14,8 +15,8 @@ namespace App_Brycol.Modele
     class Item
     {
         public int ID { get; set; }
-        public int IdTypeDePiece { get; set; }
-        public int IdCategorie { get; set; }
+        public Modele.Type Type { get; set; }
+        public Categorie Categorie { get; set; }
         public string Nom { get; set; }
         public float Largeur { get; set; }
         public float Longueur { get; set; }

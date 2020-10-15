@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -20,12 +21,14 @@ namespace App_Brycol.VuesModele
             cmdAjouterItem = new Commande(AjouterItem);
 
             SommaireItems = new ObservableCollection<Item>();
+            ListeItems = new ObservableCollection<Item>();
             FiltrePrixMax = PRIXMAX;
             FiltrePrixMin = PRIXMIN;
-            var iReq = from i in OutilEF.brycolContexte.Meubles select i;
-            
+            var iReq = from i in OutilEF.brycolContexte.Meubles.Include("Categorie").Include("Type") select i;
+
             foreach (Item i in iReq)
                 SommaireItems.Add(i);
+
             Items = SommaireItems;
 
         }
@@ -35,8 +38,20 @@ namespace App_Brycol.VuesModele
         public const int POS_PAR_DEFAUT = 0;
         public const int PRIXMAX = 1000000;
         public const int PRIXMIN = 0;
+
         public ObservableCollection<Item> Items;
 
+        private Categorie _Categorie;
+        public Categorie Categorie 
+        {
+            get { return _Categorie; }
+            set
+            {
+                _Categorie = value;
+                OnPropertyChanged("Categorie");
+            }
+
+        }
         private ObservableCollection<Item> _sommaireItems;
         public ObservableCollection<Item> SommaireItems
         {
