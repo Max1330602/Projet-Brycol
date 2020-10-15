@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_Brycol"
         mc:Ignorable="d"
+        WindowState="Maximized"
         Title="Brycol" Height="600" Width="800">
     <Grid Name="gridMainWindow">
         <Grid.RowDefinitions>
@@ -16,8 +17,8 @@
         <Border Grid.Row="0" Background="LightGray" Grid.ColumnSpan="2"></Border>
         <Image Grid.Row="0" Source="images/logo.png"></Image>
         <Rectangle Stroke="Black" Grid.Row="1" Margin="75,65,75,90"></Rectangle>
-        <Button Background="Transparent" FontFamily="Constantia Bold"  FontSize="15" Name="btnCreerPiece" Click="btnCreerPiece_Click" Grid.Row="1" Content="Créer une pièce" Height="50" Width="150" VerticalAlignment="Top" Margin="260,100,270,0"></Button>
-        <Button Background="Transparent" FontFamily="Constantia Bold"  FontSize="15" Name="btnTeleverserPiece" Click="btnTeleverserPiece_Click" Grid.Row="1" Content="Téléverser une pièce" Height="50" Width="150" VerticalAlignment="Bottom" Margin="220,0,230,150"></Button>
+        <Button Background="Transparent" FontFamily="Constantia Bold"  FontSize="15" Name="btnCreerProjet" Command="{ Binding cmdCreerProjet }" Grid.Row="1" Content="Créer un projet" Height="50" Width="150" VerticalAlignment="Top" Margin="260,100,270,0"></Button>
+        <Button Background="Transparent" FontFamily="Constantia Bold"  FontSize="15" Name="btnTeleverserProjet" Click="btnTeleverserProjet_Click" Grid.Row="1" Content="Téléverser un projet" Height="50" Width="150" VerticalAlignment="Bottom" Margin="220,0,230,150"></Button>
         <ContentPresenter Name="presenteurContenu" Grid.RowSpan="3"></ContentPresenter>
     </Grid>
 </Window>

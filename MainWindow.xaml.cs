@@ -1,5 +1,6 @@
 ﻿using App_Brycol.Outils;
 using App_Brycol.Vues;
+using App_Brycol.VuesModele;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,16 +29,11 @@ namespace App_Brycol
         {
             InitializeComponent();
             OutilEF outilEF = new OutilEF();
+            DataContext = new Projet_VM();
 
         }
 
-        private void btnCreerPiece_Click(object sender, RoutedEventArgs e)
-        {
-            DimensionsPiece popUp = new DimensionsPiece();
-            popUp.ShowDialog();
-        }
-
-        private void btnTeleverserPiece_Click(object sender, RoutedEventArgs e)
+        private void btnTeleverserProjet_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Option de téléversement à venir!");
         }

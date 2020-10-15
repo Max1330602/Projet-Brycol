@@ -8,7 +8,7 @@
         Title="Cout" Height="450" Width="800">
     <Grid Name="grdCoutParent">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height=".5*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height=".5*"/>
         </Grid.RowDefinitions>
@@ -17,7 +17,10 @@
         <Image Grid.Row="0" Source="/images/logo.png" HorizontalAlignment="Right"/>
 
         <Button Name="btnOk" Content="Ok" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="30" Margin="0,0,15,10" Click="btnOk_Click"/>
-
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <Button Name="btnVoirCoutProjet" Content="Voir coût du projet"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="150" Height="30" Margin="15,0,0,10" IsEnabled="False"  Click="btnVoirCoutProjet_Click"/>
+            <Button Name="btnVoirCoutPiece" Content="Voir coût de la pièce sélectionnée" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="30" Margin="15,0,0,10" IsEnabled="false" Click="btnVoirCoutPiece_Click"  />
+        </StackPanel>
 
     </Grid>
 </Window>

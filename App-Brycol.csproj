@@ -89,6 +89,7 @@
     </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -113,12 +114,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Modele\Categorie.cs" />
     <Compile Include="Modele\Item.cs" />
     <Compile Include="Modele\ItemsPlan.cs" />
+    <Compile Include="Modele\Piece.cs" />
+    <Compile Include="Modele\Projet.cs" />
+    <Compile Include="Modele\Type.cs" />
     <Compile Include="Outils\BrycolContexte.cs" />
     <Compile Include="Outils\Commande.cs" />
     <Compile Include="Outils\OutilEF.cs" />
     <Compile Include="VuesModele\Item_VM.cs" />
+    <Compile Include="VuesModele\Piece_VM.cs" />
+    <Compile Include="VuesModele\Projet_VM.cs" />
     <Compile Include="Vues\Aide.xaml.cs">
       <DependentUpon>Aide.xaml</DependentUpon>
     </Compile>
@@ -143,8 +150,14 @@
     <Compile Include="Vues\PlanDeTravail.xaml.cs">
       <DependentUpon>PlanDeTravail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vues\Projet.xaml.cs">
-      <DependentUpon>Projet.xaml</DependentUpon>
+    <Compile Include="Vues\GererProjet.xaml.cs">
+      <DependentUpon>GererProjet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\UCCoutPiece.xaml.cs">
+      <DependentUpon>UCCoutPiece.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\UCCoutProjet.xaml.cs">
+      <DependentUpon>UCCoutProjet.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -190,7 +203,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vues\Projet.xaml">
+    <Page Include="Vues\GererProjet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\UCCoutPiece.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\UCCoutProjet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,7 +250,38 @@
     <Resource Include="images\soleil.png" />
   </ItemGroup>
   <ItemGroup>
+
     <Resource Include="images\quadrille.jpg" />
+
+    <Resource Include="images\Items\item10.png" />
+    <Resource Include="images\Items\item11.png" />
+    <Resource Include="images\Items\item12.png" />
+    <Resource Include="images\Items\item13.png" />
+    <Resource Include="images\Items\item14.png" />
+    <Resource Include="images\Items\item15.png" />
+    <Resource Include="images\Items\item16.png" />
+    <Resource Include="images\Items\item17.png" />
+    <Resource Include="images\Items\item18.png" />
+    <Resource Include="images\Items\item19.png" />
+    <Resource Include="images\Items\item2.png" />
+    <Resource Include="images\Items\item20.png" />
+    <Resource Include="images\Items\item21.png" />
+    <Resource Include="images\Items\item22.png" />
+    <Resource Include="images\Items\item23.png" />
+    <Resource Include="images\Items\item3.png" />
+    <Resource Include="images\Items\item4.png" />
+    <Resource Include="images\Items\item5.png" />
+    <Resource Include="images\Items\item6.png" />
+    <Resource Include="images\Items\item7.png" />
+    <Resource Include="images\Items\item8.png" />
+    <Resource Include="images\Items\item9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\item1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\item0.png" />
+
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

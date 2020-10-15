@@ -23,5 +23,15 @@ namespace App_Brycol.Vues
         {
             InitializeComponent();
         }
+
+        private void btnAnnuler_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnAppliquer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -32,28 +32,34 @@
                 <RowDefinition Height="25"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Filtres" FontSize="15" FontWeight="Bold"></TextBlock>
             <TextBlock Grid.Row="1" Text="Nom:"></TextBlock>
-            <TextBox Grid.Row="1" Grid.Column="1"></TextBox>
+            <TextBox Text="{Binding FiltreNom, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"></TextBox>
             <TextBlock Grid.Row="2" Text="Prix min.:"></TextBlock>
-            <TextBox Grid.Row="2" Grid.Column="1"></TextBox>
-            <TextBlock Grid.Row="3" Text="Prix max.:"></TextBlock>
-            <TextBox Grid.Row="3" Grid.Column="1"></TextBox>
+            <TextBox Name="txtPrixMin" TextChanged="txt_TextChanged" Text="{Binding FiltrePrixMin, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2"></TextBox>
+            <TextBlock Grid.Row="3"  Text="Prix max.:"></TextBlock>
+            <TextBox Name="txtPrixMax"  Text="{Binding FiltrePrixMax, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="3"></TextBox>
             <TextBlock Grid.Row="4" Text="Catégorie:"></TextBlock>
-            <TextBox Grid.Row="4" Grid.Column="1"></TextBox>
-            <TextBlock Grid.Row="5" Text="Pìèce:"></TextBlock>
-            <TextBox Grid.Row="5" Grid.Column="1"></TextBox>
+            <TextBox Text="{Binding FiltreCategorie, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="4"></TextBox>
+            <TextBlock Grid.Row="5" Text="Type de pièce:"></TextBlock>
+            <TextBox Text="{Binding FiltreType, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="5"></TextBox>
         </Grid>
         <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DG_items" Grid.Row="1" Grid.Column="1" ItemsSource="{ Binding SommaireItems}" SelectedItem="{ Binding ItemSelectionne}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom" Binding="{ Binding Nom }"></DataGridTextColumn>
                 <DataGridTextColumn Header="Prix" Binding="{ Binding Cout }"></DataGridTextColumn>
-                <DataGridTextColumn Header="Catégorie"></DataGridTextColumn>
-                <DataGridTextColumn Header="Pièce" Binding="{ Binding IdTypeDePiece }"></DataGridTextColumn>
-                <DataGridTextColumn Header="Image"></DataGridTextColumn>
+                <DataGridTextColumn Header="Catégorie" Binding="{ Binding Categorie.Nom }"></DataGridTextColumn>
+                <DataGridTextColumn Header="Pièce" Binding="{ Binding Type.Nom }"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Image" Width="100" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Name="imgItem" Height="75" Width="75" Source="{ Binding ImgItem }"></Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 
