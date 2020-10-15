@@ -25,25 +25,32 @@ namespace App_Brycol.Vues
             InitializeComponent();
         }
 
+      
+
         private void btnContinuer_Click(object sender, RoutedEventArgs e)
         {
+            
             Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
             ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
             this.Close();
             gridMW.Children.Clear();
             gridMW.Children.Add(cpMW);
             cpMW.Content = new PlanDeTravail();
+
         }
 
         private void txtLargeur_TextChanged(object sender, TextChangedEventArgs e)
         {
             txtLargeur.Text = Regex.Replace(txtLargeur.Text, "[^0-9]+", "");
+            string LargeurPiece = txtLargeur.Text;
+            int LargeurPieceINT = int.Parse(LargeurPiece); //Success
         }
 
         private void txtLongueur_TextChanged(object sender, TextChangedEventArgs e)
         {
             txtLongueur.Text = Regex.Replace(txtLongueur.Text, "[^0-9]+", "");
-
+            string LongueurPiece = txtLongueur.Text;
+            int LongueurPieceINT = int.Parse(LongueurPiece); //Success
         }
 
         private void btnAnnuler_Click(object sender, RoutedEventArgs e)
