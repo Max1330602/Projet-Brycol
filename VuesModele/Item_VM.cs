@@ -22,6 +22,9 @@ namespace App_Brycol.VuesModele
 
             SommaireItems = new ObservableCollection<Item>();
             ListeItems = new ObservableCollection<Item>();
+            FiltreCategorie = "";
+            FiltreNom = "";
+            FiltreType = "";
             FiltrePrixMax = PRIXMAX;
             FiltrePrixMin = PRIXMIN;
             var iReq = from i in OutilEF.brycolContexte.Meubles.Include("Categorie").Include("Type") select i;
@@ -116,7 +119,9 @@ namespace App_Brycol.VuesModele
             set
             {
                 _filtreNom = value;
-                OnPropertyChanged("Filtre");
+                OnPropertyChanged("FiltreNom");
+                if (Items != null)
+                    SommaireItems = Items;
                 filtrer();
             }
         }
@@ -132,7 +137,10 @@ namespace App_Brycol.VuesModele
             {
                 _filtrePrixMin = value;
                 OnPropertyChanged("FiltrePrixMin");
+                if (Items != null)
+                    SommaireItems = Items;
                 filtrer();
+
             }
         }
 
@@ -147,30 +155,82 @@ namespace App_Brycol.VuesModele
             {
                 _filtrePrixMax = value;
                 OnPropertyChanged("FiltrePrixMax");
+                if (Items != null)
+                    SommaireItems = Items;
+                filtrer();
+
+            }
+        }
+
+        private string _filtreType;
+        public string FiltreType
+        {
+
+            get
+            {
+                return _filtreType;
+
+            }
+            set
+            {
+                _filtreType = value;
+                OnPropertyChanged("FiltreType");
+                if (Items != null)
+                    SommaireItems = Items;
                 filtrer();
             }
+
+        }
+
+        private string _filtreCategorie;
+        public string FiltreCategorie
+        {
+
+            get
+            {
+                return _filtreCategorie;
+
+            }
+            set
+            {
+                _filtreCategorie = value;
+                OnPropertyChanged("FiltreCategorie");
+                if (Items != null)
+                    SommaireItems = Items;
+                filtrer();
+            }
+
         }
         #endregion
 
 
-        public void filtrer() 
+        public void filtrer()
+
         {
+            //Si la liste n'est pas vide ni égale à 0
             if (SommaireItems != null && SommaireItems.Count != 0)
-            {
-                SommaireItems = Items;
-                if(FiltreNom == null)
-                    SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.Cout > FiltrePrixMin && si.Cout < FiltrePrixMax));
-                else
-                    SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.Nom.Contains(FiltreNom) && si.Cout > FiltrePrixMin && si.Cout < FiltrePrixMax));
-            }
-            else if (SommaireItems.Count == 0 && (FiltreNom != null  || FiltrePrixMin != 0 || FiltrePrixMax != 1000000)) 
-            {
-                SommaireItems = Items;
-                if (FiltreNom == null)
-                    SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.Cout > FiltrePrixMin && si.Cout < FiltrePrixMax));
-                else
-                    SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.Nom.Contains(FiltreNom) && si.Cout > FiltrePrixMin && si.Cout < FiltrePrixMax));
-            }
+                filtreCombine();
+            //Si il y a un ou des filtre mais que la liste est vide
+            else if (SommaireItems.Count == 0 && (FiltreNom != "" || FiltreCategorie != "" || FiltreType != "" || FiltrePrixMin != 0 || FiltrePrixMax != 1000000))
+                filtreCombine();
+            //Si il y a un filtre actif
+            else if (FiltreNom != "" || FiltreCategorie != "" || FiltreType != "" || FiltrePrixMin != 0 || FiltrePrixMax != 1000000)
+                filtreCombine();
+            
+
+        }
+
+        public void filtreCombine()
+        {
+            if (FiltreNom == "" && FiltreCategorie == "" && FiltreType == "")
+                SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.Cout > FiltrePrixMin &&
+                                                                                         si.Cout < FiltrePrixMax));
+            else
+                SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.Type.Nom.Contains(FiltreType) &&
+                                                                                         si.Categorie.Nom.Contains(FiltreCategorie) &&
+                                                                                         si.Nom.Contains(FiltreNom) &&
+                                                                                         si.Cout > FiltrePrixMin &&
+                                                                                         si.Cout < FiltrePrixMax));
         }
 
         public void AjouterItem(Object param)
