@@ -7,6 +7,49 @@
         mc:Ignorable="d"
         Title="ModifierItem" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
         
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="LightGray"></Border>
+
+        <Label Grid.ColumnSpan="2" Grid.Row="0" FontSize="20" Height="40" Width="500" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Modifier Item Sélectionné"/>
+
+        <Label Grid.Column="0" Grid.Row="1" FontSize="20" Height="40" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Aperçu Item" Margin="0,0,0,0"/>
+        <Rectangle Grid.Column="0" Grid.Row="1" Stroke="Black" StrokeThickness="2" Margin="32,32,32,32">
+
+        </Rectangle>
+
+        <Image x:Name="imgItem" Source="/images/Items/item6.png" Grid.Column="0" Grid.Row="1" Margin="32,32,32,32"></Image>
+
+        <Label Grid.Column="1" Grid.Row="1" FontSize="20" Height="40" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Couleur Item " Margin="10,12,114,0"/>
+        <ComboBox Grid.Column="1" Grid.Row="1" Foreground="Black" Height="25" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,60,10,10" >
+            <ComboBoxItem Content="Rouge" Background="Red"></ComboBoxItem>
+            <ComboBoxItem Content="Rouge Foncé" Background="DarkRed"></ComboBoxItem>
+            <ComboBoxItem Content="Vert Foncé" Background="DarkGreen"></ComboBoxItem>
+            <ComboBoxItem Content="Vert" Background="Green"></ComboBoxItem>
+            <ComboBoxItem Content="Bleu" Background="Blue"></ComboBoxItem>
+            <ComboBoxItem Content="Bleu Foncé" Foreground="White" Background="Navy"></ComboBoxItem>
+            <ComboBoxItem Content="Orange" Background="Orange"></ComboBoxItem>
+            <ComboBoxItem Content="Orange Foncé" Background="DarkOrange"></ComboBoxItem>
+            <ComboBoxItem Content="Jaune"  Foreground="Black" Background="Yellow"></ComboBoxItem>
+            <ComboBoxItem Content="Violet" Background="Violet"></ComboBoxItem>
+            <ComboBoxItem Content="Mauve" Background="Purple"></ComboBoxItem>
+            <ComboBoxItem Content="Brown" Background="SaddleBrown"></ComboBoxItem>
+        </ComboBox>
+
+        <Button x:Name="btnAppliquer" Grid.Column="1" Grid.Row="1"  Height="25" Width="75" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,10,10,10" Content="Appliquer" Click="btnAppliquer_Click"></Button>
+        <Button x:Name="btnAnnuler" Grid.Column="1" Grid.Row="1"  Height="25" Width="75" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,10,105,10" Content="Annuler" Click="btnAnnuler_Click"></Button>
+        
+        
+        <Image Grid.Row="0" Grid.Column="1" Source="/images/logo.png" HorizontalAlignment="Right"></Image>
+
+
     </Grid>
 </Window>
