@@ -14,7 +14,7 @@ namespace App_Brycol.Outils
         public DbSet<ItemsPlan> lstItems { get; set; }
         public DbSet<Projet> Projets { get; set; }
         public DbSet<Categorie> Catego { get; set; }
-        public DbSet<Modele.Type> Typ { get; set; }
+        public DbSet<TypePiece> TypePiece { get; set; }
         public DbSet<Piece> Pieces { get; set; }
 
         public BrycolContexte() : base("name=connexionBrycol")

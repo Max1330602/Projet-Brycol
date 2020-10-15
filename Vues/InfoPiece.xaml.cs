@@ -17,11 +17,11 @@ using System.Windows.Shapes;
 namespace App_Brycol.Vues
 {
     /// <summary>
-    /// Logique d'interaction pour DimensionsPiece.xaml
+    /// Logique d'interaction pour InfoPiece.xaml
     /// </summary>
-    public partial class DimensionsPiece : Window
+    public partial class InfoPiece : Window
     {
-        public DimensionsPiece()
+        public InfoPiece()
         {
             InitializeComponent();
 

@@ -63,7 +63,7 @@ namespace App_Brycol.Vues
 
         private void btnModifierPiece_Click(object sender, RoutedEventArgs e)
         {
-            DimensionsPiece popUp = new DimensionsPiece();
+            InfoPiece popUp = new InfoPiece();
             popUp.ShowDialog();
         }
 

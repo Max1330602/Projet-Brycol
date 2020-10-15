@@ -119,7 +119,7 @@
     <Compile Include="Modele\ItemsPlan.cs" />
     <Compile Include="Modele\Piece.cs" />
     <Compile Include="Modele\Projet.cs" />
-    <Compile Include="Modele\Type.cs" />
+    <Compile Include="Modele\TypePiece.cs" />
     <Compile Include="Outils\BrycolContexte.cs" />
     <Compile Include="Outils\Commande.cs" />
     <Compile Include="Outils\OutilEF.cs" />
@@ -135,8 +135,8 @@
     <Compile Include="Vues\Cout.xaml.cs">
       <DependentUpon>Cout.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vues\DimensionsPiece.xaml.cs">
-      <DependentUpon>DimensionsPiece.xaml</DependentUpon>
+    <Compile Include="Vues\InfoPiece.xaml.cs">
+      <DependentUpon>InfoPiece.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vues\Enregistrer.xaml.cs">
       <DependentUpon>Enregistrer.xaml</DependentUpon>
@@ -183,7 +183,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vues\DimensionsPiece.xaml">
+    <Page Include="Vues\InfoPiece.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -250,9 +250,7 @@
     <Resource Include="images\soleil.png" />
   </ItemGroup>
   <ItemGroup>
-
     <Resource Include="images\quadrille.jpg" />
-
     <Resource Include="images\Items\item10.png" />
     <Resource Include="images\Items\item11.png" />
     <Resource Include="images\Items\item12.png" />
@@ -281,7 +279,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\Items\item0.png" />
-
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

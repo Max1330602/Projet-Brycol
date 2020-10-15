@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace App_Brycol.Modele
 {
-    class Type
+    class TypePiece
     {
         public int ID { get; set; }
         public string Nom { get; set; }
 
-        public Type() { }
+        public TypePiece() { }
     }
 }
