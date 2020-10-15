@@ -27,7 +27,7 @@ namespace App_Brycol.VuesModele
             FiltreType = "";
             FiltrePrixMax = PRIXMAX;
             FiltrePrixMin = PRIXMIN;
-            var iReq = from i in OutilEF.brycolContexte.Meubles.Include("Categorie").Include("Type") select i;
+            var iReq = from i in OutilEF.brycolContexte.Meubles.Include("Categorie").Include("TypePiece") select i;
 
             foreach (Item i in iReq)
                 SommaireItems.Add(i);
@@ -226,7 +226,7 @@ namespace App_Brycol.VuesModele
                 SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.Cout > FiltrePrixMin &&
                                                                                          si.Cout < FiltrePrixMax));
             else
-                SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.Type.Nom.Contains(FiltreType) &&
+                SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.TypePiece.Nom.Contains(FiltreType) &&
                                                                                          si.Categorie.Nom.Contains(FiltreCategorie) &&
                                                                                          si.Nom.Contains(FiltreNom) &&
                                                                                          si.Cout > FiltrePrixMin &&

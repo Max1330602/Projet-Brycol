@@ -52,7 +52,7 @@
                 <DataGridTextColumn Header="Nom" Binding="{ Binding Nom }"></DataGridTextColumn>
                 <DataGridTextColumn Header="Prix" Binding="{ Binding Cout }"></DataGridTextColumn>
                 <DataGridTextColumn Header="Catégorie" Binding="{ Binding Categorie.Nom }"></DataGridTextColumn>
-                <DataGridTextColumn Header="Pièce" Binding="{ Binding Type.Nom }"></DataGridTextColumn>
+                <DataGridTextColumn Header="Pièce" Binding="{ Binding TypePiece.Nom }"></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Image" Width="100" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
