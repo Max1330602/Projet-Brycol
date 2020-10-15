@@ -51,15 +51,24 @@ namespace App_Brycol.VuesModele
         {
 
             Piece p = new Piece();
-            p.IdProjet = 1;
+            p.Projet = Projet_VM.ProjetActuel;
+
             //HARDCODE
             p.IdTypeDePiece = 6;
             //
             p.Largeur = Largeur;
             p.Longueur = Longueur;
-            var numPiece = OutilEF.brycolContexte.Pieces.Max<Piece>(t => t.ID);
-            numPiece += 1;
-            p.Nom = "Piece" + numPiece;
+            try
+            {
+                var numPiece = OutilEF.brycolContexte.Pieces.Max<Piece>(t => t.ID);
+                numPiece += 1;
+                p.Nom = "Piece" + numPiece;
+            }
+            catch (Exception e)
+            {
+                p.Nom = "Piece";
+
+            }
 
 
             OutilEF.brycolContexte.Pieces.Add(p);
