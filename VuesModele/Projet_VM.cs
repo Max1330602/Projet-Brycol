@@ -29,8 +29,6 @@ namespace App_Brycol.VuesModele
 
         public static Projet ProjetActuel;
         public ICommand cmdCreerProjet { get; set; }
-
-        private int _id;
         public int ID { get; set; }
 
         private ObservableCollection<Piece> _listePieces;
