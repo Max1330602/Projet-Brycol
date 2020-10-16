@@ -28,7 +28,7 @@
 
         <Button Grid.Column="0" Grid.Row="1" Name="btnCatalogue" Click="btnCatalogue_Click"  Width="100" Height="25" Content="Catalogue" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,25,0,0"></Button>
 
-        <Button Grid.Column="0" Grid.Row="1" Name="btnModifierItem" Click="btnModifierItem_Click"  Width="100" Height="25" Content="Modifier Item" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,65,0,0" IsEnabled="False"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Name="btnModifierItem" Click="btnModifierItem_Click"  Width="100" Height="25" Content="Modifier Item" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,65,0,0" IsEnabled="true"></Button>
         <Button Grid.Column="0" Grid.Row="1" Name="btnSupprimerItem" Click="btnSupprimerItem_Click"  Width="100" Height="25" Content="Supprimer Item" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,105,0,0" IsEnabled="False" x:FieldModifier="public"></Button>
 
         <Button Grid.Column="0" Grid.Row="1" Name="btnModifierPiece" Click="btnModifierPiece_Click"  Width="100" Height="25" Content="Modifier Pièce" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,145,0,0"></Button>
