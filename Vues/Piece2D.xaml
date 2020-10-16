@@ -14,8 +14,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-
-            <Canvas x:Name="canvas"
+            <Canvas x:Name="canvas" 
                 MouseLeftButtonDown="CanvasMouseLeftButtonDown"
                 MouseLeftButtonUp="CanvasMouseLeftButtonUp"
                 MouseMove="CanvasMouseMove"

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace App_Brycol.Modele
 {
-    class TypePiece
+    public class TypePiece
     {
         public int ID { get; set; }
         public string Nom { get; set; }

@@ -20,6 +20,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Application = System.Windows.Application;
 
 namespace App_Brycol.Vues
 {
@@ -36,7 +37,12 @@ namespace App_Brycol.Vues
 
         private void btnRetour_Click(object sender, RoutedEventArgs e)
         {
+            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
             this.Close();
+            gridMW.Children.Clear();
+            gridMW.Children.Add(cpMW);
+            cpMW.Content = new PlanDeTravail();
         }
 
         private void txt_TextChanged(object sender, TextChangedEventArgs e)

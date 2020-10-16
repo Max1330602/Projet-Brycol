@@ -1,5 +1,8 @@
-﻿using System;
+﻿using App_Brycol.Modele;
+using App_Brycol.VuesModele;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -27,7 +30,7 @@ namespace App_Brycol.Vues
         public Piece2D()
         {
             InitializeComponent();
-
+            initializeItems();
         }
 
         private void AddButtonClick(object sender, RoutedEventArgs e)
@@ -42,7 +45,7 @@ namespace App_Brycol.Vues
                 var image = new Image { Source = bitmap };
                 Canvas.SetLeft(image, 0);
                 Canvas.SetTop(image, 0);
-                canvas.Children.Add(image);
+                //canvas.Children.Add(image);
             }
         }
 
@@ -203,7 +206,23 @@ namespace App_Brycol.Vues
                 draggedImage.Source = null;
             }
         }
-       
+
+        public void initializeItems()
+        {
+            if (Item_VM.ItemsPlanActuel != null)
+            {
+                foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
+                {
+                    var bitmap = new BitmapImage(new Uri("pack://application:,,,/images/Items/item" + ip.Item.ID + ".png"));
+                    var image = new Image { Source = bitmap };
+                    Canvas.SetLeft(image, ip.emplacementGauche);
+                    Canvas.SetTop(image, ip.emplacementHaut);
+                    image.Height = 100;
+                    image.Width = 100;
+                    canvas.Children.Add(image);
+                }
+            }
+        }
      
     }
 }

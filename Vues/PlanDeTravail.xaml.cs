@@ -24,9 +24,10 @@ namespace App_Brycol.Vues
         public PlanDeTravail()
         {
             InitializeComponent();
-            Piece2D Plan2D = new Piece2D();
+            
         }
 
+        public static Catalogue Catalogue;
         private void btnAide_Click(object sender, RoutedEventArgs e)
         {
             Aide popUp = new Aide();

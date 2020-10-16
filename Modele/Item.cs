@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 
 namespace App_Brycol.Modele
 {
-    class Item
+    public class Item
     {
         public int ID { get; set; }
         public TypePiece TypePiece { get; set; }

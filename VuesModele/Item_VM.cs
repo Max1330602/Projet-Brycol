@@ -1,5 +1,6 @@
 ﻿using App_Brycol.Modele;
 using App_Brycol.Outils;
+using App_Brycol.Vues;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,8 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Image = System.Windows.Controls.Image;
 
 namespace App_Brycol.VuesModele
 {
@@ -19,9 +22,10 @@ namespace App_Brycol.VuesModele
         public Item_VM()
         {
             cmdAjouterItem = new Commande(AjouterItem);
-
             SommaireItems = new ObservableCollection<Item>();
             ListeItems = new ObservableCollection<Item>();
+            if (ItemsPlanActuel == null)
+                ItemsPlanActuel = new ObservableCollection<ItemsPlan>();
             FiltreCategorie = "";
             FiltreNom = "";
             FiltreType = "";
@@ -38,11 +42,13 @@ namespace App_Brycol.VuesModele
         #region Propriétés
 
         public ICommand cmdAjouterItem { get; set; }
+        public ICommand cmdInitItem { get; set; }
         public const int POS_PAR_DEFAUT = 0;
         public const int PRIXMAX = 1000000;
         public const int PRIXMIN = 0;
 
         public ObservableCollection<Item> Items;
+        public static ObservableCollection<ItemsPlan> ItemsPlanActuel;
 
         private Categorie _Categorie;
         public Categorie Categorie 
@@ -85,11 +91,11 @@ namespace App_Brycol.VuesModele
         }
 
         private ObservableCollection<Item> _listeItems;
-        public ObservableCollection<Item> ListeItems
+        public  ObservableCollection<Item> ListeItems
         {
             get { return _listeItems; }
             set
-            {
+            {              
                 _listeItems = value;
                 OnPropertyChanged("ListeItems");
             }
@@ -238,12 +244,14 @@ namespace App_Brycol.VuesModele
             ItemsPlan i = new ItemsPlan();
 
             i.Item = _itemSelectionne;
-            i.emplacement = POS_PAR_DEFAUT;
+            i.emplacementGauche = POS_PAR_DEFAUT;
+            i.emplacementHaut = POS_PAR_DEFAUT;
             // HARD CODE
             i.idPlan = 1;
             if (i.Item != null)
             {
                 ListeItems.Add(i.Item);
+                ItemsPlanActuel.Add(i);
                 OutilEF.brycolContexte.lstItems.Add(i);
                 OutilEF.brycolContexte.SaveChanges();
             }
