@@ -97,7 +97,19 @@ namespace App_Brycol.VuesModele
             p.Longueur = Longueur;
 
             var treq = from t in OutilEF.brycolContexte.TypePiece where t.Nom == TypePiece select t;
-            p.TypePiece = treq.First();
+
+            if (treq.Count() == 0)
+                p.TypePiece = OutilEF.brycolContexte.TypePiece.Find(6);
+            else
+                p.TypePiece = treq.First();
+
+            if (Nom == null)
+            {
+                var test = OutilEF.brycolContexte.Pieces.Max<Piece>(t => t.ID);
+                test += 1;
+                p.Nom = "Piece" + test;
+            }
+
             OutilEF.brycolContexte.Pieces.Add(p);
             OutilEF.brycolContexte.SaveChanges();
         }
