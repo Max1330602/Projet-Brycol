@@ -17,17 +17,30 @@ namespace App_Brycol.VuesModele
     class Piece_VM : INotifyPropertyChanged
     {
 
-        public ICommand cmdCreerPiece { get; set; }
+        public ICommand cmdPiece { get; set; }
 
-        public Piece_VM()
+        public static Piece pieceActuel;
+        public string ParamOption;
+
+        public Piece_VM(string paramOpt)
         {
-            cmdCreerPiece = new Commande(CreerPiece);
+            cmdPiece = new Commande(CmdPiece);
             TypesDePiece = new ObservableCollection<string>();
             var treq = from t in OutilEF.brycolContexte.TypePiece select t;
 
             foreach (TypePiece t in treq)
             {
                 TypesDePiece.Add(t.Nom);
+            }
+
+            ParamOption = paramOpt;
+
+            if (paramOpt == "Modifier")
+            {
+                Nom = pieceActuel.Nom;
+                Longueur = pieceActuel.Longueur;
+                Largeur = pieceActuel.Largeur;
+                TypePiece = pieceActuel.TypePiece.Nom;
             }
         }
 
@@ -87,9 +100,18 @@ namespace App_Brycol.VuesModele
             }
         }
 
-        public void CreerPiece(Object param)
+        public void CmdPiece(Object param)
         {
+            if (ParamOption == "Ajouter")
+                ajouterPiece();
 
+            if (ParamOption == "Modifier")
+                modifierPiece();
+
+        }
+
+        private void ajouterPiece()
+        {
             Piece p = new Piece();
             p.Projet = Projet_VM.ProjetActuel;
             p.Nom = Nom;
@@ -112,6 +134,34 @@ namespace App_Brycol.VuesModele
 
             OutilEF.brycolContexte.Pieces.Add(p);
             OutilEF.brycolContexte.SaveChanges();
+
+            pieceActuel = p;
+        }
+
+        private void modifierPiece()
+        {
+            Piece p = OutilEF.brycolContexte.Pieces.Find(pieceActuel.ID);
+            p.Nom = Nom;
+            p.Largeur = Largeur;
+            p.Longueur = Longueur;
+
+            var treq = from t in OutilEF.brycolContexte.TypePiece where t.Nom == TypePiece select t;
+
+            if (treq.Count() == 0)
+                p.TypePiece = OutilEF.brycolContexte.TypePiece.Find(6);
+            else
+                p.TypePiece = treq.First();
+
+            if (Nom == null)
+            {
+                var test = OutilEF.brycolContexte.Pieces.Max<Piece>(t => t.ID);
+                test += 1;
+                p.Nom = "Piece" + test;
+            }
+
+            OutilEF.brycolContexte.SaveChanges();
+
+            pieceActuel = p;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

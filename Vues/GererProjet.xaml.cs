@@ -27,7 +27,7 @@ namespace App_Brycol.Vues
         private void btnAjouterPiece_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            InfoPiece popUp = new InfoPiece();
+            InfoPiece popUp = new InfoPiece("Ajouter");
             popUp.ShowDialog();
         }
 

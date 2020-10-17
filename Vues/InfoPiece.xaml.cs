@@ -19,13 +19,14 @@ namespace App_Brycol.Vues
     /// <summary>
     /// Logique d'interaction pour InfoPiece.xaml
     /// </summary>
-    public partial class InfoPiece : Window
+    public partial class InfoPiece : Window 
     {
-        public InfoPiece()
+        public InfoPiece(string paramOpt)
         {
             InitializeComponent();
 
-            DataContext = new Piece_VM();
+            DataContext = new Piece_VM(paramOpt);
+
         }
 
       
@@ -44,16 +45,12 @@ namespace App_Brycol.Vues
 
         private void txtLargeur_TextChanged(object sender, TextChangedEventArgs e)
         {
-            txtLargeur.Text = Regex.Replace(txtLargeur.Text, "[^0-9]+", "");
-            string LargeurPiece = txtLargeur.Text;
-            int LargeurPieceINT = int.Parse(LargeurPiece); //Success
+            txtLargeur.Text = Regex.Replace(txtLargeur.Text, "[^0-9]+", "");    
         }
 
         private void txtLongueur_TextChanged(object sender, TextChangedEventArgs e)
         {
             txtLongueur.Text = Regex.Replace(txtLongueur.Text, "[^0-9]+", "");
-            string LongueurPiece = txtLongueur.Text;
-            int LongueurPieceINT = int.Parse(LongueurPiece); //Success
         }
 
         private void btnAnnuler_Click(object sender, RoutedEventArgs e)
@@ -61,5 +58,6 @@ namespace App_Brycol.Vues
             //RETOUR ÉCRAN PROJET
             this.Close();
         }
+
     }
 }

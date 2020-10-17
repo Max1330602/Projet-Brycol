@@ -25,9 +25,9 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="2">
+        <StackPanel Orientation="Horizontal" Grid.Row="2" >
             <Label Content="Nom du projet :" FontWeight="Bold"/>
-            <TextBlock Text="{Binding Nom}" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding NomProjet}" VerticalAlignment="Center"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
