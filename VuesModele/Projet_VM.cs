@@ -21,9 +21,12 @@ namespace App_Brycol.VuesModele
 
             ListePieces = new ObservableCollection<Piece>();
 
-            var PReq = from p in OutilEF.brycolContexte.Pieces where p.Projet.ID == ID select p;
-            foreach (Piece p in PReq)
-                ListePieces.Add(p);
+            if (ProjetActuel != null)
+            {
+                var PReq = from p in OutilEF.brycolContexte.Pieces where p.Projet.ID == ProjetActuel.ID select p;
+                foreach (Piece p in PReq)
+                    ListePieces.Add(p);
+            }
 
         }
 
