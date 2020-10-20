@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App_Brycol.VuesModele;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,8 +28,15 @@ namespace App_Brycol.Vues
         private void btnAjouterPiece_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            InfoPiece popUp = new InfoPiece("Ajouter");
-            popUp.ShowDialog();
+            if (Projet_VM.ProjetActuel.ListePieces.Count() < 8)
+            {
+                InfoPiece popUp = new InfoPiece("Ajouter");
+                popUp.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Déjà 8 pièces sont liées à ce projet", "Maximum de pièces atteint", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void btnSupprimerPiece_Click(object sender, RoutedEventArgs e)

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using App_Brycol.Modele;
+using App_Brycol.VuesModele;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +26,8 @@ namespace App_Brycol.Vues
         public PlanDeTravail()
         {
             InitializeComponent();
-            
+            lblProjet.Content = Projet_VM.ProjetActuel.Nom.ToString();
+
         }
 
         public static Catalogue Catalogue;

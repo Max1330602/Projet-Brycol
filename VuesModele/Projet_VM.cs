@@ -55,7 +55,7 @@ namespace App_Brycol.VuesModele
                 p.Nom = "Projet";
             }
             p.Createur = "Utilisateur";
-
+            p.ListePieces = ListePieces;
             OutilEF.brycolContexte.Projets.Add(p);
             OutilEF.brycolContexte.SaveChanges();
             ProjetActuel = p;
