@@ -118,6 +118,7 @@
     <Compile Include="Modele\Item.cs" />
     <Compile Include="Modele\ItemsPlan.cs" />
     <Compile Include="Modele\Piece.cs" />
+    <Compile Include="Modele\Plan.cs" />
     <Compile Include="Modele\Projet.cs" />
     <Compile Include="Modele\TypePiece.cs" />
     <Compile Include="Outils\BrycolContexte.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Outils\OutilEF.cs" />
     <Compile Include="VuesModele\Item_VM.cs" />
     <Compile Include="VuesModele\Piece_VM.cs" />
+    <Compile Include="VuesModele\Plan_VM.cs" />
     <Compile Include="VuesModele\Projet_VM.cs" />
     <Compile Include="Vues\Aide.xaml.cs">
       <DependentUpon>Aide.xaml</DependentUpon>
