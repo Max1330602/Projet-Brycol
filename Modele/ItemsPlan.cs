@@ -10,10 +10,10 @@ namespace App_Brycol.Modele
     public class  ItemsPlan
     {
         public int ID { get; set; }
-        public int idPlan { get; set; }
+        public Plan Plan { get; set; }
+        public Item Item { get; set; }
         public int emplacementGauche { get; set; }
         public int emplacementHaut { get; set; }
-        public Item Item { get; set; }
 
         public ItemsPlan()
         {

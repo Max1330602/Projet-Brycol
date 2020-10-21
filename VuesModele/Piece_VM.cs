@@ -136,6 +136,9 @@ namespace App_Brycol.VuesModele
             OutilEF.brycolContexte.SaveChanges();
 
             pieceActuel = p;
+            Plan_VM pVM = new Plan_VM();
+            pVM.InitPlan();
+
         }
 
         private void modifierPiece()

@@ -27,7 +27,6 @@ namespace App_Brycol.Vues
         {
             InitializeComponent();
             lblProjet.Content = Projet_VM.ProjetActuel.Nom.ToString();
-
         }
 
         public static Catalogue Catalogue;
@@ -58,6 +57,7 @@ namespace App_Brycol.Vues
             ModifierItem popUp = new ModifierItem();
             popUp.ShowDialog();
         }
+        
 
         private void btnSupprimerItem_Click(object sender, RoutedEventArgs e)
         {

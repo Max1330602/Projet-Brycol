@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace App_Brycol.Modele
 {
 
-    class Piece
+    public class Piece
     {
         public int ID { get; set; }
         public Projet Projet { get; set; }

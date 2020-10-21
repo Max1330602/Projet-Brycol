@@ -247,7 +247,7 @@ namespace App_Brycol.VuesModele
             i.emplacementGauche = POS_PAR_DEFAUT;
             i.emplacementHaut = POS_PAR_DEFAUT;
             // HARD CODE
-            i.idPlan = 1;
+            i.Plan = Plan_VM.PlanActuel;
             if (i.Item != null)
             {
                 ListeItems.Add(i.Item);

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace App_Brycol.Modele
 {
-    class Projet
+    public class Projet
     {
         public int ID { get; set; }
         public string Nom { get; set; }

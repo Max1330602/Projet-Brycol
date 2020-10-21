@@ -26,6 +26,7 @@ namespace App_Brycol.Vues
         public UCCoutPiece()
         {
             InitializeComponent();
+            DataContext = new Piece_VM("");
         }
 
     }
