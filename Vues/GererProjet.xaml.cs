@@ -46,8 +46,12 @@ namespace App_Brycol.Vues
 
         private void btnPlan_Click(object sender, RoutedEventArgs e)
         {
-            // PlanDeTravail popUp = new PlanDeTravail();
-            // popUp.ShowDialog();
+            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
+            this.Close();
+            gridMW.Children.Clear();
+            gridMW.Children.Add(cpMW);
+            cpMW.Content = new PlanDeTravail();
         }
 
         private void btnCoutProjet_Click(object sender, RoutedEventArgs e)
@@ -62,5 +66,53 @@ namespace App_Brycol.Vues
             this.Close();
         }
 
+        private void btnPiece1_Click(object sender, RoutedEventArgs e)
+        {
+            if (!btnPlan.IsEnabled)
+            {
+                btnPiece1.Background = new SolidColorBrush(Colors.LightBlue);
+                btnPlan.IsEnabled = !btnPlan.IsEnabled;
+            }
+            else
+            {
+                btnPiece1.Background = new SolidColorBrush(Colors.White);
+                btnPlan.IsEnabled = !btnPlan.IsEnabled;
+            }
+        }
+
+        private void btnPiece2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnPiece3_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnPiece4_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnPiece5_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnPiece6_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnPiece7_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnPiece8_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

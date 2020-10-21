@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace App_Brycol.VuesModele
 {
-    class Projet_VM
+    class Projet_VM : INotifyPropertyChanged
     {
         public Projet_VM()
         {
