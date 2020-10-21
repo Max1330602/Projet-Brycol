@@ -24,6 +24,10 @@ namespace App_Brycol.VuesModele
 
         public Piece_VM(string paramOpt)
         {
+            if (pieceActuel == null)
+                pieceActuel = new Piece();
+
+
             cmdPiece = new Commande(CmdPiece);
             TypesDePiece = new ObservableCollection<string>();
             var treq = from t in OutilEF.brycolContexte.TypePiece select t;
@@ -138,6 +142,12 @@ namespace App_Brycol.VuesModele
             pieceActuel = p;
             Plan_VM pVM = new Plan_VM();
             pVM.InitPlan();
+
+            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
+            gridMW.Children.Clear();
+            gridMW.Children.Add(cpMW);
+            cpMW.Content = new PlanDeTravail();
 
         }
 
