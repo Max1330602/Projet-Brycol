@@ -24,20 +24,23 @@ namespace App_Brycol.Modele
         {
             get
             {
+                Plan plan = new Plan();
                 decimal ToPi = 0;
                 const decimal TPS = 0.05M;
                 const decimal TVQ = 0.09975M;
-
-             /*   var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == ID select p; 
+                //****************************************
+                // HARDCODE LE ID
+                var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == 1 select p; 
+                //****************************************
                 foreach (Plan p in PReq)
-                {
-                    var LiReq = from Li in OutilEF.brycolContexte.lstItems where Li.idPlan == p.ID select Li;
-                    foreach (ItemsPlan Li in LiReq)
-                    {
-                        ToPi += Li.Item.Cout;
-                    }
-                }*/
-                    return  ToPi /*+ (ToPi*TPS) + (ToPi*TVQ)*/; 
+                    plan = p;
+
+                var LiReq = from Li in OutilEF.brycolContexte.lstItems.Include("Item") where Li.Plan.ID == plan.ID select Li;
+                foreach (ItemsPlan Li in LiReq)
+                    ToPi += Li.Item.Cout;
+
+                //On retourne la valeur à deux chiffres après la virgule
+                return decimal.Round(ToPi + (ToPi*TPS) + (ToPi*TVQ), 2, MidpointRounding.AwayFromZero); 
             }
             set { _total = value; }
         }

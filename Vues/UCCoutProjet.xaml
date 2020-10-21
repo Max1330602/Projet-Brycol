@@ -18,21 +18,24 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DG_coutItem" ItemsSource="{Binding ListePieces}" Grid.ColumnSpan="2">
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DG_coutItem" 
+                  ItemsSource="{Binding ListePieces}" 
+                  SelectedItem="{Binding PieceSelectionnee}" 
+                  Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom de la pièce" Binding="{Binding Nom}" Width="*"/>
-                <DataGridTextColumn Header="Coût total de la pièce" Binding="{Binding Cout}" Width=".5*"/>
+                <DataGridTextColumn Header="Coût total de la pièce" Binding="{Binding Total}" Width=".5*"/>
             </DataGrid.Columns>
         </DataGrid>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" >
             <Label Content="Nom du projet :" FontWeight="Bold"/>
-            <TextBlock Text="{Binding NomProjet}" VerticalAlignment="Center"/>
+            <Label Name="lblNomProjet" Content="Nom Projet"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
             <Label Content="Total :" FontWeight="Bold"/>
-            <TextBlock Text="{Binding Total}" VerticalAlignment="Center"/>
+            <Label Name="lblTotal" Content="N/A"/>
         </StackPanel>
 
 

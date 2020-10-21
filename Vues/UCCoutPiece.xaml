@@ -17,8 +17,8 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-    
-        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DG_coutItem" ItemsSource="{Binding SommaireItems}" Grid.ColumnSpan="2">
+
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DG_coutItem" ItemsSource="{Binding Listeitems}" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom d'item" Binding="{Binding Nom}" Width="*"/>
                 <DataGridTextColumn Header="Prix" Binding="{Binding Cout}" Width=".5*"/>
@@ -27,7 +27,7 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="2">
             <Label Content="Nom de la Pièce :" FontWeight="Bold"/>
-            <TextBlock Text="{Binding Nom}" VerticalAlignment="Center"/>
+            <Label Name="lblNomPiece" Content="N/A"/>
         </StackPanel>
 
 

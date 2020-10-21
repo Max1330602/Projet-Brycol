@@ -45,6 +45,19 @@ namespace App_Brycol.VuesModele
             }
         }
 
+        private Piece _pieceSelectionnee;
+        public Piece PieceSelectionnee
+        {
+            get { return _pieceSelectionnee; }
+            set 
+            {
+                if (value != null)
+                    _pieceSelectionnee = value;
+
+                OnPropertyChanged("PieceSelectionnee");
+            }
+        }
+
         public void CreerProjet(Object param)
         {
             Projet p = new Projet();
