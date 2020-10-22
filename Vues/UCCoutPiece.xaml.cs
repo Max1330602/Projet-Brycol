@@ -21,12 +21,15 @@ namespace App_Brycol.Vues
     /// </summary>
     public partial class UCCoutPiece : UserControl
     {
-
-
         public UCCoutPiece()
         {
             InitializeComponent();
             DataContext = new Piece_VM("");
+            lblNomPiece.Content = Piece_VM.pieceSelect.Nom;
+            lblSousTotal.Content = Piece_VM.SousTotal.ToString() + "$";
+            lblTPS.Content = Piece_VM.TpsDePiece.ToString() + "$";
+            lblTVQ.Content = Piece_VM.TvqDePiece.ToString() + "$";
+            lblTotal.Content = Piece_VM.Total.ToString() + "$";
         }
 
     }

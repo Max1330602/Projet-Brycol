@@ -15,6 +15,10 @@ namespace App_Brycol.VuesModele
 {
     class Projet_VM : INotifyPropertyChanged
     {
+
+        public static Projet ProjetActuel;
+        public ICommand cmdCreerProjet { get; set; }
+
         public Projet_VM()
         {
             cmdCreerProjet = new Commande(CreerProjet);
@@ -30,9 +34,7 @@ namespace App_Brycol.VuesModele
 
         }
 
-        public static Projet ProjetActuel;
-        public ICommand cmdCreerProjet { get; set; }
-        public int ID { get; set; }
+        #region Propriétés
 
         private ObservableCollection<Piece> _listePieces;
         public ObservableCollection<Piece> ListePieces
@@ -52,11 +54,16 @@ namespace App_Brycol.VuesModele
             set 
             {
                 if (value != null)
+                {
                     _pieceSelectionnee = value;
 
+                    Piece_VM.pieceSelect = _pieceSelectionnee;
+                }      
                 OnPropertyChanged("PieceSelectionnee");
             }
         }
+
+        #endregion
 
         public void CreerProjet(Object param)
         {
@@ -78,6 +85,19 @@ namespace App_Brycol.VuesModele
 
             GererProjet popUp = new GererProjet();
             popUp.ShowDialog();
+
+        }
+
+        public static decimal Total()
+        {
+            decimal ToPo = 0;
+
+            foreach (Piece p in ProjetActuel.ListePieces)
+            {
+                ToPo += p.Total;
+            }
+
+            return ToPo;
 
         }
 

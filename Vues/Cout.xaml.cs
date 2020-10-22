@@ -27,19 +27,19 @@ namespace App_Brycol.Vues
         {
             InitializeComponent();
 
-            uCCoutPiece = new UCCoutPiece();
-            Grid.SetRow(uCCoutPiece, 1);
-
-            uCCoutProjet = new UCCoutProjet();
-            Grid.SetRow(uCCoutProjet, 1);
-
             switch (UCEcran)
             {
                 case "Piece":
+                    uCCoutPiece = new UCCoutPiece();
+                    Grid.SetRow(uCCoutPiece, 1);
+
                     grdCoutParent.Children.Add(uCCoutPiece);
                     btnVoirCoutProjet.IsEnabled = true;
                     break;
                 case "Projet":
+                    uCCoutProjet = new UCCoutProjet();
+                    Grid.SetRow(uCCoutProjet, 1);
+
                     grdCoutParent.Children.Add(uCCoutProjet);
                     btnVoirCoutPiece.IsEnabled = true;
                     break;
@@ -56,6 +56,10 @@ namespace App_Brycol.Vues
         private void btnVoirCoutProjet_Click(object sender, RoutedEventArgs e)
         {
             grdCoutParent.Children.Remove(uCCoutPiece);
+
+            uCCoutProjet = new UCCoutProjet();
+            Grid.SetRow(uCCoutProjet, 1);
+
             grdCoutParent.Children.Add(uCCoutProjet);
             btnVoirCoutProjet.IsEnabled = false;
             btnVoirCoutPiece.IsEnabled = true;
@@ -64,6 +68,10 @@ namespace App_Brycol.Vues
         private void btnVoirCoutPiece_Click(object sender, RoutedEventArgs e)
         {
             grdCoutParent.Children.Remove(uCCoutProjet);
+
+            uCCoutPiece = new UCCoutPiece();
+            Grid.SetRow(uCCoutPiece, 1);
+
             grdCoutParent.Children.Add(uCCoutPiece);
             btnVoirCoutProjet.IsEnabled = true;
             btnVoirCoutPiece.IsEnabled = false;

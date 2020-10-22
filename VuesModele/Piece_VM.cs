@@ -16,19 +16,26 @@ namespace App_Brycol.VuesModele
 {
     class Piece_VM : INotifyPropertyChanged
     {
+        const decimal TPS = 0.05M;
+        const decimal TVQ = 0.09975M;
 
         public ICommand cmdPiece { get; set; }
-
         public static Piece pieceActuel;
+        public static Piece pieceSelect;
+        public static decimal SousTotal;
+        public static decimal TpsDePiece;
+        public static decimal TvqDePiece;
+        public static decimal Total;
         public string ParamOption;
 
         public Piece_VM(string paramOpt)
         {
-            if (pieceActuel == null)
-                pieceActuel = new Piece();
+            SousTotal = 0;
+            TpsDePiece = 0;
+            TvqDePiece = 0;
+            Total = 0;
 
-
-            cmdPiece = new Commande(CmdPiece);
+        cmdPiece = new Commande(CmdPiece);
             TypesDePiece = new ObservableCollection<string>();
             var treq = from t in OutilEF.brycolContexte.TypePiece select t;
 
@@ -46,7 +53,34 @@ namespace App_Brycol.VuesModele
                 Largeur = pieceActuel.Largeur;
                 TypePiece = pieceActuel.TypePiece.Nom;
             }
+
+            ListeItems = new ObservableCollection<Item>();
+
+            if (pieceSelect != null)
+            {
+                Plan plan = new Plan();
+
+                //****************************************
+                // HARDCODE LE ID                                                      ICI PIÈCE ACTUELLE
+                var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == 1 select p;
+                //****************************************
+                foreach (Plan p in PReq)
+                    plan = p;
+
+                var LiReq = from Li in OutilEF.brycolContexte.lstItems.Include("Item") where Li.Plan.ID == plan.ID select Li;
+                foreach (ItemsPlan Li in LiReq)
+                {
+                    ListeItems.Add(Li.Item);
+                    SousTotal += Li.Item.Cout;
+                }
+
+                TpsDePiece = decimal.Round((SousTotal * TPS), 2, MidpointRounding.AwayFromZero);
+                TvqDePiece = decimal.Round((SousTotal * TVQ), 2, MidpointRounding.AwayFromZero);
+                Total = decimal.Round((SousTotal + TpsDePiece + TvqDePiece), 2, MidpointRounding.AwayFromZero);
+
+            }
         }
+        #region Propriétés
 
         private float _longueur;
         public float Longueur 
@@ -103,6 +137,18 @@ namespace App_Brycol.VuesModele
                 OnPropertyChanged("TypePiece");
             }
         }
+
+        private ObservableCollection<Item> _listeItems;
+        public ObservableCollection<Item> ListeItems
+        {
+            get { return _listeItems; }
+            set
+            {
+                _listeItems = value;
+                OnPropertyChanged("ListeItems");
+            }
+        }
+        #endregion
 
         public void CmdPiece(Object param)
         {

@@ -26,7 +26,7 @@ namespace App_Brycol.Vues
             InitializeComponent();
             DataContext = new Projet_VM();
             lblNomProjet.Content = Projet_VM.ProjetActuel.Nom;
-            //lblTotal.Content = Projet_VM.ProjetActuel.Total.ToString();
+            lblTotal.Content = Projet_VM.Total().ToString() + "$";
         }
     }
 }
