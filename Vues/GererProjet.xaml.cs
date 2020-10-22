@@ -1,4 +1,5 @@
-﻿using App_Brycol.VuesModele;
+﻿using App_Brycol.Modele;
+using App_Brycol.VuesModele;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,25 @@ namespace App_Brycol.Vues
     /// </summary>
     public partial class GererProjet : Window
     {
+        private List<Button> lstBoutons = new List<Button>();
+
         public GererProjet()
         {
             InitializeComponent();
+
+            lstBoutons.Add(btnPiece1);
+            lstBoutons.Add(btnPiece2);
+            lstBoutons.Add(btnPiece3);
+            lstBoutons.Add(btnPiece4);
+            lstBoutons.Add(btnPiece5);
+            lstBoutons.Add(btnPiece6);
+            lstBoutons.Add(btnPiece7);
+            lstBoutons.Add(btnPiece8);
+            
+            for (int i = 0; i < Projet_VM.ProjetActuel.ListePieces.Count(); i++)
+            {
+                lstBoutons[i].IsEnabled = true;
+            }
         }
 
         private void btnAjouterPiece_Click(object sender, RoutedEventArgs e)
@@ -68,51 +85,90 @@ namespace App_Brycol.Vues
 
         private void btnPiece1_Click(object sender, RoutedEventArgs e)
         {
-            if (!btnPlan.IsEnabled)
-            {
-                btnPiece1.Background = new SolidColorBrush(Colors.LightBlue);
-                btnPlan.IsEnabled = !btnPlan.IsEnabled;
-            }
-            else
-            {
-                btnPiece1.Background = new SolidColorBrush(Colors.White);
-                btnPlan.IsEnabled = !btnPlan.IsEnabled;
-            }
+            selectionnerBouton(sender);
+            Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[0];
         }
 
         private void btnPiece2_Click(object sender, RoutedEventArgs e)
         {
-
+            selectionnerBouton(sender);
+            Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[1];
         }
 
         private void btnPiece3_Click(object sender, RoutedEventArgs e)
         {
+            selectionnerBouton(sender);
+            Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[2];
 
         }
 
         private void btnPiece4_Click(object sender, RoutedEventArgs e)
         {
-
+            selectionnerBouton(sender);
+            Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[3];
         }
 
         private void btnPiece5_Click(object sender, RoutedEventArgs e)
         {
+            selectionnerBouton(sender);
+            Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[4];
 
         }
 
         private void btnPiece6_Click(object sender, RoutedEventArgs e)
         {
-
+            selectionnerBouton(sender);
+            Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[5];
         }
 
         private void btnPiece7_Click(object sender, RoutedEventArgs e)
         {
-
+            selectionnerBouton(sender);
+            Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[6];
         }
 
         private void btnPiece8_Click(object sender, RoutedEventArgs e)
         {
+            selectionnerBouton(sender);
+            Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[7];
+        }
 
+        private void selectionnerBouton(object sender)
+        {
+            if (!btnPlan.IsEnabled)
+            {
+                foreach (Button b in lstBoutons)
+                {
+                    if (b != sender)
+                    {
+                        b.IsEnabled = false;
+                    }
+                    else
+                    {
+                        b.Background = new SolidColorBrush(Colors.LightBlue);
+                        btnPlan.IsEnabled = !btnPlan.IsEnabled;
+                    }
+
+                }
+            }
+            else
+            {
+                int i = 0;
+                foreach (Button b in lstBoutons)
+                {
+                    if (i < Projet_VM.ProjetActuel.ListePieces.Count())
+                    if (b != sender && Projet_VM.ProjetActuel.ListePieces[i] != null)
+                    { 
+                        b.IsEnabled = true;
+                    }
+                    else
+                    {
+                        b.Background = new SolidColorBrush(Colors.White);
+                        btnPlan.IsEnabled = !btnPlan.IsEnabled;
+                    }
+                    i++;
+                }
+            }
         }
     }
 }
