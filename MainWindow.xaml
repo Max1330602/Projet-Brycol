@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:App_Brycol"
         mc:Ignorable="d"
         WindowState="Maximized"
+        Closing="OnClosing"
         Title="Brycol" Height="600" Width="800">
     <Grid Name="gridMainWindow">
         <Grid.RowDefinitions>

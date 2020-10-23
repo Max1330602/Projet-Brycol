@@ -3,6 +3,7 @@ using App_Brycol.Vues;
 using App_Brycol.VuesModele;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,18 @@ namespace App_Brycol
         private void btnTeleverserProjet_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Option de téléversement à venir!");
+        }
+
+        private void OnClosing(object sender, CancelEventArgs cancelEventArgs)
+        {
+            if (Projet_VM.EstSauvegarde == false)
+            {
+                WarningProjetNonSau popUp = new WarningProjetNonSau();
+                popUp.ShowDialog();
+
+
+            }
+
         }
     }
 }
