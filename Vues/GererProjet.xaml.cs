@@ -58,7 +58,13 @@ namespace App_Brycol.Vues
 
         private void btnSupprimerPiece_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Voulez-vraiment supprimer cette pièce ?", "Suppression de pièce", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+            MessageBoxResult resultat;
+            resultat = MessageBox.Show("Voulez-vraiment supprimer cette pièce ?", "Suppression de pièce", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+            if (resultat == MessageBoxResult.Yes)
+            {
+                ;
+            }
+
         }
 
         private void btnPlan_Click(object sender, RoutedEventArgs e)
@@ -135,7 +141,7 @@ namespace App_Brycol.Vues
 
         private void selectionnerBouton(object sender)
         {
-            if (!btnPlan.IsEnabled)
+            if (!btnPlan.IsEnabled && !btnSupprimerPiece.IsEnabled)
             {
                 foreach (Button b in lstBoutons)
                 {
@@ -147,6 +153,7 @@ namespace App_Brycol.Vues
                     {
                         b.Background = new SolidColorBrush(Colors.LightBlue);
                         btnPlan.IsEnabled = !btnPlan.IsEnabled;
+                        btnSupprimerPiece.IsEnabled = !btnSupprimerPiece.IsEnabled;
                     }
 
                 }
@@ -157,15 +164,16 @@ namespace App_Brycol.Vues
                 foreach (Button b in lstBoutons)
                 {
                     if (i < Projet_VM.ProjetActuel.ListePieces.Count())
-                    if (b != sender && Projet_VM.ProjetActuel.ListePieces[i] != null)
-                    { 
-                        b.IsEnabled = true;
-                    }
-                    else
-                    {
-                        b.Background = new SolidColorBrush(Colors.White);
-                        btnPlan.IsEnabled = !btnPlan.IsEnabled;
-                    }
+                        if (b != sender && Projet_VM.ProjetActuel.ListePieces[i] != null)
+                        {
+                            b.IsEnabled = true;
+                        }
+                        else
+                        {
+                            b.Background = new SolidColorBrush(Colors.White);
+                            btnPlan.IsEnabled = !btnPlan.IsEnabled;
+                            btnSupprimerPiece.IsEnabled = !btnSupprimerPiece.IsEnabled;
+                        }
                     i++;
                 }
             }
