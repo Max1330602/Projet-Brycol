@@ -222,6 +222,16 @@ namespace App_Brycol.VuesModele
             pieceActuel = p;
         }
 
+        public static void supprimerPiece()
+        {
+            Piece p = OutilEF.brycolContexte.Pieces.Find(Piece_VM.pieceActuel.ID);
+
+            OutilEF.brycolContexte.Pieces.Remove(p);
+            OutilEF.brycolContexte.SaveChanges();
+
+            Projet_VM.ProjetActuel.ListePieces.Remove(Piece_VM.pieceActuel);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string nomPropriete)
         {
