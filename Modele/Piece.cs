@@ -17,6 +17,9 @@ namespace App_Brycol.Modele
         public float Largeur { get; set; }
         public float Longueur { get; set; }
         public string Nom { get; set; }
+        [NotMapped]
+        public decimal Total { get; set; }
+
         public Piece() 
         {
 
