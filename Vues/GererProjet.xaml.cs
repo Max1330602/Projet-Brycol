@@ -1,4 +1,5 @@
 ﻿using App_Brycol.Modele;
+using App_Brycol.Outils;
 using App_Brycol.VuesModele;
 using System;
 using System.Collections.Generic;
@@ -62,9 +63,33 @@ namespace App_Brycol.Vues
             resultat = MessageBox.Show("Voulez-vraiment supprimer cette pièce ?", "Suppression de pièce", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
             if (resultat == MessageBoxResult.Yes)
             {
-                ;
-            }
+                Piece p = OutilEF.brycolContexte.Pieces.Find(Piece_VM.pieceActuel.ID);
 
+                OutilEF.brycolContexte.Pieces.Remove(p);
+                OutilEF.brycolContexte.SaveChanges();
+
+                btnSupprimerPiece.IsEnabled = false;
+                btnPlan.IsEnabled = false;
+
+                Projet_VM.ProjetActuel.ListePieces.Remove(Piece_VM.pieceActuel);
+
+                foreach (Button b in lstBoutons)
+                {
+                    b.IsEnabled = false;
+                }
+
+                int i = 0;
+                foreach (Button b in lstBoutons)
+                {
+                    if (i < Projet_VM.ProjetActuel.ListePieces.Count())
+                        if (Projet_VM.ProjetActuel.ListePieces[i] != null)
+                        {
+                            b.IsEnabled = true;
+                        }
+                    i++;
+                }
+
+            }
         }
 
         private void btnPlan_Click(object sender, RoutedEventArgs e)

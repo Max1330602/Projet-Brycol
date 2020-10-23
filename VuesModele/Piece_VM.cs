@@ -35,7 +35,7 @@ namespace App_Brycol.VuesModele
             TvqDePiece = 0;
             Total = 0;
 
-        cmdPiece = new Commande(CmdPiece);
+            cmdPiece = new Commande(CmdPiece);
             TypesDePiece = new ObservableCollection<string>();
             var treq = from t in OutilEF.brycolContexte.TypePiece select t;
 
@@ -157,7 +157,6 @@ namespace App_Brycol.VuesModele
 
             if (ParamOption == "Modifier")
                 modifierPiece();
-
         }
 
         private void ajouterPiece()
