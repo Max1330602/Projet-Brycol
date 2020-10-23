@@ -220,46 +220,14 @@ namespace App_Brycol.VuesModele
             pieceActuel = p;
         }
 
-        private  decimal CalSouTo(Piece laPiece)
+        public static void supprimerPiece()
         {
-            Plan plan = new Plan();
-            decimal St = 0M;
+            Piece p = OutilEF.brycolContexte.Pieces.Find(Piece_VM.pieceActuel.ID);
 
-            //****************************************
-            // HARDCODE LE ID                                                      ICI laPiece
-            var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == 1 select p;
-            //****************************************
-            foreach (Plan p in PReq)
-                plan = p;
+            OutilEF.brycolContexte.Pieces.Remove(p);
+            OutilEF.brycolContexte.SaveChanges();
 
-            var LiReq = from Li in OutilEF.brycolContexte.lstItems.Include("Item") where Li.Plan.ID == plan.ID select Li;
-            foreach (ItemsPlan Li in LiReq)
-                St += Li.Item.Cout;
-
-
-            return St;
-
-        }
-
-
-        private  decimal CalTPS(decimal montant)
-        {
-            const decimal TPS = 0.05M;
-
-            return decimal.Round((montant * TPS), 2, MidpointRounding.AwayFromZero);
-        }
-
-        private  decimal CalTVQ(decimal montant)
-        {
-            const decimal TVQ = 0.09975M;
-
-            return decimal.Round((montant * TVQ), 2, MidpointRounding.AwayFromZero);
-        }
-
-        private decimal CalTotal(decimal St, decimal montantTPS, decimal montantTVQ)
-        {
-            return decimal.Round((St + montantTPS + montantTVQ), 2, MidpointRounding.AwayFromZero);
-
+            Projet_VM.ProjetActuel.ListePieces.Remove(Piece_VM.pieceActuel);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

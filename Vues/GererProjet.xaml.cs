@@ -63,15 +63,10 @@ namespace App_Brycol.Vues
             resultat = MessageBox.Show("Voulez-vraiment supprimer cette pièce ?", "Suppression de pièce", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
             if (resultat == MessageBoxResult.Yes)
             {
-                Piece p = OutilEF.brycolContexte.Pieces.Find(Piece_VM.pieceActuel.ID);
-
-                OutilEF.brycolContexte.Pieces.Remove(p);
-                OutilEF.brycolContexte.SaveChanges();
+                Piece_VM.supprimerPiece();
 
                 btnSupprimerPiece.IsEnabled = false;
                 btnPlan.IsEnabled = false;
-
-                Projet_VM.ProjetActuel.ListePieces.Remove(Piece_VM.pieceActuel);
 
                 foreach (Button b in lstBoutons)
                 {
