@@ -11,6 +11,7 @@ namespace App_Brycol.Modele
 
     public class Piece
     {
+       
         public int ID { get; set; }
         public Projet Projet { get; set; }
         public TypePiece TypePiece { get; set; }
@@ -19,6 +20,7 @@ namespace App_Brycol.Modele
         public string Nom { get; set; }
         [NotMapped]
         public decimal Total { get; set; }
+        
 
         public Piece() 
         {

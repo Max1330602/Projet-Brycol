@@ -169,7 +169,7 @@ namespace App_Brycol.VuesModele
 
             //****************************************
             // HARDCODE LE ID                                                      ICI laPiece
-            var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == 1 select p;
+            var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == laPiece.ID select p;
             //****************************************
             foreach (Plan p in PReq)
                 plan = p;
