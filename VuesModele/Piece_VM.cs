@@ -54,13 +54,17 @@ namespace App_Brycol.VuesModele
 
             ListeItems = new ObservableCollection<Item>();
 
+            if (pieceSelect == null)
+                pieceSelect = pieceActuel;
+
+
             if (pieceSelect != null)
             {
                 Plan plan = new Plan();
 
                 //****************************************
                 // HARDCODE LE ID                                                      ICI pieceActuel
-                var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == 1 select p;
+                var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == pieceSelect.ID select p;
                 //****************************************
                 foreach (Plan p in PReq)
                     plan = p;
@@ -70,11 +74,11 @@ namespace App_Brycol.VuesModele
                     ListeItems.Add(Li.Item);
 
 
-                SousTotal = CalSouTo(pieceActuel);
+                SousTotal = CalSouTo(pieceSelect);
                 TpsDePiece = CalTPS(SousTotal);
                 TvqDePiece = CalTVQ(SousTotal);
                 Total = CalTotal(SousTotal, TpsDePiece, TvqDePiece);
-                pieceActuel.Total = Total;
+                pieceSelect.Total = Total;
 
 
             }
@@ -228,7 +232,7 @@ namespace App_Brycol.VuesModele
 
             //****************************************
             // HARDCODE LE ID                                                      ICI laPiece
-            var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == 1 select p;
+            var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == laPiece.ID select p;
             //****************************************
             foreach (Plan p in PReq)
                 plan = p;
