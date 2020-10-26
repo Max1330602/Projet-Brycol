@@ -15,7 +15,7 @@ namespace App_Brycol.Modele
 
         public Plan()
         {
-
+            
         }
     }
 }

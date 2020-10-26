@@ -48,8 +48,9 @@ namespace App_Brycol.VuesModele
         public const int PRIXMIN = 0;
 
         public ObservableCollection<Item> Items;
-        public static ObservableCollection<ItemsPlan> ItemsPlanActuel;
 
+        public static ObservableCollection<ItemsPlan> ItemsPlanActuel;
+    
         private Categorie _Categorie;
         public Categorie Categorie 
         {
@@ -243,7 +244,7 @@ namespace App_Brycol.VuesModele
         { 
             ItemsPlan i = new ItemsPlan();
 
-            i.Item = _itemSelectionne;
+            i.Item = _itemSelectionne;           
             i.emplacementGauche = POS_PAR_DEFAUT;
             i.emplacementHaut = POS_PAR_DEFAUT;
             // HARD CODE

@@ -38,6 +38,7 @@ namespace App_Brycol.VuesModele
                     ListePieces.Add(p);
             }
 
+
         }
 
         #region Propriétés

@@ -1,4 +1,5 @@
 ﻿using App_Brycol.Modele;
+using App_Brycol.Outils;
 using App_Brycol.VuesModele;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,9 @@ namespace App_Brycol.Vues
         private Point mousePosition;
         private bool move;
         public double Zoom;
+        public const double pixelToM = 3779.5275590551 / echelle;
+        public const double pixelToCm = 37.7952755906/echelle;
+        public const int echelle = 50;
 
 
         private void OnPropertyChanged([CallerMemberName] String propertyName = "")
@@ -102,13 +106,28 @@ namespace App_Brycol.Vues
 
         private void CanvasMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            var position = e.GetPosition(canvas);
+            var offset = position - mousePosition;
+
             if (draggedImage != null && move == true)
             {
                 canvas.ReleaseMouseCapture();
                 Panel.SetZIndex(draggedImage, 0);
                 
+                var ireq = from ip in OutilEF.brycolContexte.lstItems.Include("Plan") where ip.Plan.Piece.ID == Piece_VM.pieceActuel.ID select ip;
+                foreach (ItemsPlan i in ireq)
+                {
+                    var bitmap = new BitmapImage(i.Item.ImgItem.UriSource);
+                    var imageBD = new Image { Source = bitmap };
+
+                    if (imageBD.Source.ToString() == draggedImage.Source.ToString())
+                    {
+                        i.emplacementGauche = Canvas.GetLeft(draggedImage) + offset.X;
+                        i.emplacementHaut = Canvas.GetTop(draggedImage) + offset.Y;
+                    }
+                }
+                OutilEF.brycolContexte.SaveChanges();
                 draggedImage = null;
-               
             }
         }
         
@@ -129,6 +148,7 @@ namespace App_Brycol.Vues
                     Point mousePos = e.GetPosition(canvas_Zoom); // get absolute mouse position
                     Canvas.SetLeft(canvas, mousePos.X - clickPosition.X); // move canvas
                     Canvas.SetTop(canvas, mousePos.Y - clickPosition.Y);
+
                 }
             }
         }
@@ -215,8 +235,17 @@ namespace App_Brycol.Vues
 
         public void initializeItems()
         {
+            canvas.Children.Clear();
+
+
+            
+
             if (Item_VM.ItemsPlanActuel != null)
             {
+                Item_VM.ItemsPlanActuel.Clear();
+                var ireq = from ip in OutilEF.brycolContexte.lstItems.Include("Plan") where ip.Plan.Piece.ID == Piece_VM.pieceActuel.ID select ip;
+                foreach (ItemsPlan i in ireq)
+                    Item_VM.ItemsPlanActuel.Add(i);
                 foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
                 {
                     var bitmap = new BitmapImage(new Uri("pack://application:,,,/images/Items/item" + ip.Item.ID + ".png"));

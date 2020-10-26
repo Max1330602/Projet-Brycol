@@ -12,8 +12,8 @@ namespace App_Brycol.Modele
         public int ID { get; set; }
         public Plan Plan { get; set; }
         public Item Item { get; set; }
-        public int emplacementGauche { get; set; }
-        public int emplacementHaut { get; set; }
+        public double emplacementGauche { get; set; }
+        public double emplacementHaut { get; set; }
 
         public ItemsPlan()
         {
