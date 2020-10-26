@@ -37,7 +37,8 @@ namespace App_Brycol.Vues
 
         private void cmbCouleur_SelectedChange(object sender, SelectionChangedEventArgs e)
         {
-            string img = "F:\\Users\\Yannick\\Desktop\\Cegep\\Automne 2020\\Développement d'applications graphiques\\Brycol\\Projet-Brycol\\images\\Items\\item6.png";
+            string FichierProjet = "..\\..\\";
+            string img = FichierProjet + @"\\images\\Items\\item6.png";
 
             Bitmap bmp = new Bitmap(img);
 
@@ -97,14 +98,13 @@ namespace App_Brycol.Vues
                         rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 139, 69, 19));
                 }
             }
-
-            rbmp.Save("F:\\Users\\Yannick\\Desktop\\Cegep\\Automne 2020\\Développement d'applications graphiques\\Brycol\\Projet-Brycol\\images\\ItemsModifies\\item6Modifie.png");
+            rbmp.Save(FichierProjet + @"images\\ItemsModifies\\item6Modifie.png");
 
             BitmapImage bmiItem = new BitmapImage();
             bmiItem.BeginInit();
             bmiItem.CacheOption = BitmapCacheOption.OnLoad;
             bmiItem.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-            bmiItem.UriSource = new Uri("F:\\Users\\Yannick\\Desktop\\Cegep\\Automne 2020\\Développement d'applications graphiques\\Brycol\\Projet-Brycol\\images\\ItemsModifies\\item6Modifie.png");
+            bmiItem.UriSource = new Uri(FichierProjet + @"images\\ItemsModifies\\item6Modifie.png", UriKind.Relative);
             bmiItem.EndInit();
             imgItem.Source = bmiItem;
 
