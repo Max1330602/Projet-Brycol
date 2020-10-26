@@ -67,11 +67,7 @@ namespace App_Brycol.Vues
             }
         }
 
-        
 
-
-
-        
 
         private void CanvasMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -152,8 +148,7 @@ namespace App_Brycol.Vues
                 else
                 {
                     rotationInDegrees = 0;
-                }
-                    // Do something with the rotationInDegrees here, if needed...
+                }                   
                     if (rotationInDegrees == 0 || rotation == null)
                     {
                         draggedImage.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 90 };
@@ -171,8 +166,7 @@ namespace App_Brycol.Vues
                         
                         draggedImage.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 0 };
                     }
-                
-                
+                             
             }
             
 
@@ -184,8 +178,6 @@ namespace App_Brycol.Vues
         private Double zoom = 1;
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-
 
 
         // Zoom on Mouse wheel
@@ -208,14 +200,7 @@ namespace App_Brycol.Vues
             {
                 slider1.Value = slider1.Ticks.Select(x => (double?)x).FirstOrDefault(x => x > slider1.Value) ?? slider1.Value;
             }
-               
-            /* }
-             else
-             {
-                 canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transform Canvas size
-                // canvas_Zoom.RenderTransform = new TranslateTransform(-1, -1);
-
-             }*/
+           
         }
         
 
@@ -282,13 +267,12 @@ namespace App_Brycol.Vues
             var canvss = e.GetPosition(canvas);
             foreach (UIElement child in canvas.Children)
             {
-                var position = e.GetPosition(child);
-            
                 Point childTopGauche = child.TransformToAncestor(canvas).Transform(new Point(0, 0));
                 Point childBotDroite = new Point(childTopGauche.X + child.DesiredSize.Width , childTopGauche.Y + child.DesiredSize.Height);
-                if (childTopGauche.X > canvas.Width || childTopGauche.X < 0 || childTopGauche.Y < 0 || childTopGauche.Y > canvas.Height || childBotDroite.X > canvas.Width || childBotDroite.Y > canvas.Height)
+
+                if (childTopGauche.X > canvas.Width || childTopGauche.X < 0 || childTopGauche.Y < 0 || childTopGauche.Y > canvas.Height || childBotDroite.X > canvas.Width || childBotDroite.X < 0 || childBotDroite.Y < 0 || childBotDroite.Y > canvas.Height)
                 {
-                    child.Opacity = 0.4;
+                    child.Opacity = 0.3;
                 }
                 else
                 {
