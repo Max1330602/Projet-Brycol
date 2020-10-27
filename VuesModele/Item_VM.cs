@@ -241,6 +241,7 @@ namespace App_Brycol.VuesModele
 
         public void AjouterItem(Object param)
         { 
+            
             ItemsPlan i = new ItemsPlan();
 
             i.Item = _itemSelectionne;

@@ -34,8 +34,7 @@ namespace App_Brycol.Vues
             InitializeComponent();
             initializeItems();
 
-           
-
+            DataContext = new Plan_VM();
         }
 
         private Point clickPosition;
@@ -43,6 +42,9 @@ namespace App_Brycol.Vues
         private Point mousePosition;
         private bool move;
         public double Zoom;
+        public const double pixelToM = 3779.5275590551 / echelle;
+        public const double pixelToCm = 37.7952755906 / echelle;
+        public const int echelle = 50;
 
 
         private void OnPropertyChanged([CallerMemberName] String propertyName = "")
@@ -208,8 +210,21 @@ namespace App_Brycol.Vues
         {
             if (!move)
             {
+                
 
-                draggedImage.Source = null;
+                if (Item_VM.ItemsPlanActuel != null)
+                {
+                    foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
+                    {
+                        if (ip.Item.ImgItem.Width == draggedImage.Source.Width)
+                        {
+                            Item_VM.ItemsPlanActuel.Remove(ip);
+                            draggedImage.Source = null;
+                            return;
+                        }
+                    }
+                }
+                
             }
         }
 
@@ -223,6 +238,9 @@ namespace App_Brycol.Vues
                     var image = new Image { Source = bitmap };
                     Canvas.SetLeft(image, ip.emplacementGauche);
                     Canvas.SetTop(image, ip.emplacementHaut);
+                    TextBlock textBlock = new TextBlock();
+                    //image.Height = (ip.Item.Hauteur * pixelToCm) / (canvas.Height / pixelToM);
+                    //image.Width = (ip.Item.Largeur * pixelToCm) / (canvas.Width / pixelToM);
                     image.Height = 100;
                     image.Width = 100;
                     canvas.Children.Add(image);
@@ -273,6 +291,7 @@ namespace App_Brycol.Vues
                 if (childTopGauche.X > canvas.Width || childTopGauche.X < 0 || childTopGauche.Y < 0 || childTopGauche.Y > canvas.Height || childBotDroite.X > canvas.Width || childBotDroite.X < 0 || childBotDroite.Y < 0 || childBotDroite.Y > canvas.Height)
                 {
                     child.Opacity = 0.3;
+                    
                 }
                 else
                 {
@@ -280,5 +299,6 @@ namespace App_Brycol.Vues
                 }
             }
         }
+
     }
 }
