@@ -10,6 +10,8 @@ using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace App_Brycol.VuesModele
@@ -36,6 +38,8 @@ namespace App_Brycol.VuesModele
                 var PReq = from p in OutilEF.brycolContexte.Pieces where p.Projet.ID == ProjetActuel.ID select p;
                 foreach (Piece p in PReq)
                     ListePieces.Add(p);
+
+                Nom = ProjetActuel.Nom;
             }
 
 
@@ -123,6 +127,12 @@ namespace App_Brycol.VuesModele
             ProjetActuel = p;
             EstSauvegarde = true;
 
+            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
+            gridMW.Children.Clear();
+            gridMW.Children.Add(cpMW);
+            cpMW.Content = new PlanDeTravail();
+
         }
 
         public void SuppProjet(Object param)
@@ -168,10 +178,8 @@ namespace App_Brycol.VuesModele
             Plan plan = new Plan();
             decimal St = 0M;
 
-            //****************************************
-            // HARDCODE LE ID                                                      ICI laPiece
             var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == laPiece.ID select p;
-            //****************************************
+
             foreach (Plan p in PReq)
                 plan = p;
 

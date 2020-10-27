@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,8 +36,7 @@ namespace App_Brycol.Vues
             InitializeComponent();
             initializeItems();
 
-           
-
+            DataContext = new Plan_VM();
         }
 
         private Point clickPosition;
@@ -45,7 +45,7 @@ namespace App_Brycol.Vues
         private bool move;
         public double Zoom;
         public const double pixelToM = 3779.5275590551 / echelle;
-        public const double pixelToCm = 37.7952755906/echelle;
+        public const double pixelToCm = 37.7952755906 / echelle;
         public const int echelle = 50;
 
 
@@ -113,22 +113,25 @@ namespace App_Brycol.Vues
             {
                 canvas.ReleaseMouseCapture();
                 Panel.SetZIndex(draggedImage, 0);
-                
-                var ireq = from ip in OutilEF.brycolContexte.lstItems.Include("Plan") where ip.Plan.Piece.ID == Piece_VM.pieceActuel.ID select ip;
-                foreach (ItemsPlan i in ireq)
+
+                //var ireq = from ip in OutilEF.brycolContexte.lstItems.Include("Plan") where ip.Plan.Piece.ID == Piece_VM.pieceActuel.ID select ip;
+                foreach (ItemsPlan i in Item_VM.ItemsPlanActuel)
                 {
                     var bitmap = new BitmapImage(i.Item.ImgItem.UriSource);
                     var imageBD = new Image { Source = bitmap };
                     imageBD.Tag = i.ID;
-                    if (imageBD.Source.ToString() == draggedImage.Source.ToString() && imageBD.Tag == draggedImage.Tag)
+
+                    if (imageBD.Source.ToString() == draggedImage.Source.ToString() && imageBD.Tag.ToString() == draggedImage.Tag.ToString())
                     {
                         
                         i.emplacementGauche = Canvas.GetLeft(draggedImage) + offset.X;
                         i.emplacementHaut = Canvas.GetTop(draggedImage) + offset.Y;
+                        OutilEF.brycolContexte.SaveChanges();
+                        draggedImage = null;
+                        return;
                     }
                 }
-                OutilEF.brycolContexte.SaveChanges();
-                draggedImage = null;
+               
             }
         }
         
@@ -228,18 +231,33 @@ namespace App_Brycol.Vues
         private void btnDelete(object sender, RoutedEventArgs e)
         {
             if (!move)
-            {
+            {              
+                if (Item_VM.ItemsPlanActuel != null)
+                {
+                    foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
+                    {
+                        var bitmap = new BitmapImage(ip.Item.ImgItem.UriSource);
+                        var imageBD = new Image { Source = bitmap };
 
-                draggedImage.Source = null;
+                        if (imageBD.Source.ToString() == draggedImage.Source.ToString())
+                        {
+                            
+                            Item_VM.ItemsPlanActuel.Remove(ip);
+                            draggedImage.Source = null;
+                            OutilEF.brycolContexte.lstItems.Remove(ip);
+                            OutilEF.brycolContexte.SaveChanges();
+                            
+                            return;
+                        }
+                    }
+                }
+                
             }
         }
 
         public void initializeItems()
         {
             canvas.Children.Clear();
-
-
-            
 
             if (Item_VM.ItemsPlanActuel != null)
             {
@@ -253,8 +271,12 @@ namespace App_Brycol.Vues
                     var image = new Image { Source = bitmap };
                     Canvas.SetLeft(image, ip.emplacementGauche);
                     Canvas.SetTop(image, ip.emplacementHaut);
-                    image.Height = 100;
-                    image.Width = 100;
+                    TextBlock textBlock = new TextBlock();
+                    image.Height = (ip.Item.Hauteur * pixelToCm);
+                    image.Width = (ip.Item.Largeur * pixelToCm);
+                    //image.Height = 100;
+                    //image.Width = 100;
+                    image.Tag = ip.ID;
                     canvas.Children.Add(image);
                 }
             }
@@ -303,6 +325,7 @@ namespace App_Brycol.Vues
                 if (childTopGauche.X > canvas.Width || childTopGauche.X < 0 || childTopGauche.Y < 0 || childTopGauche.Y > canvas.Height || childBotDroite.X > canvas.Width || childBotDroite.X < 0 || childBotDroite.Y < 0 || childBotDroite.Y > canvas.Height)
                 {
                     child.Opacity = 0.3;
+                    
                 }
                 else
                 {
@@ -310,5 +333,6 @@ namespace App_Brycol.Vues
                 }
             }
         }
+
     }
 }

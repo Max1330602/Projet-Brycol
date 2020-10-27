@@ -100,8 +100,9 @@ namespace App_Brycol.Vues
 
         private void Piece2D_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
         }
+>>>>>>> 4914ab7c21b8d8d304ca633e08cf2f991b8eb5b6
 
         private void test(object sender, RoutedEventArgs e)
         {

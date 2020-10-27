@@ -19,37 +19,40 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-
+            <TextBlock  Foreground="Black" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Center">
+                <Run Text="{Binding LargeurAffichage}"></Run>
+                <Run>mètres</Run>
+            </TextBlock>
+            <TextBlock  Foreground="Black" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,210,4,210">
+                <Run Text="{Binding LongueurAffichage}"></Run>
+                <Run>mètres</Run>
+            </TextBlock>
 
 
             <Canvas x:Name="canvas_Zoom" Margin="25,29,28,27" MouseMove="CanvasZoomMouseMove">
-                <Border BorderBrush="#804000" BorderThickness="5" > 
-                <Canvas Background="LightGray" Width="480" Height="289" VerticalAlignment="Center" HorizontalAlignment="Center"
-                            x:Name="canvas" 
-                    MouseLeftButtonDown="CanvasMouseLeftButtonDown"
-                    MouseLeftButtonUp="CanvasMouseLeftButtonUp"
-                    MouseMove="CanvasMouseMove"
-                    MouseWheel="Canvas_MouseWheel"  ClipToBounds="true" Grid.RowSpan="2" Canvas.Left="143" Canvas.Top="43">
-                    <Canvas.RenderTransform>
-                        <TransformGroup>
-                            <TranslateTransform X="0" Y="0"/>
-                        </TransformGroup>
-                    </Canvas.RenderTransform>
+                <!--<Border BorderBrush="#804000" BorderThickness="5" >-->
+              
+                    <Canvas Background="LightGray" Width="{Binding Largeur}" Height="{Binding Longueur}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                x:Name="canvas" 
+                                MouseLeftButtonDown="CanvasMouseLeftButtonDown"
+                                MouseLeftButtonUp="CanvasMouseLeftButtonUp"
+                                MouseMove="CanvasMouseMove"
+                                MouseWheel="Canvas_MouseWheel"  ClipToBounds="true" Grid.RowSpan="2" Canvas.Left="143" Canvas.Top="43">
+                        <Canvas.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform X="0" Y="0"/>
+                            </TransformGroup>
+                        </Canvas.RenderTransform>
 
+                     </Canvas>
+                <!--</Border>-->
+                
                 </Canvas>
-                </Border>
-
-            </Canvas>
 
 
-
-
-
-
-
-            <Button Content="Delete" Click="btnDelete" Margin="112,413,636,13" />
-            <Button Content="Rotation de l'image" Click="btnRotation" Margin="190,413,484,13" />
-            <Grid Margin="128,413,10,13" DockPanel.Dock="Bottom" Grid.RowSpan="2">
+            <Button Content="Supprimer un item" Click="btnDelete" Margin="50,413,636,13" Height="20" VerticalAlignment="Bottom" Width="120"/>
+            <Button Content="Rotation de l'image" Click="btnRotation" Margin="190,413,484,13" Height="20" VerticalAlignment="Bottom" Width="125"/>
+            <Grid Margin="128,413,10,13" DockPanel.Dock="Bottom" Grid.RowSpan="2" Height="20" VerticalAlignment="Bottom">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="7*" />
                     <ColumnDefinition Width="3*"/>
@@ -85,19 +88,7 @@
                     <!-- spacer -->
                 </Grid.ColumnDefinitions>
 
-                <!--<Button Click="btnRotation" RenderTransformOrigin="0.5,0.5" Height="40" Canvas.Left="376" Canvas.Top="397" Width="97" Margin="70,-16,67,0"/>
-                <StackPanel Canvas.Left="380" Canvas.Top="403" Margin="84,-10,82,1">
-                    <Image Source="../images/rotation.png" Height="25" RenderTransformOrigin="0.5,0.5" Margin="26,0,25,0"/>
-                </StackPanel>
-                <TextBlock FontSize="10" Margin="76,10,72,-3"><Run Text="Rotation de l'image"/></TextBlock>
-                -->
-
-
-
-                <!-- 
-            The 100% button.  Causes the content to be scaled to 100 percent.
-            -->
-
+                
 
 
 
