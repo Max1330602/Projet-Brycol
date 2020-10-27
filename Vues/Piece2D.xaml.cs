@@ -267,7 +267,7 @@ namespace App_Brycol.Vues
                     Item_VM.ItemsPlanActuel.Add(i);
                 foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
                 {
-                    var bitmap = new BitmapImage(new Uri("pack://application:,,,/images/Items/item" + ip.Item.ID + ".png"));
+                    var bitmap = new BitmapImage(new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png"));
                     var image = new Image { Source = bitmap };
                     Canvas.SetLeft(image, ip.emplacementGauche);
                     Canvas.SetTop(image, ip.emplacementHaut);

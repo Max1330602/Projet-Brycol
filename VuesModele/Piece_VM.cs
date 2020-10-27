@@ -221,6 +221,8 @@ namespace App_Brycol.VuesModele
             OutilEF.brycolContexte.SaveChanges();
 
             pieceActuel = p;
+            
+
         }
 
         private decimal CalSouTo(Piece laPiece)
