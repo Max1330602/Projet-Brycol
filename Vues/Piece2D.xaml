@@ -47,13 +47,7 @@
                      </Canvas>
                 <!--</Border>-->
                 
-
                 </Canvas>
-
-
-
-
-
 
 
             <Button Content="Supprimer un item" Click="btnDelete" Margin="50,413,636,13" Height="20" VerticalAlignment="Bottom" Width="120"/>

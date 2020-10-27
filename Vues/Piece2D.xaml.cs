@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -112,21 +113,23 @@ namespace App_Brycol.Vues
             {
                 canvas.ReleaseMouseCapture();
                 Panel.SetZIndex(draggedImage, 0);
-                
-                var ireq = from ip in OutilEF.brycolContexte.lstItems.Include("Plan") where ip.Plan.Piece.ID == Piece_VM.pieceActuel.ID select ip;
-                foreach (ItemsPlan i in ireq)
+
+                //var ireq = from ip in OutilEF.brycolContexte.lstItems.Include("Plan") where ip.Plan.Piece.ID == Piece_VM.pieceActuel.ID select ip;
+                foreach (ItemsPlan i in Item_VM.ItemsPlanActuel)
                 {
                     var bitmap = new BitmapImage(i.Item.ImgItem.UriSource);
                     var imageBD = new Image { Source = bitmap };
-
-                    if (imageBD.Source.ToString() == draggedImage.Source.ToString())
+                    imageBD.Tag = i.ID;
+                    if (imageBD.Source.ToString() == draggedImage.Source.ToString() && imageBD.Tag.ToString() == draggedImage.Tag.ToString())
                     {
                         i.emplacementGauche = Canvas.GetLeft(draggedImage) + offset.X;
                         i.emplacementHaut = Canvas.GetTop(draggedImage) + offset.Y;
+                        OutilEF.brycolContexte.SaveChanges();
+                        draggedImage = null;
+                        return;
                     }
                 }
-                OutilEF.brycolContexte.SaveChanges();
-                draggedImage = null;
+               
             }
         }
         
@@ -226,17 +229,22 @@ namespace App_Brycol.Vues
         private void btnDelete(object sender, RoutedEventArgs e)
         {
             if (!move)
-            {
-                
-
+            {              
                 if (Item_VM.ItemsPlanActuel != null)
                 {
                     foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
                     {
-                        if (ip.Item.ImgItem.Width == draggedImage.Source.Width)
+                        var bitmap = new BitmapImage(ip.Item.ImgItem.UriSource);
+                        var imageBD = new Image { Source = bitmap };
+
+                        if (imageBD.Source.ToString() == draggedImage.Source.ToString())
                         {
+                            
                             Item_VM.ItemsPlanActuel.Remove(ip);
                             draggedImage.Source = null;
+                            OutilEF.brycolContexte.lstItems.Remove(ip);
+                            OutilEF.brycolContexte.SaveChanges();
+                            
                             return;
                         }
                     }
@@ -248,9 +256,6 @@ namespace App_Brycol.Vues
         public void initializeItems()
         {
             canvas.Children.Clear();
-
-
-            
 
             if (Item_VM.ItemsPlanActuel != null)
             {
@@ -265,10 +270,11 @@ namespace App_Brycol.Vues
                     Canvas.SetLeft(image, ip.emplacementGauche);
                     Canvas.SetTop(image, ip.emplacementHaut);
                     TextBlock textBlock = new TextBlock();
-                    //image.Height = (ip.Item.Hauteur * pixelToCm) / (canvas.Height / pixelToM);
-                    //image.Width = (ip.Item.Largeur * pixelToCm) / (canvas.Width / pixelToM);
-                    image.Height = 100;
-                    image.Width = 100;
+                    image.Height = (ip.Item.Hauteur * pixelToCm);
+                    image.Width = (ip.Item.Largeur * pixelToCm);
+                    //image.Height = 100;
+                    //image.Width = 100;
+                    image.Tag = ip.ID;
                     canvas.Children.Add(image);
                 }
             }
