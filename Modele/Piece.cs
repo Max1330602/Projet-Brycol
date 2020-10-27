@@ -20,7 +20,6 @@ namespace App_Brycol.Modele
         public string Nom { get; set; }
         [NotMapped]
         public decimal Total { get; set; }
-        
 
         public Piece() 
         {
