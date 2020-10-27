@@ -21,31 +21,31 @@
 
             <TextBlock  Foreground="Black" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Center">
                 <Run Text="{Binding LargeurAffichage}"></Run>
-                <Run>mètres</Run>
+                <Run Text="{Binding UniteMesure}"></Run>
             </TextBlock>
             <TextBlock  Foreground="Black" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,210,4,210">
                 <Run Text="{Binding LongueurAffichage}"></Run>
-                <Run>mètres</Run>
+                <Run Text="{Binding UniteMesure}"></Run>
             </TextBlock>
 
 
-            <Canvas x:Name="canvas_Zoom" Margin="25,29,28,27" MouseMove="CanvasZoomMouseMove">
-                <Border x:Name="CanvasBorder" BorderBrush="#804000">
+            <Canvas x:Name="canvas_Zoom" Margin="25,0,28,27" MouseMove="CanvasZoomMouseMove" Height="390" VerticalAlignment="Bottom">
+                <!--<Border x:Name="CanvasBorder" BorderBrush="#804000">-->
 
-                    <Canvas Background="LightGray" Width="{Binding Largeur}" Height="{Binding Longueur}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                <Canvas Background="LightGray" Width="{Binding Largeur}" Height="{Binding Longueur}" VerticalAlignment="Center" HorizontalAlignment="Center"
                                 x:Name="canvas" 
                                 MouseLeftButtonDown="CanvasMouseLeftButtonDown"
                                 MouseLeftButtonUp="CanvasMouseLeftButtonUp"
                                 MouseMove="CanvasMouseMove"
-                                MouseWheel="Canvas_MouseWheel"  ClipToBounds="true" Grid.RowSpan="2" Canvas.Left="143" Canvas.Top="43" Panel.ZIndex="1">
-                        <Canvas.RenderTransform>
-                            <TransformGroup>
-                                <TranslateTransform X="0" Y="0"/>
-                            </TransformGroup>
-                        </Canvas.RenderTransform>
+                                MouseWheel="Canvas_MouseWheel"  ClipToBounds="true" Grid.RowSpan="2" Canvas.Left="143" Canvas.Top="43" >
+                    <Canvas.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="0" Y="0"/>
+                        </TransformGroup>
+                    </Canvas.RenderTransform>
 
-                    </Canvas>
-                </Border>
+                </Canvas>
+                <!--</Border>-->
 
             </Canvas>
 
@@ -88,7 +88,7 @@
                     <!-- spacer -->
                 </Grid.ColumnDefinitions>
 
-                
+
 
 
 

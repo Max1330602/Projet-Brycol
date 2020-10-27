@@ -17,6 +17,7 @@ namespace App_Brycol.VuesModele
     class Plan_VM : INotifyPropertyChanged
     {
         public static Plan PlanActuel;
+        public const float pixelToPied = (float)1152.0001451339 / echelle;
         public const float pixelToM = (float)3779.5275590551 / echelle;
         public const double pixelToCm = (float)37.7952755906 / echelle;
         public const int echelle = 50;
@@ -24,11 +25,34 @@ namespace App_Brycol.VuesModele
 
         public Plan_VM()
         {
-            Longueur = Piece_VM.pieceActuel.Longueur * pixelToM;
-            Largeur = Piece_VM.pieceActuel.Largeur * pixelToM;
-            LongueurAffichage = Piece_VM.pieceActuel.Longueur;
-            LargeurAffichage = Piece_VM.pieceActuel.Largeur;
+           
+            if(InfoPiece.uniteMesure == "Mètres")
+            {
+                Longueur = Piece_VM.pieceActuel.Longueur * pixelToM;
+                Largeur = Piece_VM.pieceActuel.Largeur * pixelToM;
+                LongueurAffichage = Piece_VM.pieceActuel.Longueur;
+                LargeurAffichage = Piece_VM.pieceActuel.Largeur;
+            }
+            else
+            {
+                Longueur = Piece_VM.pieceActuel.Longueur * pixelToPied;
+                Largeur = Piece_VM.pieceActuel.Largeur * pixelToPied;
+                LongueurAffichage = Piece_VM.pieceActuel.Longueur;
+                LargeurAffichage = Piece_VM.pieceActuel.Largeur;
+            }
+            UniteMesure = InfoPiece.uniteMesure;
             
+        }
+        private string _uniteMesure;
+        public string UniteMesure
+        {
+            get { return _uniteMesure; }
+            set
+            {
+                _uniteMesure = value;
+                OnPropertyChanged("UniteMesure");
+            }
+
         }
 
         private float _longueur;
@@ -78,8 +102,6 @@ namespace App_Brycol.VuesModele
             }
 
         }
-
-
 
 
         public void InitPlan()

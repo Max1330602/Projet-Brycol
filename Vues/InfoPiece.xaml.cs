@@ -1,4 +1,5 @@
 ﻿using App_Brycol.VuesModele;
+using Org.BouncyCastle.Asn1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace App_Brycol.Vues
 
         }
 
+        public static string uniteMesure;
       
 
         private void btnContinuer_Click(object sender, RoutedEventArgs e)
@@ -52,5 +54,14 @@ namespace App_Brycol.Vues
             this.Close();
         }
 
+        private void metre_Checked(object sender, RoutedEventArgs e)
+        {
+            uniteMesure = "Mètres";
+        }
+
+        private void pied_Checked(object sender, RoutedEventArgs e)
+        {
+            uniteMesure = "Pieds";
+        }
     }
 }
