@@ -30,24 +30,24 @@
 
 
             <Canvas x:Name="canvas_Zoom" Margin="25,29,28,27" MouseMove="CanvasZoomMouseMove">
-                <!--<Border BorderBrush="#804000" BorderThickness="5" >-->
-              
+                <Border x:Name="CanvasBorder" BorderBrush="#804000">
+
                     <Canvas Background="LightGray" Width="{Binding Largeur}" Height="{Binding Longueur}" VerticalAlignment="Center" HorizontalAlignment="Center"
                                 x:Name="canvas" 
                                 MouseLeftButtonDown="CanvasMouseLeftButtonDown"
                                 MouseLeftButtonUp="CanvasMouseLeftButtonUp"
                                 MouseMove="CanvasMouseMove"
-                                MouseWheel="Canvas_MouseWheel"  ClipToBounds="true" Grid.RowSpan="2" Canvas.Left="143" Canvas.Top="43">
+                                MouseWheel="Canvas_MouseWheel"  ClipToBounds="true" Grid.RowSpan="2" Canvas.Left="143" Canvas.Top="43" Panel.ZIndex="1">
                         <Canvas.RenderTransform>
                             <TransformGroup>
                                 <TranslateTransform X="0" Y="0"/>
                             </TransformGroup>
                         </Canvas.RenderTransform>
 
-                     </Canvas>
-                <!--</Border>-->
-                
-                </Canvas>
+                    </Canvas>
+                </Border>
+
+            </Canvas>
 
 
             <Button Content="Supprimer un item" Click="btnDelete" Margin="50,413,636,13" Height="20" VerticalAlignment="Bottom" Width="120"/>

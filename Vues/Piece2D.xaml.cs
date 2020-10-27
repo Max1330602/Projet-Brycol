@@ -36,6 +36,8 @@ namespace App_Brycol.Vues
             InitializeComponent();
             initializeItems();
 
+            CanvasBorder.BorderThickness = new Thickness(1);
+
             DataContext = new Plan_VM();
         }
 
@@ -236,8 +238,8 @@ namespace App_Brycol.Vues
                     {
                         var bitmap = new BitmapImage(ip.Item.ImgItem.UriSource);
                         var imageBD = new Image { Source = bitmap };
-
-                        if (imageBD.Source.ToString() == draggedImage.Source.ToString())
+                        imageBD.Tag = ip.ID;
+                        if (imageBD.Source.ToString() == draggedImage.Source.ToString() && imageBD.Tag.ToString() == draggedImage.Tag.ToString())
                         {
                             
                             Item_VM.ItemsPlanActuel.Remove(ip);

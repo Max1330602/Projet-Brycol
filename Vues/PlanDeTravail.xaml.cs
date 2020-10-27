@@ -98,10 +98,10 @@ namespace App_Brycol.Vues
             popUp.ShowDialog();
         }
 
-       /* private void Piece2D_Loaded(object sender, RoutedEventArgs e)
+        private void Piece2D_Loaded(object sender, RoutedEventArgs e)
         {
-            
-        }*/
+
+        }
 
         private void test(object sender, RoutedEventArgs e)
         {
