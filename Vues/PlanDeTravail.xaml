@@ -53,8 +53,8 @@
         <!-- Plan 2D de la pièce-->
 
 
-       <local:Piece2D Grid.Column="1" Grid.Row="1" Margin="12,25,10,71" Loaded="Piece2D_Loaded" ClipToBounds="true"></local:Piece2D>
-
+        <local:Piece2D Grid.Column="1" Grid.Row="1" Margin="12,25,10,71" Loaded="Piece2D_Loaded" ClipToBounds="true"></local:Piece2D>
+   
 
     </Grid>
 </UserControl>

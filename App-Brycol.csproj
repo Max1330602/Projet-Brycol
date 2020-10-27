@@ -299,6 +299,7 @@
     <Resource Include="images\ItemsModifies\item6Modifie.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\Items\Top\item0.png" />
     <Resource Include="images\Items\Top\item1.png" />
     <Resource Include="images\Items\Top\item10.png" />
     <Resource Include="images\Items\Top\item11.png" />

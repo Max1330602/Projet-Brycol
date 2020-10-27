@@ -219,9 +219,10 @@ namespace App_Brycol.VuesModele
             }
 
             OutilEF.brycolContexte.SaveChanges();
-
             pieceActuel = p;
-            
+            //---TODO-----------------------------------------------------------------------
+            var plreq = from pl in OutilEF.brycolContexte.Plans.Include("Piece") where pl.Piece.ID == pieceActuel.ID select pl;
+            Plan_VM.PlanActuel = plreq.First();
 
         }
 

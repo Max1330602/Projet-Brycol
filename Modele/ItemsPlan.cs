@@ -14,6 +14,7 @@ namespace App_Brycol.Modele
         public Item Item { get; set; }
         public double emplacementGauche { get; set; }
         public double emplacementHaut { get; set; }
+        public double angleRotation { get; set; }
 
         public ItemsPlan()
         {
