@@ -62,10 +62,8 @@ namespace App_Brycol.VuesModele
             {
                 Plan plan = new Plan();
 
-                //****************************************
-                // HARDCODE LE ID                                                      ICI pieceActuel
                 var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == pieceSelect.ID select p;
-                //****************************************
+
                 foreach (Plan p in PReq)
                     plan = p;
 
@@ -230,10 +228,8 @@ namespace App_Brycol.VuesModele
             Plan plan = new Plan();
             decimal St = 0M;
 
-            //****************************************
-            // HARDCODE LE ID                                                      ICI laPiece
             var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == laPiece.ID select p;
-            //****************************************
+
             foreach (Plan p in PReq)
                 plan = p;
 
