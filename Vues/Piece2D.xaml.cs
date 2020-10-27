@@ -122,8 +122,10 @@ namespace App_Brycol.Vues
                     var bitmap = new BitmapImage(i.Item.ImgItem.UriSource);
                     var imageBD = new Image { Source = bitmap };
                     imageBD.Tag = i.ID;
+
                     if (imageBD.Source.ToString() == draggedImage.Source.ToString() && imageBD.Tag.ToString() == draggedImage.Tag.ToString())
                     {
+                        
                         i.emplacementGauche = Canvas.GetLeft(draggedImage) + offset.X;
                         i.emplacementHaut = Canvas.GetTop(draggedImage) + offset.Y;
                         OutilEF.brycolContexte.SaveChanges();
