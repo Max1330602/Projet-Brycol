@@ -15,13 +15,17 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.TextFormatting;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Brushes = System.Windows.Media.Brushes;
+using Color = System.Drawing.Color;
 using Image = System.Windows.Controls.Image;
+using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 using Point = System.Windows.Point;
 
 namespace App_Brycol.Vues
@@ -29,14 +33,25 @@ namespace App_Brycol.Vues
     /// <summary>
     /// Logique d'interaction pour Piece2D.xaml
     /// </summary>
-    public partial class Piece2D : UserControl , INotifyPropertyChanged
+    public partial class Piece2D : System.Windows.Controls.UserControl, INotifyPropertyChanged
     {
         public Piece2D()
         {
             InitializeComponent();
             initializeItems();
 
-            //CanvasBorder.BorderThickness = new Thickness(1);
+            ImageBrush imgBrush = new ImageBrush();
+            imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/invalide.png"));
+            canvas.Background = imgBrush;
+
+            Canvas.SetLeft(canvas, (750 / 2)- (Piece_VM.pieceActuel.Largeur * pixelToM /2));
+            Canvas.SetBottom(canvas, (390 / 2) - (Piece_VM.pieceActuel.Longueur * pixelToM / 2));
+
+            zoom = 0.9-((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0)/100.0);
+            
+          
+            canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transforme la grandeur du canvas
+          
 
             DataContext = new Plan_VM();
         }
@@ -77,11 +92,13 @@ namespace App_Brycol.Vues
 
         private void CanvasMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            btnDeletePlan.IsEnabled = false;
+            btnRotationPlan.IsEnabled = false;
             var image = e.Source as System.Windows.Controls.Image;
-            if (e.ClickCount == 2)
+            if (e.ClickCount == 2 && image!= null)
             {
-                PlanDeTravail xx = new PlanDeTravail();
-                xx.btnSupprimerItem.IsEnabled = true;
+                btnDeletePlan.IsEnabled = true;
+                btnRotationPlan.IsEnabled = true;
 
                 draggedImage = image;
                 draggedImage.Opacity = 0.5;
@@ -90,7 +107,7 @@ namespace App_Brycol.Vues
             }
            
             else {
-                clickPosition = e.GetPosition(canvas); // get click position
+                clickPosition = e.GetPosition(canvas); // avoir la position du click
                 if (image != null && canvas.CaptureMouse())
                 {
                     draggedImage = image;
@@ -100,7 +117,7 @@ namespace App_Brycol.Vues
                     mousePosition = e.GetPosition(canvas);
                     draggedImage = image;
 
-                    Panel.SetZIndex(draggedImage, 1); // in case of multiple images
+                    System.Windows.Controls.Panel.SetZIndex(draggedImage, 1); // si on a plusieurs images
 
                 }
             }
@@ -114,9 +131,9 @@ namespace App_Brycol.Vues
             if (draggedImage != null && move == true)
             {
                 canvas.ReleaseMouseCapture();
-                Panel.SetZIndex(draggedImage, 0);
+                System.Windows.Controls.Panel.SetZIndex(draggedImage, 0);
 
-                //var ireq = from ip in OutilEF.brycolContexte.lstItems.Include("Plan") where ip.Plan.Piece.ID == Piece_VM.pieceActuel.ID select ip;
+                
                 foreach (ItemsPlan i in Item_VM.ItemsPlanActuel)
                 {
                     var bitmap = new BitmapImage(i.Item.ImgItem.UriSource);
@@ -158,8 +175,8 @@ namespace App_Brycol.Vues
             {
                 if (e.LeftButton != MouseButtonState.Released)
                 {
-                    Point mousePos = e.GetPosition(canvas_Zoom); // get absolute mouse position
-                    Canvas.SetLeft(canvas, mousePos.X - clickPosition.X); // move canvas
+                    Point mousePos = e.GetPosition(canvas_Zoom); // position absolu de la souris
+                    Canvas.SetLeft(canvas, mousePos.X - clickPosition.X); // bouger le canvas
                     Canvas.SetTop(canvas, mousePos.Y - clickPosition.Y);
 
                 }
@@ -213,17 +230,17 @@ namespace App_Brycol.Vues
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        // Zoom on Mouse wheel
+        // Zoom avec la roue à zoom
         private void Canvas_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            zoom += zoomSpeed * e.Delta; // Ajust zooming speed (e.Delta = Mouse spin value )
-            if (zoom < zoomMin) { zoom = zoomMin; } // Limit Min Scale
-            if (zoom > zoomMax) { zoom = zoomMax; } // Limit Max Scale
+            zoom += zoomSpeed * e.Delta; // Ajuste la vitesse du zoom (e.Delta = Souris roue à zoom )
+            if (zoom < zoomMin) { zoom = zoomMin; } // Limite le minimum
+            if (zoom > zoomMax) { zoom = zoomMax; } // Limite le maximum
 
             Point mousePos = e.GetPosition(canvas);
 
             
-                canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom, mousePos.X, mousePos.Y); // transform Canvas size from mouse position
+                canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom, mousePos.X, mousePos.Y); // transforme la grandeur du canvas selon la position de la souris
 
             if (e.Delta<0)
             {
@@ -240,27 +257,32 @@ namespace App_Brycol.Vues
         private void btnDelete(object sender, RoutedEventArgs e)
         {
             if (!move)
-            {              
-                if (Item_VM.ItemsPlanActuel != null)
+            {
+                MessageBoxResult resultat;
+                resultat = System.Windows.MessageBox.Show("Voulez-vraiment supprimer cette item ?", "Suppression d'un item", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                if (resultat == MessageBoxResult.Yes)
                 {
-                    foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
+                    if (Item_VM.ItemsPlanActuel != null)
                     {
-                        var bitmap = new BitmapImage(ip.Item.ImgItem.UriSource);
-                        var imageBD = new Image { Source = bitmap };
-                        imageBD.Tag = ip.ID;
-                        if (imageBD.Source.ToString() == draggedImage.Source.ToString() && imageBD.Tag.ToString() == draggedImage.Tag.ToString())
+                        foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
                         {
-                            
-                            Item_VM.ItemsPlanActuel.Remove(ip);
-                            draggedImage.Source = null;
-                            OutilEF.brycolContexte.lstItems.Remove(ip);
-                            OutilEF.brycolContexte.SaveChanges();
-                            
-                            return;
+                            var bitmap = new BitmapImage(ip.Item.ImgItem.UriSource);
+                            var imageBD = new Image { Source = bitmap };
+                            imageBD.Tag = ip.ID;
+                            if (imageBD.Tag.ToString() == draggedImage.Tag.ToString())
+                            {
+
+                                Item_VM.ItemsPlanActuel.Remove(ip);
+                                draggedImage.Source = null;
+                                OutilEF.brycolContexte.lstItems.Remove(ip);
+                                OutilEF.brycolContexte.SaveChanges();
+
+                                return;
+                            }
                         }
                     }
                 }
-                
+               
             }
         }
 
@@ -276,7 +298,22 @@ namespace App_Brycol.Vues
                     Item_VM.ItemsPlanActuel.Add(i);
                 foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
                 {
-                    var bitmap = new BitmapImage(new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png"));
+                    var bitmap = new BitmapImage();
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png");
+                    try
+                    {
+                        bitmap.EndInit();
+                    }
+                    catch (Exception e)
+                    {
+                        bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item0.png");
+                        bitmap.EndInit();
+
+
+                    }
                     var image = new Image { Source = bitmap };
                     Canvas.SetLeft(image, ip.emplacementGauche);
                     Canvas.SetTop(image, ip.emplacementHaut);
@@ -300,14 +337,12 @@ namespace App_Brycol.Vues
                         image.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 270 };
                     }
                     #endregion
-                    
-                    image.Height = (ip.Item.Hauteur * pixelToCm);
+
+                    image.Height = (ip.Item.Longueur * pixelToCm);
                     image.Width = (ip.Item.Largeur * pixelToCm);
-                    //image.Height = 100;
-                    //image.Width = 100;
                     image.Tag = ip.ID;
                     canvas.Children.Add(image);
-                }
+                    }
             }
         }
 
@@ -315,50 +350,57 @@ namespace App_Brycol.Vues
         {
             zoom = 1;
         
-            canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transform Canvas size
+            canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transforme la grandeur du canvas
             slider1.Value = 50;
         }
 
         private void btnZoomIn(object sender, RoutedEventArgs e)
         {
             zoom = zoom + 0.12;
-            if (zoom < zoomMin) { zoom = zoomMin; } // Limit Min Scale
-            if (zoom > zoomMax) { zoom = zoomMax; } // Limit Max Scale
+            if (zoom < zoomMin) { zoom = zoomMin; } // Limite le minimum
+            if (zoom > zoomMax) { zoom = zoomMax; } // Limite le maximum
 
             slider1.Value = slider1.Ticks.Select(x => (double?)x).FirstOrDefault(x => x > slider1.Value) ?? slider1.Value;
 
 
-            canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transform Canvas size
+            canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transforme la grandeur du canvas
           
         }
 
         private void btnZoomOut(object sender, RoutedEventArgs e)
         {
             zoom = zoom - 0.12;
-            if (zoom < zoomMin) { zoom = zoomMin; } // Limit Min Scale
-            if (zoom > zoomMax) { zoom = zoomMax; } // Limit Max Scale
+            if (zoom < zoomMin) { zoom = zoomMin; } // Limite le minimum
+            if (zoom > zoomMax) { zoom = zoomMax; } // Limite le maximum
 
             slider1.Value = slider1.Ticks.Select(x => (double?)x).LastOrDefault(x => x < slider1.Value) ?? slider1.Value;
 
-            canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transform Canvas size
+            canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom);  // transforme la grandeur du canvas
         }
 
-        private void CanvasZoomMouseMove(object sender, MouseEventArgs e)
+        private void CanvasZoomMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
-           
+            
             var canvss = e.GetPosition(canvas);
             foreach (UIElement child in canvas.Children)
             {
+                
                 Point childTopGauche = child.TransformToAncestor(canvas).Transform(new Point(0, 0));
                 Point childBotDroite = new Point(childTopGauche.X + child.DesiredSize.Width , childTopGauche.Y + child.DesiredSize.Height);
 
                 if (childTopGauche.X > canvas.Width || childTopGauche.X < 0 || childTopGauche.Y < 0 || childTopGauche.Y > canvas.Height || childBotDroite.X > canvas.Width || childBotDroite.X < 0 || childBotDroite.Y < 0 || childBotDroite.Y > canvas.Height)
                 {
-                    child.Opacity = 0.3;
-                    
+          
+                    ImageBrush imgBrush = new ImageBrush();
+                    imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/invalideItem.png"));
+
+
+                    child.OpacityMask = imgBrush;
                 }
                 else
                 {
+                    
+                    child.OpacityMask = null;
                     child.Opacity = 1;
                 }
             }

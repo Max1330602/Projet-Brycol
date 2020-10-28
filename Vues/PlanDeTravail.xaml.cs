@@ -121,10 +121,7 @@ namespace App_Brycol.Vues
             popUp.ShowDialog();
         }
 
-        private void test(object sender, RoutedEventArgs e)
-        {
-            btnSupprimerItem.IsEnabled = true;
-        }
+      
 
         private Bitmap Capturer(int DebutX, int DebutY, int Width, int Height)
         {

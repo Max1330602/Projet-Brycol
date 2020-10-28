@@ -40,7 +40,7 @@
         <Button Grid.Column="0" Grid.Row="1" Name="btnProjet" Click="btnProjet_Click"  Width="100" Height="25" Content="Changer Pièce" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,185,0,0"></Button>
         <Button Grid.Column="0" Grid.Row="1" Name="btnCoutPiece" Click="btnCoutPiece_Click"  Width="100" Height="25" Content="Coût de la Pièce" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,225,0,0"></Button>
         <Button Grid.Column="0" Grid.Row="1" Name="btnEnregistrer" Click="btnEnregistrer_Click" Width="100" Height="25" Content="Enregistrer" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,265,0,0"></Button>
-        <Button Name="btntest" Click="test" Margin="40,384,50,106" Grid.Row="1"></Button>
+        
 
 
         <Rectangle x:Name="rectangle" Grid.Column="1" Grid.Row="1" Stroke="Black" StrokeThickness="4" Margin="8,21,6,67">

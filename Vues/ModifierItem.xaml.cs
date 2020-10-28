@@ -42,6 +42,7 @@ namespace App_Brycol.Vues
 
         private void cmbCouleur_SelectedChange(object sender, SelectionChangedEventArgs e)
         {
+            imgItem.Source = Piece2D.draggedImage.Source;
             string FichierProjet = "..\\..\\";
             string bitmapSourceInit = imgItem.Source.ToString();
 
@@ -72,73 +73,61 @@ namespace App_Brycol.Vues
 
                     if (cmbCouleur.SelectedItem == Rouge)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(0, 0, 0, 0));
                         rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 255, g, b));
                     }
 
                     else if (cmbCouleur.SelectedItem == RougeFonce)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(0, 0, 0, 0));
                         rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 139, g, b));
                     }
 
                     else if (cmbCouleur.SelectedItem == VertFonce)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(0, 0, 0, 0));
                         rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, r, 100, b));
                     }
 
                     else if (cmbCouleur.SelectedItem == Vert)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(0, 0, 0, 0));
                         rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, r, 128, b));
                     }
 
                     else if (cmbCouleur.SelectedItem == Bleu)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(0, 0, 0, 0));
                         rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, r, g, 255));
                     }
 
                     else if (cmbCouleur.SelectedItem == BleuFonce)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(0, 0, 0, 0));
                         rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, r, g, 128));
                     }
 
                     else if (cmbCouleur.SelectedItem == Orange)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(0, 0, 0, 0));
                         rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 255, 165, b));
                     }
 
                     else if (cmbCouleur.SelectedItem == OrangeFonce)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(0, 0, 0, 0));
                         rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 255, 140, b));
                     }
 
                     else if (cmbCouleur.SelectedItem == Jaune)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(0, 0, 0, 0));
                         rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 255, 255, b));
                     }
 
                     else if (cmbCouleur.SelectedItem == Violet)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(0, 0, 0, 0));
                         rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 238, 130, 238));
                     }
 
                     else if (cmbCouleur.SelectedItem == Mauve)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(0, 0, 0, 0));
                         rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 128, g, 128));
                     }
 
                     else if (cmbCouleur.SelectedItem == Brun)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(0, 0, 0, 0));
                         rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 139, 69, 19));
                     }
                 }
@@ -156,5 +145,6 @@ namespace App_Brycol.Vues
             bmiItem.EndInit();
             imgItem.Source = bmiItem;
         }
+
     }
 }
