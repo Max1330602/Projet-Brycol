@@ -102,7 +102,6 @@ namespace App_Brycol.Vues
         {
 
         }
->>>>>>> 4914ab7c21b8d8d304ca633e08cf2f991b8eb5b6
 
         private void test(object sender, RoutedEventArgs e)
         {

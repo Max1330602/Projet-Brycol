@@ -113,7 +113,6 @@ namespace App_Brycol.VuesModele
         public void SauvProjet(Object param)
         {
             Projet p = OutilEF.brycolContexte.Projets.Find(ProjetActuel.ID);
-            p.Nom = Nom;
 
             if (Nom == null)
             {
@@ -122,7 +121,29 @@ namespace App_Brycol.VuesModele
                 p.Nom = "Projet" + test;
             }
 
-            OutilEF.brycolContexte.SaveChanges();
+            if (Nom != p.Nom && EstSauvegarde == true)
+            {
+                MessageBoxResult result = MessageBox.Show("Voulez-vous sauvegarder en tant que nouveau projet?", "Sauvegarder en tant que nouveau projet", MessageBoxButton.YesNo);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        SauNeoProjet();
+                        break;
+                    case MessageBoxResult.No:
+                        p.Nom = Nom;
+                        OutilEF.brycolContexte.SaveChanges();
+                        break;
+                }
+
+            }
+            else
+            {
+                p.Nom = Nom;
+                OutilEF.brycolContexte.SaveChanges();
+            }
+
+
+
 
             ProjetActuel = p;
             EstSauvegarde = true;
@@ -170,6 +191,63 @@ namespace App_Brycol.VuesModele
                 OutilEF.brycolContexte.Pieces.Remove(pie);
             }
             OutilEF.brycolContexte.Projets.Remove(pro);
+            OutilEF.brycolContexte.SaveChanges();
+        }
+
+        private void SauNeoProjet()
+        {
+            Projet pro = new Projet();
+            List<Piece> lstPie = new List<Piece>();
+            Plan pla = new Plan();
+            List<ItemsPlan> lstItPla = new List<ItemsPlan>();
+
+            pro = OutilEF.brycolContexte.Projets.Find(ProjetActuel.ID);
+            var PieReq = from pie in OutilEF.brycolContexte.Pieces where pie.Projet.ID == pro.ID select pie;
+
+            pro.Nom = Nom;
+            pro.Createur = "Utilisateur";
+            ListePieces = new ObservableCollection<Piece>();
+            pro.ListePieces = ListePieces;
+
+            OutilEF.brycolContexte.Projets.Add(pro);
+
+            ProjetActuel = pro;
+
+            foreach (Piece pie in PieReq)
+                lstPie.Add(pie);
+
+            foreach (Piece pie in lstPie)
+            {
+
+                var PlanReq = from plan in OutilEF.brycolContexte.Plans where plan.Piece.ID == pie.ID select plan;
+
+                pie.Projet = ProjetActuel;
+                OutilEF.brycolContexte.Pieces.Add(pie);
+                ListePieces.Add(pie);
+
+                foreach (Plan plan in PlanReq)
+                    pla = plan;
+
+
+                var IteReq = from ite in OutilEF.brycolContexte.lstItems where ite.Plan.ID == pla.ID select ite;
+
+
+                pla.Piece = pie;
+                OutilEF.brycolContexte.Plans.Add(pla);
+
+                foreach (ItemsPlan itPl in IteReq)
+                    lstItPla.Add(itPl);
+
+                foreach (ItemsPlan itPl in lstItPla)
+                {
+
+                    itPl.Plan = pla;
+                    OutilEF.brycolContexte.lstItems.Add(itPl);
+                }
+
+
+            }
+
             OutilEF.brycolContexte.SaveChanges();
         }
 
