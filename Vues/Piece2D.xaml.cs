@@ -276,22 +276,7 @@ namespace App_Brycol.Vues
                     Item_VM.ItemsPlanActuel.Add(i);
                 foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
                 {
-                    var bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png");
-                    try
-                    {
-                        bitmap.EndInit();
-                    }
-                    catch (Exception e)
-                    {
-                        bitmap = new BitmapImage();
-                        bitmap.BeginInit();
-                        bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item0.png");
-                        bitmap.EndInit();
-
-
-                    }
+                    var bitmap = new BitmapImage(new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png"));
                     var image = new Image { Source = bitmap };
                     Canvas.SetLeft(image, ip.emplacementGauche);
                     Canvas.SetTop(image, ip.emplacementHaut);
@@ -315,14 +300,14 @@ namespace App_Brycol.Vues
                         image.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 270 };
                     }
                     #endregion
-
+                    
                     image.Height = (ip.Item.Hauteur * pixelToCm);
                     image.Width = (ip.Item.Largeur * pixelToCm);
                     //image.Height = 100;
                     //image.Width = 100;
                     image.Tag = ip.ID;
                     canvas.Children.Add(image);
-                    }
+                }
             }
         }
 
