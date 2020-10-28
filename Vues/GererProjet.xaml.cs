@@ -95,6 +95,7 @@ namespace App_Brycol.Vues
                         if (Projet_VM.ProjetActuel.ListePieces[i] != null)
                         {
                             b.IsEnabled = true;
+                            b.Content = Projet_VM.ProjetActuel.ListePieces[i].Nom;
                         }
                     }
                     else
