@@ -221,10 +221,11 @@ namespace App_Brycol.VuesModele
             OutilEF.brycolContexte.SaveChanges();
             pieceActuel = p;
 
-            //---TODO-----------------------------------------------------------------------
-            var plreq = from pl in OutilEF.brycolContexte.Plans.Include("Piece") where pl.Piece.ID == pieceActuel.ID select pl;
-            Plan_VM.PlanActuel = plreq.First();
-            
+            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
+            gridMW.Children.Clear();
+            gridMW.Children.Add(cpMW);
+            cpMW.Content = new PlanDeTravail();
         }
 
         private decimal CalSouTo(Piece laPiece)

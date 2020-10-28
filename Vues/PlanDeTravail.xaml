@@ -43,7 +43,7 @@
         <Button Name="btntest" Click="test" Margin="40,384,50,106" Grid.Row="1"></Button>
 
 
-        <Rectangle x:Name="rectangle" Grid.Column="1" Grid.Row="1" Stroke="Black" StrokeThickness="4" Margin="8,21,6,67">
+        <Rectangle Grid.Column="1" Grid.Row="1" Stroke="Black" StrokeThickness="4" Margin="8,21,6,67">
         </Rectangle>
 
 
@@ -51,7 +51,8 @@
 
 
         <!-- Plan 2D de la pièce-->
-        <local:Piece2D x:Name="plan2D" Grid.Column="1" Grid.Row="1" Margin="12,25,10,71" ClipToBounds="true"></local:Piece2D>
+
+        <local:Piece2D Grid.Column="1" Grid.Row="1" Margin="12,25,10,71" Loaded="Piece2D_Loaded" ClipToBounds="true"></local:Piece2D>
    
 
     </Grid>

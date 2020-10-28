@@ -2,11 +2,7 @@
 using App_Brycol.VuesModele;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
-using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -79,25 +75,6 @@ namespace App_Brycol.Vues
 
         private void btnProjet_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < Projet_VM.ProjetActuel.ListePieces.Count(); i++)
-            {
-                if (Projet_VM.ProjetActuel.ListePieces[i] == Piece_VM.pieceActuel)
-                {
-                    System.Windows.Point PositionAbsolue = plan2D.TranslatePoint(new System.Windows.Point(162, 125), plan2D);
-                    System.Windows.Point PositionEcran = this.PointToScreen(PositionAbsolue);
-
-                    // Catch width and hight of scatterview
-                    int width = (int)plan2D.ActualWidth;
-                    int height = (int)plan2D.ActualHeight;
-
-                    // Screenshot as bitmap TakeScreenshot(StartWert_X, StartWert_Y, BreiteBild, HöheBild)
-                    Bitmap capture = Capturer((int)PositionEcran.X, (int)PositionEcran.Y, width, height);
-
-                    // save image in stream
-                    capture.Save("..\\..\\images\\Plans\\" + "plan" + Plan_VM.PlanActuel.ID + ".png");
-
-                }
-            }
             GererProjet popUp = new GererProjet();
             popUp.ShowDialog();
         }
@@ -121,29 +98,14 @@ namespace App_Brycol.Vues
             popUp.ShowDialog();
         }
 
+        private void Piece2D_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
         private void test(object sender, RoutedEventArgs e)
         {
             btnSupprimerItem.IsEnabled = true;
         }
-
-        private Bitmap Capturer(int DebutX, int DebutY, int Width, int Height)
-        {
-            // Bitmap in right size
-            Bitmap Capture = new Bitmap(Width, Height);
-            Graphics G = Graphics.FromImage(Capture);
-            // snip wanted area
-            G.CopyFromScreen(DebutX, DebutY, 0, 0, new System.Drawing.Size(Width, Height), CopyPixelOperation.SourceCopy);
-
-
-            // save uncompressed bitmap to disk
-            string fileName = Plan_VM.PlanActuel.ImgPlan.ToString();
-            System.IO.FileStream fs = System.IO.File.Open(fileName, System.IO.FileMode.OpenOrCreate);
-            Capture.Save(fs, System.Drawing.Imaging.ImageFormat.Bmp);
-            fs.Close();
-
-            return Capture;
-
-        }
-
     }
 }
