@@ -36,6 +36,8 @@ namespace App_Brycol.Vues
             InitializeComponent();
             initializeItems();
 
+            //CanvasBorder.BorderThickness = new Thickness(1);
+
             DataContext = new Plan_VM();
         }
 
@@ -118,14 +120,21 @@ namespace App_Brycol.Vues
                 foreach (ItemsPlan i in Item_VM.ItemsPlanActuel)
                 {
                     var bitmap = new BitmapImage(i.Item.ImgItem.UriSource);
+                    
                     var imageBD = new Image { Source = bitmap };
                     imageBD.Tag = i.ID;
 
-                    if (imageBD.Source.ToString() == draggedImage.Source.ToString() && imageBD.Tag.ToString() == draggedImage.Tag.ToString())
+                    if (imageBD.Tag.ToString() == draggedImage.Tag.ToString())
                     {
-                        
+                        RotateTransform rotation = draggedImage.RenderTransform as RotateTransform;
+                        if (rotation != null)
+                        {
+                            i.angleRotation = rotation.Angle;
+                        }
+                
                         i.emplacementGauche = Canvas.GetLeft(draggedImage) + offset.X;
                         i.emplacementHaut = Canvas.GetTop(draggedImage) + offset.Y;
+
                         OutilEF.brycolContexte.SaveChanges();
                         draggedImage = null;
                         return;
@@ -238,8 +247,8 @@ namespace App_Brycol.Vues
                     {
                         var bitmap = new BitmapImage(ip.Item.ImgItem.UriSource);
                         var imageBD = new Image { Source = bitmap };
-
-                        if (imageBD.Source.ToString() == draggedImage.Source.ToString())
+                        imageBD.Tag = ip.ID;
+                        if (imageBD.Source.ToString() == draggedImage.Source.ToString() && imageBD.Tag.ToString() == draggedImage.Tag.ToString())
                         {
                             
                             Item_VM.ItemsPlanActuel.Remove(ip);
@@ -267,11 +276,31 @@ namespace App_Brycol.Vues
                     Item_VM.ItemsPlanActuel.Add(i);
                 foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
                 {
-                    var bitmap = new BitmapImage(new Uri("pack://application:,,,/images/Items/item" + ip.Item.ID + ".png"));
+                    var bitmap = new BitmapImage(new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png"));
                     var image = new Image { Source = bitmap };
                     Canvas.SetLeft(image, ip.emplacementGauche);
                     Canvas.SetTop(image, ip.emplacementHaut);
-                    TextBlock textBlock = new TextBlock();
+
+                    #region angle
+                    if (ip.angleRotation == 0)
+                    {
+                        image.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 0 };
+                    }
+                    else if (ip.angleRotation == 90)
+                    {
+                        image.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 90 };
+                    }
+                    else if (ip.angleRotation == 180)
+                    {
+                        image.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 180 };
+                    }
+                    else if (ip.angleRotation == 270)
+                    {
+
+                        image.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 270 };
+                    }
+                    #endregion
+                    
                     image.Height = (ip.Item.Hauteur * pixelToCm);
                     image.Width = (ip.Item.Largeur * pixelToCm);
                     //image.Height = 100;
@@ -316,6 +345,7 @@ namespace App_Brycol.Vues
 
         private void CanvasZoomMouseMove(object sender, MouseEventArgs e)
         {
+           
             var canvss = e.GetPosition(canvas);
             foreach (UIElement child in canvas.Children)
             {
