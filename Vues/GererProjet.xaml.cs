@@ -23,6 +23,7 @@ namespace App_Brycol.Vues
     public partial class GererProjet : Window
     {
         private List<Button> lstBoutons = new List<Button>();
+        private List<Image> lstImagePlans = new List<Image>();
 
         public GererProjet()
         {
@@ -36,10 +37,23 @@ namespace App_Brycol.Vues
             lstBoutons.Add(btnPiece6);
             lstBoutons.Add(btnPiece7);
             lstBoutons.Add(btnPiece8);
-            
+
+            lstImagePlans.Add(imgPlan1);
             for (int i = 0; i < Projet_VM.ProjetActuel.ListePieces.Count(); i++)
             {
                 lstBoutons[i].IsEnabled = true;
+                if (Projet_VM.ProjetActuel.ListePieces[i] == Plan_VM.PlanActuel.Piece)
+                {
+                    //lstImagePlans[0].Source = new BitmapImage(Plan_VM.PlanActuel.ImgPlan.UriSource);
+                }
+                if (lstBoutons[i].IsEnabled == true)
+                {
+                    lstBoutons[i].Content = Projet_VM.ProjetActuel.ListePieces[i].Nom;
+                }
+                else
+                {
+                    lstBoutons[i].Content = "";
+                }
             }
         }
 
@@ -77,10 +91,16 @@ namespace App_Brycol.Vues
                 foreach (Button b in lstBoutons)
                 {
                     if (i < Projet_VM.ProjetActuel.ListePieces.Count())
+                    {
                         if (Projet_VM.ProjetActuel.ListePieces[i] != null)
                         {
                             b.IsEnabled = true;
                         }
+                    }
+                    else
+                    {
+                        b.Content = "";
+                    }
                     i++;
                 }
 
@@ -95,6 +115,8 @@ namespace App_Brycol.Vues
             gridMW.Children.Clear();
             gridMW.Children.Add(cpMW);
             cpMW.Content = new PlanDeTravail();
+
+
         }
 
         private void btnCoutProjet_Click(object sender, RoutedEventArgs e)

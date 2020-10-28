@@ -42,7 +42,7 @@ namespace App_Brycol.Vues
         }
 
         private Point clickPosition;
-        private Image draggedImage;
+        public static Image draggedImage;
         private Point mousePosition;
         private bool move;
         public double Zoom;

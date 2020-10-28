@@ -26,7 +26,7 @@
 
         </Rectangle>
         
-        <Image x:Name="imgItem" Source="/images/Items/item6.png" Grid.Column="0" Grid.Row="1" Margin="32,32,32,32" ></Image>
+        <Image x:Name="imgItem" Grid.Column="0" Grid.Row="1" Margin="32,32,32,32" ></Image>
 
         <Label Grid.Column="1" Grid.Row="1" FontSize="20" Height="40" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Couleur Item " Margin="10,12,114,0"/>
         <ComboBox x:Name="cmbCouleur" Grid.Column="1" Grid.Row="1" Foreground="Black" Height="25" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,60,10,10" SelectionChanged="cmbCouleur_SelectedChange">
