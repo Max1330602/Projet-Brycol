@@ -145,5 +145,6 @@ namespace App_Brycol.Vues
             bmiItem.EndInit();
             imgItem.Source = bmiItem;
         }
+
     }
 }
