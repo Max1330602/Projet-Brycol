@@ -266,6 +266,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\quadrille.jpg" />
+	<Resource Include="images\Items\item0.png" />
+    <Resource Include="images\Items\item1.png" />
     <Resource Include="images\Items\item10.png" />
     <Resource Include="images\Items\item11.png" />
     <Resource Include="images\Items\item12.png" />
@@ -288,12 +290,6 @@
     <Resource Include="images\Items\item7.png" />
     <Resource Include="images\Items\item8.png" />
     <Resource Include="images\Items\item9.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Items\item1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Items\Top\item0.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\ItemsModifies\item6Modifie.png" />
