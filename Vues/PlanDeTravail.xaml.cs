@@ -60,8 +60,15 @@ namespace App_Brycol.Vues
 
         private void btnModifierItem_Click(object sender, RoutedEventArgs e)
         {
-            ModifierItem popUp = new ModifierItem();
-            popUp.ShowDialog();
+            if (Piece2D.draggedImage != null && Piece2D.draggedImage.Source != null)
+            {
+                ModifierItem popUp = new ModifierItem();
+                popUp.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Il faut d'abord sélectionner un item dans le plan");
+            }
         }
         
 

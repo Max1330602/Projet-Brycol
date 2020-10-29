@@ -26,18 +26,23 @@ namespace App_Brycol.Vues
         {
             InitializeComponent();
 
-            if (Piece2D.draggedImage.Source != null)
-                imgItem.Source = Piece2D.draggedImage.Source;
+            imgItem.Source = Piece2D.draggedImage.Source;
         }
 
         private void btnAnnuler_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            Piece2D.draggedImage = null;
         }
 
         private void btnAppliquer_Click(object sender, RoutedEventArgs e)
         {
-
+            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
+            this.Close();
+            gridMW.Children.Clear();
+            gridMW.Children.Add(cpMW);
+            cpMW.Content = new PlanDeTravail();
         }
 
         private void cmbCouleur_SelectedChange(object sender, SelectionChangedEventArgs e)
@@ -146,5 +151,10 @@ namespace App_Brycol.Vues
             imgItem.Source = bmiItem;
         }
 
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            this.Close();
+            Piece2D.draggedImage = null;
+        }
     }
 }
