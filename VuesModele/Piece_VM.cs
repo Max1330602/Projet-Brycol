@@ -67,7 +67,7 @@ namespace App_Brycol.VuesModele
                 foreach (Plan p in PReq)
                     plan = p;
 
-                var LiReq = from Li in OutilEF.brycolContexte.lstItems.Include("Item") where Li.Plan.ID == Plan_VM.PlanActuel.ID select Li;
+                var LiReq = from Li in OutilEF.brycolContexte.lstItems.Include("Item") where Li.Plan.ID == plan.ID select Li;
                 foreach (ItemsPlan Li in LiReq)
                     ListeItems.Add(Li.Item);
 
