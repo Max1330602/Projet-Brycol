@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App_Brycol.VuesModele;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -25,6 +26,8 @@ namespace App_Brycol.Vues
         public ModifierItem()
         {
             InitializeComponent();
+
+            DataContext = new Item_VM();
 
             imgItem.Source = Piece2D.draggedImage.Source;
         }
@@ -145,7 +148,6 @@ namespace App_Brycol.Vues
             bmiItem.BeginInit();
             bmiItem.CacheOption = BitmapCacheOption.OnLoad;
             bmiItem.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-            //var bmiItem = new BitmapImage(new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png"));
             bmiItem.UriSource = new Uri(bitmapSourceSave, UriKind.Relative);
             bmiItem.EndInit();
             imgItem.Source = bmiItem;
@@ -154,7 +156,7 @@ namespace App_Brycol.Vues
         private void Window_Closed(object sender, EventArgs e)
         {
             this.Close();
-            Piece2D.draggedImage = null;
+            //Piece2D.draggedImage = null;
         }
     }
 }

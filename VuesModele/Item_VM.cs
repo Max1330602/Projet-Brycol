@@ -21,7 +21,8 @@ namespace App_Brycol.VuesModele
     {
         public Item_VM()
         {
-            cmdAjouterItem = new Commande(AjouterItem);
+            cmdAjouterItem = new Commande(AjouterItem); 
+            cmdAjouterItemModifie = new Commande(AjouterItemModifie);
             SommaireItems = new ObservableCollection<Item>();
             ListeItems = new ObservableCollection<Item>();
             if (ItemsPlanActuel == null)
@@ -41,6 +42,7 @@ namespace App_Brycol.VuesModele
         }
         #region Propriétés
 
+        public ICommand cmdAjouterItemModifie { get; set;}
         public ICommand cmdAjouterItem { get; set; }
         public ICommand cmdInitItem { get; set; }
         public const int POS_PAR_DEFAUT = 0;
@@ -257,6 +259,31 @@ namespace App_Brycol.VuesModele
                 OutilEF.brycolContexte.lstItems.Add(i);
                 OutilEF.brycolContexte.SaveChanges();
             }
+        }
+
+        public void AjouterItemModifie(Object param)
+        {
+            foreach (ItemsPlan ip in ItemsPlanActuel)
+            {
+                string temp = ip.Item.ImgItem.ToString().Replace("Items", "Items/Top");
+                if (temp == Piece2D.draggedImage.Source.ToString())
+                {
+                    BitmapImage item = new BitmapImage();
+                    item.BeginInit();
+                    item.CacheOption = BitmapCacheOption.OnLoad;
+                    item.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                    item.UriSource = new Uri("pack://application:,,,/images/ItemsModifies/item" + ip.Item.ID + ".png");
+                    item.EndInit();
+                    Piece2D.draggedImage.Source = item;
+                }
+            }
+
+            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
+            gridMW.Children.Clear();
+            gridMW.Children.Add(cpMW);
+            cpMW.Content = new PlanDeTravail();
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
