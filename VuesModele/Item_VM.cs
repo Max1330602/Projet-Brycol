@@ -25,8 +25,13 @@ namespace App_Brycol.VuesModele
             cmdAjouterItemModifie = new Commande(AjouterItemModifie);
             SommaireItems = new ObservableCollection<Item>();
             ListeItems = new ObservableCollection<Item>();
+
             if (ItemsPlanActuel == null)
                 ItemsPlanActuel = new ObservableCollection<ItemsPlan>();
+
+            if (ItemsPlanModifie == null)
+                ItemsPlanModifie = new ObservableCollection<ItemsPlan>();
+
             FiltreCategorie = "";
             FiltreNom = "";
             FiltreType = "";
@@ -52,7 +57,8 @@ namespace App_Brycol.VuesModele
         public ObservableCollection<Item> Items;
 
         public static ObservableCollection<ItemsPlan> ItemsPlanActuel;
-    
+        public static ObservableCollection<ItemsPlan> ItemsPlanModifie;
+
         private Categorie _Categorie;
         public Categorie Categorie 
         {
@@ -265,17 +271,16 @@ namespace App_Brycol.VuesModele
         {
             foreach (ItemsPlan ip in ItemsPlanActuel)
             {
-                string temp = ip.Item.ImgItem.ToString().Replace("Items", "Items/Top");
-                if (temp == Piece2D.draggedImage.Source.ToString())
-                {
-                    BitmapImage item = new BitmapImage();
-                    item.BeginInit();
-                    item.CacheOption = BitmapCacheOption.OnLoad;
-                    item.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                    item.UriSource = new Uri("pack://application:,,,/images/ItemsModifies/item" + ip.Item.ID + ".png");
-                    item.EndInit();
-                    Piece2D.draggedImage.Source = item;
-                }
+                ItemsPlanModifie.Add(ip);
+
+                /*BitmapImage item = new BitmapImage();
+                item.BeginInit();
+                item.CacheOption = BitmapCacheOption.OnLoad;
+                item.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                item.UriSource = new Uri("pack://application:,,,/images/ItemsModifies/item" + ip.Item.ID + ".png");
+                item.EndInit();
+                Piece2D.draggedImage.Source = item;
+                */
             }
 
             Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");

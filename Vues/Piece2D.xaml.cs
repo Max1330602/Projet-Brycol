@@ -35,10 +35,13 @@ namespace App_Brycol.Vues
     /// </summary>
     public partial class Piece2D : System.Windows.Controls.UserControl, INotifyPropertyChanged
     {
+
         public Piece2D()
         {
             InitializeComponent();
             initializeItems();
+            //initializeItemsModifie();
+
 
             ImageBrush imgBrush = new ImageBrush();
             imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/invalide.png"));
@@ -311,9 +314,50 @@ namespace App_Brycol.Vues
                         bitmap.BeginInit();
                         bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item0.png");
                         bitmap.EndInit();
-
-
                     }
+
+                    foreach (ItemsPlan ipm in Item_VM.ItemsPlanModifie)
+                    {
+                        if (ipm == ip && ItemsPlan_VM.pathChoisi)
+                        {
+                            ItemsPlan_VM.pathChoisi = false;
+                            bitmap = new BitmapImage();
+                            bitmap.BeginInit();
+                            bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                            bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                            bitmap.UriSource = new Uri("..\\..\\images\\ItemsModifies\\item" + ip.Item.ID + ".png", UriKind.Relative);
+                            try
+                            {
+                                bitmap.EndInit();
+                            }
+                            catch (Exception e)
+                            {
+                                bitmap.BeginInit();
+                                bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item0.png");
+                                bitmap.EndInit();
+                            }
+                        }
+                        else if (ipm == ip && !ItemsPlan_VM.pathChoisi)
+                        {
+                            ItemsPlan_VM.pathChoisi = true;
+                            bitmap = new BitmapImage();
+                            bitmap.BeginInit();
+                            bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                            bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                            bitmap.UriSource = new Uri("..\\..\\images\\ItemsModifies\\item" + ip.Item.ID + "(1).png", UriKind.Relative);
+                            try
+                            {
+                                bitmap.EndInit();
+                            }
+                            catch (Exception e)
+                            {
+                                bitmap.BeginInit();
+                                bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item0.png");
+                                bitmap.EndInit();
+                            }
+                        }
+                    }
+
                     var image = new Image { Source = bitmap };
                     Canvas.SetLeft(image, ip.emplacementGauche);
                     Canvas.SetTop(image, ip.emplacementHaut);
@@ -342,9 +386,80 @@ namespace App_Brycol.Vues
                     image.Width = (ip.Item.Largeur * pixelToCm);
                     image.Tag = ip.ID;
                     canvas.Children.Add(image);
-                    }
+                }
             }
         }
+
+        /*
+        public void initializeItemsModifie()
+        {
+            if (Item_VM.ItemsPlanActuel != null)
+            {
+                for (int i = 0; i < Item_VM.ItemsPlanModifie.Count(); i++)
+                {
+                    foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
+                    {
+                        if (ip == Item_VM.ItemsPlanModifie[i])
+                        {
+                            var bitmap = new BitmapImage();
+                            bitmap.BeginInit();
+                            bitmap.UriSource = new Uri("pack://application:,,,/images/ItemsModifies/item" + ip.Item.ID + ".png");
+                            try
+                            {
+                                bitmap.EndInit();
+                            }
+                            catch (Exception e)
+                            {
+                                bitmap = new BitmapImage();
+                                bitmap.BeginInit();
+                                bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item0.png");
+                                bitmap.EndInit();
+
+
+                            }
+                            var image = new Image { Source = bitmap };
+                            Canvas.SetLeft(image, ip.emplacementGauche);
+                            Canvas.SetTop(image, ip.emplacementHaut);
+
+                            #region angle
+                            if (ip.angleRotation == 0)
+                            {
+                                image.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 0 };
+                            }
+                            else if (ip.angleRotation == 90)
+                            {
+                                image.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 90 };
+                            }
+                            else if (ip.angleRotation == 180)
+                            {
+                                image.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 180 };
+                            }
+                            else if (ip.angleRotation == 270)
+                            {
+
+                                image.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 270 };
+                            }
+                            #endregion
+
+                            image.Height = (ip.Item.Longueur * pixelToCm);
+                            image.Width = (ip.Item.Largeur * pixelToCm);
+                            image.Tag = ip.ID;
+                            foreach (UIElement child in canvas.Children)
+                            {
+                                double emplacementGauche = Canvas.GetLeft(child);
+                                double emplacementHaut = Canvas.GetTop(child);
+                                if (ip.emplacementGauche == emplacementGauche && ip.emplacementHaut == emplacementHaut)
+                                {
+                                    draggedImage.Source = null;
+                                }
+                            }
+                            canvas.Children.Add(image);
+                        }
+                    }
+                }
+            }
+        }
+        */
 
         private void canvasResizeFull(object sender, RoutedEventArgs e)
         {
