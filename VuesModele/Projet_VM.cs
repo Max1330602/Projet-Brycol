@@ -86,10 +86,13 @@ namespace App_Brycol.VuesModele
         }
 
         #endregion
-
+        //--------------------------------------
+        //Céation d'un projet
+        //--------------------------------------
         public void CreerProjet(Object param)
         {
             Projet p = new Projet();
+            //On met un nom par défaut au projet
             try
             {
                 var test = OutilEF.brycolContexte.Projets.Max<Projet>(t => t.ID);
@@ -99,30 +102,39 @@ namespace App_Brycol.VuesModele
             {
                 p.Nom = "Projet";
             }
+            //On donne le nom de Créateur HARDCODER pour le moment et on initialise la liste de pièce
             p.Createur = "Utilisateur";
             p.ListePieces = ListePieces;
+            //On sauvegarde en BD le projet
             OutilEF.brycolContexte.Projets.Add(p);
             OutilEF.brycolContexte.SaveChanges();
+            //On garde en mémoire le projet
             ProjetActuel = p;
-
+            //On affiche la fenêtre du Gerer projet
             GererProjet popUp = new GererProjet();
             popUp.ShowDialog();
 
         }
 
+        //--------------------------------------
+        // Sauvegarder Projet
+        //--------------------------------------
         public void SauvProjet(Object param)
         {
+            //On fait une requête pour aller chercher le projet
             Projet p = OutilEF.brycolContexte.Projets.Find(ProjetActuel.ID);
 
+            //S'il y a rien dans Nom, on donne un nom par défaut
             if (Nom == null)
             {
                 var test = OutilEF.brycolContexte.Projets.Max<Projet>(t => t.ID);
                 test += 1;
                 p.Nom = "Projet" + test;
             }
-
+            //Si l'utilisateur rentre un nom différent du nom du projet en BD
             if (Nom != p.Nom && EstSauvegarde == true)
             {
+                //On demande s'il veut créer un nouveau projet ou juste changer le nom du projet
                 MessageBoxResult result = MessageBox.Show("Voulez-vous sauvegarder en tant que nouveau projet?", "Sauvegarder en tant que nouveau projet", MessageBoxButton.YesNo);
                 switch (result)
                 {
@@ -144,10 +156,11 @@ namespace App_Brycol.VuesModele
 
 
 
-
+            //On change les modifications du projet et on met True à estSauvegarder
             ProjetActuel = p;
             EstSauvegarde = true;
 
+            //On rafraîchit le plan de travail
             Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
             ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
             gridMW.Children.Clear();
@@ -156,6 +169,9 @@ namespace App_Brycol.VuesModele
 
         }
 
+        //--------------------------------------
+        // Supprimer un Projet
+        //--------------------------------------
         public void SuppProjet(Object param)
         {
             Projet pro = new Projet();
@@ -194,6 +210,9 @@ namespace App_Brycol.VuesModele
             OutilEF.brycolContexte.SaveChanges();
         }
 
+        //--------------------------------------
+        // Sauvegarde un Projet, comme nouveau projet
+        //--------------------------------------
         private void SauNeoProjet()
         {
             Projet pro = new Projet();
