@@ -140,7 +140,7 @@ namespace App_Brycol.Vues
 
 
             // save uncompressed bitmap to disk
-            string fileName = Plan_VM.PlanActuel.ImgPlan.ToString();
+            string fileName = "..\\..\\images\\Plans\\" + "plan" + Plan_VM.PlanActuel.ID + ".png";
             System.IO.FileStream fs = System.IO.File.Open(fileName, System.IO.FileMode.OpenOrCreate);
             Capture.Save(fs, System.Drawing.Imaging.ImageFormat.Bmp);
             fs.Close();

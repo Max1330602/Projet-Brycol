@@ -301,6 +301,7 @@
     <Resource Include="images\Items\item0.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="images\ItemsModifies\" />
     <Folder Include="images\Plans\" />
   </ItemGroup>
   <ItemGroup>
@@ -366,50 +367,6 @@
   <ItemGroup>
     <Resource Include="images\Items\Top\item23.jpg" />
     <Resource Include="images\Items\Top\item26.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\ItemsModifies\item1.png" />
-    <Resource Include="images\ItemsModifies\item10.png" />
-    <Resource Include="images\ItemsModifies\item13.png" />
-    <Resource Include="images\ItemsModifies\item14.png" />
-    <Resource Include="images\ItemsModifies\item2.png" />
-    <Resource Include="images\ItemsModifies\item23.png" />
-    <Resource Include="images\ItemsModifies\item3.png" />
-    <Resource Include="images\ItemsModifies\item4.png" />
-    <Resource Include="images\ItemsModifies\item8.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\ItemsModifies\item11.png" />
-    <Resource Include="images\ItemsModifies\item5.png" />
-    <Resource Include="images\ItemsModifies\item9.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\ItemsModifies\item1%281%29.png" />
-    <Resource Include="images\ItemsModifies\item2%281%29.png" />
-    <Resource Include="images\ItemsModifies\item3%281%29.png" />
-    <Resource Include="images\ItemsModifies\item4%281%29.png" />
-    <Resource Include="images\ItemsModifies\item9%281%29.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\ItemsModifies\item10%281%29.png" />
-    <Resource Include="images\ItemsModifies\item11%281%29.png" />
-    <Resource Include="images\ItemsModifies\item12%281%29.png" />
-    <Resource Include="images\ItemsModifies\item13%281%29.png" />
-    <Resource Include="images\ItemsModifies\item14%281%29.png" />
-    <Resource Include="images\ItemsModifies\item15%281%29.png" />
-    <Resource Include="images\ItemsModifies\item16%281%29.png" />
-    <Resource Include="images\ItemsModifies\item17%281%29.png" />
-    <Resource Include="images\ItemsModifies\item18%281%29.png" />
-    <Resource Include="images\ItemsModifies\item19%281%29.png" />
-    <Resource Include="images\ItemsModifies\item20%281%29.png" />
-    <Resource Include="images\ItemsModifies\item21%281%29.png" />
-    <Resource Include="images\ItemsModifies\item22%281%29.png" />
-    <Resource Include="images\ItemsModifies\item23%281%29.png" />
-    <Resource Include="images\ItemsModifies\item26%281%29.png" />
-    <Resource Include="images\ItemsModifies\item5%281%29.png" />
-    <Resource Include="images\ItemsModifies\item6%281%29.png" />
-    <Resource Include="images\ItemsModifies\item7%281%29.png" />
-    <Resource Include="images\ItemsModifies\item8%281%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -108,6 +108,7 @@ namespace App_Brycol.VuesModele
         {
             PlanActuel = new Plan();
             PlanActuel.Piece = Piece_VM.pieceActuel;
+            Projet_VM.ProjetActuel.ListePlans.Add(PlanActuel);
             OutilEF.brycolContexte.Plans.Add(PlanActuel);
             OutilEF.brycolContexte.SaveChanges();
         }

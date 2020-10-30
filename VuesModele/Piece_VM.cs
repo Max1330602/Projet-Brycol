@@ -167,6 +167,7 @@ namespace App_Brycol.VuesModele
             p.Nom = Nom;
             p.Largeur = Largeur;
             p.Longueur = Longueur;
+            p.Projet.ListePieces.Add(p);
 
             var treq = from t in OutilEF.brycolContexte.TypePiece where t.Nom == TypePiece select t;
 
