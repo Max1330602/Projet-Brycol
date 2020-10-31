@@ -29,6 +29,8 @@ namespace App_Brycol.Vues
         {
             InitializeComponent();
 
+            DataContext = new Projet_VM();
+
             lstBoutons.Add(btnPiece1);
             lstBoutons.Add(btnPiece2);
             lstBoutons.Add(btnPiece3);
@@ -39,20 +41,24 @@ namespace App_Brycol.Vues
             lstBoutons.Add(btnPiece8);
 
             lstImagePlans.Add(imgPlan1);
+            lstImagePlans.Add(imgPlan2);
+            lstImagePlans.Add(imgPlan3);
+            lstImagePlans.Add(imgPlan4);
+            lstImagePlans.Add(imgPlan5);
+            lstImagePlans.Add(imgPlan6);
+            lstImagePlans.Add(imgPlan7);
+            lstImagePlans.Add(imgPlan8);
+
             for (int i = 0; i < Projet_VM.ProjetActuel.ListePieces.Count(); i++)
             {
                 lstBoutons[i].IsEnabled = true;
-                if (Projet_VM.ProjetActuel.ListePieces[i] == Plan_VM.PlanActuel.Piece)
-                {
-                    //lstImagePlans[0].Source = new BitmapImage(Plan_VM.PlanActuel.ImgPlan.UriSource);
-                }
                 if (lstBoutons[i].IsEnabled == true)
                 {
-                    lstBoutons[i].Content = Projet_VM.ProjetActuel.ListePieces[i].Nom;
+                    lstImagePlans[i].Source = Projet_VM.ProjetActuel.ListePlans[i].ImgPlan;
                 }
                 else
                 {
-                    lstBoutons[i].Content = "";
+                    lstImagePlans[i].Source = null;
                 }
             }
         }
@@ -95,6 +101,7 @@ namespace App_Brycol.Vues
                         if (Projet_VM.ProjetActuel.ListePieces[i] != null)
                         {
                             b.IsEnabled = true;
+                            b.Content = Projet_VM.ProjetActuel.ListePieces[i].Nom;
                         }
                     }
                     else

@@ -34,19 +34,33 @@
             <Image x:Name="imgPlan1" Stretch="Fill" Opacity="0.8"></Image>
         </Button>
 
-        <Button x:Name="btnPiece2" Grid.Column="2" Grid.Row="1" Background="White" Click="btnPiece2_Click" IsEnabled="False"></Button>
+        <Button x:Name="btnPiece2" Grid.Column="2" Grid.Row="1" Background="White" Click="btnPiece2_Click" IsEnabled="False">
+            <Image x:Name="imgPlan2" Stretch="Fill" Opacity="0.8"></Image>
+        </Button>
 
-        <Button x:Name="btnPiece3" Grid.Column="3" Grid.Row="1" Background="White" Click="btnPiece3_Click" IsEnabled="False"></Button>
+        <Button x:Name="btnPiece3" Grid.Column="3" Grid.Row="1" Background="White" Click="btnPiece3_Click" IsEnabled="False">
+            <Image x:Name="imgPlan3" Stretch="Fill" Opacity="0.8"></Image>
+        </Button>
 
-        <Button x:Name="btnPiece4" Grid.Column="4" Grid.Row="1" Background="White" Click="btnPiece4_Click" IsEnabled="False"></Button>
+        <Button x:Name="btnPiece4" Grid.Column="4" Grid.Row="1" Background="White" Click="btnPiece4_Click" IsEnabled="False">
+            <Image x:Name="imgPlan4" Stretch="Fill" Opacity="0.8"></Image>
+        </Button>
 
-        <Button x:Name="btnPiece5" Grid.Column="1" Grid.Row="2" Background="White" Click="btnPiece5_Click" IsEnabled="False"></Button>
+        <Button x:Name="btnPiece5" Grid.Column="1" Grid.Row="2" Background="White" Click="btnPiece5_Click" IsEnabled="False">
+            <Image x:Name="imgPlan5" Stretch="Fill" Opacity="0.8"></Image>
+        </Button>
 
-        <Button x:Name="btnPiece6" Grid.Column="2" Grid.Row="2" Background="White" Click="btnPiece6_Click" IsEnabled="False"></Button>
+        <Button x:Name="btnPiece6" Grid.Column="2" Grid.Row="2" Background="White" Click="btnPiece6_Click" IsEnabled="False">
+            <Image x:Name="imgPlan6" Stretch="Fill" Opacity="0.8"></Image>
+        </Button>
 
-        <Button x:Name="btnPiece7" Grid.Column="3" Grid.Row="3" Background="White" Click="btnPiece7_Click" IsEnabled="False"></Button>
+        <Button x:Name="btnPiece7" Grid.Column="3" Grid.Row="3" Background="White" Click="btnPiece7_Click" IsEnabled="False">
+            <Image x:Name="imgPlan7" Stretch="Fill" Opacity="0.8"></Image>
+        </Button>
 
-        <Button x:Name="btnPiece8" Grid.Column="4" Grid.Row="4" Background="White" Click="btnPiece8_Click" IsEnabled="False"></Button>
+        <Button x:Name="btnPiece8" Grid.Column="4" Grid.Row="4" Background="White" Click="btnPiece8_Click" IsEnabled="False">
+            <Image x:Name="imgPlan8" Stretch="Fill" Opacity="0.8"></Image>
+        </Button>
 
 
         <Image Grid.Row="0" Grid.Column="4" Source="/images/logo.png" HorizontalAlignment="Right"></Image>

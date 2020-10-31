@@ -134,6 +134,7 @@
     <Compile Include="Outils\BrycolContexte.cs" />
     <Compile Include="Outils\Commande.cs" />
     <Compile Include="Outils\OutilEF.cs" />
+    <Compile Include="VuesModele\ItemsPlan_VM.cs" />
     <Compile Include="VuesModele\Item_VM.cs" />
     <Compile Include="VuesModele\Piece_VM.cs" />
     <Compile Include="VuesModele\Plan_VM.cs" />

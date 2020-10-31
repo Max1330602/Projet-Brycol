@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App_Brycol.VuesModele;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -26,18 +27,25 @@ namespace App_Brycol.Vues
         {
             InitializeComponent();
 
-            if (Piece2D.draggedImage.Source != null)
-                imgItem.Source = Piece2D.draggedImage.Source;
+            DataContext = new Item_VM();
+
+            imgItem.Source = Piece2D.draggedImage.Source;
         }
 
         private void btnAnnuler_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            Piece2D.draggedImage = null;
         }
 
         private void btnAppliquer_Click(object sender, RoutedEventArgs e)
         {
-
+            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
+            this.Close();
+            gridMW.Children.Clear();
+            gridMW.Children.Add(cpMW);
+            cpMW.Content = new PlanDeTravail();
         }
 
         private void cmbCouleur_SelectedChange(object sender, SelectionChangedEventArgs e)
@@ -49,14 +57,14 @@ namespace App_Brycol.Vues
             string bitmapSource = bitmapSourceInit.Replace("pack://application:,,,/", FichierProjet);
             bitmapSource = bitmapSource.Replace("/", "\\");
 
-
             Bitmap bmp = new Bitmap(bitmapSource);
 
             // Avoir les dimension de l'image
             int width = bmp.Width;
             int height = bmp.Height;
 
-            Bitmap rbmp = new Bitmap(bmp);
+            Bitmap imageModifie1 = new Bitmap(bmp);
+            Bitmap imageModifie2 = new Bitmap(bmp);
 
             // Tant que toute la hauteur n'a pas été toute parcourue
             for (int y = 0; y < height; y++)
@@ -73,78 +81,118 @@ namespace App_Brycol.Vues
 
                     if (cmbCouleur.SelectedItem == Rouge)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 255, g, b));
+                        imageModifie1.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 255, g, b));
+                        imageModifie2.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 255, g, b));
                     }
 
                     else if (cmbCouleur.SelectedItem == RougeFonce)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 139, g, b));
+                        imageModifie1.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 139, g, b));
+                        imageModifie2.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 139, g, b));
                     }
 
                     else if (cmbCouleur.SelectedItem == VertFonce)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, r, 100, b));
+                        imageModifie1.SetPixel(x, y, System.Drawing.Color.FromArgb(a, r, 100, b));
+                        imageModifie2.SetPixel(x, y, System.Drawing.Color.FromArgb(a, r, 100, b));
                     }
 
                     else if (cmbCouleur.SelectedItem == Vert)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, r, 128, b));
+                        imageModifie1.SetPixel(x, y, System.Drawing.Color.FromArgb(a, r, 128, b));
+                        imageModifie2.SetPixel(x, y, System.Drawing.Color.FromArgb(a, r, 128, b));
                     }
 
                     else if (cmbCouleur.SelectedItem == Bleu)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, r, g, 255));
+                        imageModifie1.SetPixel(x, y, System.Drawing.Color.FromArgb(a, r, g, 255));
+                        imageModifie2.SetPixel(x, y, System.Drawing.Color.FromArgb(a, r, g, 255));
                     }
 
                     else if (cmbCouleur.SelectedItem == BleuFonce)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, r, g, 128));
+                        imageModifie1.SetPixel(x, y, System.Drawing.Color.FromArgb(a, r, g, 128));
+                        imageModifie2.SetPixel(x, y, System.Drawing.Color.FromArgb(a, r, g, 128));
                     }
 
                     else if (cmbCouleur.SelectedItem == Orange)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 255, 165, b));
+                        imageModifie1.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 255, 165, b));
+                        imageModifie2.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 255, 165, b));
                     }
 
                     else if (cmbCouleur.SelectedItem == OrangeFonce)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 255, 140, b));
+                        imageModifie1.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 255, 140, b));
+                        imageModifie2.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 255, 140, b));
                     }
 
                     else if (cmbCouleur.SelectedItem == Jaune)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 255, 255, b));
+                        imageModifie1.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 255, 255, b));
+                        imageModifie2.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 255, 255, b));
                     }
 
                     else if (cmbCouleur.SelectedItem == Violet)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 238, 130, 238));
+                        imageModifie1.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 238, 130, 238));
+                        imageModifie2.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 238, 130, 238));
                     }
 
                     else if (cmbCouleur.SelectedItem == Mauve)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 128, g, 128));
+                        imageModifie1.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 128, g, 128));
+                        imageModifie2.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 128, g, 128));
                     }
 
                     else if (cmbCouleur.SelectedItem == Brun)
                     {
-                        rbmp.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 139, 69, 19));
+                        imageModifie1.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 139, 69, 19));
+                        imageModifie2.SetPixel(x, y, System.Drawing.Color.FromArgb(a, 139, 69, 19));
                     }
                 }
             }
             string bitmapSourceSave = bitmapSource.Replace("Items\\Top", "ItemsModifies");
+            string bitmapSourceSave2 = bitmapSourceSave;
 
-            rbmp.Save(bitmapSourceSave, ImageFormat.Png);
+            if (bitmapSourceSave2.Contains("(1)"))
+                bitmapSourceSave = bitmapSourceSave2.Replace("(1).png", ".png" );
+            else
+                bitmapSourceSave2 = bitmapSourceSave2.Replace(".png", "(1).png");
 
-            BitmapImage bmiItem = new BitmapImage();
-            bmiItem.BeginInit();
-            bmiItem.CacheOption = BitmapCacheOption.OnLoad;
-            bmiItem.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-            //var bmiItem = new BitmapImage(new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png"));
-            bmiItem.UriSource = new Uri(bitmapSourceSave, UriKind.Relative);
-            bmiItem.EndInit();
-            imgItem.Source = bmiItem;
+            if (ItemsPlan_VM.pathChoisi)
+            {
+                imageModifie1.Save(bitmapSourceSave, ImageFormat.Png);
+                imageModifie1.Dispose();
+                BitmapImage bmiItem = new BitmapImage();
+                bmiItem.BeginInit();
+                bmiItem.CacheOption = BitmapCacheOption.OnLoad;
+                bmiItem.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                bmiItem.UriSource = new Uri(bitmapSourceSave, UriKind.Relative);
+                bmiItem.EndInit();
+                imgItem.Source = bmiItem;
+            }
+            else
+            {
+                imageModifie2.Save(bitmapSourceSave2, ImageFormat.Png);
+                imageModifie2.Dispose();
+                BitmapImage bmiItem = new BitmapImage();
+                bmiItem.BeginInit();
+                bmiItem.CacheOption = BitmapCacheOption.OnLoad;
+                bmiItem.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                bmiItem.UriSource = new Uri(bitmapSourceSave2, UriKind.Relative);
+                bmiItem.EndInit();
+                imgItem.Source = bmiItem;
+            }
+
+
+            
         }
 
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            this.Close();
+            //Piece2D.draggedImage = null;
+        }
     }
 }

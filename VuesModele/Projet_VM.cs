@@ -33,12 +33,17 @@ namespace App_Brycol.VuesModele
             cmdSuppProjet = new Commande(SuppProjet);
 
             ListePieces = new ObservableCollection<Piece>();
+            ListePlans = new ObservableCollection<Plan>();
 
             if (ProjetActuel != null)
             {
                 var PReq = from p in OutilEF.brycolContexte.Pieces where p.Projet.ID == ProjetActuel.ID select p;
                 foreach (Piece p in PReq)
                     ListePieces.Add(p);
+
+                var PReq2 = from plan in OutilEF.brycolContexte.Plans where plan.Piece.Projet.ID == ProjetActuel.ID select plan;
+                foreach (Plan plan in PReq2)
+                    ListePlans.Add(plan);
 
                 Nom = ProjetActuel.Nom;
             }
@@ -47,6 +52,17 @@ namespace App_Brycol.VuesModele
         }
 
         #region Propriétés
+
+        private ObservableCollection<Plan> _listePlans;
+        public ObservableCollection<Plan> ListePlans
+        {
+            get { return _listePlans; }
+            set
+            {
+                _listePlans = value;
+                OnPropertyChanged("ListePlans");
+            }
+        }
 
         private ObservableCollection<Piece> _listePieces;
         public ObservableCollection<Piece> ListePieces
@@ -102,6 +118,7 @@ namespace App_Brycol.VuesModele
             }
             p.Createur = "Utilisateur";
             p.ListePieces = ListePieces;
+            p.ListePlans = ListePlans;
             OutilEF.brycolContexte.Projets.Add(p);
             OutilEF.brycolContexte.SaveChanges();
             ProjetActuel = p;
@@ -223,6 +240,9 @@ namespace App_Brycol.VuesModele
             ListePieces = new ObservableCollection<Piece>();
             pro.ListePieces = ListePieces;
 
+            ListePlans = new ObservableCollection<Plan>();
+            pro.ListePlans = ListePlans;
+
             OutilEF.brycolContexte.Projets.Add(pro);
 
             ProjetActuel = pro;
@@ -256,6 +276,7 @@ namespace App_Brycol.VuesModele
                 {
 
                     itPl.Plan = pla;
+                    ListePlans.Add(pla);
                     OutilEF.brycolContexte.lstItems.Add(itPl);
                 }
 

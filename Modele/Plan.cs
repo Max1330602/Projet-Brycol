@@ -22,6 +22,8 @@ namespace App_Brycol.Modele
 
                 BitmapImage bmiPlan = new BitmapImage();
                 bmiPlan.BeginInit();
+                bmiPlan.CacheOption = BitmapCacheOption.OnLoad;
+                bmiPlan.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                 bmiPlan.UriSource = new Uri("..\\..\\images\\Plans\\plan" + ID + ".png", UriKind.Relative);
                 bmiPlan.EndInit();
                 return bmiPlan;
