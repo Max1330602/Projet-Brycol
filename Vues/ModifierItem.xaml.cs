@@ -52,7 +52,7 @@ namespace App_Brycol.Vues
         private void cmbCouleur_SelectedChange(object sender, SelectionChangedEventArgs e)
         {
             imgItem.Source = Piece2D.draggedImage.Source;
-            string FichierProjet = "..\\..\\";
+            string FichierProjet = "\\";
             string bitmapSourceInit = imgItem.Source.ToString();
 
             string bitmapSource = bitmapSourceInit.Replace("pack://application:,,,/", FichierProjet);

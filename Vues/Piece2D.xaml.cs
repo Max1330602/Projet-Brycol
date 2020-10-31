@@ -365,7 +365,7 @@ namespace App_Brycol.Vues
                             bitmap.BeginInit();
                             bitmap.CacheOption = BitmapCacheOption.OnLoad;
                             bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                            bitmap.UriSource = new Uri("..\\..\\images\\ItemsModifies\\item" + ip.Item.ID + ".png", UriKind.Relative);
+                            bitmap.UriSource = new Uri("\\images\\ItemsModifies\\item" + ip.Item.ID + ".png", UriKind.Relative);
                             try
                             {
                                 bitmap.EndInit();
@@ -384,7 +384,7 @@ namespace App_Brycol.Vues
                             bitmap.BeginInit();
                             bitmap.CacheOption = BitmapCacheOption.OnLoad;
                             bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                            bitmap.UriSource = new Uri("..\\..\\images\\ItemsModifies\\item" + ip.Item.ID + "(1).png", UriKind.Relative);
+                            bitmap.UriSource = new Uri("\\images\\ItemsModifies\\item" + ip.Item.ID + "(1).png", UriKind.Relative);
                             try
                             {
                                 bitmap.EndInit();
