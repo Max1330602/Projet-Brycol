@@ -54,14 +54,16 @@ namespace App_Brycol.VuesModele
 
             ListeItems = new ObservableCollection<Item>();
 
+            if (pieceSelect == null)
+                pieceSelect = pieceActuel;
+
+
             if (pieceSelect != null)
             {
                 Plan plan = new Plan();
 
-                //****************************************
-                // HARDCODE LE ID                                                      ICI pieceActuel
-                var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == 1 select p;
-                //****************************************
+                var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == pieceSelect.ID select p;
+
                 foreach (Plan p in PReq)
                     plan = p;
 
@@ -70,11 +72,11 @@ namespace App_Brycol.VuesModele
                     ListeItems.Add(Li.Item);
 
 
-                SousTotal = CalSouTo(pieceActuel);
+                SousTotal = CalSouTo(pieceSelect);
                 TpsDePiece = CalTPS(SousTotal);
                 TvqDePiece = CalTVQ(SousTotal);
                 Total = CalTotal(SousTotal, TpsDePiece, TvqDePiece);
-                pieceActuel.Total = Total;
+                pieceSelect.Total = Total;
 
 
             }
@@ -165,6 +167,7 @@ namespace App_Brycol.VuesModele
             p.Nom = Nom;
             p.Largeur = Largeur;
             p.Longueur = Longueur;
+            p.Projet.ListePieces.Add(p);
 
             var treq = from t in OutilEF.brycolContexte.TypePiece where t.Nom == TypePiece select t;
 
@@ -217,19 +220,27 @@ namespace App_Brycol.VuesModele
             }
 
             OutilEF.brycolContexte.SaveChanges();
-
             pieceActuel = p;
+
+            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
+            gridMW.Children.Clear();
+            gridMW.Children.Add(cpMW);
+            cpMW.Content = new PlanDeTravail();
+
+            //---TODO-----------------------------------------------------------------------
+            var plreq = from pl in OutilEF.brycolContexte.Plans.Include("Piece") where pl.Piece.ID == pieceActuel.ID select pl;
+            Plan_VM.PlanActuel = plreq.First();
+            
         }
 
-        private decimal CalSouTo(Piece laPiece)
+        public static decimal CalSouTo(Piece laPiece)
         {
             Plan plan = new Plan();
             decimal St = 0M;
 
-            //****************************************
-            // HARDCODE LE ID                                                      ICI laPiece
-            var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == 1 select p;
-            //****************************************
+            var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == laPiece.ID select p;
+
             foreach (Plan p in PReq)
                 plan = p;
 
@@ -243,33 +254,33 @@ namespace App_Brycol.VuesModele
         }
 
 
-        private decimal CalTPS(decimal montant)
+        public static decimal CalTPS(decimal montant)
         {
             const decimal TPS = 0.05M;
 
             return decimal.Round((montant * TPS), 2, MidpointRounding.AwayFromZero);
         }
 
-        private decimal CalTVQ(decimal montant)
+        public static decimal CalTVQ(decimal montant)
         {
             const decimal TVQ = 0.09975M;
 
             return decimal.Round((montant * TVQ), 2, MidpointRounding.AwayFromZero);
         }
 
-        private decimal CalTotal(decimal St, decimal montantTPS, decimal montantTVQ)
+        public static decimal CalTotal(decimal St, decimal montantTPS, decimal montantTVQ)
         {
             return decimal.Round((St + montantTPS + montantTVQ), 2, MidpointRounding.AwayFromZero);
         }
 
-            public static void supprimerPiece()
+        public static void supprimerPiece()
         {
-            Piece p = OutilEF.brycolContexte.Pieces.Find(Piece_VM.pieceActuel.ID);
+            Piece p = OutilEF.brycolContexte.Pieces.Find(pieceActuel.ID);
 
             OutilEF.brycolContexte.Pieces.Remove(p);
             OutilEF.brycolContexte.SaveChanges();
 
-            Projet_VM.ProjetActuel.ListePieces.Remove(Piece_VM.pieceActuel);
+            Projet_VM.ProjetActuel.ListePieces.Remove(pieceActuel);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

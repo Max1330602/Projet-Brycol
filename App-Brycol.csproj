@@ -83,6 +83,10 @@
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
+    <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>packages\stdole.16.7.30508.193\lib\net45\stdole.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -123,6 +127,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Wpf.ZoomAndPan, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Wpf.ZoomAndPan.1.0.2\lib\net452\Wpf.ZoomAndPan.dll</HintPath>
+    </Reference>
     <Reference Include="Zstandard.Net, Version=1.1.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>packages\MySql.Data.8.0.21\lib\net452\Zstandard.Net.dll</HintPath>
     </Reference>
@@ -142,6 +149,7 @@
     <Compile Include="Outils\BrycolContexte.cs" />
     <Compile Include="Outils\Commande.cs" />
     <Compile Include="Outils\OutilEF.cs" />
+    <Compile Include="VuesModele\ItemsPlan_VM.cs" />
     <Compile Include="VuesModele\Item_VM.cs" />
     <Compile Include="VuesModele\Piece_VM.cs" />
     <Compile Include="VuesModele\Plan_VM.cs" />
@@ -220,7 +228,7 @@
     </Page>
     <Page Include="Vues\Piece2D.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Vues\PlanDeTravail.xaml">
       <SubType>Designer</SubType>
@@ -271,9 +279,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\logo.png" />
+    <Resource Include="images\favicon.png" />
+    <Resource Include="images\Items\item16.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\Items\Top\item11.png" />
+    <Resource Include="images\logo.png" />
     <Resource Include="images\soleil.png" />
   </ItemGroup>
   <ItemGroup>
@@ -284,7 +295,6 @@
     <Resource Include="images\Items\item13.png" />
     <Resource Include="images\Items\item14.png" />
     <Resource Include="images\Items\item15.png" />
-    <Resource Include="images\Items\item16.png" />
     <Resource Include="images\Items\item17.png" />
     <Resource Include="images\Items\item18.png" />
     <Resource Include="images\Items\item19.png" />
@@ -308,7 +318,53 @@
     <Resource Include="images\Items\item0.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\ItemsModifies\item6Modifie.png" />
+    <Folder Include="images\ItemsModifies\" />
+    <Folder Include="images\Plans\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\Top\item0.png" />
+    <Resource Include="images\Items\Top\item1.png" />
+    <Resource Include="images\Items\Top\item10.png" />
+    <Resource Include="images\Items\Top\item12.png" />
+    <Resource Include="images\Items\Top\item13.png" />
+    <Resource Include="images\Items\Top\item14.png" />
+    <Resource Include="images\Items\Top\item15.png" />
+    <Resource Include="images\Items\Top\item16.png" />
+    <Resource Include="images\Items\Top\item18.png" />
+    <Resource Include="images\Items\Top\item19.png" />
+    <Resource Include="images\Items\Top\item2.png" />
+    <Resource Include="images\Items\Top\item20.png" />
+    <Resource Include="images\Items\Top\item21.png" />
+    <Resource Include="images\Items\Top\item22.png" />
+    <Resource Include="images\Items\Top\item23.png" />
+    <Resource Include="images\Items\Top\item3.png" />
+    <Resource Include="images\Items\Top\item4.png" />
+    <Resource Include="images\Items\Top\item5.png" />
+    <Resource Include="images\Items\Top\item6.png" />
+    <Resource Include="images\Items\Top\item7.png" />
+    <Resource Include="images\Items\Top\item8.png" />
+    <Resource Include="images\Items\Top\item9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\invalide.png" />
+    <Resource Include="images\Items\invalideItem.png" />
+    <Resource Include="images\Items\item26.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\Top\item23.jpg" />
+    <Resource Include="images\Items\Top\item26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\invalide1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\plancher.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\plancheWood.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\Top\item17.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

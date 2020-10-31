@@ -21,11 +21,17 @@ namespace App_Brycol.VuesModele
     {
         public Item_VM()
         {
-            cmdAjouterItem = new Commande(AjouterItem);
+            cmdAjouterItem = new Commande(AjouterItem); 
+            cmdAjouterItemModifie = new Commande(AjouterItemModifie);
             SommaireItems = new ObservableCollection<Item>();
             ListeItems = new ObservableCollection<Item>();
+
             if (ItemsPlanActuel == null)
                 ItemsPlanActuel = new ObservableCollection<ItemsPlan>();
+
+            if (ItemsPlanModifie == null)
+                ItemsPlanModifie = new ObservableCollection<ItemsPlan>();
+
             FiltreCategorie = "";
             FiltreNom = "";
             FiltreType = "";
@@ -41,6 +47,7 @@ namespace App_Brycol.VuesModele
         }
         #region Propriétés
 
+        public ICommand cmdAjouterItemModifie { get; set;}
         public ICommand cmdAjouterItem { get; set; }
         public ICommand cmdInitItem { get; set; }
         public const int POS_PAR_DEFAUT = 0;
@@ -48,7 +55,9 @@ namespace App_Brycol.VuesModele
         public const int PRIXMIN = 0;
 
         public ObservableCollection<Item> Items;
+
         public static ObservableCollection<ItemsPlan> ItemsPlanActuel;
+        public static ObservableCollection<ItemsPlan> ItemsPlanModifie;
 
         private Categorie _Categorie;
         public Categorie Categorie 
@@ -241,9 +250,10 @@ namespace App_Brycol.VuesModele
 
         public void AjouterItem(Object param)
         { 
+            
             ItemsPlan i = new ItemsPlan();
 
-            i.Item = _itemSelectionne;
+            i.Item = _itemSelectionne;           
             i.emplacementGauche = POS_PAR_DEFAUT;
             i.emplacementHaut = POS_PAR_DEFAUT;
             // HARD CODE
@@ -255,6 +265,30 @@ namespace App_Brycol.VuesModele
                 OutilEF.brycolContexte.lstItems.Add(i);
                 OutilEF.brycolContexte.SaveChanges();
             }
+        }
+
+        public void AjouterItemModifie(Object param)
+        {
+            foreach (ItemsPlan ip in ItemsPlanActuel)
+            {
+                ItemsPlanModifie.Add(ip);
+
+                /*BitmapImage item = new BitmapImage();
+                item.BeginInit();
+                item.CacheOption = BitmapCacheOption.OnLoad;
+                item.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                item.UriSource = new Uri("pack://application:,,,/images/ItemsModifies/item" + ip.Item.ID + ".png");
+                item.EndInit();
+                Piece2D.draggedImage.Source = item;
+                */
+            }
+
+            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
+            gridMW.Children.Clear();
+            gridMW.Children.Add(cpMW);
+            cpMW.Content = new PlanDeTravail();
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

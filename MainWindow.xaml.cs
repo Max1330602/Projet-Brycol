@@ -41,7 +41,7 @@ namespace App_Brycol
 
         private void OnClosing(object sender, CancelEventArgs cancelEventArgs)
         {
-            if (Projet_VM.EstSauvegarde == false)
+            if (Projet_VM.ProjetActuel != null && Projet_VM.EstSauvegarde == false)
             {
                 WarningProjetNonSau popUp = new WarningProjetNonSau();
                 popUp.ShowDialog();
