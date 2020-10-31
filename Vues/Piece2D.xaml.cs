@@ -202,8 +202,8 @@ namespace App_Brycol.Vues
         {
             if (!move)
             {
-
-                draggedImage.Source = null;
+                if(draggedImage != null)
+                    draggedImage.Source = null;
             }
         }
 
