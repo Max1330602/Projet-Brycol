@@ -238,16 +238,17 @@ namespace App_Brycol.VuesModele
 
             foreach (Piece pie in lstPie)
             {
-
                 var PlanReq = from plan in OutilEF.brycolContexte.Plans where plan.Piece.ID == pie.ID select plan;
 
                 pie.Projet = ProjetActuel;
                 OutilEF.brycolContexte.Pieces.Add(pie);
-                ListePieces.Add(pie);
+                pro.ListePieces.Add(pie);
 
                 foreach (Plan plan in PlanReq)
+                {
                     pla = plan;
-
+                    pro.ListePlans.Add(pla);
+                }
 
                 var IteReq = from ite in OutilEF.brycolContexte.lstItems where ite.Plan.ID == pla.ID select ite;
 
@@ -258,14 +259,15 @@ namespace App_Brycol.VuesModele
                 foreach (ItemsPlan itPl in IteReq)
                     lstItPla.Add(itPl);
 
+                
                 foreach (ItemsPlan itPl in lstItPla)
                 {
 
                     itPl.Plan = pla;
-                    ListePlans.Add(pla);
                     OutilEF.brycolContexte.lstItems.Add(itPl);
                 }
 
+                lstItPla.Clear();
 
             }
 

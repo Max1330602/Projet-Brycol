@@ -83,6 +83,7 @@ namespace App_Brycol.Vues
             resultat = MessageBox.Show("Voulez-vraiment supprimer cette pièce ?", "Suppression de pièce", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
             if (resultat == MessageBoxResult.Yes)
             {
+                Plan_VM.supprimerPlan();
                 Piece_VM.supprimerPiece();
 
                 btnSupprimerPiece.IsEnabled = false;
@@ -101,15 +102,25 @@ namespace App_Brycol.Vues
                         if (Projet_VM.ProjetActuel.ListePieces[i] != null)
                         {
                             b.IsEnabled = true;
-                            b.Content = Projet_VM.ProjetActuel.ListePieces[i].Nom;
+                            b.Background = new SolidColorBrush(Colors.White);
                         }
-                    }
-                    else
-                    {
-                        b.Content = "";
                     }
                     i++;
                 }
+
+                foreach (Image image in lstImagePlans)
+                {
+                    image.Source = null;
+                }
+
+                for (int i2 = 0; i2 < lstImagePlans.Count(); i2++)
+                {
+                    if (i2 < Projet_VM.ProjetActuel.ListePieces.Count())
+                    {
+                        lstImagePlans[i2].Source = Projet_VM.ProjetActuel.ListePlans[i2].ImgPlan;
+                    }
+                }
+                
 
             }
         }
@@ -142,50 +153,56 @@ namespace App_Brycol.Vues
         {
             selectionnerBouton(sender);
             Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[0];
+            Plan_VM.PlanActuel = Projet_VM.ProjetActuel.ListePlans[0];
         }
 
         private void btnPiece2_Click(object sender, RoutedEventArgs e)
         {
             selectionnerBouton(sender);
             Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[1];
+            Plan_VM.PlanActuel = Projet_VM.ProjetActuel.ListePlans[1];
         }
 
         private void btnPiece3_Click(object sender, RoutedEventArgs e)
         {
             selectionnerBouton(sender);
             Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[2];
-
+            Plan_VM.PlanActuel = Projet_VM.ProjetActuel.ListePlans[2];
         }
 
         private void btnPiece4_Click(object sender, RoutedEventArgs e)
         {
             selectionnerBouton(sender);
             Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[3];
+            Plan_VM.PlanActuel = Projet_VM.ProjetActuel.ListePlans[3];
         }
 
         private void btnPiece5_Click(object sender, RoutedEventArgs e)
         {
             selectionnerBouton(sender);
             Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[4];
-
+            Plan_VM.PlanActuel = Projet_VM.ProjetActuel.ListePlans[4];
         }
 
         private void btnPiece6_Click(object sender, RoutedEventArgs e)
         {
             selectionnerBouton(sender);
             Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[5];
+            Plan_VM.PlanActuel = Projet_VM.ProjetActuel.ListePlans[5];
         }
 
         private void btnPiece7_Click(object sender, RoutedEventArgs e)
         {
             selectionnerBouton(sender);
             Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[6];
+            Plan_VM.PlanActuel = Projet_VM.ProjetActuel.ListePlans[6];
         }
 
         private void btnPiece8_Click(object sender, RoutedEventArgs e)
         {
             selectionnerBouton(sender);
             Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[7];
+            Plan_VM.PlanActuel = Projet_VM.ProjetActuel.ListePlans[7];
         }
 
         private void selectionnerBouton(object sender)

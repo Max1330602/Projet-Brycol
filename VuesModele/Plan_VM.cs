@@ -122,6 +122,26 @@ namespace App_Brycol.VuesModele
             }
         }
 
+        public static void supprimerPlan()
+        {
+            List<ItemsPlan> lstItPla = new List<ItemsPlan>();
+
+            var IteReq = from ite in OutilEF.brycolContexte.lstItems where ite.Plan.ID == PlanActuel.ID select ite;
+
+            foreach (ItemsPlan itPl in IteReq)
+                lstItPla.Add(itPl);
+
+            foreach (ItemsPlan itPl in lstItPla)
+                OutilEF.brycolContexte.lstItems.Remove(itPl);
+
+            Plan p = OutilEF.brycolContexte.Plans.Find(PlanActuel.ID);
+
+            OutilEF.brycolContexte.Plans.Remove(PlanActuel);
+            OutilEF.brycolContexte.SaveChanges();
+
+            Projet_VM.ProjetActuel.ListePlans.Remove(PlanActuel);
+        }
+
     }
    
 }

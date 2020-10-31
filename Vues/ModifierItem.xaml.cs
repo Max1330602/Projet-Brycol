@@ -1,4 +1,5 @@
-﻿using App_Brycol.VuesModele;
+﻿using App_Brycol.Modele;
+using App_Brycol.VuesModele;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -160,7 +161,7 @@ namespace App_Brycol.Vues
             else
                 bitmapSourceSave2 = bitmapSourceSave2.Replace(".png", "(1).png");
 
-            if (ItemsPlan_VM.pathChoisi)
+            if (ItemsPlan.pathChoisi)
             {
                 imageModifie1.Save(bitmapSourceSave, ImageFormat.Png);
                 imageModifie1.Dispose();

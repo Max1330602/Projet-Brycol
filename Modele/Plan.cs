@@ -19,13 +19,24 @@ namespace App_Brycol.Modele
         {
             get
             {
-
                 BitmapImage bmiPlan = new BitmapImage();
                 bmiPlan.BeginInit();
                 bmiPlan.CacheOption = BitmapCacheOption.OnLoad;
                 bmiPlan.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                 bmiPlan.UriSource = new Uri("..\\..\\images\\Plans\\plan" + ID + ".png", UriKind.Relative);
-                bmiPlan.EndInit();
+                try
+                {
+                    bmiPlan.EndInit();
+                }
+                catch (Exception e)
+                {
+                    bmiPlan = new BitmapImage();
+                    bmiPlan.BeginInit();
+                    bmiPlan.UriSource = new Uri("pack://application:,,,/images/Items/item0.png");
+                    bmiPlan.EndInit();
+
+
+                }
                 return bmiPlan;
             }
             set { }

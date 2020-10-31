@@ -318,9 +318,9 @@ namespace App_Brycol.Vues
 
                     foreach (ItemsPlan ipm in Item_VM.ItemsPlanModifie)
                     {
-                        if (ipm == ip && ItemsPlan_VM.pathChoisi)
+                        if (ipm == ip && ItemsPlan.pathChoisi)
                         {
-                            ItemsPlan_VM.pathChoisi = false;
+                            ItemsPlan.pathChoisi = false;
                             bitmap = new BitmapImage();
                             bitmap.BeginInit();
                             bitmap.CacheOption = BitmapCacheOption.OnLoad;
@@ -337,9 +337,9 @@ namespace App_Brycol.Vues
                                 bitmap.EndInit();
                             }
                         }
-                        else if (ipm == ip && !ItemsPlan_VM.pathChoisi)
+                        else if (ipm == ip && !ItemsPlan.pathChoisi)
                         {
-                            ItemsPlan_VM.pathChoisi = true;
+                            ItemsPlan.pathChoisi = true;
                             bitmap = new BitmapImage();
                             bitmap.BeginInit();
                             bitmap.CacheOption = BitmapCacheOption.OnLoad;
