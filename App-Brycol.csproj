@@ -302,10 +302,7 @@
   <ItemGroup>
     <Resource Include="images\Items\item0.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="images\ItemsModifies\" />
-    <Folder Include="images\Plans\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="images\Items\Top\item0.png" />
     <Resource Include="images\Items\Top\item1.png" />
@@ -331,39 +328,9 @@
     <Resource Include="images\Items\Top\item9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\invalide.png" />
-    <Resource Include="images\invalideItem.png" />
-    <Resource Include="images\item0.png" />
-    <Resource Include="images\item1.png" />
-    <Resource Include="images\item10.png" />
-    <Resource Include="images\item11.png" />
-    <Resource Include="images\item12.png" />
-    <Resource Include="images\item13.png" />
-    <Resource Include="images\item14.png" />
-    <Resource Include="images\item15.png" />
-    <Resource Include="images\item17.png" />
-    <Resource Include="images\item18.png" />
-    <Resource Include="images\item19.png" />
-    <Resource Include="images\item2.png" />
-    <Resource Include="images\item20.png" />
-    <Resource Include="images\item21.png" />
-    <Resource Include="images\item22.png" />
-    <Resource Include="images\item23.png" />
-    <Resource Include="images\item26.PNG" />
-    <Resource Include="images\item3.png" />
-    <Resource Include="images\item4.png" />
-    <Resource Include="images\item5.png" />
-    <Resource Include="images\item6.png" />
-    <Resource Include="images\item7.png" />
-    <Resource Include="images\item8.png" />
-    <Resource Include="images\item9.png" />
-    <Resource Include="images\rip.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\Items\invalide.png" />
     <Resource Include="images\Items\invalideItem.png" />
     <Resource Include="images\Items\item26.PNG" />
-    <Resource Include="images\Items\rip.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\Items\Top\item23.jpg" />
@@ -371,9 +338,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\Items\invalide1.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Items\plancher3.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\Items\plancher.jpg" />
