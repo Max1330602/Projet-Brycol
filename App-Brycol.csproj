@@ -264,10 +264,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\favicon.png" />
     <Resource Include="images\Items\item16.png" />
-    <Resource Include="images\logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\Items\Top\item11.png" />
+    <Resource Include="images\logo.png" />
     <Resource Include="images\soleil.png" />
   </ItemGroup>
   <ItemGroup>
@@ -308,7 +310,6 @@
     <Resource Include="images\Items\Top\item0.png" />
     <Resource Include="images\Items\Top\item1.png" />
     <Resource Include="images\Items\Top\item10.png" />
-    <Resource Include="images\Items\Top\item11.png" />
     <Resource Include="images\Items\Top\item12.png" />
     <Resource Include="images\Items\Top\item13.png" />
     <Resource Include="images\Items\Top\item14.png" />
@@ -367,6 +368,21 @@
   <ItemGroup>
     <Resource Include="images\Items\Top\item23.jpg" />
     <Resource Include="images\Items\Top\item26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\invalide1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\plancher3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\plancher.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\plancheWood.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\Top\item17.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

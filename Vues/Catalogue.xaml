@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_Brycol.Vues"
         mc:Ignorable="d"
-        Title="Catalogue" Height="600" Width="910">
+        Title="Catalogue" Height="600" Width="910" Icon="pack://application:,,,/images/favicon.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
