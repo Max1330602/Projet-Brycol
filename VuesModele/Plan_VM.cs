@@ -22,6 +22,7 @@ namespace App_Brycol.VuesModele
         public const double pixelToCm = (float)37.7952755906 / echelle;
         public const int echelle = 50;
         public static bool validePourEnregistrer = true;
+        public static string uniteDeMesure = "";
 
         public Plan_VM()
         {
@@ -43,6 +44,8 @@ namespace App_Brycol.VuesModele
             UniteMesure = InfoPiece.uniteMesure;
             
         }
+   
+
         private string _uniteMesure;
         public string UniteMesure
         {

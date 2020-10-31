@@ -302,7 +302,10 @@
   <ItemGroup>
     <Resource Include="images\Items\item0.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="images\ItemsModifies\" />
+    <Folder Include="images\Plans\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="images\Items\Top\item0.png" />
     <Resource Include="images\Items\Top\item1.png" />

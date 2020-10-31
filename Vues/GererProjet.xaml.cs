@@ -61,6 +61,15 @@ namespace App_Brycol.Vues
                     lstImagePlans[i].Source = null;
                 }
             }
+
+            if (Projet_VM.ProjetActuel.ListePieces.Count == 0)
+            {
+                btnCoutProjet.IsEnabled = false;
+            }
+            else
+            {
+                btnCoutProjet.IsEnabled = true;
+            }
         }
 
         private void btnAjouterPiece_Click(object sender, RoutedEventArgs e)
@@ -122,6 +131,14 @@ namespace App_Brycol.Vues
                 }
                 
 
+            }
+
+            if (Projet_VM.ProjetActuel.ListePieces.Count() == 0)
+            {               
+                MessageBox.Show("Vous devez créer une pièce pour visualiser le plan de travail", "Créer une pièce", MessageBoxButton.OK, MessageBoxImage.Information);
+                InfoPiece popUp = new InfoPiece("Ajouter");
+                popUp.ShowDialog();
+                this.Close();
             }
         }
 

@@ -24,7 +24,10 @@ namespace App_Brycol.Vues
         public UCCoutProjet()
         {
             InitializeComponent();
+            
             DataContext = new Projet_VM();
+            DG_coutItem.Items.Refresh();
+
             lblNomProjet.Content = Projet_VM.ProjetActuel.Nom;
             lblTotal.Content = Projet_VM.Total().ToString() + "$";
         }

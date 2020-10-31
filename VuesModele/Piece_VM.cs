@@ -234,7 +234,7 @@ namespace App_Brycol.VuesModele
             
         }
 
-        private decimal CalSouTo(Piece laPiece)
+        public static decimal CalSouTo(Piece laPiece)
         {
             Plan plan = new Plan();
             decimal St = 0M;
@@ -254,21 +254,21 @@ namespace App_Brycol.VuesModele
         }
 
 
-        private decimal CalTPS(decimal montant)
+        public static decimal CalTPS(decimal montant)
         {
             const decimal TPS = 0.05M;
 
             return decimal.Round((montant * TPS), 2, MidpointRounding.AwayFromZero);
         }
 
-        private decimal CalTVQ(decimal montant)
+        public static decimal CalTVQ(decimal montant)
         {
             const decimal TVQ = 0.09975M;
 
             return decimal.Round((montant * TVQ), 2, MidpointRounding.AwayFromZero);
         }
 
-        private decimal CalTotal(decimal St, decimal montantTPS, decimal montantTVQ)
+        public static decimal CalTotal(decimal St, decimal montantTPS, decimal montantTVQ)
         {
             return decimal.Round((St + montantTPS + montantTVQ), 2, MidpointRounding.AwayFromZero);
         }

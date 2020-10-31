@@ -45,6 +45,15 @@ namespace App_Brycol.VuesModele
                 foreach (Plan plan in PReq2)
                     ListePlans.Add(plan);
 
+                foreach (Piece p in ListePieces)
+                {
+                    Piece_VM.SousTotal = Piece_VM.CalSouTo(p);
+                    Piece_VM.TpsDePiece = Piece_VM.CalTPS(Piece_VM.SousTotal);
+                    Piece_VM.TvqDePiece = Piece_VM.CalTVQ(Piece_VM.SousTotal);
+                    Piece_VM.Total = Piece_VM.CalTotal(Piece_VM.SousTotal, Piece_VM.TpsDePiece, Piece_VM.TvqDePiece);
+                    p.Total = Piece_VM.Total;
+                }
+
                 Nom = ProjetActuel.Nom;
             }
 

@@ -38,31 +38,56 @@ namespace App_Brycol.Vues
 
         public Piece2D()
         {
-            InitializeComponent();
-            initializeItems();
-            //initializeItemsModifie();
+            
+                InitializeComponent();
+                initializeItems();
 
+                ImageBrush imgBrush = new ImageBrush();
+                imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/plancheWood.jpg"));
+                canvas.Background = imgBrush;
 
-            ImageBrush imgBrush = new ImageBrush();
-            imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/plancheWood.jpg"));
-            canvas.Background = imgBrush;
+                if (Plan_VM.uniteDeMesure == "Mètres")
+                {
+                    Canvas.SetLeft(canvas, (600 / 2) - (Piece_VM.pieceActuel.Largeur * pixelToM / 2));
+                    Canvas.SetBottom(canvas, (800 / 2) - (Piece_VM.pieceActuel.Longueur * pixelToM / 2));
 
-            Canvas.SetLeft(canvas, (600 / 2)- (Piece_VM.pieceActuel.Largeur * pixelToM /2));
-            Canvas.SetBottom(canvas, (800 / 2) - (Piece_VM.pieceActuel.Longueur * pixelToM / 2));
+                    if (Piece_VM.pieceActuel.Longueur <= 8 || Piece_VM.pieceActuel.Largeur <= 8)
+                    {
+                        zoom = 1.4 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
+                        zoomMax = 1.9;
+                        zoomMin = 0.7;
+                    }
+                    else
+                    {
+                        zoom = 0.9 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
+                        zoomMax = 1.2;
+                        zoomMin = 0.3;
+                    }
 
+                }
+                else
+                {
+                    Canvas.SetLeft(canvas, (600 / 2) - (Piece_VM.pieceActuel.Largeur * pixelToPied / 2));
+                    Canvas.SetBottom(canvas, (800 / 2) - (Piece_VM.pieceActuel.Longueur * pixelToPied / 2));
 
-            if (Piece_VM.pieceActuel.Longueur <= 8 || Piece_VM.pieceActuel.Largeur <= 8)
-            {
-                zoom = 1.4 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
-                zoomMax = 1.9;
-                zoomMin = 0.7;
+                    if (Piece_VM.pieceActuel.Longueur <= 26 || Piece_VM.pieceActuel.Largeur <= 26)
+                    {
+                        zoom = 1.4 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
+                        zoomMax = 1.9;
+                        zoomMin = 0.7;
+                    }
+                    else
+                    {
+                        zoom = 0.9 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
+                        zoomMax = 1.2;
+                        zoomMin = 0.3;
+                    }
+                
+            
             }
-            else
-            {
-                zoom = 0.9 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
-                zoomMax = 1.2;
-                zoomMin = 0.3;
-            }
+
+
+            
             
             
           
@@ -78,8 +103,10 @@ namespace App_Brycol.Vues
         private bool move;
         public double Zoom;
         public const double pixelToM = 3779.5275590551 / echelle;
+        public const double pixelToPied = 1151.9999999832 / echelle;
         public const double pixelToCm = 37.7952755906 / echelle;
         public const int echelle = 50;
+        // Zoom
         private Double zoomMax;
         private Double zoomMin;
         private Double zoomSpeed = 0.001;
@@ -241,7 +268,7 @@ namespace App_Brycol.Vues
             
 
         }
-        // Zoom
+       
         
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -455,7 +482,7 @@ namespace App_Brycol.Vues
                         {
                             childTopGauche = child.TransformToAncestor(canvas).Transform(new Point(0, 0));
                             childBotDroite = new Point(childTopGauche.X + child.DesiredSize.Width, childTopGauche.Y + child.DesiredSize.Height);
-                            
+
                         }
                         else if (ip.angleRotation == 90)
                         {
@@ -474,15 +501,17 @@ namespace App_Brycol.Vues
                             childTopGauche = new Point(childTopGaucheFixe.X, childTopGaucheFixe.Y - child.DesiredSize.Width);
                             childBotDroite = new Point(childTopGaucheFixe.X + child.DesiredSize.Height, childTopGaucheFixe.Y);
                         }
-                        
-                    }                   
+
+                    }
+                   
                 }
                 if (childTopGauche.X > canvas.Width || childTopGauche.X < 0 || childTopGauche.Y < 0 || childTopGauche.Y > canvas.Height || childBotDroite.X > canvas.Width || childBotDroite.X < 0 || childBotDroite.Y < 0 || childBotDroite.Y > canvas.Height)
                 {
                     if ((childTopGauche.X > canvas.Width && childBotDroite.X > canvas.Width) || (childTopGauche.Y > canvas.Height && childBotDroite.Y > canvas.Height) || (childTopGauche.X < 0 && childBotDroite.X < 0) || (childTopGauche.Y < 0 && childBotDroite.Y < 0))
                     {
-                        Canvas.SetLeft(child, 0);
-                        Canvas.SetTop(child, 0);
+                        Canvas.SetLeft(child, canvas.Width /2);
+                        Canvas.SetTop(child, canvas.Height/2);
+                        
                     }
                     else
                     {
