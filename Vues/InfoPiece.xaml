@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_Brycol.Vues"
         mc:Ignorable="d"
-        Title="Informations d'une pièce" Height="500" Width="600">
+        Title="Informations d'une pièce" Height="500" Width="600" Icon="pack://application:,,,/images/favicon.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>

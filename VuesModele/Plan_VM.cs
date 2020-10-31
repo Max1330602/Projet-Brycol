@@ -21,7 +21,7 @@ namespace App_Brycol.VuesModele
         public const float pixelToM = (float)3779.5275590551 / echelle;
         public const double pixelToCm = (float)37.7952755906 / echelle;
         public const int echelle = 50;
-
+        public static bool validePourEnregistrer = true;
 
         public Plan_VM()
         {
@@ -51,6 +51,18 @@ namespace App_Brycol.VuesModele
             {
                 _uniteMesure = value;
                 OnPropertyChanged("UniteMesure");
+            }
+
+        }
+
+        private bool _validePourEnregistrer;
+        public bool ValidePourEnregistrer
+        {
+            get { return _validePourEnregistrer; }
+            set
+            {
+                _validePourEnregistrer = value;
+                OnPropertyChanged("ValidePourEnregistrer");
             }
 
         }

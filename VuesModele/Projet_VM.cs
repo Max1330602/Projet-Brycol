@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Security.Cryptography.X509Certificates;
@@ -113,41 +114,54 @@ namespace App_Brycol.VuesModele
         public void SauvProjet(Object param)
         {
             Projet p = OutilEF.brycolContexte.Projets.Find(ProjetActuel.ID);
-
-            if (Nom == null)
+            bool validation = Plan_VM.validePourEnregistrer;
+            //vérifie si les items sont valide
+            if (validation)
             {
-                var test = OutilEF.brycolContexte.Projets.Max<Projet>(t => t.ID);
-                test += 1;
-                p.Nom = "Projet" + test;
-            }
-
-            if (Nom != p.Nom && EstSauvegarde == true)
-            {
-                MessageBoxResult result = MessageBox.Show("Voulez-vous sauvegarder en tant que nouveau projet?", "Sauvegarder en tant que nouveau projet", MessageBoxButton.YesNo);
-                switch (result)
+                if (Nom == null)
                 {
-                    case MessageBoxResult.Yes:
-                        SauNeoProjet();
-                        break;
-                    case MessageBoxResult.No:
-                        p.Nom = Nom;
-                        OutilEF.brycolContexte.SaveChanges();
-                        break;
+                    var test = OutilEF.brycolContexte.Projets.Max<Projet>(t => t.ID);
+                    test += 1;
+                    p.Nom = "Projet" + test;
                 }
 
+                if (Nom != p.Nom && EstSauvegarde == true)
+                {
+                    MessageBoxResult result = MessageBox.Show("Voulez-vous sauvegarder en tant que nouveau projet?", "Sauvegarder en tant que nouveau projet", MessageBoxButton.YesNo);
+                    switch (result)
+                    {
+                        case MessageBoxResult.Yes:
+                            SauNeoProjet();
+                            break;
+                        case MessageBoxResult.No:
+                            p.Nom = Nom;
+                            OutilEF.brycolContexte.SaveChanges();
+                            break;
+                    }
+
+                }
+                else
+                {
+                    p.Nom = Nom;
+                    OutilEF.brycolContexte.SaveChanges();
+                }
+
+
+
+
+                ProjetActuel = p;
+                EstSauvegarde = true;
             }
             else
             {
-                p.Nom = Nom;
-                OutilEF.brycolContexte.SaveChanges();
+                //Si au moins un item n'est pas valide, on affiche un message d'erreur
+                MessageBoxResult resultat;
+                resultat = System.Windows.MessageBox.Show("Impossible d'enregistrer, vous avez un item invalide dans le plan de travail.", "Sauvegarde impossible", MessageBoxButton.OK, MessageBoxImage.Warning);
+                if (resultat == MessageBoxResult.OK)
+                {
+                    return;
+                }
             }
-
-
-
-
-            ProjetActuel = p;
-            EstSauvegarde = true;
-
             Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
             ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
             gridMW.Children.Clear();

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:App_Brycol.Vues"
              
-             mc:Ignorable="d" Height="auto" Width="auto">
+             mc:Ignorable="d" Height="auto" Width="auto" >
     <Grid x:Name="grdPlanTravail">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
