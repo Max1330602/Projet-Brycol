@@ -27,7 +27,6 @@ namespace App_Brycol.Vues
         {
             InitializeComponent();
             DataContext = new Piece_VM("");
-
             switch (UCEcran)
             {
                 case "Piece":

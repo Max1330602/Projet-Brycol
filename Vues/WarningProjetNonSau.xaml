@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_Brycol.Vues"
         mc:Ignorable="d"
-        Title="Projet Non Sauvegardé" Height="150.8" Width="350">
+        Title="Projet Non Sauvegardé" Height="150.8" Width="350" Icon="pack://application:,,,/images/favicon.png">
 
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">

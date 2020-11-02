@@ -8,6 +8,6 @@ namespace App_Brycol.VuesModele
 {
     class ItemsPlan_VM
     {
-        public static bool pathChoisi;
+
     }
 }

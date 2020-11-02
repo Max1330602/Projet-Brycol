@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:App_Brycol.Vues"
         mc:Ignorable="d"
         Closed="Window_Closed"
-        Title="ModifierItem" Height="450" Width="800">
+        Title="ModifierItem" Height="450" Width="800" Icon="pack://application:,,,/images/favicon.png">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>

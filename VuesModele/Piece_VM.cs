@@ -273,14 +273,14 @@ namespace App_Brycol.VuesModele
             return decimal.Round((St + montantTPS + montantTVQ), 2, MidpointRounding.AwayFromZero);
         }
 
-            public static void supprimerPiece()
+        public static void supprimerPiece()
         {
-            Piece p = OutilEF.brycolContexte.Pieces.Find(Piece_VM.pieceActuel.ID);
+            Piece p = OutilEF.brycolContexte.Pieces.Find(pieceActuel.ID);
 
             OutilEF.brycolContexte.Pieces.Remove(p);
             OutilEF.brycolContexte.SaveChanges();
 
-            Projet_VM.ProjetActuel.ListePieces.Remove(Piece_VM.pieceActuel);
+            Projet_VM.ProjetActuel.ListePieces.Remove(pieceActuel);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

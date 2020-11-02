@@ -1,4 +1,5 @@
-﻿using App_Brycol.VuesModele;
+﻿using App_Brycol.Modele;
+using App_Brycol.VuesModele;
 using Org.BouncyCastle.Asn1;
 using System;
 using System.Collections.Generic;
@@ -57,11 +58,13 @@ namespace App_Brycol.Vues
         private void metre_Checked(object sender, RoutedEventArgs e)
         {
             uniteMesure = "Mètres";
+            Plan_VM.uniteDeMesure = uniteMesure;
         }
 
         private void pied_Checked(object sender, RoutedEventArgs e)
         {
             uniteMesure = "Pieds";
+            Plan_VM.uniteDeMesure = uniteMesure;
         }
     }
 }

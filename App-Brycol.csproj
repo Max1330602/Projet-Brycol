@@ -264,10 +264,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\favicon.png" />
     <Resource Include="images\Items\item16.png" />
-    <Resource Include="images\logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\Items\Top\item11.png" />
+    <Resource Include="images\logo.png" />
     <Resource Include="images\soleil.png" />
   </ItemGroup>
   <ItemGroup>
@@ -308,7 +310,6 @@
     <Resource Include="images\Items\Top\item0.png" />
     <Resource Include="images\Items\Top\item1.png" />
     <Resource Include="images\Items\Top\item10.png" />
-    <Resource Include="images\Items\Top\item11.png" />
     <Resource Include="images\Items\Top\item12.png" />
     <Resource Include="images\Items\Top\item13.png" />
     <Resource Include="images\Items\Top\item14.png" />
@@ -330,43 +331,25 @@
     <Resource Include="images\Items\Top\item9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\invalide.png" />
-    <Resource Include="images\invalideItem.png" />
-    <Resource Include="images\item0.png" />
-    <Resource Include="images\item1.png" />
-    <Resource Include="images\item10.png" />
-    <Resource Include="images\item11.png" />
-    <Resource Include="images\item12.png" />
-    <Resource Include="images\item13.png" />
-    <Resource Include="images\item14.png" />
-    <Resource Include="images\item15.png" />
-    <Resource Include="images\item17.png" />
-    <Resource Include="images\item18.png" />
-    <Resource Include="images\item19.png" />
-    <Resource Include="images\item2.png" />
-    <Resource Include="images\item20.png" />
-    <Resource Include="images\item21.png" />
-    <Resource Include="images\item22.png" />
-    <Resource Include="images\item23.png" />
-    <Resource Include="images\item26.PNG" />
-    <Resource Include="images\item3.png" />
-    <Resource Include="images\item4.png" />
-    <Resource Include="images\item5.png" />
-    <Resource Include="images\item6.png" />
-    <Resource Include="images\item7.png" />
-    <Resource Include="images\item8.png" />
-    <Resource Include="images\item9.png" />
-    <Resource Include="images\rip.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\Items\invalide.png" />
     <Resource Include="images\Items\invalideItem.png" />
     <Resource Include="images\Items\item26.PNG" />
-    <Resource Include="images\Items\rip.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\Items\Top\item23.jpg" />
     <Resource Include="images\Items\Top\item26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\invalide1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\plancher.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\plancheWood.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\Top\item17.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

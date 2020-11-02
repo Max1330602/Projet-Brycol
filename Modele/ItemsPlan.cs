@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,8 @@ namespace App_Brycol.Modele
         public double emplacementGauche { get; set; }
         public double emplacementHaut { get; set; }
         public double angleRotation { get; set; }
-
+        [NotMapped]
+        public static bool pathChoisi;
         public ItemsPlan()
         {
         }
