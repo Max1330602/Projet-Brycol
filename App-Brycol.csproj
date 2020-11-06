@@ -303,7 +303,9 @@
     <Resource Include="images\Items\item0.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="images\ItemsModifies\" />
+    <Folder Include="images\ItemsModifies\Item24\" />
+    <Folder Include="images\ItemsModifies\Item25\" />
+    <Folder Include="images\ItemsModifies\Item26\" />
     <Folder Include="images\Plans\" />
   </ItemGroup>
   <ItemGroup>
@@ -336,7 +338,6 @@
     <Resource Include="images\Items\item26.PNG" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\Items\Top\item23.jpg" />
     <Resource Include="images\Items\Top\item26.png" />
   </ItemGroup>
   <ItemGroup>
@@ -350,6 +351,217 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\Items\Top\item17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item10\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item10\brun.png" />
+    <Resource Include="images\ItemsModifies\Item10\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item10\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item10\orange.png" />
+    <Resource Include="images\ItemsModifies\Item10\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item10\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item1\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item1\brun.png" />
+    <Resource Include="images\ItemsModifies\Item1\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item1\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item1\orange.png" />
+    <Resource Include="images\ItemsModifies\Item1\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item1\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item2\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item2\brun.png" />
+    <Resource Include="images\ItemsModifies\Item2\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item2\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item2\orange.png" />
+    <Resource Include="images\ItemsModifies\Item2\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item2\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item3\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item3\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item3\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item4\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item4\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item4\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item5\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item5\brun.png" />
+    <Resource Include="images\ItemsModifies\Item5\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item5\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item5\orange.png" />
+    <Resource Include="images\ItemsModifies\Item5\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item5\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item3\brun.png" />
+    <Resource Include="images\ItemsModifies\Item3\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item3\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item3\orange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item4\brun.png" />
+    <Resource Include="images\ItemsModifies\Item4\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item4\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item4\orange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item6\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item6\brun.png" />
+    <Resource Include="images\ItemsModifies\Item6\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item6\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item6\orange.png" />
+    <Resource Include="images\ItemsModifies\Item6\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item6\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item7\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item7\brun.png" />
+    <Resource Include="images\ItemsModifies\Item7\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item7\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item7\orange.png" />
+    <Resource Include="images\ItemsModifies\Item7\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item7\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item8\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item8\brun.png" />
+    <Resource Include="images\ItemsModifies\Item8\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item8\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item8\orange.png" />
+    <Resource Include="images\ItemsModifies\Item8\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item8\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item9\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item9\brun.png" />
+    <Resource Include="images\ItemsModifies\Item9\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item9\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item9\orange.png" />
+    <Resource Include="images\ItemsModifies\Item9\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item9\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item11\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item11\brun.png" />
+    <Resource Include="images\ItemsModifies\Item11\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item11\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item11\orange.png" />
+    <Resource Include="images\ItemsModifies\Item11\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item11\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item12\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item12\brun.png" />
+    <Resource Include="images\ItemsModifies\Item12\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item12\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item12\orange.png" />
+    <Resource Include="images\ItemsModifies\Item12\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item12\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item13\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item13\brun.png" />
+    <Resource Include="images\ItemsModifies\Item13\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item13\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item13\orange.png" />
+    <Resource Include="images\ItemsModifies\Item13\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item13\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item14\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item14\brun.png" />
+    <Resource Include="images\ItemsModifies\Item14\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item14\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item14\orange.png" />
+    <Resource Include="images\ItemsModifies\Item14\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item14\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item15\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item15\brun.png" />
+    <Resource Include="images\ItemsModifies\Item15\jaune.jpeg" />
+    <Resource Include="images\ItemsModifies\Item15\mauve.jpeg" />
+    <Resource Include="images\ItemsModifies\Item15\orange.png" />
+    <Resource Include="images\ItemsModifies\Item15\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item15\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item16\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item16\brun.png" />
+    <Resource Include="images\ItemsModifies\Item16\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item16\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item16\orange.png" />
+    <Resource Include="images\ItemsModifies\Item16\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item16\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item17\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item17\brun.png" />
+    <Resource Include="images\ItemsModifies\Item17\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item17\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item17\orange.png" />
+    <Resource Include="images\ItemsModifies\Item17\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item17\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item18\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item18\brun.png" />
+    <Resource Include="images\ItemsModifies\Item18\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item18\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item18\orange.png" />
+    <Resource Include="images\ItemsModifies\Item18\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item18\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item19\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item19\brun.png" />
+    <Resource Include="images\ItemsModifies\Item19\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item19\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item19\orange.png" />
+    <Resource Include="images\ItemsModifies\Item19\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item19\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item20\blue.png" />
+    <Resource Include="images\ItemsModifies\Item20\brun.png" />
+    <Resource Include="images\ItemsModifies\Item20\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item20\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item20\orange.png" />
+    <Resource Include="images\ItemsModifies\Item20\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item20\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item21\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item21\brun.png" />
+    <Resource Include="images\ItemsModifies\Item21\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item21\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item21\orange.png" />
+    <Resource Include="images\ItemsModifies\Item21\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item21\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item22\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item22\brun.png" />
+    <Resource Include="images\ItemsModifies\Item22\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item22\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item22\orange.png" />
+    <Resource Include="images\ItemsModifies\Item22\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item22\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item23\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item23\brun.png" />
+    <Resource Include="images\ItemsModifies\Item23\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item23\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item23\orange.png" />
+    <Resource Include="images\ItemsModifies\Item23\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item23\vert.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

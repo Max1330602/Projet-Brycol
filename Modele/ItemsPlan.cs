@@ -13,11 +13,13 @@ namespace App_Brycol.Modele
         public int ID { get; set; }
         public Plan Plan { get; set; }
         public Item Item { get; set; }
+        public string Couleur { get; set; }
         public double emplacementGauche { get; set; }
         public double emplacementHaut { get; set; }
         public double angleRotation { get; set; }
         [NotMapped]
-        public static bool pathChoisi;
+        public object Tag { get; set; }
+
         public ItemsPlan()
         {
         }

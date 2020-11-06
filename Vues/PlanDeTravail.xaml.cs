@@ -101,7 +101,7 @@ namespace App_Brycol.Vues
                     Bitmap capture = Capturer((int)PositionEcran.X, (int)PositionEcran.Y, width, height);
 
                     // save image in stream
-                    capture.Save("\\images\\Plans\\" + "plan" + Plan_VM.PlanActuel.ID + ".png");
+                    capture.Save("..\\..\\images\\Plans\\" + "plan" + Plan_VM.PlanActuel.ID + ".png");
 
                 }
             }
@@ -140,7 +140,7 @@ namespace App_Brycol.Vues
 
 
             // save uncompressed bitmap to disk
-            string fileName = "\\images\\Plans\\" + "plan" + Plan_VM.PlanActuel.ID + ".png";
+            string fileName = "..\\..\\images\\Plans\\" + "plan" + Plan_VM.PlanActuel.ID + ".png";
             System.IO.FileStream fs = System.IO.File.Open(fileName, System.IO.FileMode.OpenOrCreate);
             Capture.Save(fs, System.Drawing.Imaging.ImageFormat.Bmp);
             fs.Close();
