@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_Brycol.Vues"
         mc:Ignorable="d"
+        WindowStartupLocation ="CenterScreen"
+        ResizeMode="NoResize"
         Title="Cout" Height="450" Width="800" Icon="pack://application:,,,/images/favicon.png">
     <Grid Name="grdCoutParent">
         <Grid.RowDefinitions>
@@ -18,8 +20,9 @@
 
         <Button Name="btnOk" Content="Ok" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="30" Margin="0,0,15,10" Click="btnOk_Click"/>
         <StackPanel Orientation="Horizontal" Grid.Row="2">
-            <Button Name="btnVoirCoutProjet" Content="Voir coût du projet"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="150" Height="30" Margin="15,0,0,10" IsEnabled="False"  Click="btnVoirCoutProjet_Click"/>
-            <Button Name="btnVoirCoutPiece" Content="Voir coût de la pièce sélectionnée" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="30" Margin="15,0,0,10" IsEnabled="false" Click="btnVoirCoutPiece_Click"  />
+            <Button Name="btnVoirCoutProjet" Content="Voir le coût du projet"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="150" Height="30" Margin="15,0,0,10" Visibility = "Collapsed"  Click="btnVoirCoutProjet_Click"/>
+            <Button Name="btnVoirCoutDetailProjet" Content="Voir le coût détaillé du projet" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="30" Margin="15,0,0,10" Visibility = "Collapsed"  Click="btnVoirCoutDetailProjet_Click"  />
+            <Button Name="btnVoirCoutPiece" Content="Voir le coût de la pièce sélectionnée" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="200" Height="30" Margin="15,0,0,10" Visibility = "Collapsed" Click="btnVoirCoutPiece_Click"  />
         </StackPanel>
 
     </Grid>

@@ -1,7 +1,6 @@
 ﻿using App_Brycol.VuesModele;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,34 +11,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace App_Brycol.Vues
 {
     /// <summary>
-    /// Logique d'interaction pour WarningProjetNonSau.xaml
+    /// Logique d'interaction pour UCCoutDetailProjet.xaml
     /// </summary>
-    public partial class WarningProjetNonSau : Window
+    public partial class UCCoutDetailProjet : UserControl
     {
-
-
-        public WarningProjetNonSau()
+        public UCCoutDetailProjet()
         {
             InitializeComponent();
             DataContext = new Projet_VM();
-        }
+            DG_coutItem.Items.Refresh();
 
-        private void btnComfirm_Click(object sender, RoutedEventArgs e)
-        {
-            Enregistrer popUp = new Enregistrer();
-            popUp.ShowDialog();
-
-            this.Close();
-        }
-
-        private void btnRefus_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+            lblNomProjet.Content = Projet_VM.ProjetActuel.Nom;
+            lblTotal.Content = Projet_VM.Total().ToString() + "$";
         }
     }
 }

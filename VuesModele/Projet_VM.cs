@@ -34,6 +34,7 @@ namespace App_Brycol.VuesModele
 
             ListePieces = new ObservableCollection<Piece>();
             ListePlans = new ObservableCollection<Plan>();
+            ListeItemPieceProjet = new ObservableCollection<ItemPieceProjet>();
 
             if (ProjetActuel != null)
             {
@@ -44,6 +45,8 @@ namespace App_Brycol.VuesModele
                 var PReq2 = from plan in OutilEF.brycolContexte.Plans where plan.Piece.Projet.ID == ProjetActuel.ID select plan;
                 foreach (Plan plan in PReq2)
                     ListePlans.Add(plan);
+
+                ListeItemPieceProjet = CreatlstIPP();
 
                 foreach (Piece p in ListePieces)
                 {
@@ -81,6 +84,17 @@ namespace App_Brycol.VuesModele
             {
                 _listePieces = value;
                 OnPropertyChanged("ListePieces");
+            }
+        }
+
+        private ObservableCollection<ItemPieceProjet> _listeItemPieceProjet;
+        public ObservableCollection<ItemPieceProjet> ListeItemPieceProjet
+        {
+            get { return _listeItemPieceProjet; }
+            set
+            {
+                _listeItemPieceProjet = value;
+                OnPropertyChanged("ListeItemPieceProjet");
             }
         }
 
@@ -295,6 +309,35 @@ namespace App_Brycol.VuesModele
             }
 
             OutilEF.brycolContexte.SaveChanges();
+        }
+
+        private ObservableCollection<ItemPieceProjet> CreatlstIPP()
+        {
+            ObservableCollection<ItemPieceProjet> LstIPP = new ObservableCollection<ItemPieceProjet>();
+            List<Piece> LstPi = new List<Piece>();
+
+
+            var PReq = from p in OutilEF.brycolContexte.Pieces where p.Projet.ID == ProjetActuel.ID select p;
+            foreach (Piece p in PReq)
+                LstPi.Add(p);
+
+            foreach (Piece p in LstPi)
+            {
+                ItemPieceProjet Ipp = new ItemPieceProjet();
+                Ipp.NomPiece = p.Nom;
+
+                var PReq3 = from iP in OutilEF.brycolContexte.lstItems.Include("Item") where iP.Plan.Piece.ID == p.ID select iP;
+                foreach (ItemsPlan itemP in PReq3)
+                {
+                    Ipp.NomItem = itemP.Item.Nom;
+                    Ipp.CoutItem = itemP.Item.Cout;
+                    LstIPP.Add(Ipp);
+                }
+
+            }
+
+            return LstIPP;
+
         }
 
         public static decimal CalSouTo(Piece laPiece)

@@ -126,6 +126,7 @@
     </ApplicationDefinition>
     <Compile Include="Modele\Categorie.cs" />
     <Compile Include="Modele\Item.cs" />
+    <Compile Include="Modele\ItemPieceProjet.cs" />
     <Compile Include="Modele\ItemsPlan.cs" />
     <Compile Include="Modele\Piece.cs" />
     <Compile Include="Modele\Plan.cs" />
@@ -165,6 +166,9 @@
     </Compile>
     <Compile Include="Vues\GererProjet.xaml.cs">
       <DependentUpon>GererProjet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\UCCoutDetailProjet.xaml.cs">
+      <DependentUpon>UCCoutDetailProjet.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vues\UCCoutPiece.xaml.cs">
       <DependentUpon>UCCoutPiece.xaml</DependentUpon>
@@ -220,6 +224,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vues\GererProjet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\UCCoutDetailProjet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
