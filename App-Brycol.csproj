@@ -179,6 +179,9 @@
     <Compile Include="Vues\WarningProjetNonSau.xaml.cs">
       <DependentUpon>WarningProjetNonSau.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vues\WarningSupPro.xaml.cs">
+      <DependentUpon>WarningSupPro.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -240,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vues\WarningProjetNonSau.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\WarningSupPro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

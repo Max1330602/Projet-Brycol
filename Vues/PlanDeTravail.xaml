@@ -35,7 +35,8 @@
         <Button Grid.Column="0" Grid.Row="1" Name="btnProjet" Click="btnProjet_Click"  Width="100" Height="25" Content="Projet" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,265,0,0"></Button>
         <Button Grid.Column="0" Grid.Row="1" Name="btnCoutPiece" Click="btnCoutPiece_Click"  Width="100" Height="25" Content="Coût de la Pièce" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,305,0,0"></Button>
         <Button Grid.Column="0" Grid.Row="1" Name="btnEnregistrer" Click="btnEnregistrer_Click" Width="100" Height="25" Content="Enregistrer" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,345,0,0"></Button>
-        <Button Grid.Column="0" Grid.Row="1" Name="btnThemeSombre" Click="btnThemeSombre_Click" Width="35" Height="35" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,385,0,0">
+        <Button Grid.Column="0" Grid.Row="1" Name="btnSupprimer" Command="{ Binding cmdSuppProjet }" Click="btnSupprimer_Click" Width="100" Height="25" Content="Supprimer Projet" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,385,0,0"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Name="btnThemeSombre" Click="btnThemeSombre_Click" Width="35" Height="35" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,425,0,0">
             <Image Source="/images/soleil.png" />
         </Button>
         
