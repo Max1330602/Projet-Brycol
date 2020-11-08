@@ -24,12 +24,16 @@ namespace App_Brycol.Vues
     {
         private List<Button> lstBoutons = new List<Button>();
         private List<Image> lstImagePlans = new List<Image>();
+        private List<Label> lstLabels = new List<Label>();
 
         public GererProjet()
         {
             InitializeComponent();
+            this.MinHeight = 450;
+            this.MinWidth = 800;
 
             DataContext = new Projet_VM();
+            lblProjet.Content = "Projet : " + Projet_VM.ProjetActuel.Nom;
 
             lstBoutons.Add(btnPiece1);
             lstBoutons.Add(btnPiece2);
@@ -49,16 +53,27 @@ namespace App_Brycol.Vues
             lstImagePlans.Add(imgPlan7);
             lstImagePlans.Add(imgPlan8);
 
+            lstLabels.Add(txtPiece1);
+            lstLabels.Add(txtPiece2);
+            lstLabels.Add(txtPiece3);
+            lstLabels.Add(txtPiece4);
+            lstLabels.Add(txtPiece5);
+            lstLabels.Add(txtPiece6);
+            lstLabels.Add(txtPiece7);
+            lstLabels.Add(txtPiece8);
+
             for (int i = 0; i < Projet_VM.ProjetActuel.ListePieces.Count(); i++)
             {
                 lstBoutons[i].IsEnabled = true;
                 if (lstBoutons[i].IsEnabled == true)
                 {
                     lstImagePlans[i].Source = Projet_VM.ProjetActuel.ListePlans[i].ImgPlan;
+                    lstLabels[i].Content = Projet_VM.ProjetActuel.ListePieces[i].Nom;
                 }
                 else
                 {
                     lstImagePlans[i].Source = null;
+                    lstLabels[i].Content = "";
                 }
             }
 
@@ -122,11 +137,17 @@ namespace App_Brycol.Vues
                     image.Source = null;
                 }
 
+                foreach (Label lbl in lstLabels)
+                {
+                    lbl.Content = "";
+                }
+
                 for (int i2 = 0; i2 < lstImagePlans.Count(); i2++)
                 {
                     if (i2 < Projet_VM.ProjetActuel.ListePieces.Count())
                     {
                         lstImagePlans[i2].Source = Projet_VM.ProjetActuel.ListePlans[i2].ImgPlan;
+                        lstLabels[i2].Content = Projet_VM.ProjetActuel.ListePieces[i2].Nom;
                     }
                 }
                 

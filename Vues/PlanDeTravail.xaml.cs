@@ -30,9 +30,9 @@ namespace App_Brycol.Vues
         public PlanDeTravail()
         {
             InitializeComponent();
+
             DataContext = new Projet_VM();
-            lblProjet.Content = Projet_VM.ProjetActuel.Nom;
-            lblPiece.Content = Piece_VM.pieceActuel.Nom;
+            lblProjet.Content = "Projet : " + Projet_VM.ProjetActuel.Nom + "\t Pièce : " + Piece_VM.pieceActuel.Nom;
         }
 
         public static Catalogue Catalogue;

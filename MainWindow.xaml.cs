@@ -29,6 +29,8 @@ namespace App_Brycol
        public MainWindow()
         {
             InitializeComponent();
+            this.MinWidth = 1000;
+            this.MinHeight = 700;
             OutilEF outilEF = new OutilEF();
             DataContext = new Projet_VM();
 

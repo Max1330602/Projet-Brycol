@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_Brycol.Vues"
         WindowStartupLocation ="CenterScreen"
-        ResizeMode="NoResize"
         mc:Ignorable="d"
         Title="Projet" Height="450" Width="800" Icon="pack://application:,,,/images/favicon.png">
     <Grid>
@@ -25,6 +24,7 @@
         <Border Grid.Row="0" Grid.ColumnSpan="5" Background="LightGray"></Border>
 
         <Label Grid.Row="0" FontSize="20" Height="40" Width="500" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Gérer le projet"/>
+        <Label x:Name="lblProjet" Grid.Row="0" FontSize="18" Height="40" Width="500" Grid.ColumnSpan="5" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,40,0,0" Content="Nom du projet"/>
 
         <Button Grid.Column="0" Grid.Row="1" Name="btnAjouterPiece" Click="btnAjouterPiece_Click"  Width="100" Height="25" Content="Ajouter Pièce" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,25,0,0"/>
         <Button Grid.Column="0" Grid.Row="1" Name="btnSupprimerPiece" Click="btnSupprimerPiece_Click" Command="{Binding cmdPiece}"  Width="100" Height="25" Content="Supprimer Pièce" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,65,0,0" IsEnabled="False"></Button>
@@ -33,35 +33,59 @@
         <Button Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Name="btnQuitter" Click="btnQuitter_Click"  Width="100" Height="25" Content="Quitter" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,185,0,0"></Button>
 
         <Button x:Name="btnPiece1" ToggleButton.Checked="btnPiece1_Click" Grid.Column="1" Grid.Row="1" Background="White" Click="btnPiece1_Click" IsEnabled="false">
-            <Image x:Name="imgPlan1" Stretch="Fill" Opacity="0.8"></Image>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Image x:Name="imgPlan1" Height="125" Stretch="Fill" Opacity="0.8"></Image>
+                <Label x:Name="txtPiece1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25"/>
+            </StackPanel>
         </Button>
 
         <Button x:Name="btnPiece2" Grid.Column="2" Grid.Row="1" Background="White" Click="btnPiece2_Click" IsEnabled="False">
-            <Image x:Name="imgPlan2" Stretch="Fill" Opacity="0.8"></Image>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Image x:Name="imgPlan2" Height="125" Stretch="Fill" Opacity="0.8"></Image>
+                <Label x:Name="txtPiece2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25"/>
+            </StackPanel>
         </Button>
 
         <Button x:Name="btnPiece3" Grid.Column="3" Grid.Row="1" Background="White" Click="btnPiece3_Click" IsEnabled="False">
-            <Image x:Name="imgPlan3" Stretch="Fill" Opacity="0.8"></Image>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Image x:Name="imgPlan3" Height="125" Stretch="Fill" Opacity="0.8"></Image>
+                <Label x:Name="txtPiece3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25"/>
+            </StackPanel>
         </Button>
 
         <Button x:Name="btnPiece4" Grid.Column="4" Grid.Row="1" Background="White" Click="btnPiece4_Click" IsEnabled="False">
-            <Image x:Name="imgPlan4" Stretch="Fill" Opacity="0.8"></Image>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Image x:Name="imgPlan4" Height="125" Stretch="Fill" Opacity="0.8"></Image>
+                <Label x:Name="txtPiece4" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25"/>
+            </StackPanel>
         </Button>
 
         <Button x:Name="btnPiece5" Grid.Column="1" Grid.Row="2" Background="White" Click="btnPiece5_Click" IsEnabled="False">
-            <Image x:Name="imgPlan5" Stretch="Fill" Opacity="0.8"></Image>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Image x:Name="imgPlan5" Height="125" Stretch="Fill" Opacity="0.8"></Image>
+                <Label x:Name="txtPiece5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25"/>
+            </StackPanel>
         </Button>
 
         <Button x:Name="btnPiece6" Grid.Column="2" Grid.Row="2" Background="White" Click="btnPiece6_Click" IsEnabled="False">
-            <Image x:Name="imgPlan6" Stretch="Fill" Opacity="0.8"></Image>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Image x:Name="imgPlan6" Height="125" Stretch="Fill" Opacity="0.8"></Image>
+                <Label x:Name="txtPiece6" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25"/>
+            </StackPanel>
         </Button>
 
         <Button x:Name="btnPiece7" Grid.Column="3" Grid.Row="3" Background="White" Click="btnPiece7_Click" IsEnabled="False">
-            <Image x:Name="imgPlan7" Stretch="Fill" Opacity="0.8"></Image>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Image x:Name="imgPlan7" Height="125" Stretch="Fill" Opacity="0.8"></Image>
+                <Label x:Name="txtPiece7" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25"/>
+            </StackPanel>
         </Button>
 
         <Button x:Name="btnPiece8" Grid.Column="4" Grid.Row="4" Background="White" Click="btnPiece8_Click" IsEnabled="False">
-            <Image x:Name="imgPlan8" Stretch="Fill" Opacity="0.8"></Image>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Image x:Name="imgPlan8" Height="125" Stretch="Fill" Opacity="0.8"></Image>
+                <Label x:Name="txtPiece8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25"/>
+            </StackPanel>
         </Button>
 
 
