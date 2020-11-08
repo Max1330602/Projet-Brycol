@@ -41,12 +41,18 @@ namespace App_Brycol.Vues
 
         private void txtLargeur_TextChanged(object sender, TextChangedEventArgs e)
         {
-            txtLargeur.Text = Regex.Replace(txtLargeur.Text, "[^0-9]+", "");    
+            txtLargeur.Text = Regex.Replace(txtLargeur.Text, "[^0-9]+", "");
+
+            if (txtLongueur.Text != "" && txtLargeur.Text != "")
+                txtSuperf.Text = (Convert.ToDouble(txtLargeur.Text) * Convert.ToDouble(txtLongueur.Text)).ToString();
         }
 
         private void txtLongueur_TextChanged(object sender, TextChangedEventArgs e)
         {
             txtLongueur.Text = Regex.Replace(txtLongueur.Text, "[^0-9]+", "");
+
+            if (txtLongueur.Text != "" && txtLargeur.Text != "")
+                txtSuperf.Text = (Convert.ToDouble(txtLargeur.Text.ToString()) * Convert.ToDouble(txtLongueur.Text.ToString())).ToString();
         }
 
         private void btnAnnuler_Click(object sender, RoutedEventArgs e)
@@ -59,12 +65,19 @@ namespace App_Brycol.Vues
         {
             uniteMesure = "Mètres";
             Plan_VM.uniteDeMesure = uniteMesure;
+
+            if (txtUniMesu != null)
+                txtUniMesu.Text = "m";
+
         }
 
         private void pied_Checked(object sender, RoutedEventArgs e)
         {
             uniteMesure = "Pieds";
             Plan_VM.uniteDeMesure = uniteMesure;
+
+            if (txtUniMesu != null)
+                txtUniMesu.Text = "p";
         }
     }
 }
