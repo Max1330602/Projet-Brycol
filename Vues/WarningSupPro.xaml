@@ -8,6 +8,13 @@
         ResizeMode="NoResize"
         mc:Ignorable="d"
         Title="Supprimer le projet" Height="150.8" Width="350" Icon="pack://application:,,,/images/favicon.png">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontFamily" Value="Constantia Bold"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+    </Window.Resources>
 
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">

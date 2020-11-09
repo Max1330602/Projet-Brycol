@@ -6,6 +6,13 @@
         xmlns:local="clr-namespace:App_Brycol.Vues"
         mc:Ignorable="d"
         Title="Aide" Height="450" Width="800" Icon="pack://application:,,,/images/favicon.png">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontFamily" Value="Constantia Bold"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+    </Window.Resources>
     <Grid>
 
         <Grid.RowDefinitions>

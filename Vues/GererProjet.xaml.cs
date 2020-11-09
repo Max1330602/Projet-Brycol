@@ -165,14 +165,7 @@ namespace App_Brycol.Vues
 
         private void btnPlan_Click(object sender, RoutedEventArgs e)
         {
-            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
-            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
-            this.Close();
-            gridMW.Children.Clear();
-            gridMW.Children.Add(cpMW);
-            cpMW.Content = new PlanDeTravail();
-
-
+            OuvrirPlan();
         }
 
         private void btnCoutProjet_Click(object sender, RoutedEventArgs e)
@@ -290,5 +283,73 @@ namespace App_Brycol.Vues
             p.Nom = Projet_VM.ProjetActuel.Nom;
             OutilEF.brycolContexte.SaveChanges();
         }
+
+        private void btnPiece1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[0];
+            Plan_VM.PlanActuel = Projet_VM.ProjetActuel.ListePlans[0];
+            OuvrirPlan();
+        }
+
+        private void btnPiece2_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[1];
+            Plan_VM.PlanActuel = Projet_VM.ProjetActuel.ListePlans[1];
+            OuvrirPlan();
+        }
+
+        private void btnPiece3_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[2];
+            Plan_VM.PlanActuel = Projet_VM.ProjetActuel.ListePlans[2];
+            OuvrirPlan();
+        }
+
+        private void btnPiece4_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[3];
+            Plan_VM.PlanActuel = Projet_VM.ProjetActuel.ListePlans[3];
+            OuvrirPlan();
+        }
+
+        private void btnPiece5_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[4];
+            Plan_VM.PlanActuel = Projet_VM.ProjetActuel.ListePlans[4];
+            OuvrirPlan();
+        }
+
+        private void btnPiece6_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[5];
+            Plan_VM.PlanActuel = Projet_VM.ProjetActuel.ListePlans[5];
+            OuvrirPlan();
+        }
+
+        private void btnPiece7_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[6];
+            Plan_VM.PlanActuel = Projet_VM.ProjetActuel.ListePlans[6];
+            OuvrirPlan();
+        }
+
+        private void btnPiece8_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[7];
+            Plan_VM.PlanActuel = Projet_VM.ProjetActuel.ListePlans[7];
+            OuvrirPlan();
+        }
+
+        private void OuvrirPlan()
+        {
+            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
+            this.Close();
+            gridMW.Children.Clear();
+            gridMW.Children.Add(cpMW);
+            cpMW.Content = new PlanDeTravail();
+        }
+
+>>>>>>> 79a1af20acdac41509e43a0770e49501e50cb205
     }
 }

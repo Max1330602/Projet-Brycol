@@ -8,6 +8,14 @@
         ResizeMode="NoResize"
         mc:Ignorable="d"
         Title="Informations d'une pièce" Height="300" Width="420" Icon="pack://application:,,,/images/favicon.png" >
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontFamily" Value="Constantia Bold"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"></RowDefinition>
@@ -53,8 +61,8 @@
 
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="btnContinuer" Click="btnContinuer_Click" Command="{Binding cmdPiece}" Grid.Row="2" Width="100" Height="25" Content="Continuer" HorizontalAlignment="Right" Margin="0,0,10,10"/>
                 <Button Name="btnAnnuler" Click="btnAnnuler_Click" Grid.Row="2" Width="100" Height="25" Content="Annuler" HorizontalAlignment="Right" Margin="0,0,20,10"/>
+                <Button Name="btnContinuer" Click="btnContinuer_Click" Command="{Binding cmdPiece}" Grid.Row="2" Width="100" Height="25" Content="Continuer" HorizontalAlignment="Right" Margin="0,0,10,10"/>
             </StackPanel>
         </StackPanel>
 

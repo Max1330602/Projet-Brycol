@@ -4,6 +4,7 @@ using Org.BouncyCastle.Asn1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace App_Brycol.Vues
     /// </summary>
     public partial class InfoPiece : Window 
     {
-        public InfoPiece(string paramOpt)
+        public InfoPiece([Optional] string paramOpt)
         {
             InitializeComponent();
 
