@@ -146,6 +146,9 @@
     <Compile Include="Vues\Catalogue.xaml.cs">
       <DependentUpon>Catalogue.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vues\ChargerProjet.xaml.cs">
+      <DependentUpon>ChargerProjet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vues\Cout.xaml.cs">
       <DependentUpon>Cout.xaml</DependentUpon>
     </Compile>
@@ -199,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vues\Catalogue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\ChargerProjet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

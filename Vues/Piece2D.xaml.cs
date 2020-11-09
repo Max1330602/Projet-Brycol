@@ -355,25 +355,27 @@ namespace App_Brycol.Vues
                         bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item0.png");
                         bitmap.EndInit();
                     }
-
-                    foreach (ItemsPlan ipm in Item_VM.ItemsPlanModifie)
+                    if (Item_VM.ItemsPlanModifie != null)
                     {
-                        bitmap = new BitmapImage();
-                        bitmap.BeginInit();
-                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                        bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                        bitmap.UriSource = new Uri("pack://application:,,,/images/ItemsModifies/Item" + ip.Item.ID + "/" + ip.Couleur + ".png");
-
-                        try
-                        {
-                            bitmap.EndInit();
-                        }
-                        catch (Exception e)
+                        foreach (ItemsPlan ipm in Item_VM.ItemsPlanModifie)
                         {
                             bitmap = new BitmapImage();
                             bitmap.BeginInit();
-                            bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png");
-                            bitmap.EndInit();
+                            bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                            bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                            bitmap.UriSource = new Uri("pack://application:,,,/images/ItemsModifies/Item" + ip.Item.ID + "/" + ip.Couleur + ".png");
+
+                            try
+                            {
+                                bitmap.EndInit();
+                            }
+                            catch (Exception e)
+                            {
+                                bitmap = new BitmapImage();
+                                bitmap.BeginInit();
+                                bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png");
+                                bitmap.EndInit();
+                            }
                         }
                     }
                     var image = new Image { Source = bitmap };
