@@ -7,6 +7,14 @@
         WindowStartupLocation ="CenterScreen"
         mc:Ignorable="d"
         Title="Projet" Height="450" Width="800" Icon="pack://application:,,,/images/favicon.png">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontFamily" Value="Constantia Bold"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -26,11 +34,11 @@
         <Label Grid.Row="0" FontSize="20" Height="40" Width="500" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Gérer le projet"/>
         <Label x:Name="lblProjet" Grid.Row="0" FontSize="18" Height="40" Width="500" Grid.ColumnSpan="5" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,40,0,0" Content="Nom du projet"/>
 
-        <Button Grid.Column="0" Grid.Row="1" Name="btnAjouterPiece" Click="btnAjouterPiece_Click"  Width="100" Height="25" Content="Ajouter Pièce" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,25,0,0"/>
-        <Button Grid.Column="0" Grid.Row="1" Name="btnSupprimerPiece" Click="btnSupprimerPiece_Click" Command="{Binding cmdPiece}"  Width="100" Height="25" Content="Supprimer Pièce" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,65,0,0" IsEnabled="False"></Button>
-        <Button Grid.Column="0" Grid.Row="1" Name="btnPlan" Click="btnPlan_Click" Width="100" Height="25" Content="Ouvrir Plan" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,105,0,0" IsEnabled="False"></Button>
-        <Button Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Name="btnCoutProjet" Click="btnCoutProjet_Click"     Width="100" Height="25" Content="Coût Projet" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,145,0,0"></Button>
-        <Button Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Name="btnQuitter" Click="btnQuitter_Click"  Width="100" Height="25" Content="Quitter" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,185,0,0"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Name="btnAjouterPiece" Click="btnAjouterPiece_Click"  Width="125" Height="25" Content="Ajouter Pièce" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,25,0,0"/>
+        <Button Grid.Column="0" Grid.Row="1" Name="btnSupprimerPiece" Click="btnSupprimerPiece_Click" Command="{Binding cmdPiece}"  Width="125" Height="25" Content="Supprimer Pièce" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,65,0,0" IsEnabled="False"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Name="btnPlan" Click="btnPlan_Click" Width="125" Height="25" Content="Ouvrir Plan" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,105,0,0" IsEnabled="False"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Name="btnCoutProjet" Click="btnCoutProjet_Click"  Width="125" Height="25" Content="Coût Projet" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,145,0,0"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Name="btnQuitter" Click="btnQuitter_Click"  Width="125" Height="25" Content="Quitter" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,185,0,0"></Button>
 
         <Button x:Name="btnPiece1" ToggleButton.Checked="btnPiece1_Click" Grid.Column="1" Grid.Row="1" Background="White" Click="btnPiece1_Click" IsEnabled="false">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
