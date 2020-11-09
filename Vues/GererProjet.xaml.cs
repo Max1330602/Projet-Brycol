@@ -349,7 +349,5 @@ namespace App_Brycol.Vues
             gridMW.Children.Add(cpMW);
             cpMW.Content = new PlanDeTravail();
         }
-
->>>>>>> 79a1af20acdac41509e43a0770e49501e50cb205
     }
 }
