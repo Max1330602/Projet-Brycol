@@ -377,7 +377,7 @@ namespace App_Brycol.VuesModele
         {
             ObservableCollection<ItemPieceProjet> LstIPP = new ObservableCollection<ItemPieceProjet>();
             List<Piece> LstPi = new List<Piece>();
-            Item_VM.ItemsPlanActuel = new ObservableCollection<ItemsPlan>();
+            //Item_VM.ItemsPlanActuel = new ObservableCollection<ItemsPlan>();
 
             var PReq = from p in OutilEF.brycolContexte.Pieces where p.Projet.ID == ProjetActuel.ID select p;
             foreach (Piece p in PReq)
