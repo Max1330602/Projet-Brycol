@@ -30,7 +30,7 @@ namespace App_Brycol
         {
             InitializeComponent();
             this.MinWidth = 1000;
-            this.MinHeight = 700;
+            this.MinHeight = 720;
             OutilEF outilEF = new OutilEF();
             DataContext = new Projet_VM();
 
