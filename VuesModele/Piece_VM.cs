@@ -67,7 +67,7 @@ namespace App_Brycol.VuesModele
                 foreach (Plan p in PReq)
                     plan = p;
 
-                var LiReq = from Li in OutilEF.brycolContexte.lstItems.Include("Item") where Li.Plan.ID == Plan_VM.PlanActuel.ID select Li;
+                var LiReq = from Li in OutilEF.brycolContexte.lstItems.Include("Item") where Li.Plan.ID == plan.ID select Li;
                 foreach (ItemsPlan Li in LiReq)
                     ListeItems.Add(Li.Item);
 
@@ -167,6 +167,7 @@ namespace App_Brycol.VuesModele
             p.Nom = Nom;
             p.Largeur = Largeur;
             p.Longueur = Longueur;
+            p.Projet.ListePieces.Add(p);
 
             var treq = from t in OutilEF.brycolContexte.TypePiece where t.Nom == TypePiece select t;
 
@@ -226,9 +227,14 @@ namespace App_Brycol.VuesModele
             gridMW.Children.Clear();
             gridMW.Children.Add(cpMW);
             cpMW.Content = new PlanDeTravail();
+
+            //---TODO-----------------------------------------------------------------------
+            var plreq = from pl in OutilEF.brycolContexte.Plans.Include("Piece") where pl.Piece.ID == pieceActuel.ID select pl;
+            Plan_VM.PlanActuel = plreq.First();
+            
         }
 
-        private decimal CalSouTo(Piece laPiece)
+        public static decimal CalSouTo(Piece laPiece)
         {
             Plan plan = new Plan();
             decimal St = 0M;
@@ -248,33 +254,33 @@ namespace App_Brycol.VuesModele
         }
 
 
-        private decimal CalTPS(decimal montant)
+        public static decimal CalTPS(decimal montant)
         {
             const decimal TPS = 0.05M;
 
             return decimal.Round((montant * TPS), 2, MidpointRounding.AwayFromZero);
         }
 
-        private decimal CalTVQ(decimal montant)
+        public static decimal CalTVQ(decimal montant)
         {
             const decimal TVQ = 0.09975M;
 
             return decimal.Round((montant * TVQ), 2, MidpointRounding.AwayFromZero);
         }
 
-        private decimal CalTotal(decimal St, decimal montantTPS, decimal montantTVQ)
+        public static decimal CalTotal(decimal St, decimal montantTPS, decimal montantTVQ)
         {
             return decimal.Round((St + montantTPS + montantTVQ), 2, MidpointRounding.AwayFromZero);
         }
 
-            public static void supprimerPiece()
+        public static void supprimerPiece()
         {
-            Piece p = OutilEF.brycolContexte.Pieces.Find(Piece_VM.pieceActuel.ID);
+            Piece p = OutilEF.brycolContexte.Pieces.Find(pieceActuel.ID);
 
             OutilEF.brycolContexte.Pieces.Remove(p);
             OutilEF.brycolContexte.SaveChanges();
 
-            Projet_VM.ProjetActuel.ListePieces.Remove(Piece_VM.pieceActuel);
+            Projet_VM.ProjetActuel.ListePieces.Remove(pieceActuel);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

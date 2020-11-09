@@ -21,11 +21,16 @@ namespace App_Brycol.VuesModele
     {
         public Item_VM()
         {
-            cmdAjouterItem = new Commande(AjouterItem);
+            cmdAjouterItem = new Commande(AjouterItem); 
             SommaireItems = new ObservableCollection<Item>();
             ListeItems = new ObservableCollection<Item>();
+
             if (ItemsPlanActuel == null)
                 ItemsPlanActuel = new ObservableCollection<ItemsPlan>();
+
+            if (ItemsPlanModifie == null)
+                ItemsPlanModifie = new ObservableCollection<ItemsPlan>();
+
             FiltreCategorie = "";
             FiltreNom = "";
             FiltreType = "";
@@ -41,6 +46,7 @@ namespace App_Brycol.VuesModele
         }
         #region Propriétés
 
+        public ICommand cmdAjouterItemModifie { get; set;}
         public ICommand cmdAjouterItem { get; set; }
         public ICommand cmdInitItem { get; set; }
         public const int POS_PAR_DEFAUT = 0;
@@ -50,7 +56,8 @@ namespace App_Brycol.VuesModele
         public ObservableCollection<Item> Items;
 
         public static ObservableCollection<ItemsPlan> ItemsPlanActuel;
-    
+        public static ObservableCollection<ItemsPlan> ItemsPlanModifie;
+
         private Categorie _Categorie;
         public Categorie Categorie 
         {

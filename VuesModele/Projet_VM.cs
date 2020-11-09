@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Security.Cryptography.X509Certificates;
@@ -32,12 +33,29 @@ namespace App_Brycol.VuesModele
             cmdSuppProjet = new Commande(SuppProjet);
 
             ListePieces = new ObservableCollection<Piece>();
+            ListePlans = new ObservableCollection<Plan>();
+            ListeItemPieceProjet = new ObservableCollection<ItemPieceProjet>();
 
             if (ProjetActuel != null)
             {
                 var PReq = from p in OutilEF.brycolContexte.Pieces where p.Projet.ID == ProjetActuel.ID select p;
                 foreach (Piece p in PReq)
                     ListePieces.Add(p);
+
+                var PReq2 = from plan in OutilEF.brycolContexte.Plans where plan.Piece.Projet.ID == ProjetActuel.ID select plan;
+                foreach (Plan plan in PReq2)
+                    ListePlans.Add(plan);
+
+                ListeItemPieceProjet = CreatlstIPP();
+
+                foreach (Piece p in ListePieces)
+                {
+                    Piece_VM.SousTotal = Piece_VM.CalSouTo(p);
+                    Piece_VM.TpsDePiece = Piece_VM.CalTPS(Piece_VM.SousTotal);
+                    Piece_VM.TvqDePiece = Piece_VM.CalTVQ(Piece_VM.SousTotal);
+                    Piece_VM.Total = Piece_VM.CalTotal(Piece_VM.SousTotal, Piece_VM.TpsDePiece, Piece_VM.TvqDePiece);
+                    p.Total = Piece_VM.Total;
+                }
 
                 Nom = ProjetActuel.Nom;
             }
@@ -47,6 +65,17 @@ namespace App_Brycol.VuesModele
 
         #region Propriétés
 
+        private ObservableCollection<Plan> _listePlans;
+        public ObservableCollection<Plan> ListePlans
+        {
+            get { return _listePlans; }
+            set
+            {
+                _listePlans = value;
+                OnPropertyChanged("ListePlans");
+            }
+        }
+
         private ObservableCollection<Piece> _listePieces;
         public ObservableCollection<Piece> ListePieces
         {
@@ -55,6 +84,17 @@ namespace App_Brycol.VuesModele
             {
                 _listePieces = value;
                 OnPropertyChanged("ListePieces");
+            }
+        }
+
+        private ObservableCollection<ItemPieceProjet> _listeItemPieceProjet;
+        public ObservableCollection<ItemPieceProjet> ListeItemPieceProjet
+        {
+            get { return _listeItemPieceProjet; }
+            set
+            {
+                _listeItemPieceProjet = value;
+                OnPropertyChanged("ListeItemPieceProjet");
             }
         }
 
@@ -101,6 +141,7 @@ namespace App_Brycol.VuesModele
             }
             p.Createur = "Utilisateur";
             p.ListePieces = ListePieces;
+            p.ListePlans = ListePlans;
             OutilEF.brycolContexte.Projets.Add(p);
             OutilEF.brycolContexte.SaveChanges();
             ProjetActuel = p;
@@ -113,41 +154,54 @@ namespace App_Brycol.VuesModele
         public void SauvProjet(Object param)
         {
             Projet p = OutilEF.brycolContexte.Projets.Find(ProjetActuel.ID);
-
-            if (Nom == null)
+            bool validation = Plan_VM.validePourEnregistrer;
+            //vérifie si les items sont valide
+            if (validation)
             {
-                var test = OutilEF.brycolContexte.Projets.Max<Projet>(t => t.ID);
-                test += 1;
-                p.Nom = "Projet" + test;
-            }
-
-            if (Nom != p.Nom && EstSauvegarde == true)
-            {
-                MessageBoxResult result = MessageBox.Show("Voulez-vous sauvegarder en tant que nouveau projet?", "Sauvegarder en tant que nouveau projet", MessageBoxButton.YesNo);
-                switch (result)
+                if (Nom == null)
                 {
-                    case MessageBoxResult.Yes:
-                        SauNeoProjet();
-                        break;
-                    case MessageBoxResult.No:
-                        p.Nom = Nom;
-                        OutilEF.brycolContexte.SaveChanges();
-                        break;
+                    var test = OutilEF.brycolContexte.Projets.Max<Projet>(t => t.ID);
+                    test += 1;
+                    p.Nom = "Projet" + test;
                 }
 
+                if (Nom != p.Nom && EstSauvegarde == true)
+                {
+                    MessageBoxResult result = MessageBox.Show("Voulez-vous sauvegarder en tant que nouveau projet?", "Sauvegarder en tant que nouveau projet", MessageBoxButton.YesNo);
+                    switch (result)
+                    {
+                        case MessageBoxResult.Yes:
+                            SauNeoProjet();
+                            break;
+                        case MessageBoxResult.No:
+                            p.Nom = Nom;
+                            OutilEF.brycolContexte.SaveChanges();
+                            break;
+                    }
+
+                }
+                else
+                {
+                    p.Nom = Nom;
+                    OutilEF.brycolContexte.SaveChanges();
+                }
+
+
+
+
+                ProjetActuel = p;
+                EstSauvegarde = true;
             }
             else
             {
-                p.Nom = Nom;
-                OutilEF.brycolContexte.SaveChanges();
+                //Si au moins un item n'est pas valide, on affiche un message d'erreur
+                MessageBoxResult resultat;
+                resultat = System.Windows.MessageBox.Show("Impossible d'enregistrer, vous avez un item invalide dans le plan de travail.", "Sauvegarde impossible", MessageBoxButton.OK, MessageBoxImage.Warning);
+                if (resultat == MessageBoxResult.OK)
+                {
+                    return;
+                }
             }
-
-
-
-
-            ProjetActuel = p;
-            EstSauvegarde = true;
-
             Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
             ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
             gridMW.Children.Clear();
@@ -209,6 +263,9 @@ namespace App_Brycol.VuesModele
             ListePieces = new ObservableCollection<Piece>();
             pro.ListePieces = ListePieces;
 
+            ListePlans = new ObservableCollection<Plan>();
+            pro.ListePlans = ListePlans;
+
             OutilEF.brycolContexte.Projets.Add(pro);
 
             ProjetActuel = pro;
@@ -218,16 +275,17 @@ namespace App_Brycol.VuesModele
 
             foreach (Piece pie in lstPie)
             {
-
                 var PlanReq = from plan in OutilEF.brycolContexte.Plans where plan.Piece.ID == pie.ID select plan;
 
                 pie.Projet = ProjetActuel;
                 OutilEF.brycolContexte.Pieces.Add(pie);
-                ListePieces.Add(pie);
+                pro.ListePieces.Add(pie);
 
                 foreach (Plan plan in PlanReq)
+                {
                     pla = plan;
-
+                    pro.ListePlans.Add(pla);
+                }
 
                 var IteReq = from ite in OutilEF.brycolContexte.lstItems where ite.Plan.ID == pla.ID select ite;
 
@@ -238,6 +296,7 @@ namespace App_Brycol.VuesModele
                 foreach (ItemsPlan itPl in IteReq)
                     lstItPla.Add(itPl);
 
+                
                 foreach (ItemsPlan itPl in lstItPla)
                 {
 
@@ -245,10 +304,40 @@ namespace App_Brycol.VuesModele
                     OutilEF.brycolContexte.lstItems.Add(itPl);
                 }
 
+                lstItPla.Clear();
 
             }
 
             OutilEF.brycolContexte.SaveChanges();
+        }
+
+        private ObservableCollection<ItemPieceProjet> CreatlstIPP()
+        {
+            ObservableCollection<ItemPieceProjet> LstIPP = new ObservableCollection<ItemPieceProjet>();
+            List<Piece> LstPi = new List<Piece>();
+
+
+            var PReq = from p in OutilEF.brycolContexte.Pieces where p.Projet.ID == ProjetActuel.ID select p;
+            foreach (Piece p in PReq)
+                LstPi.Add(p);
+
+            foreach (Piece p in LstPi)
+            {
+                ItemPieceProjet Ipp = new ItemPieceProjet();
+                Ipp.NomPiece = p.Nom;
+
+                var PReq3 = from iP in OutilEF.brycolContexte.lstItems.Include("Item") where iP.Plan.Piece.ID == p.ID select iP;
+                foreach (ItemsPlan itemP in PReq3)
+                {
+                    Ipp.NomItem = itemP.Item.Nom;
+                    Ipp.CoutItem = itemP.Item.Cout;
+                    LstIPP.Add(Ipp);
+                }
+
+            }
+
+            return LstIPP;
+
         }
 
         public static decimal CalSouTo(Piece laPiece)

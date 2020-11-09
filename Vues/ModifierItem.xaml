@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_Brycol.Vues"
         mc:Ignorable="d"
-        Title="ModifierItem" Height="450" Width="800">
+        Closed="Window_Closed"
+        Title="ModifierItem" Height="450" Width="800" Icon="pack://application:,,,/images/favicon.png">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -26,25 +28,20 @@
 
         </Rectangle>
         
-        <Image x:Name="imgItem" Source="/images/Items/item6.png" Grid.Column="0" Grid.Row="1" Margin="32,32,32,32" ></Image>
+        <Image x:Name="imgItem" Grid.Column="0" Grid.Row="1" Margin="32,32,32,32" ></Image>
 
         <Label Grid.Column="1" Grid.Row="1" FontSize="20" Height="40" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Couleur Item " Margin="10,12,114,0"/>
         <ComboBox x:Name="cmbCouleur" Grid.Column="1" Grid.Row="1" Foreground="Black" Height="25" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,60,10,10" SelectionChanged="cmbCouleur_SelectedChange">
             <ComboBoxItem x:Name="Rouge" Content="Rouge" Background="Red"></ComboBoxItem>
-            <ComboBoxItem x:Name="RougeFonce" Content="Rouge Foncé" Background="DarkRed"></ComboBoxItem>
-            <ComboBoxItem x:Name="VertFonce" Content="Vert Foncé" Background="DarkGreen"></ComboBoxItem>
             <ComboBoxItem x:Name="Vert" Content="Vert" Background="Green"></ComboBoxItem>
             <ComboBoxItem x:Name="Bleu" Content="Bleu" Background="Blue"></ComboBoxItem>
-            <ComboBoxItem x:Name="BleuFonce" Content="Bleu Foncé" Foreground="White" Background="Navy"></ComboBoxItem>
             <ComboBoxItem x:Name="Orange" Content="Orange" Background="Orange"></ComboBoxItem>
-            <ComboBoxItem x:Name="OrangeFonce" Content="Orange Foncé" Background="DarkOrange"></ComboBoxItem>
             <ComboBoxItem x:Name="Jaune" Content="Jaune"  Foreground="Black" Background="Yellow"></ComboBoxItem>
-            <ComboBoxItem x:Name="Violet" Content="Violet" Background="Violet"></ComboBoxItem>
             <ComboBoxItem x:Name="Mauve" Content="Mauve" Background="Purple"></ComboBoxItem>
-            <ComboBoxItem x:Name="Brun" Content="Brown" Background="SaddleBrown"></ComboBoxItem>
+            <ComboBoxItem x:Name="Brun" Content="Brun" Background="SaddleBrown"></ComboBoxItem>
         </ComboBox>
 
-        <Button x:Name="btnAppliquer" Grid.Column="1" Grid.Row="1"  Height="25" Width="75" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,10,10,10" Content="Appliquer" Click="btnAppliquer_Click"></Button>
+        <Button x:Name="btnAppliquer" Command="{ Binding cmdAjouterItemModifie }" Grid.Column="1" Grid.Row="1"  Height="25" Width="75" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,10,10,10" Content="Appliquer" Click="btnAppliquer_Click"></Button>
         <Button x:Name="btnAnnuler" Grid.Column="1" Grid.Row="1"  Height="25" Width="75" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,10,105,10" Content="Annuler" Click="btnAnnuler_Click"></Button>
         
         

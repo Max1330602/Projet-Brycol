@@ -4,36 +4,59 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_Brycol.Vues"
+        WindowStartupLocation ="CenterScreen"
+        ResizeMode="NoResize"
         mc:Ignorable="d"
-        Title="Informations d'une pièce" Height="500" Width="600">
+        Title="Informations d'une pièce" Height="300" Width="420" Icon="pack://application:,,,/images/favicon.png" >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"></RowDefinition>
-            <RowDefinition Height="300"></RowDefinition>
-            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width=".2*"/>
+        </Grid.ColumnDefinitions>
 
-        <Image Source="/images/logo.png"></Image>
-        <TextBlock Text="Options de dimensions" HorizontalAlignment="Left" Grid.Row="1" Margin="75,0,0,0"></TextBlock>
-        <Rectangle Stroke="Black" Margin="75,20,75,20" Grid.Row="1"></Rectangle>
+        <Image Source="/images/logo.png" Grid.Column="1"/>
 
-        <TextBlock Text="Nom" Grid.Row="1" Height="25" Width="125" Margin="0,0,300,150"></TextBlock>
-        <TextBox Text="{ Binding Nom }" Grid.Row="1" Height="25" Width="125" Margin="0,0,50,150"></TextBox>
+        <StackPanel Grid.RowSpan="2" Margin="20,20,0,0">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Nom" Grid.Row="1" Height="25" Width="125"/>
+                <TextBox Text="{ Binding Nom }" Height="25" Width="125"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Type de pièce" Height="25" Width="125" />
+                <ComboBox SelectedItem="{ Binding TypePiece}" ItemsSource="{Binding TypesDePiece}" Height="25" Width="125"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Unité de mesure" Height="25" Width="125" />
+                <RadioButton x:Name="metre" Height="25" Width="100" GroupName="unite" IsChecked="True" Checked="metre_Checked" Content="Métrique"/>
+                <RadioButton x:Name="pied" Height="25" Width="100" GroupName="unite" Checked="pied_Checked" Content="Impérial"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Longueur" Height="25" Width="125"/>
+                <TextBox Name="txtLongueur" Text="{Binding Longueur}" TextChanged="txtLongueur_TextChanged" Height="25" Width="125"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Largeur" Grid.Row="1" Height="25" Width="125"/>
+                <TextBox Name="txtLargeur" Text="{Binding Largeur}" TextChanged="txtLargeur_TextChanged" Height="25" Width="125"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Superficie" Height="25" Width="125"/>
+                <TextBlock Name="txtSuperf" Text="0" Height="25" Width="125" TextAlignment="Right"/>
+                <TextBlock Name="txtUniMesu" Text="m" Height="25" Margin="5,0,0,0" TextAlignment="Right"/>
+            </StackPanel>
 
-        <TextBlock Text="Type de pièce" Grid.Row="1" Height="25" Width="125" Margin="0,0,300,75"></TextBlock>
-        <ComboBox SelectedItem="{ Binding TypePiece}" ItemsSource="{Binding TypesDePiece}" Grid.Row="1" Height="25" Width="125" Margin="0,0,50,75">
-        </ComboBox>
-        <TextBlock Text="Unité de mesure" Grid.Row="1" Height="25" Width="125" Margin="0,0,300,-25"></TextBlock>
-        <RadioButton x:Name="metre" Height="25" Width="100" GroupName="unite" Grid.Row="1" IsChecked="True" Margin="0,0,80,-25" Checked="metre_Checked" Content="Métrique"></RadioButton>
-        <RadioButton x:Name="pied" Height="25" Width="100" GroupName="unite" Grid.Row="1" Margin="0,0,-100,-25" Checked="pied_Checked" Content="Impérial"></RadioButton>
-        
-        <TextBlock Text="Longueur" Grid.Row="1" Height="25" Width="125" Margin="0,0,300,-100"></TextBlock>
-        <TextBox Name="txtLongueur" Text="{Binding Longueur}" TextChanged="txtLongueur_TextChanged" Grid.Row="1" Margin="0,0,50,-100" Height="25" Width="125"></TextBox>
-        
-        <TextBlock Text="Largeur" Grid.Row="1" Height="25" Width="125" Margin="0,0,300,-175"></TextBlock>
-        <TextBox Name="txtLargeur" Text="{Binding Largeur}" TextChanged="txtLargeur_TextChanged" Grid.Row="1" Margin="0,0,50,-175" Height="25" Width="125"></TextBox>
+        </StackPanel>
 
-        <Button Name="btnContinuer" Click="btnContinuer_Click" Command="{Binding cmdPiece}" Grid.Row="2" Width="100" Height="25" Content="Continuer" HorizontalAlignment="Right" Margin="0,0,10,10"></Button>
-        <Button Name="btnAnnuler" Click="btnAnnuler_Click" Grid.Row="2" Width="100" Height="25" Content="Annuler" HorizontalAlignment="Right" Margin="0,0,125,10"></Button>
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="btnContinuer" Click="btnContinuer_Click" Command="{Binding cmdPiece}" Grid.Row="2" Width="100" Height="25" Content="Continuer" HorizontalAlignment="Right" Margin="0,0,10,10"/>
+                <Button Name="btnAnnuler" Click="btnAnnuler_Click" Grid.Row="2" Width="100" Height="25" Content="Annuler" HorizontalAlignment="Right" Margin="0,0,20,10"/>
+            </StackPanel>
+        </StackPanel>
+
     </Grid>
 </Window>

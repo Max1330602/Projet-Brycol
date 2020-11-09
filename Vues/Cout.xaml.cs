@@ -22,11 +22,12 @@ namespace App_Brycol.Vues
     {
         private UCCoutPiece uCCoutPiece { get; set; }
         private UCCoutProjet uCCoutProjet { get; set; }
+        private UCCoutDetailProjet uCCoutDetailProjet { get; set; }
 
         public Cout(string UCEcran )
         {
             InitializeComponent();
-
+            DataContext = new Piece_VM("");
             switch (UCEcran)
             {
                 case "Piece":
@@ -34,14 +35,15 @@ namespace App_Brycol.Vues
                     Grid.SetRow(uCCoutPiece, 1);
 
                     grdCoutParent.Children.Add(uCCoutPiece);
-                    btnVoirCoutProjet.IsEnabled = true;
+                    btnVoirCoutProjet.Visibility= Visibility.Visible;
                     break;
                 case "Projet":
                     uCCoutProjet = new UCCoutProjet();
                     Grid.SetRow(uCCoutProjet, 1);
 
                     grdCoutParent.Children.Add(uCCoutProjet);
-                    btnVoirCoutPiece.IsEnabled = true;
+                    btnVoirCoutDetailProjet.Visibility = Visibility.Visible;
+                    btnVoirCoutPiece.Visibility = Visibility.Visible;
                     break;
 
             }
@@ -56,25 +58,45 @@ namespace App_Brycol.Vues
         private void btnVoirCoutProjet_Click(object sender, RoutedEventArgs e)
         {
             grdCoutParent.Children.Remove(uCCoutPiece);
+            grdCoutParent.Children.Remove(uCCoutDetailProjet);
 
             uCCoutProjet = new UCCoutProjet();
             Grid.SetRow(uCCoutProjet, 1);
 
             grdCoutParent.Children.Add(uCCoutProjet);
-            btnVoirCoutProjet.IsEnabled = false;
-            btnVoirCoutPiece.IsEnabled = true;
+            btnVoirCoutProjet.Visibility = Visibility.Collapsed;
+            btnVoirCoutDetailProjet.Visibility = Visibility.Visible;
+            btnVoirCoutPiece.Visibility = Visibility.Visible;
+
         }
 
         private void btnVoirCoutPiece_Click(object sender, RoutedEventArgs e)
         {
             grdCoutParent.Children.Remove(uCCoutProjet);
+            grdCoutParent.Children.Remove(uCCoutDetailProjet);
 
             uCCoutPiece = new UCCoutPiece();
             Grid.SetRow(uCCoutPiece, 1);
 
             grdCoutParent.Children.Add(uCCoutPiece);
-            btnVoirCoutProjet.IsEnabled = true;
-            btnVoirCoutPiece.IsEnabled = false;
+            btnVoirCoutPiece.Visibility = Visibility.Collapsed;
+            btnVoirCoutDetailProjet.Visibility = Visibility.Collapsed;
+            btnVoirCoutProjet.Visibility = Visibility.Visible;
+
+        }
+
+        private void btnVoirCoutDetailProjet_Click(object sender, RoutedEventArgs e)
+        {
+            grdCoutParent.Children.Remove(uCCoutProjet);
+
+            uCCoutDetailProjet = new UCCoutDetailProjet();
+            Grid.SetRow(uCCoutDetailProjet, 1);
+
+            grdCoutParent.Children.Add(uCCoutDetailProjet);
+            btnVoirCoutPiece.Visibility = Visibility.Collapsed;
+            btnVoirCoutDetailProjet.Visibility = Visibility.Collapsed;
+            btnVoirCoutProjet.Visibility = Visibility.Visible;
+
         }
     }
 }

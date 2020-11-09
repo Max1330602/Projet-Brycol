@@ -21,7 +21,8 @@ namespace App_Brycol.VuesModele
         public const float pixelToM = (float)3779.5275590551 / echelle;
         public const double pixelToCm = (float)37.7952755906 / echelle;
         public const int echelle = 50;
-
+        public static bool validePourEnregistrer = true;
+        public static string uniteDeMesure = "";
 
         public Plan_VM()
         {
@@ -43,6 +44,8 @@ namespace App_Brycol.VuesModele
             UniteMesure = InfoPiece.uniteMesure;
             
         }
+   
+
         private string _uniteMesure;
         public string UniteMesure
         {
@@ -51,6 +54,18 @@ namespace App_Brycol.VuesModele
             {
                 _uniteMesure = value;
                 OnPropertyChanged("UniteMesure");
+            }
+
+        }
+
+        private bool _validePourEnregistrer;
+        public bool ValidePourEnregistrer
+        {
+            get { return _validePourEnregistrer; }
+            set
+            {
+                _validePourEnregistrer = value;
+                OnPropertyChanged("ValidePourEnregistrer");
             }
 
         }
@@ -108,6 +123,7 @@ namespace App_Brycol.VuesModele
         {
             PlanActuel = new Plan();
             PlanActuel.Piece = Piece_VM.pieceActuel;
+            Projet_VM.ProjetActuel.ListePlans.Add(PlanActuel);
             OutilEF.brycolContexte.Plans.Add(PlanActuel);
             OutilEF.brycolContexte.SaveChanges();
         }
@@ -119,6 +135,26 @@ namespace App_Brycol.VuesModele
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(nomPropriete));
             }
+        }
+
+        public static void supprimerPlan()
+        {
+            List<ItemsPlan> lstItPla = new List<ItemsPlan>();
+
+            var IteReq = from ite in OutilEF.brycolContexte.lstItems where ite.Plan.ID == PlanActuel.ID select ite;
+
+            foreach (ItemsPlan itPl in IteReq)
+                lstItPla.Add(itPl);
+
+            foreach (ItemsPlan itPl in lstItPla)
+                OutilEF.brycolContexte.lstItems.Remove(itPl);
+
+            Plan p = OutilEF.brycolContexte.Plans.Find(PlanActuel.ID);
+
+            OutilEF.brycolContexte.Plans.Remove(PlanActuel);
+            OutilEF.brycolContexte.SaveChanges();
+
+            Projet_VM.ProjetActuel.ListePlans.Remove(PlanActuel);
         }
 
     }

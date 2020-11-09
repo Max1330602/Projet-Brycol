@@ -5,10 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:App_Brycol.Vues"
              
-             mc:Ignorable="d" Height="auto" Width="auto">
+             mc:Ignorable="d" Height="auto" Width="auto"
+             d:DesignHeight="657" d:DesignWidth="952">
     <Grid x:Name="grdPlanTravail">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -18,32 +19,30 @@
 
         <Border Grid.Row="0" Grid.ColumnSpan="3" Background="LightGray"></Border>
 
-        <Label Name="lblProjet" Grid.ColumnSpan="2" Grid.Row="0" FontSize="20" Height="40" Width="500" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Nom du Projet"/>
-        <Button Grid.Column="0" Grid.Row="0" Name="btnAide" Click="btnAide_Click" Width="50" Height="25" Content="Aide" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10,35,10,10"></Button>
-        <Button Grid.Column="0" Grid.Row="0" Name="btn2D" Click="btn2D_Click" Width="50" Height="25" Content="2D" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,35,10,10"></Button>
-        <Button Grid.Column="0" Grid.Row="0" Name="btn3D" Click="btn3D_Click" Width="50" Height="25" Content="3D" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,35,10,10"></Button>
-        <Button Grid.Column="1" Grid.Row="0" Name="btnThemeSombre" Click="btnThemeSombre_Click" Width="35" Height="35" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,10,10">
+        <Label Name="lblProjet" Grid.ColumnSpan="2" Grid.Row="0" FontSize="20" Height="40" Width="500" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Nom du Projet + Nom Pièce Active"/>
+        
+        
+
+
+        <Image Grid.Row="1" Grid.Column="0" Source="/images/logo.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="25,0,0,71"></Image>
+
+        <Button Grid.Column="0" Grid.Row="1" Name="btnAide" Click="btnAide_Click" Width="100" Height="25" Content="Aide" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,25,0,0"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Name="btn3D" Click="btn3D_Click" Width="100" Height="25" Content="3D" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,65,0,0"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Name="btn2D" Click="btn2D_Click" Width="100" Height="25" Content="2D" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,105,0,0"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Name="btnCatalogue" Click="btnCatalogue_Click"  Width="100" Height="25" Content="Catalogue" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,145,0,0"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Name="btnModifierItem" Click="btnModifierItem_Click"  Width="100" Height="25" Content="Modifier Item" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,185,0,0" IsEnabled="true"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Name="btnModifierPiece" Click="btnModifierPiece_Click"  Width="100" Height="25" Content="Modifier Pièce" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,225,0,0"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Name="btnProjet" Click="btnProjet_Click"  Width="100" Height="25" Content="Projet" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,265,0,0"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Name="btnCoutPiece" Click="btnCoutPiece_Click"  Width="100" Height="25" Content="Coût de la Pièce" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,305,0,0"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Name="btnEnregistrer" Click="btnEnregistrer_Click" Width="100" Height="25" Content="Enregistrer" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,345,0,0"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Name="btnSupprimer" Command="{ Binding cmdSuppProjet }" Click="btnSupprimer_Click" Width="100" Height="25" Content="Supprimer Projet" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,385,0,0"></Button>
+        <Button Grid.Column="0" Grid.Row="1" Name="btnThemeSombre" Click="btnThemeSombre_Click" Width="35" Height="35" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,425,0,0">
             <Image Source="/images/soleil.png" />
         </Button>
         
-        <Label Name="lblPiece" Grid.Row="0" Grid.Column="1" FontSize="20" Height="40" Width="500" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Nom de la pièce"/>
 
 
-        <Image Grid.Row="0" Grid.Column="1" Source="/images/logo.png" HorizontalAlignment="Right"></Image>
-
-        <Button Grid.Column="0" Grid.Row="1" Name="btnCatalogue" Click="btnCatalogue_Click"  Width="100" Height="25" Content="Catalogue" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,25,0,0"></Button>
-
-        <Button Grid.Column="0" Grid.Row="1" Name="btnModifierItem" Click="btnModifierItem_Click"  Width="100" Height="25" Content="Modifier Item" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,65,0,0" IsEnabled="true"></Button>
-        <Button Grid.Column="0" Grid.Row="1" Name="btnSupprimerItem" Click="btnSupprimerItem_Click"  Width="100" Height="25" Content="Supprimer Item" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,105,0,0" IsEnabled="False" x:FieldModifier="public"></Button>
-
-        <Button Grid.Column="0" Grid.Row="1" Name="btnModifierPiece" Click="btnModifierPiece_Click"  Width="100" Height="25" Content="Modifier Pièce" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,145,0,0"></Button>
-        <Button Grid.Column="0" Grid.Row="1" Name="btnProjet" Click="btnProjet_Click"  Width="100" Height="25" Content="Changer Pièce" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,185,0,0"></Button>
-        <Button Grid.Column="0" Grid.Row="1" Name="btnCoutPiece" Click="btnCoutPiece_Click"  Width="100" Height="25" Content="Coût de la Pièce" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,225,0,0"></Button>
-        <Button Grid.Column="0" Grid.Row="1" Name="btnEnregistrer" Click="btnEnregistrer_Click" Width="100" Height="25" Content="Enregistrer" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="25,265,0,0"></Button>
-        <Button Name="btntest" Click="test" Margin="40,384,50,106" Grid.Row="1"></Button>
-
-
-        <Rectangle Grid.Column="1" Grid.Row="1" Stroke="Black" StrokeThickness="4" Margin="8,21,6,67">
+        <Rectangle x:Name="rectangle" Grid.Column="1" Grid.Row="1" Stroke="Black" StrokeThickness="4" Margin="8,21,6,67">
         </Rectangle>
 
 
@@ -51,8 +50,7 @@
 
 
         <!-- Plan 2D de la pièce-->
-
-        <local:Piece2D Grid.Column="1" Grid.Row="1" Margin="12,25,10,71" Loaded="Piece2D_Loaded" ClipToBounds="true"></local:Piece2D>
+        <local:Piece2D x:Name="plan2D" Grid.Column="1" Grid.Row="1" Margin="12,25,10,71" ClipToBounds="true"></local:Piece2D>
    
 
     </Grid>
