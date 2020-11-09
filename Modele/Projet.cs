@@ -13,7 +13,7 @@ namespace App_Brycol.Modele
     {
         public int ID { get; set; }
         public string Nom { get; set; }
-        public string Createur { get; set; }
+        public Utilisateur Utilisateur { get; set; }
         [NotMapped]
         public ObservableCollection<Piece> ListePieces { get; set; }
         [NotMapped]

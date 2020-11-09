@@ -132,6 +132,7 @@
     <Compile Include="Modele\Plan.cs" />
     <Compile Include="Modele\Projet.cs" />
     <Compile Include="Modele\TypePiece.cs" />
+    <Compile Include="Modele\Utilisateur.cs" />
     <Compile Include="Outils\BrycolContexte.cs" />
     <Compile Include="Outils\Commande.cs" />
     <Compile Include="Outils\OutilEF.cs" />
@@ -166,6 +167,9 @@
     </Compile>
     <Compile Include="Vues\GererProjet.xaml.cs">
       <DependentUpon>GererProjet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\UCCMenuPrincipal.xaml.cs">
+      <DependentUpon>UCCMenuPrincipal.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vues\UCCoutDetailProjet.xaml.cs">
       <DependentUpon>UCCoutDetailProjet.xaml</DependentUpon>
@@ -227,6 +231,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vues\GererProjet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\UCCMenuPrincipal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
