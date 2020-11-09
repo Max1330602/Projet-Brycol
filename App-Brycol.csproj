@@ -507,8 +507,6 @@
   <ItemGroup>
     <Resource Include="images\ItemsModifies\Item15\bleu.png" />
     <Resource Include="images\ItemsModifies\Item15\brun.png" />
-    <Resource Include="images\ItemsModifies\Item15\jaune.jpeg" />
-    <Resource Include="images\ItemsModifies\Item15\mauve.jpeg" />
     <Resource Include="images\ItemsModifies\Item15\orange.png" />
     <Resource Include="images\ItemsModifies\Item15\rouge.png" />
     <Resource Include="images\ItemsModifies\Item15\vert.png" />
@@ -584,6 +582,10 @@
     <Resource Include="images\ItemsModifies\Item23\orange.png" />
     <Resource Include="images\ItemsModifies\Item23\rouge.png" />
     <Resource Include="images\ItemsModifies\Item23\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item15\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item15\mauve.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
