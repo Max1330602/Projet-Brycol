@@ -33,7 +33,7 @@ namespace App_Brycol.Vues
             this.MinWidth = 800;
 
             DataContext = new Projet_VM();
-            lblProjet.Content = "Projet : " + Projet_VM.ProjetActuel.Nom;
+            txtProjet.Text = Projet_VM.ProjetActuel.Nom;
 
             lstBoutons.Add(btnPiece1);
             lstBoutons.Add(btnPiece2);
@@ -276,6 +276,14 @@ namespace App_Brycol.Vues
             }
         }
 
+        private void txtProjet_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Projet p = OutilEF.brycolContexte.Projets.Find(Projet_VM.ProjetActuel.ID);
+            Projet_VM.ProjetActuel.Nom = txtProjet.Text;
+            p.Nom = Projet_VM.ProjetActuel.Nom;
+            OutilEF.brycolContexte.SaveChanges();
+        }
+
         private void btnPiece1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Piece_VM.pieceActuel = Projet_VM.ProjetActuel.ListePieces[0];
@@ -341,6 +349,5 @@ namespace App_Brycol.Vues
             gridMW.Children.Add(cpMW);
             cpMW.Content = new PlanDeTravail();
         }
-
     }
 }

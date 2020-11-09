@@ -260,8 +260,9 @@ namespace App_Brycol.VuesModele
             if (i.Item != null)
             {
                 ListeItems.Add(i.Item);
+                i.Plan = Plan_VM.PlanActuel;
                 ItemsPlanActuel.Add(i);
-                OutilEF.brycolContexte.lstItems.Add(i);
+                OutilEF.brycolContexte.lstItems.Add(i);            
                 OutilEF.brycolContexte.SaveChanges();
             }
         }

@@ -356,26 +356,25 @@ namespace App_Brycol.Vues
                         bitmap.EndInit();
                     }
 
-                    foreach (ItemsPlan ipm in Item_VM.ItemsPlanModifie)
-                    {
                         bitmap = new BitmapImage();
                         bitmap.BeginInit();
                         bitmap.CacheOption = BitmapCacheOption.OnLoad;
                         bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                         bitmap.UriSource = new Uri("pack://application:,,,/images/ItemsModifies/Item" + ip.Item.ID + "/" + ip.Couleur + ".png");
 
-                        try
-                        {
-                            bitmap.EndInit();
-                        }
-                        catch (Exception e)
-                        {
-                            bitmap = new BitmapImage();
-                            bitmap.BeginInit();
-                            bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png");
-                            bitmap.EndInit();
-                        }
+                    try
+                    {
+                        bitmap.EndInit();
                     }
+                    catch (Exception e)
+                    {
+                        bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png");
+                        bitmap.EndInit();
+                    }
+                    
+                    
                     var image = new Image { Source = bitmap };
                     Canvas.SetLeft(image, ip.emplacementGauche);
                     Canvas.SetTop(image, ip.emplacementHaut);

@@ -190,6 +190,8 @@ namespace App_Brycol.VuesModele
             Plan_VM pVM = new Plan_VM();
             pVM.InitPlan();
 
+            
+            Application.Current.MainWindow.WindowState = WindowState.Maximized;          
             Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
             ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
             gridMW.Children.Clear();

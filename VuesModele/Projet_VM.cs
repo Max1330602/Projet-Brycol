@@ -25,12 +25,14 @@ namespace App_Brycol.VuesModele
         public ICommand cmdCreerProjet { get; set; }
         public ICommand cmdSauvProjet { get; set; }
         public ICommand cmdSuppProjet { get; set; }
+        public ICommand cmdChargerProjet { get; set; }
 
         public Projet_VM()
         {
             cmdCreerProjet = new Commande(CreerProjet);
             cmdSauvProjet = new Commande(SauvProjet);
             cmdSuppProjet = new Commande(SuppProjet);
+            cmdChargerProjet = new Commande(Charger);
 
             ListePieces = new ObservableCollection<Piece>();
             ListePlans = new ObservableCollection<Plan>();
@@ -125,7 +127,59 @@ namespace App_Brycol.VuesModele
             }
         }
 
+        private string _projetSelectionne;
+        public string ProjetSelectionne
+        {
+            get { return _projetSelectionne; }
+            set 
+            {
+                _projetSelectionne = value;
+                OnPropertyChanged("ProjetSelectionne");
+            }
+        }
         #endregion
+
+        public void Charger(Object param)
+        {
+            Projet proj = new Projet();
+            var pReq = from p in OutilEF.brycolContexte.Projets where p.Nom == ProjetSelectionne select p;
+            foreach (Projet pro in pReq)
+                proj = pro;
+            ProjetActuel = proj;
+            ProjetActuel.ListePieces = new ObservableCollection<Piece>();
+            ProjetActuel.ListePlans = new ObservableCollection<Plan>();
+            var pieceReq = from piece in OutilEF.brycolContexte.Pieces where piece.Projet.ID == ProjetActuel.ID select piece;
+            foreach (Piece pie in pieceReq)
+            {
+                ProjetActuel.ListePieces.Add(pie);
+            }
+            foreach (Piece pie in ProjetActuel.ListePieces)
+            {
+                var planReq = (from plan in OutilEF.brycolContexte.Plans where plan.Piece.ID == pie.ID select plan).ToList<Plan>();
+                foreach (Plan pl in planReq)
+                {
+                    ProjetActuel.ListePlans.Add(pl);
+                }
+            }
+            Piece_VM.pieceActuel = ProjetActuel.ListePieces.First<Piece>();
+            Plan_VM.PlanActuel = ProjetActuel.ListePlans.First<Plan>();
+            int idPlan = ProjetActuel.ListePlans.First<Plan>().ID;
+            var itemReq = from item in OutilEF.brycolContexte.lstItems.Include("Item") where item.Plan.ID == idPlan select item;
+            Item_VM.ItemsPlanActuel = new ObservableCollection<ItemsPlan>();
+            foreach (ItemsPlan i in itemReq)
+            {
+                if(i.Item != null)
+                    Item_VM.ItemsPlanActuel.Add(i);
+            }
+
+            Application.Current.MainWindow.WindowState = WindowState.Maximized;
+            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
+            Application.Current.Windows[1].Close();
+            gridMW.Children.Clear();
+            gridMW.Children.Add(cpMW);
+            cpMW.Content = new PlanDeTravail();
+        }
 
         public void CreerProjet(Object param)
         {
@@ -203,6 +257,7 @@ namespace App_Brycol.VuesModele
                     return;
                 }
             }
+
             Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
             ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
             gridMW.Children.Clear();
@@ -248,6 +303,13 @@ namespace App_Brycol.VuesModele
             OutilEF.brycolContexte.Projets.Remove(pro);
             OutilEF.brycolContexte.SaveChanges();
         }
+
+
+        private void getProjet()
+        {
+                      
+        }
+
 
         private void SauNeoProjet()
         {
@@ -316,7 +378,7 @@ namespace App_Brycol.VuesModele
         {
             ObservableCollection<ItemPieceProjet> LstIPP = new ObservableCollection<ItemPieceProjet>();
             List<Piece> LstPi = new List<Piece>();
-
+            //Item_VM.ItemsPlanActuel = new ObservableCollection<ItemsPlan>();
 
             var PReq = from p in OutilEF.brycolContexte.Pieces where p.Projet.ID == ProjetActuel.ID select p;
             foreach (Piece p in PReq)

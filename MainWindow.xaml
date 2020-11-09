@@ -5,20 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_Brycol"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Closing="OnClosing"
-        Title="Brycol" Height="600" Width="800" Icon="images/favicon.png">
+        Title="Brycol" Height="400" Width="300" Icon="images/favicon.png">
     <Grid Name="gridMainWindow">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"></RowDefinition>
-            <RowDefinition Height="375"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="300"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <Border Grid.Row="0" Background="LightGray" Grid.ColumnSpan="2"></Border>
         <Image Grid.Row="0" Source="images/logo.png"></Image>
-        <Rectangle Stroke="Black" Grid.Row="1" Margin="75,65,75,90"></Rectangle>
-        <Button Background="Transparent" FontFamily="Constantia Bold"  FontSize="15" Name="btnCreerProjet" Command="{ Binding cmdCreerProjet }" Grid.Row="1" Content="Créer un projet" Height="50" Width="150" VerticalAlignment="Top" Margin="260,100,270,0"></Button>
-        <Button Background="Transparent" FontFamily="Constantia Bold"  FontSize="15" Name="btnTeleverserProjet" Click="btnTeleverserProjet_Click" Grid.Row="1" Content="Téléverser un projet" Height="50" Width="150" VerticalAlignment="Bottom" Margin="220,0,230,150"></Button>
+        <Rectangle Stroke="Black" Grid.Row="1" Margin="50,65,50,90"></Rectangle>
+        <Button Background="Transparent" FontFamily="Constantia Bold"  FontSize="15" Name="btnCreerProjet" Command="{ Binding cmdCreerProjet }" Grid.Row="1" Content="Créer un projet" Height="50" Width="150" VerticalAlignment="Top" Margin="0,75,0,0" BorderBrush="Transparent"></Button>
+        <Button Background="Transparent" FontFamily="Constantia Bold"  FontSize="15" Name="btnTeleverserProjet" Click="btnTeleverserProjet_Click" Grid.Row="1" Content="Téléverser un projet" Height="50" Width="150" VerticalAlignment="Bottom" Margin="0,0,0,100" BorderBrush="Transparent"></Button>
         <ContentPresenter Name="presenteurContenu" Grid.RowSpan="3"></ContentPresenter>
     </Grid>
 </Window>

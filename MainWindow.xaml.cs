@@ -29,8 +29,6 @@ namespace App_Brycol
        public MainWindow()
         {
             InitializeComponent();
-            this.MinWidth = 1000;
-            this.MinHeight = 720;
             OutilEF outilEF = new OutilEF();
             DataContext = new Projet_VM();
 
@@ -38,7 +36,8 @@ namespace App_Brycol
 
         private void btnTeleverserProjet_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Option de téléversement à venir!");
+            ChargerProjet popUp = new ChargerProjet();
+            popUp.ShowDialog();           
         }
 
         private void OnClosing(object sender, CancelEventArgs cancelEventArgs)
