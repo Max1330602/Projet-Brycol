@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_Brycol"
         mc:Ignorable="d"
+        WindowStartupLocation ="CenterScreen"
         ResizeMode="NoResize"
         Closing="OnClosing"
         Title="Brycol" Height="400" Width="300" Icon="images/favicon.png">
