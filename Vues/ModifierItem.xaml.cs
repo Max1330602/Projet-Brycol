@@ -92,7 +92,8 @@ namespace App_Brycol.Vues
             //Piece2D.draggedImage = null;
         }
 
-        private void cmbCouleur_SelectedChange(object sender, MouseButtonEventArgs e)
+
+        private void ClrPcker_Background_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<System.Windows.Media.Color?> e)
         {
 
         }
