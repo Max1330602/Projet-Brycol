@@ -115,6 +115,21 @@
     <Reference Include="Wpf.ZoomAndPan, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Wpf.ZoomAndPan.1.0.2\lib\net452\Wpf.ZoomAndPan.dll</HintPath>
     </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Zstandard.Net, Version=1.1.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>packages\MySql.Data.8.0.21\lib\net452\Zstandard.Net.dll</HintPath>
     </Reference>
@@ -132,6 +147,7 @@
     <Compile Include="Modele\Plan.cs" />
     <Compile Include="Modele\Projet.cs" />
     <Compile Include="Modele\TypePiece.cs" />
+    <Compile Include="Modele\TypePlancher.cs" />
     <Compile Include="Modele\Utilisateur.cs" />
     <Compile Include="Outils\BrycolContexte.cs" />
     <Compile Include="Outils\Commande.cs" />
@@ -377,9 +393,6 @@
     <Resource Include="images\Items\plancher.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\Items\plancheWood.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\Items\Top\item17.png" />
   </ItemGroup>
   <ItemGroup>
@@ -594,6 +607,15 @@
   <ItemGroup>
     <Resource Include="images\ItemsModifies\Item15\jaune.png" />
     <Resource Include="images\ItemsModifies\Item15\mauve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\plancheBois.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\plancheTuile.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\plancheCiment.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

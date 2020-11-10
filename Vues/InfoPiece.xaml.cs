@@ -37,23 +37,19 @@ namespace App_Brycol.Vues
 
         private void btnContinuer_Click(object sender, RoutedEventArgs e)
         {
+            if ((bool)pied.IsChecked && (Int32.Parse(txtLongueur.Text) > 100 || Int32.Parse(txtLongueur.Text) < 3))
+            {
+                MessageBox.Show("Les dimensions ne sont pas valides. (Maximum 100 pieds et minimum de 3 pieds)");
+                return;
+            }
+            else if ((bool)metre.IsChecked && (Int32.Parse(txtLongueur.Text) > 30 || Int32.Parse(txtLongueur.Text) < 1))
+            {
+                MessageBox.Show("Les dimensions ne sont pas valides. (Maximum de 30 mètres et minimum de 3 mètres)");
+                return;
+            }
+                   
             this.Close();
-        }
-
-        private void txtLargeur_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            txtLargeur.Text = Regex.Replace(txtLargeur.Text, "[^0-9]+", "");
-
-            if (txtLongueur.Text != "" && txtLargeur.Text != "")
-                txtSuperf.Text = (Convert.ToDouble(txtLargeur.Text) * Convert.ToDouble(txtLongueur.Text)).ToString();
-        }
-
-        private void txtLongueur_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            txtLongueur.Text = Regex.Replace(txtLongueur.Text, "[^0-9]+", "");
-
-            if (txtLongueur.Text != "" && txtLargeur.Text != "")
-                txtSuperf.Text = (Convert.ToDouble(txtLargeur.Text.ToString()) * Convert.ToDouble(txtLongueur.Text.ToString())).ToString();
+            btnContinuer.SetBinding(Button.CommandProperty, new Binding("cmdPiece"));
         }
 
         private void btnAnnuler_Click(object sender, RoutedEventArgs e)
@@ -79,6 +75,19 @@ namespace App_Brycol.Vues
 
             if (txtUniMesu != null)
                 txtUniMesu.Text = "p";
+        }
+
+        private void txtLongueur_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (txtLongueur.Text != "" && txtLargeur.Text != "")
+                txtSuperf.Text = (Convert.ToDouble(txtLargeur.Text) * Convert.ToDouble(txtLongueur.Text)).ToString();
+
+        }
+
+        private void txtLargeur_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (txtLongueur.Text != "" && txtLargeur.Text != "")
+                txtSuperf.Text = (Convert.ToDouble(txtLargeur.Text) * Convert.ToDouble(txtLongueur.Text)).ToString();
         }
     }
 }

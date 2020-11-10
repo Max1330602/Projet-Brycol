@@ -36,10 +36,16 @@ namespace App_Brycol.VuesModele
             cmdPiece = new Commande(CmdPiece);
             TypesDePiece = new ObservableCollection<string>();
             var treq = from t in OutilEF.brycolContexte.TypePiece select t;
-
             foreach (TypePiece t in treq)
             {
                 TypesDePiece.Add(t.Nom);
+            }
+
+            TypesDePlancher = new ObservableCollection<string>();
+            var tPlancherReq = from t in OutilEF.brycolContexte.TypePlancher select t;
+            foreach (TypePlancher t in tPlancherReq)
+            {
+                TypesDePlancher.Add(t.Nom);
             }
 
             ParamOption = paramOpt;
@@ -50,6 +56,7 @@ namespace App_Brycol.VuesModele
                 Longueur = pieceActuel.Longueur;
                 Largeur = pieceActuel.Largeur;
                 TypePiece = pieceActuel.TypePiece.Nom;
+                TypePlancher = pieceActuel.TypePlancher.Nom;
             }
 
             ListeItems = new ObservableCollection<Item>();
@@ -128,6 +135,17 @@ namespace App_Brycol.VuesModele
             }
         }
 
+        private ObservableCollection<string> _typesDePlancher;
+        public ObservableCollection<string> TypesDePlancher
+        {
+            get { return _typesDePlancher; }
+            set
+            {
+                _typesDePlancher = value;
+                OnPropertyChanged("TypesDePlancher");
+            }
+        }
+
         private string _typePiece;
         public string TypePiece
         {
@@ -136,6 +154,17 @@ namespace App_Brycol.VuesModele
             {
                 _typePiece = value;
                 OnPropertyChanged("TypePiece");
+            }
+        }
+
+        private string _typePlancher;
+        public string TypePlancher
+        {
+            get { return _typePlancher; }
+            set
+            {
+                _typePlancher = value;
+                OnPropertyChanged("TypePlancher");
             }
         }
 
@@ -176,6 +205,14 @@ namespace App_Brycol.VuesModele
             else
                 p.TypePiece = treq.First();
 
+            var tPlancherReq = from t in OutilEF.brycolContexte.TypePlancher where t.Nom == TypePlancher select t;
+
+            if (tPlancherReq.Count() == 0)
+                p.TypePlancher = OutilEF.brycolContexte.TypePlancher.Find(4);
+            else
+                p.TypePlancher = tPlancherReq.First();
+
+
             if (Nom == null)
             {
                 var test = OutilEF.brycolContexte.Pieces.Max<Piece>(t => t.ID);
@@ -213,6 +250,14 @@ namespace App_Brycol.VuesModele
                 p.TypePiece = OutilEF.brycolContexte.TypePiece.Find(6);
             else
                 p.TypePiece = treq.First();
+
+            var tPlancherReq = from t in OutilEF.brycolContexte.TypePlancher where t.Nom == TypePlancher select t;
+
+            if (tPlancherReq.Count() == 0)
+                p.TypePlancher = OutilEF.brycolContexte.TypePlancher.Find(4);
+            else
+                p.TypePlancher = tPlancherReq.First();
+
 
             if (Nom == null)
             {
