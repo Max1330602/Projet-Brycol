@@ -618,7 +618,7 @@
     <Resource Include="images\Items\plancheCiment.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\Items\plancherAucun.jpg" />
+    <Resource Include="images\Items\plancheAucun.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
