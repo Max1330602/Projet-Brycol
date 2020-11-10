@@ -30,7 +30,7 @@ namespace App_Brycol
             InitializeComponent();
             OutilEF outilEF = new OutilEF();
             DataContext = new Utilisateur_VM();
-
+            //DataContext = new Projet_VM();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)

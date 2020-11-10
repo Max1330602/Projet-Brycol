@@ -21,6 +21,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="70"></RowDefinition>
             <RowDefinition Height="300"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" Background="LightGray" Grid.ColumnSpan="2"></Border>
