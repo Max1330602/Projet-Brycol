@@ -4,6 +4,7 @@ using Org.BouncyCastle.Asn1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -54,8 +55,16 @@ namespace App_Brycol.Vues
 
         private void btnAnnuler_Click(object sender, RoutedEventArgs e)
         {
-            //RETOUR ÉCRAN PROJET
             this.Close();
+            if (Plan_VM.PlanActuel != null)
+            {
+                Application.Current.MainWindow.Show();
+            }
+            else
+            {
+                GererProjet popUp = new GererProjet();
+                popUp.ShowDialog();
+            } 
         }
 
         private void metre_Checked(object sender, RoutedEventArgs e)
