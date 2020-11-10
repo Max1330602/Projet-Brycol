@@ -194,7 +194,7 @@ namespace App_Brycol.VuesModele
                 p.Nom = "Projet";
             }
 
-            p.Utilisateur = OutilEF.brycolContexte.Utilisateurs.Find(1);
+            p.Utilisateur = Utilisateur_VM.utilActuel;
             p.ListePieces = ListePieces;
             p.ListePlans = ListePlans;
             OutilEF.brycolContexte.Projets.Add(p);
@@ -322,7 +322,7 @@ namespace App_Brycol.VuesModele
             var PieReq = from pie in OutilEF.brycolContexte.Pieces where pie.Projet.ID == pro.ID select pie;
 
             pro.Nom = Nom;
-            pro.Utilisateur = OutilEF.brycolContexte.Utilisateurs.Find(1);
+            pro.Utilisateur = Utilisateur_VM.utilActuel;
             ListePieces = new ObservableCollection<Piece>();
             pro.ListePieces = ListePieces;
 
