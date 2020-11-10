@@ -302,6 +302,9 @@ namespace App_Brycol.Vues
         {
             if (!move)
             {
+
+                if(draggedImage != null)
+                    draggedImage.Source = null;
                 MessageBoxResult resultat;
                 resultat = System.Windows.MessageBox.Show("Voulez-vraiment supprimer cette item ?", "Suppression d'un item", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
                 if (resultat == MessageBoxResult.Yes)
