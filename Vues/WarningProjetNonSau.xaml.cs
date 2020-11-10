@@ -26,7 +26,6 @@ namespace App_Brycol.Vues
         public WarningProjetNonSau()
         {
             InitializeComponent();
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             DataContext = new Projet_VM();
         }
 

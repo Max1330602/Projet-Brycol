@@ -34,19 +34,19 @@
         <StackPanel Grid.Row="2" Grid.Column="1">
             <StackPanel Orientation="Horizontal">
                 <Label Content="Sous-Total :" FontWeight="Bold" Margin="0,0,17,0"/>
-                <Label Name="lblSousTotal" Content="$"/>
+                <Label Name="lblSousTotal"  HorizontalContentAlignment="Right" Content="$" Width="77"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="TPS(5%) :" FontWeight="Bold" Margin="0,0,28,0"/>
-                <Label x:Name="lblTPS" Content="$"/>
+                <Label x:Name="lblTPS"  HorizontalContentAlignment="Right" Content="$" Width="77"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="TVQ(9.975) :" FontWeight="Bold" Margin="0,0,10,0"/>
-                <Label Name="lblTVQ" Content="$"/>
+                <Label Name="lblTVQ"  HorizontalContentAlignment="Right" Content="$" Width="77"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Total :" FontWeight="Bold" Margin="0,0,47,0"/>
-                <Label Name="lblTotal" Content="$"/>
+                <Label Name="lblTotal"  HorizontalContentAlignment="Right" Content="$" Width="77"/>
             </StackPanel>
         </StackPanel>
         

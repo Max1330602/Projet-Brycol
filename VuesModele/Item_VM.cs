@@ -22,7 +22,6 @@ namespace App_Brycol.VuesModele
         public Item_VM()
         {
             cmdAjouterItem = new Commande(AjouterItem); 
-            cmdAjouterItemModifie = new Commande(AjouterItemModifie);
             SommaireItems = new ObservableCollection<Item>();
             ListeItems = new ObservableCollection<Item>();
 
@@ -261,34 +260,11 @@ namespace App_Brycol.VuesModele
             if (i.Item != null)
             {
                 ListeItems.Add(i.Item);
+                i.Plan = Plan_VM.PlanActuel;
                 ItemsPlanActuel.Add(i);
-                OutilEF.brycolContexte.lstItems.Add(i);
+                OutilEF.brycolContexte.lstItems.Add(i);            
                 OutilEF.brycolContexte.SaveChanges();
             }
-        }
-
-        public void AjouterItemModifie(Object param)
-        {
-            foreach (ItemsPlan ip in ItemsPlanActuel)
-            {
-                ItemsPlanModifie.Add(ip);
-
-                /*BitmapImage item = new BitmapImage();
-                item.BeginInit();
-                item.CacheOption = BitmapCacheOption.OnLoad;
-                item.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                item.UriSource = new Uri("pack://application:,,,/images/ItemsModifies/item" + ip.Item.ID + ".png");
-                item.EndInit();
-                Piece2D.draggedImage.Source = item;
-                */
-            }
-
-            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
-            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
-            gridMW.Children.Clear();
-            gridMW.Children.Add(cpMW);
-            cpMW.Content = new PlanDeTravail();
-
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

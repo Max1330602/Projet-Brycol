@@ -21,7 +21,6 @@ namespace App_Brycol.Modele
         public float Largeur { get; set; }
         public float Longueur { get; set; }
         public float Hauteur { get; set; }
-        public string Couleur { get; set; }
         public decimal Cout { get; set; }
         public string Fournisseur { get; set; }
         public string Commentaire { get; set; }

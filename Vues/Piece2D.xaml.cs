@@ -43,7 +43,7 @@ namespace App_Brycol.Vues
                 initializeItems();
 
                 ImageBrush imgBrush = new ImageBrush();
-                imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/plancheWood.jpg"));
+                imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/planche" + Piece_VM.pieceActuel.TypePlancher.Nom + ".jpg"));
                 canvas.Background = imgBrush;
 
                 if (Plan_VM.uniteDeMesure == "Mètres")
@@ -359,48 +359,25 @@ namespace App_Brycol.Vues
                         bitmap.EndInit();
                     }
 
-                    foreach (ItemsPlan ipm in Item_VM.ItemsPlanModifie)
-                    {
-                        if (ipm == ip && ItemsPlan.pathChoisi)
-                        {
-                            ItemsPlan.pathChoisi = false;
-                            bitmap = new BitmapImage();
-                            bitmap.BeginInit();
-                            bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                            bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                            bitmap.UriSource = new Uri("\\images\\ItemsModifies\\item" + ip.Item.ID + ".png", UriKind.Relative);
-                            try
-                            {
-                                bitmap.EndInit();
-                            }
-                            catch (Exception e)
-                            {
-                                bitmap.BeginInit();
-                                bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item0.png");
-                                bitmap.EndInit();
-                            }
-                        }
-                        else if (ipm == ip && !ItemsPlan.pathChoisi)
-                        {
-                            ItemsPlan.pathChoisi = true;
-                            bitmap = new BitmapImage();
-                            bitmap.BeginInit();
-                            bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                            bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                            bitmap.UriSource = new Uri("\\images\\ItemsModifies\\item" + ip.Item.ID + "(1).png", UriKind.Relative);
-                            try
-                            {
-                                bitmap.EndInit();
-                            }
-                            catch (Exception e)
-                            {
-                                bitmap.BeginInit();
-                                bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item0.png");
-                                bitmap.EndInit();
-                            }
-                        }
-                    }
+                        bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        bitmap.UriSource = new Uri("pack://application:,,,/images/ItemsModifies/Item" + ip.Item.ID + "/" + ip.Couleur + ".png");
 
+                    try
+                    {
+                        bitmap.EndInit();
+                    }
+                    catch (Exception e)
+                    {
+                        bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png");
+                        bitmap.EndInit();
+                    }
+                    
+                    
                     var image = new Image { Source = bitmap };
                     Canvas.SetLeft(image, ip.emplacementGauche);
                     Canvas.SetTop(image, ip.emplacementHaut);

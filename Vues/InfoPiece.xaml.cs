@@ -4,6 +4,8 @@ using Org.BouncyCastle.Asn1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -23,7 +25,7 @@ namespace App_Brycol.Vues
     /// </summary>
     public partial class InfoPiece : Window 
     {
-        public InfoPiece(string paramOpt)
+        public InfoPiece([Optional] string paramOpt)
         {
             InitializeComponent();
 
@@ -36,35 +38,65 @@ namespace App_Brycol.Vues
 
         private void btnContinuer_Click(object sender, RoutedEventArgs e)
         {
+            if ((bool)pied.IsChecked && (Int32.Parse(txtLongueur.Text) > 100 || Int32.Parse(txtLongueur.Text) < 3))
+            {
+                MessageBox.Show("Les dimensions ne sont pas valides. (Maximum 100 pieds et minimum de 3 pieds)");
+                return;
+            }
+            else if ((bool)metre.IsChecked && (Int32.Parse(txtLongueur.Text) > 30 || Int32.Parse(txtLongueur.Text) < 1))
+            {
+                MessageBox.Show("Les dimensions ne sont pas valides. (Maximum de 30 mètres et minimum de 3 mètres)");
+                return;
+            }
+                   
             this.Close();
-        }
-
-        private void txtLargeur_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            txtLargeur.Text = Regex.Replace(txtLargeur.Text, "[^0-9]+", "");    
-        }
-
-        private void txtLongueur_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            txtLongueur.Text = Regex.Replace(txtLongueur.Text, "[^0-9]+", "");
+            btnContinuer.SetBinding(Button.CommandProperty, new Binding("cmdPiece"));
         }
 
         private void btnAnnuler_Click(object sender, RoutedEventArgs e)
         {
-            //RETOUR ÉCRAN PROJET
             this.Close();
+            if (Plan_VM.PlanActuel != null)
+            {
+                Application.Current.MainWindow.Show();
+            }
+            else
+            {
+                GererProjet popUp = new GererProjet();
+                popUp.ShowDialog();
+            } 
         }
 
         private void metre_Checked(object sender, RoutedEventArgs e)
         {
             uniteMesure = "Mètres";
             Plan_VM.uniteDeMesure = uniteMesure;
+
+            if (txtUniMesu != null)
+                txtUniMesu.Text = "m";
+
         }
 
         private void pied_Checked(object sender, RoutedEventArgs e)
         {
             uniteMesure = "Pieds";
             Plan_VM.uniteDeMesure = uniteMesure;
+
+            if (txtUniMesu != null)
+                txtUniMesu.Text = "p";
+        }
+
+        private void txtLongueur_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (txtLongueur.Text != "" && txtLargeur.Text != "")
+                txtSuperf.Text = (Convert.ToDouble(txtLargeur.Text) * Convert.ToDouble(txtLongueur.Text)).ToString();
+
+        }
+
+        private void txtLargeur_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (txtLongueur.Text != "" && txtLargeur.Text != "")
+                txtSuperf.Text = (Convert.ToDouble(txtLargeur.Text) * Convert.ToDouble(txtLongueur.Text)).ToString();
         }
     }
 }

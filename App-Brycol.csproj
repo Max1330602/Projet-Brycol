@@ -130,6 +130,21 @@
     <Reference Include="Wpf.ZoomAndPan, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Wpf.ZoomAndPan.1.0.2\lib\net452\Wpf.ZoomAndPan.dll</HintPath>
     </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>packages\Extended.Wpf.Toolkit.4.0.1\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Zstandard.Net, Version=1.1.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>packages\MySql.Data.8.0.21\lib\net452\Zstandard.Net.dll</HintPath>
     </Reference>
@@ -141,11 +156,17 @@
     </ApplicationDefinition>
     <Compile Include="Modele\Categorie.cs" />
     <Compile Include="Modele\Item.cs" />
+    <Compile Include="Modele\ItemPieceProjet.cs" />
     <Compile Include="Modele\ItemsPlan.cs" />
     <Compile Include="Modele\Piece.cs" />
     <Compile Include="Modele\Plan.cs" />
     <Compile Include="Modele\Projet.cs" />
     <Compile Include="Modele\TypePiece.cs" />
+    <Compile Include="Modele\TypePlancher.cs" />
+    <Compile Include="Modele\Utilisateur.cs" />
+    <Compile Include="Outils\BindablePasswordBox.xaml.cs">
+      <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Outils\BrycolContexte.cs" />
     <Compile Include="Outils\Commande.cs" />
     <Compile Include="Outils\OutilEF.cs" />
@@ -154,11 +175,15 @@
     <Compile Include="VuesModele\Piece_VM.cs" />
     <Compile Include="VuesModele\Plan_VM.cs" />
     <Compile Include="VuesModele\Projet_VM.cs" />
+    <Compile Include="VuesModele\Utilisateur_VM.cs" />
     <Compile Include="Vues\Aide.xaml.cs">
       <DependentUpon>Aide.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vues\Catalogue.xaml.cs">
       <DependentUpon>Catalogue.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\ChargerProjet.xaml.cs">
+      <DependentUpon>ChargerProjet.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vues\Cout.xaml.cs">
       <DependentUpon>Cout.xaml</DependentUpon>
@@ -181,6 +206,12 @@
     <Compile Include="Vues\GererProjet.xaml.cs">
       <DependentUpon>GererProjet.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vues\UCCMenuPrincipal.xaml.cs">
+      <DependentUpon>UCCMenuPrincipal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\UCCoutDetailProjet.xaml.cs">
+      <DependentUpon>UCCoutDetailProjet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vues\UCCoutPiece.xaml.cs">
       <DependentUpon>UCCoutPiece.xaml</DependentUpon>
     </Compile>
@@ -189,6 +220,9 @@
     </Compile>
     <Compile Include="Vues\WarningProjetNonSau.xaml.cs">
       <DependentUpon>WarningProjetNonSau.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\WarningSupPro.xaml.cs">
+      <DependentUpon>WarningSupPro.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -202,11 +236,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Outils\BindablePasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Vues\Aide.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vues\Catalogue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\ChargerProjet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -238,6 +280,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Vues\UCCMenuPrincipal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\UCCoutDetailProjet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Vues\UCCoutPiece.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -247,6 +297,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vues\WarningProjetNonSau.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\WarningSupPro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -318,7 +372,9 @@
     <Resource Include="images\Items\item0.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="images\ItemsModifies\" />
+    <Folder Include="images\ItemsModifies\Item24\" />
+    <Folder Include="images\ItemsModifies\Item25\" />
+    <Folder Include="images\ItemsModifies\Item26\" />
     <Folder Include="images\Plans\" />
   </ItemGroup>
   <ItemGroup>
@@ -351,7 +407,6 @@
     <Resource Include="images\Items\item26.PNG" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\Items\Top\item23.jpg" />
     <Resource Include="images\Items\Top\item26.png" />
   </ItemGroup>
   <ItemGroup>
@@ -361,10 +416,232 @@
     <Resource Include="images\Items\plancher.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\Items\plancheWood.jpg" />
+    <Resource Include="images\Items\Top\item17.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\Items\Top\item17.png" />
+    <Resource Include="images\ItemsModifies\Item10\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item10\brun.png" />
+    <Resource Include="images\ItemsModifies\Item10\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item10\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item10\orange.png" />
+    <Resource Include="images\ItemsModifies\Item10\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item10\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item1\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item1\brun.png" />
+    <Resource Include="images\ItemsModifies\Item1\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item1\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item1\orange.png" />
+    <Resource Include="images\ItemsModifies\Item1\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item1\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item2\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item2\brun.png" />
+    <Resource Include="images\ItemsModifies\Item2\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item2\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item2\orange.png" />
+    <Resource Include="images\ItemsModifies\Item2\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item2\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item3\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item3\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item3\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item4\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item4\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item4\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item5\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item5\brun.png" />
+    <Resource Include="images\ItemsModifies\Item5\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item5\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item5\orange.png" />
+    <Resource Include="images\ItemsModifies\Item5\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item5\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item3\brun.png" />
+    <Resource Include="images\ItemsModifies\Item3\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item3\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item3\orange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item4\brun.png" />
+    <Resource Include="images\ItemsModifies\Item4\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item4\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item4\orange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item6\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item6\brun.png" />
+    <Resource Include="images\ItemsModifies\Item6\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item6\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item6\orange.png" />
+    <Resource Include="images\ItemsModifies\Item6\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item6\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item7\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item7\brun.png" />
+    <Resource Include="images\ItemsModifies\Item7\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item7\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item7\orange.png" />
+    <Resource Include="images\ItemsModifies\Item7\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item7\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item8\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item8\brun.png" />
+    <Resource Include="images\ItemsModifies\Item8\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item8\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item8\orange.png" />
+    <Resource Include="images\ItemsModifies\Item8\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item8\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item9\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item9\brun.png" />
+    <Resource Include="images\ItemsModifies\Item9\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item9\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item9\orange.png" />
+    <Resource Include="images\ItemsModifies\Item9\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item9\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item11\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item11\brun.png" />
+    <Resource Include="images\ItemsModifies\Item11\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item11\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item11\orange.png" />
+    <Resource Include="images\ItemsModifies\Item11\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item11\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item12\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item12\brun.png" />
+    <Resource Include="images\ItemsModifies\Item12\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item12\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item12\orange.png" />
+    <Resource Include="images\ItemsModifies\Item12\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item12\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item13\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item13\brun.png" />
+    <Resource Include="images\ItemsModifies\Item13\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item13\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item13\orange.png" />
+    <Resource Include="images\ItemsModifies\Item13\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item13\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item14\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item14\brun.png" />
+    <Resource Include="images\ItemsModifies\Item14\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item14\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item14\orange.png" />
+    <Resource Include="images\ItemsModifies\Item14\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item14\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item15\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item15\brun.png" />
+    <Resource Include="images\ItemsModifies\Item15\orange.png" />
+    <Resource Include="images\ItemsModifies\Item15\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item15\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item16\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item16\brun.png" />
+    <Resource Include="images\ItemsModifies\Item16\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item16\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item16\orange.png" />
+    <Resource Include="images\ItemsModifies\Item16\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item16\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item17\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item17\brun.png" />
+    <Resource Include="images\ItemsModifies\Item17\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item17\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item17\orange.png" />
+    <Resource Include="images\ItemsModifies\Item17\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item17\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item18\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item18\brun.png" />
+    <Resource Include="images\ItemsModifies\Item18\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item18\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item18\orange.png" />
+    <Resource Include="images\ItemsModifies\Item18\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item18\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item19\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item19\brun.png" />
+    <Resource Include="images\ItemsModifies\Item19\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item19\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item19\orange.png" />
+    <Resource Include="images\ItemsModifies\Item19\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item19\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item20\blue.png" />
+    <Resource Include="images\ItemsModifies\Item20\brun.png" />
+    <Resource Include="images\ItemsModifies\Item20\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item20\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item20\orange.png" />
+    <Resource Include="images\ItemsModifies\Item20\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item20\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item21\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item21\brun.png" />
+    <Resource Include="images\ItemsModifies\Item21\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item21\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item21\orange.png" />
+    <Resource Include="images\ItemsModifies\Item21\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item21\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item22\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item22\brun.png" />
+    <Resource Include="images\ItemsModifies\Item22\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item22\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item22\orange.png" />
+    <Resource Include="images\ItemsModifies\Item22\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item22\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item23\bleu.png" />
+    <Resource Include="images\ItemsModifies\Item23\brun.png" />
+    <Resource Include="images\ItemsModifies\Item23\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item23\mauve.png" />
+    <Resource Include="images\ItemsModifies\Item23\orange.png" />
+    <Resource Include="images\ItemsModifies\Item23\rouge.png" />
+    <Resource Include="images\ItemsModifies\Item23\vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ItemsModifies\Item15\jaune.png" />
+    <Resource Include="images\ItemsModifies\Item15\mauve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\plancheBois.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\plancheTuile.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\plancheCiment.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\plancheAucun.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

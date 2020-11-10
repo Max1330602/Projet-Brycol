@@ -25,18 +25,27 @@ namespace App_Brycol
     public partial class MainWindow : Window
     {
 
-
        public MainWindow()
         {
             InitializeComponent();
             OutilEF outilEF = new OutilEF();
-            DataContext = new Projet_VM();
+            DataContext = new Utilisateur_VM();
 
         }
 
-        private void btnTeleverserProjet_Click(object sender, RoutedEventArgs e)
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Option de téléversement à venir!");
+
+        }
+
+        private void btnInscrire_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnTriche_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void OnClosing(object sender, CancelEventArgs cancelEventArgs)
@@ -50,5 +59,7 @@ namespace App_Brycol
             }
 
         }
+
+
     }
 }
