@@ -43,7 +43,7 @@ namespace App_Brycol.Vues
                 initializeItems();
 
                 ImageBrush imgBrush = new ImageBrush();
-                imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/plancheWood.jpg"));
+                imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/planche" + Piece_VM.pieceActuel.TypePlancher.Nom + ".jpg"));
                 canvas.Background = imgBrush;
 
                 if (Plan_VM.uniteDeMesure == "Mètres")

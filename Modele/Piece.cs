@@ -15,6 +15,7 @@ namespace App_Brycol.Modele
         public int ID { get; set; }
         public Projet Projet { get; set; }
         public TypePiece TypePiece { get; set; }
+        public TypePlancher TypePlancher { get; set; }
         public float Largeur { get; set; }
         public float Longueur { get; set; }
         public string Nom { get; set; }
