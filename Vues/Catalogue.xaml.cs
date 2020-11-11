@@ -48,5 +48,12 @@ namespace App_Brycol.Vues
             txtPrixMax.Text = Regex.Replace(txtPrixMax.Text, "[^0-9]+", "");
 
         }
+
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var vm = (Item_VM)DataContext;
+            if (vm.CmdAjouterItem.CanExecute(null))
+                vm.CmdAjouterItem.Execute(null);
+        }
     }
 }
