@@ -173,7 +173,7 @@ namespace App_Brycol.VuesModele
             }
 
             PlanDeTravail popUp = new PlanDeTravail();
-            popUp.Show();
+            popUp.ShowDialog();
 
         }
 
@@ -262,7 +262,7 @@ namespace App_Brycol.VuesModele
                 }
             }
             PlanDeTravail popup = new PlanDeTravail();
-            popup.Show();
+            popup.ShowDialog();
 
         }
 

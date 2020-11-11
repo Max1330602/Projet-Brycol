@@ -4,7 +4,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:App_Brycol.Vues"            
+             xmlns:local="clr-namespace:App_Brycol.Vues"           
+             WindowState="Maximized"
              mc:Ignorable="d" MinHeight="700" MinWidth="1000">
     <Window.Resources>
         <Style TargetType="Button">

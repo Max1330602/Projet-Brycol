@@ -351,7 +351,7 @@ namespace App_Brycol.Vues
                 }
             }
             PlanDeTravail popup = new PlanDeTravail();
-            popup.Show();
+            popup.ShowDialog();
         }
     }
 }

@@ -44,7 +44,7 @@ namespace App_Brycol.Vues
         {
             this.Close();
             PlanDeTravail popup = new PlanDeTravail();
-            popup.Show();
+            popup.ShowDialog();
         }
 
         private void cmbCouleur_SelectedChange(object sender, SelectionChangedEventArgs e)

@@ -38,8 +38,15 @@ namespace App_Brycol.Vues
         private void btnRetour_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            PlanDeTravail popUp = new PlanDeTravail();
-            popUp.Show();
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.Name == "wPlanDeTravail")
+                {
+                    w.Close();
+                }
+            }
+            PlanDeTravail popup = new PlanDeTravail();
+            popup.ShowDialog();
         }
 
         private void txt_TextChanged(object sender, TextChangedEventArgs e)

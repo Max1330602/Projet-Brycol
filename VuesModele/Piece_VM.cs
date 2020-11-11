@@ -229,7 +229,7 @@ namespace App_Brycol.VuesModele
 
 
             PlanDeTravail popup = new PlanDeTravail();
-            popup.Show();
+            popup.ShowDialog();
 
         }
 
@@ -266,7 +266,7 @@ namespace App_Brycol.VuesModele
             pieceActuel = p;
 
             PlanDeTravail popup = new PlanDeTravail();
-            popup.Show();
+            popup.ShowDialog();
 
             //---TODO-----------------------------------------------------------------------
             var plreq = from pl in OutilEF.brycolContexte.Plans.Include("Piece") where pl.Piece.ID == pieceActuel.ID select pl;
