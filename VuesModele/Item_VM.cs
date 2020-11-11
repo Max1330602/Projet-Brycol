@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,7 +25,8 @@ namespace App_Brycol.VuesModele
             cmdAjouterItem = new Commande(AjouterItem); 
             SommaireItems = new ObservableCollection<Item>();
             ListeItems = new ObservableCollection<Item>();
-
+            Categories = new ObservableCollection<string>();
+            TypesDePiece = new ObservableCollection<string>();
             if (ItemsPlanActuel == null)
                 ItemsPlanActuel = new ObservableCollection<ItemsPlan>();
 
@@ -39,16 +41,41 @@ namespace App_Brycol.VuesModele
             var iReq = from i in OutilEF.brycolContexte.Meubles.Include("Categorie").Include("TypePiece") select i;
 
             foreach (Item i in iReq)
+            {
                 SommaireItems.Add(i);
 
+                if (!Categories.Contains(i.Categorie.Nom))
+                    Categories.Add(i.Categorie.Nom);
+
+                if (!TypesDePiece.Contains(i.TypePiece.Nom))
+                    TypesDePiece.Add(i.TypePiece.Nom);
+            }
             Items = SommaireItems;
+            Categories.Add("");
+            TypesDePiece.Add("");
 
         }
         #region Propriétés
 
+        private ICommand _cmdAjouterItem;
+        public ICommand CmdAjouterItem
+        {
+            get
+            {
+                if (_cmdAjouterItem == null)
+                    _cmdAjouterItem = new Commande(AjouterItem);
+                return _cmdAjouterItem;
+            }
+            set
+            {
+                _cmdAjouterItem = value;
+            }
+        }
+
         public ICommand cmdAjouterItemModifie { get; set;}
-        public ICommand cmdAjouterItem { get; set; }
         public ICommand cmdInitItem { get; set; }
+        public ICommand cmdAjouterItem { get; set; }
+
         public const int POS_PAR_DEFAUT = 0;
         public const int PRIXMAX = 1000000;
         public const int PRIXMIN = 0;
@@ -58,17 +85,42 @@ namespace App_Brycol.VuesModele
         public static ObservableCollection<ItemsPlan> ItemsPlanActuel;
         public static ObservableCollection<ItemsPlan> ItemsPlanModifie;
 
-        private Categorie _Categorie;
+        private Categorie _categorie;
         public Categorie Categorie 
         {
-            get { return _Categorie; }
+            get { return _categorie; }
             set
             {
-                _Categorie = value;
+                _categorie = value;
                 OnPropertyChanged("Categorie");
             }
 
         }
+
+        private ObservableCollection<string> _categories;
+        public ObservableCollection<string> Categories
+        {
+            get { return _categories; }
+            set
+            {
+                _categories = value;
+                OnPropertyChanged("Categories");
+            }
+
+        }
+
+        private ObservableCollection<string> _typesDePiece;
+        public ObservableCollection<string> TypesDePiece
+        {
+            get { return _typesDePiece; }
+            set
+            {
+                _typesDePiece = value;
+                OnPropertyChanged("TypesDePiece");
+            }
+
+        }
+
         private ObservableCollection<Item> _sommaireItems;
         public ObservableCollection<Item> SommaireItems
         {
@@ -240,11 +292,13 @@ namespace App_Brycol.VuesModele
                 SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.Cout > FiltrePrixMin &&
                                                                                          si.Cout < FiltrePrixMax));
             else
-                SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.TypePiece.Nom.Contains(FiltreType) &&
-                                                                                         si.Categorie.Nom.Contains(FiltreCategorie) &&
-                                                                                         si.Nom.Contains(FiltreNom) &&
+            {  SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => Regex.IsMatch(si.TypePiece.Nom, FiltreType, RegexOptions.IgnoreCase) && //si.TypePiece.Nom.Contains(FiltreType) &&
+                                                                                        Regex.IsMatch(si.Categorie.Nom, FiltreCategorie, RegexOptions.IgnoreCase) && //si.Categorie.Nom.Contains(FiltreCategorie) &&
+                                                                                        Regex.IsMatch(si.Nom, FiltreNom, RegexOptions.IgnoreCase) && //si.Nom.Contains(FiltreNom) &&
                                                                                          si.Cout > FiltrePrixMin &&
                                                                                          si.Cout < FiltrePrixMax));
+            
+            }
         }
 
         public void AjouterItem(Object param)

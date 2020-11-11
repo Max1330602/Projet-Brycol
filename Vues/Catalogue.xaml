@@ -17,13 +17,13 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="400"/>
-            <RowDefinition Height="100*"/>
+            <RowDefinition Height="400*"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="600"/>
-            <ColumnDefinition Width="150*"/>
+            <ColumnDefinition Width="600*"/>
+            <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>
 
         <Border Grid.Row="0" Grid.ColumnSpan="3" Background="LightGray"></Border>
@@ -51,11 +51,16 @@
             <TextBlock Grid.Row="3"  Text="Prix max.:"></TextBlock>
             <TextBox Name="txtPrixMax"  Text="{Binding FiltrePrixMax, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="3"></TextBox>
             <TextBlock Grid.Row="4" Text="Catégorie:"></TextBlock>
-            <TextBox Text="{Binding FiltreCategorie, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="4"></TextBox>
+            <ComboBox SelectedItem="{ Binding FiltreCategorie, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Categories}" Grid.Column="1" Grid.Row="4" />
             <TextBlock Grid.Row="5" Text="Type de pièce:"></TextBlock>
-            <TextBox Text="{Binding FiltreType, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="5"></TextBox>
+            <ComboBox SelectedItem="{ Binding FiltreType, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding TypesDePiece}" Grid.Column="1" Grid.Row="5" />
         </Grid>
         <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DG_items" Grid.Row="1" Grid.Column="1" ItemsSource="{ Binding SommaireItems}" SelectedItem="{ Binding ItemSelectionne}">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom" Binding="{ Binding Nom }"></DataGridTextColumn>
                 <DataGridTextColumn Header="Prix" Binding="{ Binding Cout }"></DataGridTextColumn>
