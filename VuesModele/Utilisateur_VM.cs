@@ -32,7 +32,7 @@ namespace App_Brycol.VuesModele
             Utilisateur user = new Utilisateur();
 
             var UtReq = from ut in OutilEF.brycolContexte.Utilisateurs where ut.Nom == Nom select ut;
-            if (UtReq != null)
+            if (UtReq.Count() != 0)
             {
                 foreach (Utilisateur ut in UtReq)
                     user = ut;
@@ -47,6 +47,16 @@ namespace App_Brycol.VuesModele
                     gridMW.Children.Add(cpMW);
                     cpMW.Content = new UCCMenuPrincipal();
                 }
+                else
+                {
+                    MessageBox.Show("Le nom de l'utilisateur et/ou le mot de passe sont incorrect.");
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Le nom de l'utilisateur et/ou le mot de passe sont incorrect.");
+                return;
             }
         }
 
@@ -69,6 +79,27 @@ namespace App_Brycol.VuesModele
 
         public void CreeUtil(Object param)
         {
+            Utilisateur user = new Utilisateur();
+
+            var UtReq = from ut in OutilEF.brycolContexte.Utilisateurs where ut.Nom == Nom select ut;
+            if (UtReq.Count() != 0)
+            {
+                MessageBox.Show("Le nom d'utilisateur est déjà pris.");
+                return;
+            }
+
+            user.Nom = Nom;
+            user.MotPasse = MotPasse;
+
+            OutilEF.brycolContexte.Utilisateurs.Add(user);
+            OutilEF.brycolContexte.SaveChanges();
+            utilActuel = user;
+
+            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
+            gridMW.Children.Clear();
+            gridMW.Children.Add(cpMW);
+            cpMW.Content = new UCCMenuPrincipal();
 
         }
 
