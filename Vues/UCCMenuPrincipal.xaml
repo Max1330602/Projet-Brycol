@@ -17,6 +17,6 @@
         <Image Grid.Row="0" Source="../images/logo.png"></Image>
         <Rectangle Stroke="Black" Grid.Row="1" Margin="50,65,50,90"></Rectangle>
         <Button Background="Transparent" FontFamily="Constantia Bold"  FontSize="15" Name="btnCreerProjet" Command="{ Binding cmdCreerProjet }" Grid.Row="1" Content="Créer un projet" Height="50" Width="150" VerticalAlignment="Top" Margin="0,75,0,0" BorderBrush="Transparent"></Button>
-        <Button Background="Transparent" FontFamily="Constantia Bold"  FontSize="15" Name="btnTeleverserProjet" Command="{Binding cmdChargerProjet }" Click="btnTeleverserProjet_Click" Grid.Row="1" Content="Téléverser un projet" Height="50" Width="150" VerticalAlignment="Bottom" Margin="0,0,0,100" BorderBrush="Transparent"></Button>
+        <Button Background="Transparent" FontFamily="Constantia Bold"  FontSize="15" Name="btnTeleverserProjet" Click="btnTeleverserProjet_Click" Grid.Row="1" Content="Téléverser un projet" Height="50" Width="150" VerticalAlignment="Bottom" Margin="0,0,0,100" BorderBrush="Transparent"></Button>
     </Grid>
 </UserControl>
