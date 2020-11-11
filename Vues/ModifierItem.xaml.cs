@@ -43,6 +43,13 @@ namespace App_Brycol.Vues
         private void btnAppliquer_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.Name == "wPlanDeTravail")
+                {
+                    w.Close();
+                }
+            }
             PlanDeTravail popup = new PlanDeTravail();
             popup.ShowDialog();
         }

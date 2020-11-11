@@ -26,6 +26,7 @@ namespace App_Brycol.VuesModele
         public ICommand cmdSauvProjet { get; set; }
         public ICommand cmdSuppProjet { get; set; }
         public ICommand cmdChargerProjet { get; set; }
+        public static bool themeSombre = false;
 
         public Projet_VM()
         {
@@ -176,8 +177,23 @@ namespace App_Brycol.VuesModele
                         Item_VM.ItemsPlanActuel.Add(i);
                 }
             }
-            PlanDeTravail popUp = new PlanDeTravail();
-            popUp.ShowDialog();
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.Name == "wPlanDeTravail")
+                {
+                    w.Close();
+                }
+            }
+            if (ProjetActuel.ListePieces.Count() == 0)
+            {
+                GererProjet popup = new GererProjet();
+                popup.ShowDialog();
+            }
+            else
+            {
+                PlanDeTravail popup = new PlanDeTravail();
+                popup.ShowDialog();
+            }
 
         }
 
@@ -257,17 +273,6 @@ namespace App_Brycol.VuesModele
                     return;
                 }
             }
-
-            foreach (Window w in Application.Current.Windows)
-            {
-                if (w.Name == "wPlanDeTravail")
-                {
-                    w.Close();
-                }
-            }
-            PlanDeTravail popup = new PlanDeTravail();
-            popup.ShowDialog();
-
         }
 
         public void SuppProjet(Object param)

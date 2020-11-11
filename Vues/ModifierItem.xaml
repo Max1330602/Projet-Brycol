@@ -7,7 +7,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Closed="Window_Closed"
-        Title="ModifierItem" Height="450" Width="800" Icon="pack://application:,,,/images/favicon.png">
+        Title="ModifierItem" MinHeight="450" MinWidth="800" Icon="pack://application:,,,/images/favicon.png">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>

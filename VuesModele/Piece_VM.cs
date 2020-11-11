@@ -228,8 +228,16 @@ namespace App_Brycol.VuesModele
             pVM.InitPlan();
 
 
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.Name == "wPlanDeTravail")
+                {
+                    w.Activate();
+                }
+            }
             PlanDeTravail popup = new PlanDeTravail();
             popup.ShowDialog();
+            
 
         }
 
@@ -265,6 +273,13 @@ namespace App_Brycol.VuesModele
             OutilEF.brycolContexte.SaveChanges();
             pieceActuel = p;
 
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.Name == "wPlanDeTravail")
+                {
+                    w.Close();
+                }
+            }
             PlanDeTravail popup = new PlanDeTravail();
             popup.ShowDialog();
 

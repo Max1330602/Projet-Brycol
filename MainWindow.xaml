@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowStartupLocation ="CenterScreen"
         ResizeMode="NoResize"
-        Closing="OnClosing"
+        
         Title="Brycol" Height="400" Width="300" Icon="images/favicon.png">
     <Window.Resources>
         <Style TargetType="Button">

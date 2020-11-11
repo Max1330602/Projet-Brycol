@@ -45,7 +45,7 @@ namespace App_Brycol.Vues
             }
             else if ((bool)metre.IsChecked && (Int32.Parse(txtLongueur.Text) > 30 || Int32.Parse(txtLongueur.Text) < 1))
             {
-                MessageBox.Show("Les dimensions ne sont pas valides. (Maximum de 30 mètres et minimum de 3 mètres)");
+                MessageBox.Show("Les dimensions ne sont pas valides. (Maximum de 30 mètres et minimum de 1 mètres)");
                 return;
             }
                    

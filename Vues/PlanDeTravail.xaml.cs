@@ -2,6 +2,7 @@
 using App_Brycol.VuesModele;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -19,6 +20,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Ubiety.Dns.Core;
+using Brush = System.Windows.Media.Brush;
+using Brushes = System.Windows.Media.Brushes;
 
 namespace App_Brycol.Vues
 {
@@ -30,6 +33,11 @@ namespace App_Brycol.Vues
         public PlanDeTravail()
         {
             InitializeComponent();
+
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
 
             DataContext = new Projet_VM();
             lblProjet.Content = "Projet : " + Projet_VM.ProjetActuel.Nom + "\t Pièce : " + Piece_VM.pieceActuel.Nom;
@@ -109,11 +117,6 @@ namespace App_Brycol.Vues
             popUp.ShowDialog();
         }
 
-        private void btnThemeSombre_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void btnCoutPiece_Click(object sender, RoutedEventArgs e)
         {
             string UCEcran = "Piece";
@@ -154,6 +157,64 @@ namespace App_Brycol.Vues
             WarningSupPro popUp = new WarningSupPro();
             popUp.ShowDialog();
 
+        }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+            Brush CouleurArriere = (Brush)bc.ConvertFrom("#33342F");
+            Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
+            Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
+
+            btnAide.Background = CouleurBouton;
+            btnAide.Foreground = Brushes.White;
+
+            btn3D.Background = CouleurBouton;
+            btn3D.Foreground = Brushes.White;
+
+            btn2D.Background = CouleurBouton;
+            btn2D.Foreground = Brushes.White;
+
+            btnCatalogue.Background = CouleurBouton;
+            btnCatalogue.Foreground = Brushes.White;
+
+            btnModifierItem.Background = CouleurBouton;
+            btnModifierItem.Foreground = Brushes.White;
+
+            btnModifierPiece.Background = CouleurBouton;
+            btnModifierPiece.Foreground = Brushes.White;
+
+            btnProjet.Background = CouleurBouton;
+            btnProjet.Foreground = Brushes.White;
+
+            btnCoutPiece.Background = CouleurBouton;
+            btnCoutPiece.Foreground = Brushes.White;
+
+            btnEnregistrer.Background = CouleurBouton;
+            btnEnregistrer.Foreground = Brushes.White;
+
+            btnSupprimer.Background = CouleurBouton;
+            btnSupprimer.Foreground = Brushes.White;
+
+            Banniere.Background = CouleurBanniere;
+            ArrierePlan.Background = CouleurArrierePlan;
+            ArriereBoutons.Background = CouleurArriere;
+        }
+
+        private void EnleverThemeSombre()
+        {
+            
+        }
+
+
+        private void OnClosing(object sender, CancelEventArgs cancelEventArgs)
+        {
+            if (Projet_VM.ProjetActuel != null && Projet_VM.EstSauvegarde == false)
+            {
+                WarningProjetNonSau popUp = new WarningProjetNonSau();
+                popUp.ShowDialog();
+            }
         }
     }
 }
