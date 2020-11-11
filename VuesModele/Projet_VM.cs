@@ -148,7 +148,7 @@ namespace App_Brycol.VuesModele
             ProjetActuel = proj;
             ProjetActuel.ListePieces = new ObservableCollection<Piece>();
             ProjetActuel.ListePlans = new ObservableCollection<Plan>();
-            var pieceReq = from piece in OutilEF.brycolContexte.Pieces where piece.Projet.ID == ProjetActuel.ID select piece;
+            var pieceReq = from piece in OutilEF.brycolContexte.Pieces.Include("TypePlancher").Include("TypePiece") where piece.Projet.ID == ProjetActuel.ID select piece;
             foreach (Piece pie in pieceReq)
             {
                 ProjetActuel.ListePieces.Add(pie);
@@ -161,17 +161,21 @@ namespace App_Brycol.VuesModele
                     ProjetActuel.ListePlans.Add(pl);
                 }
             }
-            Piece_VM.pieceActuel = ProjetActuel.ListePieces.First<Piece>();
-            Plan_VM.PlanActuel = ProjetActuel.ListePlans.First<Plan>();
-            int idPlan = ProjetActuel.ListePlans.First<Plan>().ID;
-            var itemReq = from item in OutilEF.brycolContexte.lstItems.Include("Item") where item.Plan.ID == idPlan select item;
-            Item_VM.ItemsPlanActuel = new ObservableCollection<ItemsPlan>();
-            foreach (ItemsPlan i in itemReq)
+            if(ProjetActuel.ListePieces.Count > 0)
+                Piece_VM.pieceActuel = ProjetActuel.ListePieces.First<Piece>();
+            if (ProjetActuel.ListePlans.Count > 0)
             {
-                if(i.Item != null)
-                    Item_VM.ItemsPlanActuel.Add(i);
-            }
+                Plan_VM.PlanActuel = ProjetActuel.ListePlans.First<Plan>();
+                int idPlan = ProjetActuel.ListePlans.First<Plan>().ID;
 
+                var itemReq = from item in OutilEF.brycolContexte.lstItems.Include("Item") where item.Plan.ID == idPlan select item;
+                Item_VM.ItemsPlanActuel = new ObservableCollection<ItemsPlan>();
+                foreach (ItemsPlan i in itemReq)
+                {
+                    if (i.Item != null)
+                        Item_VM.ItemsPlanActuel.Add(i);
+                }
+            }
             PlanDeTravail popUp = new PlanDeTravail();
             popUp.Show();
 
