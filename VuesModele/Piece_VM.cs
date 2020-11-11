@@ -227,13 +227,9 @@ namespace App_Brycol.VuesModele
             Plan_VM pVM = new Plan_VM();
             pVM.InitPlan();
 
-            
-            Application.Current.MainWindow.WindowState = WindowState.Maximized;          
-            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
-            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
-            gridMW.Children.Clear();
-            gridMW.Children.Add(cpMW);
-            cpMW.Content = new PlanDeTravail();
+
+            PlanDeTravail popup = new PlanDeTravail();
+            popup.Show();
 
         }
 
@@ -269,11 +265,8 @@ namespace App_Brycol.VuesModele
             OutilEF.brycolContexte.SaveChanges();
             pieceActuel = p;
 
-            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
-            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
-            gridMW.Children.Clear();
-            gridMW.Children.Add(cpMW);
-            cpMW.Content = new PlanDeTravail();
+            PlanDeTravail popup = new PlanDeTravail();
+            popup.Show();
 
             //---TODO-----------------------------------------------------------------------
             var plreq = from pl in OutilEF.brycolContexte.Plans.Include("Piece") where pl.Piece.ID == pieceActuel.ID select pl;

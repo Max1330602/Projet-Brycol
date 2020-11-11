@@ -42,12 +42,9 @@ namespace App_Brycol.Vues
 
         private void btnAppliquer_Click(object sender, RoutedEventArgs e)
         {
-            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
-            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
             this.Close();
-            gridMW.Children.Clear();
-            gridMW.Children.Add(cpMW);
-            cpMW.Content = new PlanDeTravail();
+            PlanDeTravail popup = new PlanDeTravail();
+            popup.Show();
         }
 
         private void cmbCouleur_SelectedChange(object sender, SelectionChangedEventArgs e)

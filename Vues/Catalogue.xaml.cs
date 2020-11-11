@@ -37,12 +37,9 @@ namespace App_Brycol.Vues
 
         private void btnRetour_Click(object sender, RoutedEventArgs e)
         {
-            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
-            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
             this.Close();
-            gridMW.Children.Clear();
-            gridMW.Children.Add(cpMW);
-            cpMW.Content = new PlanDeTravail();
+            PlanDeTravail popUp = new PlanDeTravail();
+            popUp.Show();
         }
 
         private void txt_TextChanged(object sender, TextChangedEventArgs e)

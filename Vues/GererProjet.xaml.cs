@@ -342,12 +342,16 @@ namespace App_Brycol.Vues
 
         private void OuvrirPlan()
         {
-            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
-            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
             this.Close();
-            gridMW.Children.Clear();
-            gridMW.Children.Add(cpMW);
-            cpMW.Content = new PlanDeTravail();
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.Name == "wPlanDeTravail")
+                {
+                    w.Close();
+                }
+            }
+            PlanDeTravail popup = new PlanDeTravail();
+            popup.Show();
         }
     }
 }

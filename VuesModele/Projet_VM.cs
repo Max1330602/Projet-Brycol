@@ -172,13 +172,9 @@ namespace App_Brycol.VuesModele
                     Item_VM.ItemsPlanActuel.Add(i);
             }
 
-            Application.Current.MainWindow.WindowState = WindowState.Maximized;
-            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
-            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
-            Application.Current.Windows[1].Close();
-            gridMW.Children.Clear();
-            gridMW.Children.Add(cpMW);
-            cpMW.Content = new PlanDeTravail();
+            PlanDeTravail popUp = new PlanDeTravail();
+            popUp.Show();
+
         }
 
         public void CreerProjet(Object param)
@@ -258,11 +254,15 @@ namespace App_Brycol.VuesModele
                 }
             }
 
-            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
-            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
-            gridMW.Children.Clear();
-            gridMW.Children.Add(cpMW);
-            cpMW.Content = new PlanDeTravail();
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.Name == "wPlanDeTravail")
+                {
+                    w.Close();
+                }
+            }
+            PlanDeTravail popup = new PlanDeTravail();
+            popup.Show();
 
         }
 

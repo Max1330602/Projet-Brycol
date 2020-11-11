@@ -29,7 +29,8 @@ namespace App_Brycol.Vues
 
         private void btnTeleverserProjet_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Option de téléversement à venir!");
+            ChargerProjet popup = new ChargerProjet();
+            popup.ShowDialog();
         }
 
     }

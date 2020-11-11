@@ -200,11 +200,11 @@
     <Compile Include="Vues\Piece2D.xaml.cs">
       <DependentUpon>Piece2D.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vues\PlanDeTravail.xaml.cs">
-      <DependentUpon>PlanDeTravail.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Vues\GererProjet.xaml.cs">
       <DependentUpon>GererProjet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\PlanDeTravail.xaml.cs">
+      <DependentUpon>PlanDeTravail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vues\UCCMenuPrincipal.xaml.cs">
       <DependentUpon>UCCMenuPrincipal.xaml</DependentUpon>
@@ -272,11 +272,11 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
-    <Page Include="Vues\PlanDeTravail.xaml">
+    <Page Include="Vues\GererProjet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vues\GererProjet.xaml">
+    <Page Include="Vues\PlanDeTravail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
