@@ -25,7 +25,7 @@ namespace App_Brycol.Vues
     /// <summary>
     /// Logique d'interaction pour PlanDeTravail.xaml
     /// </summary>
-    public partial class PlanDeTravail : UserControl
+    public partial class PlanDeTravail : Window
     {
         public PlanDeTravail()
         {

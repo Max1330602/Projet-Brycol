@@ -37,12 +37,16 @@ namespace App_Brycol.Vues
 
         private void btnRetour_Click(object sender, RoutedEventArgs e)
         {
-            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
-            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
             this.Close();
-            gridMW.Children.Clear();
-            gridMW.Children.Add(cpMW);
-            cpMW.Content = new PlanDeTravail();
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.Name == "wPlanDeTravail")
+                {
+                    w.Close();
+                }
+            }
+            PlanDeTravail popup = new PlanDeTravail();
+            popup.ShowDialog();
         }
 
         private void txt_TextChanged(object sender, TextChangedEventArgs e)
@@ -50,6 +54,13 @@ namespace App_Brycol.Vues
             txtPrixMin.Text = Regex.Replace(txtPrixMin.Text, "[^0-9]+", "");
             txtPrixMax.Text = Regex.Replace(txtPrixMax.Text, "[^0-9]+", "");
 
+        }
+
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var vm = (Item_VM)DataContext;
+            if (vm.CmdAjouterItem.CanExecute(null))
+                vm.CmdAjouterItem.Execute(null);
         }
     }
 }

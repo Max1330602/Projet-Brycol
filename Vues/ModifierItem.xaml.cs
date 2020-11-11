@@ -42,12 +42,9 @@ namespace App_Brycol.Vues
 
         private void btnAppliquer_Click(object sender, RoutedEventArgs e)
         {
-            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
-            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
             this.Close();
-            gridMW.Children.Clear();
-            gridMW.Children.Add(cpMW);
-            cpMW.Content = new PlanDeTravail();
+            PlanDeTravail popup = new PlanDeTravail();
+            popup.ShowDialog();
         }
 
         private void cmbCouleur_SelectedChange(object sender, SelectionChangedEventArgs e)
@@ -92,7 +89,8 @@ namespace App_Brycol.Vues
             //Piece2D.draggedImage = null;
         }
 
-        private void cmbCouleur_SelectedChange(object sender, MouseButtonEventArgs e)
+
+        private void ClrPcker_Background_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<System.Windows.Media.Color?> e)
         {
 
         }
