@@ -180,8 +180,10 @@ namespace App_Brycol.VuesModele
 
             EstSauvegarde = true;
 
-            PlanDeTravail popUp = new PlanDeTravail();
-            popUp.ShowDialog();
+            PlanDeTravail PlanDeTravail = new PlanDeTravail();
+            PlanDeTravail.grdPlanTravail.Children.Clear();
+            PlanDeTravail.grdPlanTravail.Children.Add(new PlanDeTravail2());
+            PlanDeTravail.ShowDialog();
 
         }
 
@@ -280,13 +282,13 @@ namespace App_Brycol.VuesModele
 
             foreach (Window w in Application.Current.Windows)
             {
-                if (w.Name == "wPlanDeTravail")
+                if (w.GetType() == typeof(PlanDeTravail))
                 {
-                    w.Close();
+                    (w as PlanDeTravail).grdPlanTravail.Children.Clear();
+                    (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
                 }
             }
-            PlanDeTravail popup = new PlanDeTravail();
-            popup.ShowDialog();
+
 
         }
 

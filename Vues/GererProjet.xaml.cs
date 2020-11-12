@@ -250,8 +250,6 @@ namespace App_Brycol.Vues
 
         private void selectionnerBouton(object sender)
         {
-
-
             if (!btnPlan.IsEnabled && !btnSupprimerPiece.IsEnabled)
             {
                 foreach (Button b in lstBoutons)
@@ -384,15 +382,23 @@ namespace App_Brycol.Vues
         private void OuvrirPlan()
         {
             this.Close();
+            bool planOuvert = false;
             foreach (Window w in Application.Current.Windows)
             {
-                if (w.Name == "wPlanDeTravail")
+                if (w.GetType() == typeof(PlanDeTravail))
                 {
-                    w.Close();
+                    planOuvert = true;
+                    (w as PlanDeTravail).grdPlanTravail.Children.Clear();
+                    (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
                 }
             }
-            PlanDeTravail popup = new PlanDeTravail();
-            popup.ShowDialog();
+            if (!planOuvert)
+            {
+                PlanDeTravail PlanDeTravail = new PlanDeTravail();
+                PlanDeTravail.grdPlanTravail.Children.Clear();
+                PlanDeTravail.grdPlanTravail.Children.Add(new PlanDeTravail2());
+                PlanDeTravail.ShowDialog();
+            }
         }
 
         private void btnThemeSombre_Click(object sender, RoutedEventArgs e)

@@ -92,11 +92,6 @@ namespace App_Brycol.Vues
 
             }
 
-
-
-
-
-
             canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transforme la grandeur du canvas
 
 

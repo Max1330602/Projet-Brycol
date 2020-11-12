@@ -47,13 +47,12 @@ namespace App_Brycol.Vues
             this.Close();
             foreach (Window w in Application.Current.Windows)
             {
-                if (w.Name == "wPlanDeTravail")
+                if (w.GetType() == typeof(PlanDeTravail))
                 {
-                    w.Close();
+                    (w as PlanDeTravail).grdPlanTravail.Children.Clear();
+                    (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
                 }
             }
-            PlanDeTravail popup = new PlanDeTravail();
-            popup.ShowDialog();
         }
 
         private void txt_TextChanged(object sender, TextChangedEventArgs e)

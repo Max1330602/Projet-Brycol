@@ -206,6 +206,9 @@
     <Compile Include="Vues\GererProjet.xaml.cs">
       <DependentUpon>GererProjet.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vues\PlanDeTravail2.xaml.cs">
+      <DependentUpon>PlanDeTravail2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vues\UCCLogin.xaml.cs">
       <DependentUpon>UCCLogin.xaml</DependentUpon>
     </Compile>
@@ -285,6 +288,10 @@
     <Page Include="Vues\GererProjet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\PlanDeTravail2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Vues\UCCLogin.xaml">
       <SubType>Designer</SubType>
