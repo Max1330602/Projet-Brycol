@@ -148,12 +148,5 @@ namespace App_Brycol.Vues
             return Capture;
 
         }
-
-        private void btnSupprimer_Click(object sender, RoutedEventArgs e)
-        {
-            WarningSupPro popUp = new WarningSupPro();
-            popUp.ShowDialog();
-
-        }
     }
 }

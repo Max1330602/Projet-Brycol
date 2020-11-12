@@ -26,9 +26,16 @@ namespace App_Brycol.Vues
             InitializeComponent();
             DataContext = new Projet_VM();
 
-            var pReq = (from p in OutilEF.brycolContexte.Projets select p.Nom).ToList();
+            var pReq = (from p in OutilEF.brycolContexte.Projets.Include("Utilisateur") where p.Utilisateur.Nom == Utilisateur_VM.utilActuel.Nom  select p.Nom).ToList();
 
             cmbProjets.ItemsSource = pReq;
+        }
+
+        private void btnSupprimer_Click(object sender, RoutedEventArgs e)
+        {
+            WarningSupPro popUp = new WarningSupPro();
+            popUp.ShowDialog();
+
         }
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
