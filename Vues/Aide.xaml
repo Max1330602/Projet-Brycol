@@ -23,7 +23,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="0" Grid.ColumnSpan="3" Background="LightGray"></Border>
+        <Border x:Name="Banniere"  Grid.Row="0" Grid.ColumnSpan="3" Background="LightGray"></Border>
+        <Border x:Name="Corps"  Grid.Row="1" Grid.ColumnSpan="2" Background="White"></Border>
 
         <Image Grid.Row="0" Grid.Column="1" Source="/images/logo.png" HorizontalAlignment="Right"></Image>
 

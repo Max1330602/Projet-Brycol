@@ -31,6 +31,11 @@ namespace App_Brycol.Vues
 
             DataContext = new Piece_VM(paramOpt);
 
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
+
         }
 
         public static string uniteMesure;
@@ -97,6 +102,27 @@ namespace App_Brycol.Vues
         {
             if (txtLongueur.Text != "" && txtLargeur.Text != "")
                 txtSuperf.Text = (Convert.ToDouble(txtLargeur.Text) * Convert.ToDouble(txtLongueur.Text)).ToString();
+        }
+
+        private void EnleverThemeSombre()
+        {
+            grdInfoPiece.Background = Brushes.White;
+        }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+            Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
+            Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
+
+            grdInfoPiece.Background = CouleurArrierePlan;
+
+            btnAnnuler.Background = CouleurBouton;
+            btnAnnuler.Foreground = Brushes.White;
+
+            btnContinuer.Background = CouleurBouton;
+            btnContinuer.Foreground = Brushes.White;
         }
     }
 }

@@ -93,7 +93,7 @@
 
 
                 <!-- Le bouton 100%.  Scale le canvas à sa grandeur d'origine-->
-                <Button Grid.Column="1" Click="canvasResizeFull" Content="Mise à l'échelle" Grid.ColumnSpan="6" Margin="90,0,24,0"/>
+                <Button Name="btnEchelle" Grid.Column="1" Click="canvasResizeFull" Content="Mise à l'échelle" Grid.ColumnSpan="6" Margin="90,0,24,0"/>
 
                 <!--Zoom label pour montrer le zoom en cours-->
                 <TextBlock
@@ -112,7 +112,7 @@
                 />
 
                 <!-- Bouton pour zoom out-->
-                <Button Grid.Column="9" Click="btnZoomOut" Content="-"/>
+                <Button Name="btnmoins" Grid.Column="9" Click="btnZoomOut" Content="-"/>
 
                 <!-- Slider pour zoom in et zoom out-->
                 <Slider
@@ -129,7 +129,7 @@
                 />
 
                 <!--Bouton pour zoom in-->
-                <Button Grid.Column="13" Click="btnZoomIn" Content="+"/>
+                <Button Name="btnPlus"  Grid.Column="13" Click="btnZoomIn" Content="+"/>
 
                 
 

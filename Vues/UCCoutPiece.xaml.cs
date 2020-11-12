@@ -24,6 +24,12 @@ namespace App_Brycol.Vues
         public UCCoutPiece()
         {
             InitializeComponent();
+
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
+
             DataContext = new Piece_VM("");
             lblNomPiece.Content = Piece_VM.pieceSelect.Nom;
             lblSousTotal.Content = Piece_VM.SousTotal.ToString() + "$";
@@ -32,5 +38,23 @@ namespace App_Brycol.Vues
             lblTotal.Content = Piece_VM.Total.ToString() + "$";
         }
 
+        private void EnleverThemeSombre()
+        {
+            DG_coutItem.Background = Brushes.White;
+
+            DG_coutItem.RowBackground = Brushes.White;
+            DG_coutItem.AlternatingRowBackground = Brushes.White;
+        }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
+
+            DG_coutItem.Background = CouleurArrierePlan;
+
+            DG_coutItem.RowBackground = Brushes.LightGray;
+            DG_coutItem.AlternatingRowBackground = Brushes.Gray;
+        }
     }
 }

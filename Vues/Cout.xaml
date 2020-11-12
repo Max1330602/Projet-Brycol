@@ -23,7 +23,7 @@
             <RowDefinition Height=".5*"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" Background="LightGray"/>
+        <Border x:Name="Banniere" Grid.Row="0" Background="LightGray"/>
         <Image Grid.Row="0" Source="/images/logo.png" HorizontalAlignment="Right"/>
 
         <Button Name="btnOk" Content="Ok" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="30" Margin="0,0,15,10" Click="btnOk_Click"/>

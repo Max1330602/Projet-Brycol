@@ -443,6 +443,8 @@ namespace App_Brycol.Vues
                 }
             }
 
+            btnThemeSombre.Background = CouleurBouton;
+
             btnQuitter.Background = CouleurBouton;
             btnQuitter.Foreground = Brushes.White;
 
@@ -488,6 +490,8 @@ namespace App_Brycol.Vues
                     l.Foreground = Brushes.Black;
                 }
             }
+
+            btnThemeSombre.Background = Brushes.White;
 
             btnQuitter.Background = Brushes.White;
             btnQuitter.Foreground = Brushes.Black;

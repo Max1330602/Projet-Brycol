@@ -16,7 +16,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid x:Name="grdWarning">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Voulez-vous vraiment supprimer le projet?"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,30,0,20">

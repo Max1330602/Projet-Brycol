@@ -72,7 +72,32 @@ namespace App_Brycol.Vues
 
         private void EnleverThemeSombre()
         {
-            
+            btnAjouter.Background = Brushes.White;
+            btnAjouter.Foreground = Brushes.Black;
+
+            btnRetour.Background = Brushes.White;
+            btnRetour.Foreground = Brushes.Black;
+
+            DG_items.RowBackground = Brushes.White;
+            DG_items.AlternatingRowBackground = Brushes.White;
+
+            DG_ListeItems.RowBackground = Brushes.White;
+            DG_ListeItems.AlternatingRowBackground = Brushes.White;
+            DG_ListeItems.Background = Brushes.White;
+
+            Banniere.Background = Brushes.LightGray;
+            Filtre.Background = Brushes.White;
+            Pied.Background = Brushes.White;
+
+            txblst.Background = Brushes.White;
+            txblst.Foreground = Brushes.Black;
+
+            txtFiltre.Foreground = Brushes.Black;
+            txtNom.Foreground = Brushes.Black;
+            txbPrixMin.Foreground = Brushes.Black;
+            txbPrixMax.Foreground = Brushes.Black;
+            txbCategorie.Foreground = Brushes.Black;
+            txbTypePiece.Foreground = Brushes.Black;
         }
 
         private void AppliquerThemeSombre()
@@ -83,16 +108,32 @@ namespace App_Brycol.Vues
             Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
             Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
 
-            
-
             btnAjouter.Background = CouleurBouton;
             btnAjouter.Foreground = Brushes.White;
 
             btnRetour.Background = CouleurBouton;
             btnRetour.Foreground = Brushes.White;
 
+            DG_items.RowBackground = Brushes.LightGray;
+            DG_items.AlternatingRowBackground = Brushes.Gray;
+
+            DG_ListeItems.RowBackground = Brushes.Gray;
+            DG_ListeItems.AlternatingRowBackground = Brushes.LightGray;
+            DG_ListeItems.Background = CouleurArriere;
+
             Banniere.Background = CouleurBanniere;            
             Filtre.Background = CouleurArriere;
+            Pied.Background = CouleurArrierePlan;
+
+            txblst.Background = CouleurArriere;
+            txblst.Foreground = Brushes.White;
+
+            txtFiltre.Foreground = Brushes.White;
+            txtNom.Foreground = Brushes.White;
+            txbPrixMin.Foreground = Brushes.White;
+            txbPrixMax.Foreground = Brushes.White;
+            txbCategorie.Foreground = Brushes.White;
+            txbTypePiece.Foreground = Brushes.White;
         }
     }
 }

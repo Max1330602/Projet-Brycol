@@ -27,6 +27,11 @@ namespace App_Brycol.Vues
         {
             InitializeComponent();
             DataContext = new Projet_VM();
+
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
         }
 
         private void btnComfirm_Click(object sender, RoutedEventArgs e)
@@ -40,6 +45,33 @@ namespace App_Brycol.Vues
         private void btnRefus_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+            Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
+
+            grdWarning.Background = CouleurArrierePlan;
+
+            btnComfirm.Background = CouleurBouton;
+            btnComfirm.Foreground = Brushes.White;
+
+            btnRefus.Background = CouleurBouton;
+            btnRefus.Foreground = Brushes.White;
+
+        }
+
+        private void EnleverThemeSombre()
+        {
+            grdWarning.Background = Brushes.White;
+
+            btnComfirm.Background = Brushes.White;
+            btnComfirm.Foreground = Brushes.Black;
+
+            btnRefus.Background = Brushes.White;
+            btnRefus.Foreground = Brushes.Black;
         }
     }
 }

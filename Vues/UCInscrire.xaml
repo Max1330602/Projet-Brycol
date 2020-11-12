@@ -14,7 +14,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Name="grdInscription">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"></RowDefinition>
             <RowDefinition Height="300"></RowDefinition>
@@ -22,7 +22,7 @@
 
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" Background="LightGray" Grid.ColumnSpan="2"></Border>
+        <Border x:Name="Banniere" Grid.Row="0" Background="LightGray" Grid.ColumnSpan="2"></Border>
         <Image Grid.Row="0" Source="../images/logo.png"></Image>
 
         <Rectangle Stroke="Black" Grid.Row="1" Margin="20,65,20,90"></Rectangle>
