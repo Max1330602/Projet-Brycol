@@ -26,7 +26,6 @@ namespace App_Brycol.VuesModele
         public ICommand cmdSauvProjet { get; set; }
         public ICommand cmdSuppProjet { get; set; }
         public ICommand cmdChargerProjet { get; set; }
-        public static bool themeSombre = false;
 
         public Projet_VM()
         {
@@ -177,23 +176,11 @@ namespace App_Brycol.VuesModele
                         Item_VM.ItemsPlanActuel.Add(i);
                 }
             }
-            foreach (Window w in Application.Current.Windows)
-            {
-                if (w.Name == "wPlanDeTravail")
-                {
-                    w.Close();
-                }
-            }
-            if (ProjetActuel.ListePieces.Count() == 0)
-            {
-                GererProjet popup = new GererProjet();
-                popup.ShowDialog();
-            }
-            else
-            {
-                PlanDeTravail popup = new PlanDeTravail();
-                popup.ShowDialog();
-            }
+
+            EstSauvegarde = true;
+
+            PlanDeTravail popUp = new PlanDeTravail();
+            popUp.ShowDialog();
 
         }
 
@@ -242,6 +229,15 @@ namespace App_Brycol.VuesModele
                     switch (result)
                     {
                         case MessageBoxResult.Yes:
+                            var pReq = from pr in OutilEF.brycolContexte.Projets.Include("Utilisateur") where pr.Nom == Nom select pr;
+                            foreach (Projet pr in pReq)
+                            {
+                                if (pr.Utilisateur == Utilisateur_VM.utilActuel)
+                                {
+                                    MessageBox.Show("Vous avez déjà un projet qui se nomme " + Nom + ".");
+                                    return;
+                                }
+                            }
                             SauNeoProjet();
                             break;
                         case MessageBoxResult.No:
@@ -253,12 +249,19 @@ namespace App_Brycol.VuesModele
                 }
                 else
                 {
+                    var pReq = from pr in OutilEF.brycolContexte.Projets.Include("Utilisateur") where pr.Nom == Nom select pr;
+                    foreach (Projet pr in pReq)
+                    {
+                        if (pr.Utilisateur == Utilisateur_VM.utilActuel)
+                        {
+                            MessageBox.Show("Vous avez déjà un projet qui se nomme " + Nom + ".");
+                            return;
+                        }
+                    }
+                  
                     p.Nom = Nom;
                     OutilEF.brycolContexte.SaveChanges();
                 }
-
-
-
 
                 ProjetActuel = p;
                 EstSauvegarde = true;
@@ -273,6 +276,17 @@ namespace App_Brycol.VuesModele
                     return;
                 }
             }
+
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.Name == "wPlanDeTravail")
+                {
+                    w.Close();
+                }
+            }
+            PlanDeTravail popup = new PlanDeTravail();
+            popup.ShowDialog();
+
         }
 
         public void SuppProjet(Object param)
@@ -282,7 +296,15 @@ namespace App_Brycol.VuesModele
             Plan pla = new Plan();
             List<ItemsPlan> lstItPla = new List<ItemsPlan>();
 
-            pro = OutilEF.brycolContexte.Projets.Find(ProjetActuel.ID);
+            if (ProjetSelectionne == null)
+            {
+                ProjetSelectionne = ProjetActuel.Nom;
+            }
+
+            var ProReq = from pr in OutilEF.brycolContexte.Projets where pr.Nom == ProjetSelectionne select pr;
+            foreach (Projet pr in ProReq)
+                pro = pr;
+
             var PieReq = from pie in OutilEF.brycolContexte.Pieces where pie.Projet.ID == pro.ID select pie;
 
             foreach (Piece pie in PieReq)

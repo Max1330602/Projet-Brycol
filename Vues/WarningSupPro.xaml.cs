@@ -33,9 +33,6 @@ namespace App_Brycol.Vues
 
         private void btnComfirm_Click(object sender, RoutedEventArgs e)
         {
-            Projet_VM.EstSauvegarde = true;
-            Application.Current.MainWindow.Close();
-
             this.Close();
         }
 
