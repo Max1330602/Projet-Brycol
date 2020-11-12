@@ -24,28 +24,33 @@ namespace App_Brycol
     /// </summary>
     public partial class MainWindow : Window
     {
+        private UCCLogin uCLogin { get; set; }
 
        public MainWindow()
         {
             InitializeComponent();
             OutilEF outilEF = new OutilEF();
-            DataContext = new Utilisateur_VM();
-            //DataContext = new Projet_VM();
+
+            uCLogin = new UCCLogin();
+            Grid.SetRow(uCLogin, 1);
+
+            gridMainWindow.Children.Add(uCLogin);
+
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
+
+        private void OnClosing(object sender, CancelEventArgs cancelEventArgs)
         {
+            if (Projet_VM.ProjetActuel != null && Projet_VM.EstSauvegarde == false)
+            {
+                WarningProjetNonSau popUp = new WarningProjetNonSau();
+                popUp.ShowDialog();
+
+
+            }
 
         }
 
-        private void btnInscrire_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
-
-        private void btnTriche_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

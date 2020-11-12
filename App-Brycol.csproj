@@ -200,11 +200,14 @@
     <Compile Include="Vues\Piece2D.xaml.cs">
       <DependentUpon>Piece2D.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vues\PlanDeTravail.xaml.cs">
+      <DependentUpon>PlanDeTravail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vues\GererProjet.xaml.cs">
       <DependentUpon>GererProjet.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vues\PlanDeTravail.xaml.cs">
-      <DependentUpon>PlanDeTravail.xaml</DependentUpon>
+    <Compile Include="Vues\UCCLogin.xaml.cs">
+      <DependentUpon>UCCLogin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vues\UCCMenuPrincipal.xaml.cs">
       <DependentUpon>UCCMenuPrincipal.xaml</DependentUpon>
@@ -217,6 +220,9 @@
     </Compile>
     <Compile Include="Vues\UCCoutProjet.xaml.cs">
       <DependentUpon>UCCoutProjet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\UCInscrire.xaml.cs">
+      <DependentUpon>UCInscrire.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vues\WarningProjetNonSau.xaml.cs">
       <DependentUpon>WarningProjetNonSau.xaml</DependentUpon>
@@ -272,11 +278,15 @@
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
+    <Page Include="Vues\PlanDeTravail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Vues\GererProjet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vues\PlanDeTravail.xaml">
+    <Page Include="Vues\UCCLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -293,6 +303,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vues\UCCoutProjet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\UCInscrire.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -322,7 +336,6 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
