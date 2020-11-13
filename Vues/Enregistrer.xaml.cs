@@ -24,7 +24,15 @@ namespace App_Brycol.Vues
         {
             InitializeComponent();
             DataContext = new Projet_VM();
+
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
+
         }
+
+        
 
         private void btnEnregistrer_Click(object sender, RoutedEventArgs e)
         {
@@ -35,5 +43,38 @@ namespace App_Brycol.Vues
         {
             this.Close();
         }
+
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+            Brush CouleurArriere = (Brush)bc.ConvertFrom("#33342F");
+            Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
+            Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
+
+            Banniere.Background = CouleurBanniere;
+            grdEnregistrer.Background = CouleurArrierePlan;
+
+            btnEnregistrer.Background = CouleurBouton;
+            btnEnregistrer.Foreground = Brushes.White;
+
+            btnAnnuler.Background = CouleurBouton;
+            btnAnnuler.Foreground = Brushes.White;
+
+        }
+
+        private void EnleverThemeSombre()
+        {
+            Banniere.Background = Brushes.LightGray;
+            grdEnregistrer.Background = Brushes.White;
+
+            btnEnregistrer.Background = Brushes.White;
+            btnEnregistrer.Foreground = Brushes.Black;
+
+            btnAnnuler.Background = Brushes.White;
+            btnAnnuler.Foreground = Brushes.Black;
+        }
+        
     }
 }

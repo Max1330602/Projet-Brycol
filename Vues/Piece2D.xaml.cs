@@ -22,6 +22,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.TextFormatting;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Brush = System.Windows.Media.Brush;
 using Brushes = System.Windows.Media.Brushes;
 using Color = System.Drawing.Color;
 using Image = System.Windows.Controls.Image;
@@ -38,61 +39,61 @@ namespace App_Brycol.Vues
 
         public Piece2D()
         {
-            
-                InitializeComponent();
-                initializeItems();
 
-                ImageBrush imgBrush = new ImageBrush();
-                imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/planche" + Piece_VM.pieceActuel.TypePlancher.Nom + ".jpg"));
-                canvas.Background = imgBrush;
+            InitializeComponent();
+            initializeItems();
 
-                if (Plan_VM.uniteDeMesure == "Mètres")
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
+
+            ImageBrush imgBrush = new ImageBrush();
+            imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/planche" + Piece_VM.pieceActuel.TypePlancher.Nom + ".jpg"));
+            canvas.Background = imgBrush;
+
+            if (Plan_VM.uniteDeMesure == "Mètres")
+            {
+                Canvas.SetLeft(canvas, (600 / 2) - (Piece_VM.pieceActuel.Largeur * pixelToM / 2));
+                Canvas.SetBottom(canvas, (800 / 2) - (Piece_VM.pieceActuel.Longueur * pixelToM / 2));
+
+                if (Piece_VM.pieceActuel.Longueur <= 8 || Piece_VM.pieceActuel.Largeur <= 8)
                 {
-                    Canvas.SetLeft(canvas, (600 / 2) - (Piece_VM.pieceActuel.Largeur * pixelToM / 2));
-                    Canvas.SetBottom(canvas, (800 / 2) - (Piece_VM.pieceActuel.Longueur * pixelToM / 2));
-
-                    if (Piece_VM.pieceActuel.Longueur <= 8 || Piece_VM.pieceActuel.Largeur <= 8)
-                    {
-                        zoom = 1.4 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
-                        zoomMax = 1.9;
-                        zoomMin = 0.7;
-                    }
-                    else
-                    {
-                        zoom = 0.9 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
-                        zoomMax = 1.2;
-                        zoomMin = 0.3;
-                    }
-
+                    zoom = 1.4 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
+                    zoomMax = 1.9;
+                    zoomMin = 0.7;
                 }
                 else
                 {
-                    Canvas.SetLeft(canvas, (600 / 2) - (Piece_VM.pieceActuel.Largeur * pixelToPied / 2));
-                    Canvas.SetBottom(canvas, (800 / 2) - (Piece_VM.pieceActuel.Longueur * pixelToPied / 2));
+                    zoom = 0.9 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
+                    zoomMax = 1.2;
+                    zoomMin = 0.3;
+                }
 
-                    if (Piece_VM.pieceActuel.Longueur <= 26 || Piece_VM.pieceActuel.Largeur <= 26)
-                    {
-                        zoom = 1.4 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
-                        zoomMax = 1.9;
-                        zoomMin = 0.7;
-                    }
-                    else
-                    {
-                        zoom = 0.9 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
-                        zoomMax = 1.2;
-                        zoomMin = 0.3;
-                    }
-                
-            
+            }
+            else
+            {
+                Canvas.SetLeft(canvas, (600 / 2) - (Piece_VM.pieceActuel.Largeur * pixelToPied / 2));
+                Canvas.SetBottom(canvas, (800 / 2) - (Piece_VM.pieceActuel.Longueur * pixelToPied / 2));
+
+                if (Piece_VM.pieceActuel.Longueur <= 26 || Piece_VM.pieceActuel.Largeur <= 26)
+                {
+                    zoom = 1.4 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
+                    zoomMax = 1.9;
+                    zoomMin = 0.7;
+                }
+                else
+                {
+                    zoom = 0.9 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
+                    zoomMax = 1.2;
+                    zoomMin = 0.3;
+                }
+
+
             }
 
-
-            
-            
-            
-          
             canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transforme la grandeur du canvas
-          
+
 
             DataContext = new Plan_VM();
         }
@@ -359,22 +360,34 @@ namespace App_Brycol.Vues
                         bitmap.EndInit();
                     }
 
+                        
+
+                    try
+                    {
                         bitmap = new BitmapImage();
                         bitmap.BeginInit();
                         bitmap.CacheOption = BitmapCacheOption.OnLoad;
                         bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                         bitmap.UriSource = new Uri("pack://application:,,,/images/ItemsModifies/Item" + ip.Item.ID + "/" + ip.Couleur + ".png");
-
-                    try
-                    {
                         bitmap.EndInit();
                     }
                     catch (Exception e)
                     {
-                        bitmap = new BitmapImage();
-                        bitmap.BeginInit();
-                        bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png");
-                        bitmap.EndInit();
+                        try
+                        {
+
+                            bitmap = new BitmapImage();
+                            bitmap.BeginInit();
+                            bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png");
+                            bitmap.EndInit();
+                        }
+                        catch(Exception e2)
+                        {
+                            bitmap = new BitmapImage();
+                            bitmap.BeginInit();
+                            bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item0.png");
+                            bitmap.EndInit();
+                        }
                     }
                     
                     
@@ -513,6 +526,45 @@ namespace App_Brycol.Vues
 
             
 
+        }
+
+        private void EnleverThemeSombre()
+        {
+            btnDeletePlan.Background = Brushes.White;
+            btnDeletePlan.Foreground = Brushes.Black;
+
+            btnRotationPlan.Background = Brushes.White;
+            btnRotationPlan.Foreground = Brushes.Black;
+
+            btnEchelle.Background = Brushes.White;
+            btnEchelle.Foreground = Brushes.Black;
+
+            btnmoins.Background = Brushes.White;
+            btnmoins.Foreground = Brushes.Black;
+
+            btnPlus.Background = Brushes.White;
+            btnPlus.Foreground = Brushes.Black;
+        }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+
+            btnDeletePlan.Background = CouleurBouton;
+            btnDeletePlan.Foreground = Brushes.White;
+
+            btnRotationPlan.Background = CouleurBouton;
+            btnRotationPlan.Foreground = Brushes.White;
+
+            btnEchelle.Background = CouleurBouton;
+            btnEchelle.Foreground = Brushes.White;
+
+            btnmoins.Background = CouleurBouton;
+            btnmoins.Foreground = Brushes.White;
+
+            btnPlus.Background = CouleurBouton;
+            btnPlus.Foreground = Brushes.White;
         }
 
     }

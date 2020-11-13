@@ -228,8 +228,11 @@ namespace App_Brycol.VuesModele
             pVM.InitPlan();
 
 
-            PlanDeTravail popup = new PlanDeTravail();
-            popup.ShowDialog();
+            PlanDeTravail PlanDeTravail = new PlanDeTravail();
+            PlanDeTravail.grdPlanTravail.Children.Clear();
+            PlanDeTravail.grdPlanTravail.Children.Add(new PlanDeTravail2());
+            PlanDeTravail.ShowDialog();
+
 
         }
 
@@ -265,8 +268,14 @@ namespace App_Brycol.VuesModele
             OutilEF.brycolContexte.SaveChanges();
             pieceActuel = p;
 
-            PlanDeTravail popup = new PlanDeTravail();
-            popup.ShowDialog();
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.GetType() == typeof(PlanDeTravail))
+                {
+                    (w as PlanDeTravail).grdPlanTravail.Children.Clear();
+                    (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
+                }
+            }
 
             //---TODO-----------------------------------------------------------------------
             var plreq = from pl in OutilEF.brycolContexte.Plans.Include("Piece") where pl.Piece.ID == pieceActuel.ID select pl;

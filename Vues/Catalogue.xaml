@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_Brycol.Vues"
         mc:Ignorable="d"
-        Title="Catalogue" Height="600" Width="910" Icon="pack://application:,,,/images/favicon.png">
+        Title="Catalogue" MinHeight="600" MinWidth="910" Icon="pack://application:,,,/images/favicon.png">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
@@ -28,9 +28,9 @@
 
         <Border Grid.Row="0" Grid.ColumnSpan="3" Background="LightGray"></Border>
         <Image Grid.Row="0" Grid.ColumnSpan="3" Source="/images/logo.png" HorizontalAlignment="Right"></Image>
-        <TextBlock Grid.ColumnSpan="2" Text="Catalogue" FontSize="35" FontWeight="Bold"></TextBlock>
+        <TextBlock x:Name="Banniere" Grid.ColumnSpan="3" Text="Catalogue" FontSize="35" FontWeight="Bold"></TextBlock>
         <TextBlock VerticalAlignment="Bottom" Padding="10" FontSize="20" Grid.ColumnSpan="3">Sélectionner un élément pour ajouter à votre pièce</TextBlock>
-        <Grid Grid.Row="1">
+        <Grid x:Name="Filtre" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"></RowDefinition>
                 <RowDefinition Height="25"></RowDefinition>
@@ -43,16 +43,16 @@
                 <ColumnDefinition Width="80"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Filtres" FontSize="15" FontWeight="Bold"></TextBlock>
-            <TextBlock Grid.Row="1" Text="Nom:"></TextBlock>
+            <TextBlock Name="txtFiltre" Text="Filtres" FontSize="15" FontWeight="Bold"></TextBlock>
+            <TextBlock Name="txtNom" Grid.Row="1" Text="Nom:"></TextBlock>
             <TextBox Text="{Binding FiltreNom, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"></TextBox>
-            <TextBlock Grid.Row="2" Text="Prix min.:"></TextBlock>
+            <TextBlock Name="txbPrixMin"  Grid.Row="2" Text="Prix min.:"></TextBlock>
             <TextBox Name="txtPrixMin" TextChanged="txt_TextChanged" Text="{Binding FiltrePrixMin, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="2"></TextBox>
-            <TextBlock Grid.Row="3"  Text="Prix max.:"></TextBlock>
+            <TextBlock Name="txbPrixMax" Grid.Row="3"  Text="Prix max.:"></TextBlock>
             <TextBox Name="txtPrixMax"  Text="{Binding FiltrePrixMax, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="3"></TextBox>
-            <TextBlock Grid.Row="4" Text="Catégorie:"></TextBlock>
+            <TextBlock Name="txbCategorie" Grid.Row="4" Text="Catégorie:"></TextBlock>
             <ComboBox SelectedItem="{ Binding FiltreCategorie, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Categories}" Grid.Column="1" Grid.Row="4" />
-            <TextBlock Grid.Row="5" Text="Type de pièce:"></TextBlock>
+            <TextBlock Name="txbTypePiece" Grid.Row="5" Text="Type de pièce:"></TextBlock>
             <ComboBox SelectedItem="{ Binding FiltreType, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding TypesDePiece}" Grid.Column="1" Grid.Row="5" />
         </Grid>
         <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DG_items" Grid.Row="1" Grid.Column="1" ItemsSource="{ Binding SommaireItems}" SelectedItem="{ Binding ItemSelectionne}">
@@ -81,7 +81,7 @@
                 <RowDefinition Height="25"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Text="Liste des éléments ajoutés"></TextBlock>
+            <TextBlock Name="txblst"  Text="Liste des éléments ajoutés"></TextBlock>
 
             <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DG_ListeItems" Grid.Row="1" Grid.Column="2" ItemsSource="{ Binding ListeItems}">
                 <DataGrid.Columns>
@@ -90,6 +90,9 @@
             </DataGrid>
 
         </Grid>
+
+        <Border x:Name="Pied" Grid.Row="2" Grid.ColumnSpan="3" Background="White"></Border>
+
         <Button Name="btnAjouter" Command="{ Binding cmdAjouterItem }" Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="1" Width="100" Height="25" Content="Ajouter" HorizontalAlignment="Right" Margin="0,0,10,10"></Button>
         <Button Name="btnRetour" Click="btnRetour_Click" Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="1" Width="100" Height="25" Content="Retour" HorizontalAlignment="Right" Margin="0,0,125,10"></Button>
 

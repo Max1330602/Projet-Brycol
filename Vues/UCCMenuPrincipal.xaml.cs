@@ -25,6 +25,12 @@ namespace App_Brycol.Vues
         {
             InitializeComponent();
             DataContext = new Projet_VM();
+
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
+
         }
 
         private void btnTeleverserProjet_Click(object sender, RoutedEventArgs e)
@@ -33,5 +39,37 @@ namespace App_Brycol.Vues
             popup.ShowDialog();
         }
 
+
+        private void EnleverThemeSombre()
+        {
+            Banniere.Background = Brushes.LightGray;
+
+            grdMenuPrincipal.Background = Brushes.White;
+
+            btnCreerProjet.Background = Brushes.White;
+            btnCreerProjet.Foreground = Brushes.Black;
+
+            btnTeleverserProjet.Background = Brushes.White;
+            btnTeleverserProjet.Foreground = Brushes.Black;
+
+        }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+            Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
+            Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
+
+            Banniere.Background = CouleurBanniere;
+
+            grdMenuPrincipal.Background = CouleurArrierePlan;
+
+            btnCreerProjet.Background = CouleurBouton;
+            btnCreerProjet.Foreground = Brushes.White;
+
+            btnTeleverserProjet.Background = CouleurBouton;
+            btnTeleverserProjet.Foreground = Brushes.White;
+        }
     }
 }

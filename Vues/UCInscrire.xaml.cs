@@ -62,5 +62,37 @@ namespace App_Brycol.Vues
             }
             btnInscrire.SetBinding(Button.CommandProperty, new Binding("cmdCreeUtil"));
         }
+
+        private void EnleverThemeSombre()
+        {
+            Banniere.Background = Brushes.LightGray;
+
+            grdInscription.Background = Brushes.White;
+
+            btnAnnuler.Background = Brushes.White;
+            btnAnnuler.Foreground = Brushes.Black;
+
+            btnInscrire.Background = Brushes.White;
+            btnInscrire.Foreground = Brushes.Black;
+
+        }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+            Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
+            Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
+
+            Banniere.Background = CouleurBanniere;
+
+            grdInscription.Background = CouleurArrierePlan;
+
+            btnAnnuler.Background = CouleurBouton;
+            btnAnnuler.Foreground = Brushes.White;
+
+            btnInscrire.Background = CouleurBouton;
+            btnInscrire.Foreground = Brushes.White;
+        }
     }
 }
