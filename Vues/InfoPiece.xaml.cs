@@ -23,7 +23,7 @@ namespace App_Brycol.Vues
     /// <summary>
     /// Logique d'interaction pour InfoPiece.xaml
     /// </summary>
-    public partial class InfoPiece : Window
+    public partial class InfoPiece : Window 
     {
         public static string uniteMesure;
 
@@ -50,7 +50,7 @@ namespace App_Brycol.Vues
             }
 
         }
-
+      
 
         private void btnContinuer_Click(object sender, RoutedEventArgs e)
         {
@@ -64,7 +64,7 @@ namespace App_Brycol.Vues
                 MessageBox.Show("Les dimensions ne sont pas valides. (Maximum de 30 mètres et minimum de 3 mètres)");
                 return;
             }
-
+                   
             this.Close();
             btnContinuer.SetBinding(Button.CommandProperty, new Binding("cmdPiece"));
         }
@@ -80,7 +80,7 @@ namespace App_Brycol.Vues
             {
                 GererProjet popUp = new GererProjet();
                 popUp.ShowDialog();
-            }
+            } 
         }
 
         private void metre_Checked(object sender, RoutedEventArgs e)
@@ -98,6 +98,8 @@ namespace App_Brycol.Vues
                 txtLargeur.Value = (Convert.ToDouble(txtLargeur.Text) * conversion);
                 txtLongueur.Value = (Convert.ToDouble(txtLongueur.Text) * conversion);
             }
+                
+
         }
 
         private void pied_Checked(object sender, RoutedEventArgs e)
@@ -120,14 +122,14 @@ namespace App_Brycol.Vues
         private void txtLongueur_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (txtLongueur.Text != "" && txtLargeur.Text != "")
-                txtSuperf.Text = (Convert.ToDouble(txtLargeur.Text) * Convert.ToDouble(txtLongueur.Text)).ToString();
+                txtSuperf.Text = (Math.Round(Convert.ToDouble(txtLargeur.Text) * Convert.ToDouble(txtLongueur.Text), 2)).ToString();
 
         }
 
         private void txtLargeur_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (txtLongueur.Text != "" && txtLargeur.Text != "")
-                txtSuperf.Text = (Convert.ToDouble(txtLargeur.Text) * Convert.ToDouble(txtLongueur.Text)).ToString();
+                txtSuperf.Text = (Math.Round(Convert.ToDouble(txtLargeur.Text) * Convert.ToDouble(txtLongueur.Text), 2)).ToString();
         }
 
         private void EnleverThemeSombre()

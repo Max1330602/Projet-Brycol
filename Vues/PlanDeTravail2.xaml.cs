@@ -152,13 +152,6 @@ namespace App_Brycol.Vues
 
         }
 
-        private void btnSupprimer_Click(object sender, RoutedEventArgs e)
-        {
-            WarningSupPro popUp = new WarningSupPro();
-            popUp.ShowDialog();
-
-        }
-
         private void AppliquerThemeSombre()
         {
             BrushConverter bc = new BrushConverter();
@@ -194,9 +187,6 @@ namespace App_Brycol.Vues
             btnEnregistrer.Background = CouleurBouton;
             btnEnregistrer.Foreground = Brushes.White;
 
-            btnSupprimer.Background = CouleurBouton;
-            btnSupprimer.Foreground = Brushes.White;
-
             Banniere.Background = CouleurBanniere;
             ArrierePlan.Background = CouleurArrierePlan;
             ArriereBoutons.Background = CouleurArriere;
@@ -230,9 +220,6 @@ namespace App_Brycol.Vues
 
             btnEnregistrer.Background = Brushes.White;
             btnEnregistrer.Foreground = Brushes.Black;
-
-            btnSupprimer.Background = Brushes.White;
-            btnSupprimer.Foreground = Brushes.Black;
 
             Banniere.Background = Brushes.LightGray;
             ArrierePlan.Background = Brushes.White;
