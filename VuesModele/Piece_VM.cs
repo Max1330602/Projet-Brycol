@@ -194,8 +194,8 @@ namespace App_Brycol.VuesModele
             Piece p = new Piece();
             p.Projet = Projet_VM.ProjetActuel;
             p.Nom = Nom;
-            p.Largeur = Largeur;
-            p.Longueur = Longueur;
+            p.Largeur = (float)Math.Round(Largeur * 100f) / 100f;
+            p.Longueur = (float)Math.Round(Longueur * 100f) / 100f;
             p.Projet.ListePieces.Add(p);
 
             var treq = from t in OutilEF.brycolContexte.TypePiece where t.Nom == TypePiece select t;
@@ -249,8 +249,8 @@ namespace App_Brycol.VuesModele
         {
             Piece p = OutilEF.brycolContexte.Pieces.Find(pieceActuel.ID);
             p.Nom = Nom;
-            p.Largeur = Largeur;
-            p.Longueur = Longueur;
+            p.Largeur = (float)Math.Round(Largeur * 100f) / 100f;
+            p.Longueur = (float)Math.Round(Longueur * 100f) / 100f;
 
             var treq = from t in OutilEF.brycolContexte.TypePiece where t.Nom == TypePiece select t;
 

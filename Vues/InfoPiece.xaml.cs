@@ -23,8 +23,10 @@ namespace App_Brycol.Vues
     /// <summary>
     /// Logique d'interaction pour InfoPiece.xaml
     /// </summary>
-    public partial class InfoPiece : Window 
+    public partial class InfoPiece : Window
     {
+        public static string uniteMesure;
+
         public InfoPiece([Optional] string paramOpt)
         {
             InitializeComponent();
@@ -36,24 +38,33 @@ namespace App_Brycol.Vues
             else
                 EnleverThemeSombre();
 
+            if (Plan_VM.uniteDeMesure == "" || Plan_VM.uniteDeMesure == "Mètres")
+            {
+                pied.IsChecked = false;
+                metre.IsChecked = true;
+            }
+            else if (Plan_VM.uniteDeMesure == "Pieds")
+            {
+                metre.IsChecked = false;
+                pied.IsChecked = true;
+            }
+
         }
 
-        public static string uniteMesure;
-      
 
         private void btnContinuer_Click(object sender, RoutedEventArgs e)
         {
-            if ((bool)pied.IsChecked && (Int32.Parse(txtLongueur.Text) > 100 || Int32.Parse(txtLongueur.Text) < 3))
+            if ((bool)pied.IsChecked && (Double.Parse(txtLongueur.Text) > 100 || Double.Parse(txtLongueur.Text) < 3))
             {
                 MessageBox.Show("Les dimensions ne sont pas valides. (Maximum 100 pieds et minimum de 3 pieds)");
                 return;
             }
-            else if ((bool)metre.IsChecked && (Int32.Parse(txtLongueur.Text) > 30 || Int32.Parse(txtLongueur.Text) < 1))
+            else if ((bool)metre.IsChecked && (Double.Parse(txtLongueur.Text) > 30 || Double.Parse(txtLongueur.Text) < 1))
             {
-                MessageBox.Show("Les dimensions ne sont pas valides. (Maximum de 30 mètres et minimum de 1 mètres)");
+                MessageBox.Show("Les dimensions ne sont pas valides. (Maximum de 30 mètres et minimum de 3 mètres)");
                 return;
             }
-                   
+
             this.Close();
             btnContinuer.SetBinding(Button.CommandProperty, new Binding("cmdPiece"));
         }
@@ -69,26 +80,41 @@ namespace App_Brycol.Vues
             {
                 GererProjet popUp = new GererProjet();
                 popUp.ShowDialog();
-            } 
+            }
         }
 
         private void metre_Checked(object sender, RoutedEventArgs e)
         {
+            double conversion = 0.3048D;
+
             uniteMesure = "Mètres";
             Plan_VM.uniteDeMesure = uniteMesure;
 
             if (txtUniMesu != null)
                 txtUniMesu.Text = "m";
 
+            if (txtLongueur.Value != null && txtLargeur.Value != null)
+            {
+                txtLargeur.Value = (Convert.ToDouble(txtLargeur.Text) * conversion);
+                txtLongueur.Value = (Convert.ToDouble(txtLongueur.Text) * conversion);
+            }
         }
 
         private void pied_Checked(object sender, RoutedEventArgs e)
         {
+            double conversion = 3.2809D;
+
             uniteMesure = "Pieds";
             Plan_VM.uniteDeMesure = uniteMesure;
 
             if (txtUniMesu != null)
                 txtUniMesu.Text = "p";
+
+            if (txtLongueur.Value != null && txtLargeur.Value != null)
+            {
+                txtLargeur.Value = (Convert.ToDouble(txtLargeur.Text) * conversion);
+                txtLongueur.Value = (Convert.ToDouble(txtLongueur.Text) * conversion);
+            }
         }
 
         private void txtLongueur_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
