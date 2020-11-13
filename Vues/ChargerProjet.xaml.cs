@@ -64,10 +64,6 @@ namespace App_Brycol.Vues
             WarningSupPro popUp = new WarningSupPro();
             popUp.ShowDialog();
 
-            var pReq = (from p in OutilEF.brycolContexte.Projets.Include("Utilisateur") where p.Utilisateur.Nom == Utilisateur_VM.utilActuel.Nom select p.Nom).ToList();
-
-            cmbProjets.ItemsSource = pReq;
-
         }
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
