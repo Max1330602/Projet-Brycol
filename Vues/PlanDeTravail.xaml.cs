@@ -43,6 +43,14 @@ namespace App_Brycol.Vues
                 WarningProjetNonSau popUp = new WarningProjetNonSau();
                 popUp.ShowDialog();
             }
+
+            Projet_VM.ProjetActuel.ListePieces.Clear();
+            Projet_VM.ProjetActuel.ListePlans.Clear();
+            Projet_VM.ProjetActuel = null;
+            Piece_VM.pieceActuel = null;
+            Plan_VM.PlanActuel = null;
+            Plan_VM.uniteDeMesure = "";
+
         }
     }
 }

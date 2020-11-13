@@ -33,6 +33,11 @@ namespace App_Brycol.Vues
 
             DataContext = new Piece_VM(paramOpt);
 
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
+
             if (Plan_VM.uniteDeMesure == "" || Plan_VM.uniteDeMesure == "Mètres")
             {
                 pied.IsChecked = false;
@@ -117,14 +122,41 @@ namespace App_Brycol.Vues
         private void txtLongueur_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (txtLongueur.Text != "" && txtLargeur.Text != "")
-                txtSuperf.Text = (Convert.ToDouble(txtLargeur.Text) * Convert.ToDouble(txtLongueur.Text)).ToString();
+                txtSuperf.Text = (Math.Round(Convert.ToDouble(txtLargeur.Text) * Convert.ToDouble(txtLongueur.Text), 2)).ToString();
 
         }
 
         private void txtLargeur_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (txtLongueur.Text != "" && txtLargeur.Text != "")
-                txtSuperf.Text = (Convert.ToDouble(txtLargeur.Text) * Convert.ToDouble(txtLongueur.Text)).ToString();
+                txtSuperf.Text = (Math.Round(Convert.ToDouble(txtLargeur.Text) * Convert.ToDouble(txtLongueur.Text), 2)).ToString();
+        }
+
+        private void EnleverThemeSombre()
+        {
+            grdInfoPiece.Background = Brushes.White;
+
+            btnAnnuler.Background = Brushes.White;
+            btnAnnuler.Foreground = Brushes.Black;
+
+            btnContinuer.Background = Brushes.White;
+            btnContinuer.Foreground = Brushes.Black;
+        }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+            Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
+            Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
+
+            grdInfoPiece.Background = CouleurArrierePlan;
+
+            btnAnnuler.Background = CouleurBouton;
+            btnAnnuler.Foreground = Brushes.White;
+
+            btnContinuer.Background = CouleurBouton;
+            btnContinuer.Foreground = Brushes.White;
         }
     }
 }
