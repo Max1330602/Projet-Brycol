@@ -308,19 +308,38 @@ namespace App_Brycol.Vues
 
         private void txtProjet_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (txtProjet.Text != Projet_VM.ProjetActuel.Nom)
+            {
+                btnModifNom.Visibility = Visibility.Visible;
+                return;
+            }
+            btnModifNom.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void btnModifNom_Click(object sender, RoutedEventArgs e)
+        {
+            bool estExistant = false;
+
             var pReq = from pr in OutilEF.brycolContexte.Projets.Include("Utilisateur") where pr.Nom == txtProjet.Text select pr;
             foreach (Projet pr in pReq)
             {
-                if (pr.Utilisateur == Utilisateur_VM.utilActuel && Projet_VM.ProjetActuel.Nom != pr.Nom)
-                {
-                    MessageBox.Show("Vous avez déjà un projet qui se nomme " + txtProjet.Text + ".");
-                    return;
-                }
+                if (pr.Utilisateur == Utilisateur_VM.utilActuel && Projet_VM.ProjetActuel.ID != pr.ID)
+                    estExistant = true;
+            }
+            if (estExistant)
+            {
+                MessageBox.Show("Vous avez déjà un projet qui se nomme " + txtProjet.Text + ".");
+                txtProjet.Text = Projet_VM.ProjetActuel.Nom;
+                btnModifNom.Visibility = Visibility.Collapsed;
+                return;
             }
             Projet p = OutilEF.brycolContexte.Projets.Find(Projet_VM.ProjetActuel.ID);
             Projet_VM.ProjetActuel.Nom = txtProjet.Text;
             p.Nom = Projet_VM.ProjetActuel.Nom;
             OutilEF.brycolContexte.SaveChanges();
+
+            btnModifNom.Visibility = Visibility.Collapsed;
         }
 
         private void btnPiece1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -524,5 +543,6 @@ namespace App_Brycol.Vues
 
             }
         }
+
     }
 }
