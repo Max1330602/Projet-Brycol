@@ -107,6 +107,12 @@ namespace App_Brycol.Vues
         private void EnleverThemeSombre()
         {
             grdInfoPiece.Background = Brushes.White;
+
+            btnAnnuler.Background = Brushes.White;
+            btnAnnuler.Foreground = Brushes.Black;
+
+            btnContinuer.Background = Brushes.White;
+            btnContinuer.Foreground = Brushes.Black;
         }
 
         private void AppliquerThemeSombre()

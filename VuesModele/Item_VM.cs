@@ -24,6 +24,7 @@ namespace App_Brycol.VuesModele
         {
             cmdAjouterItem = new Commande(AjouterItem); 
             SommaireItems = new ObservableCollection<Item>();
+            StructuresItems = new ObservableCollection<Item>();
             ListeItems = new ObservableCollection<Item>();
             Categories = new ObservableCollection<string>();
             TypesDePiece = new ObservableCollection<string>();
@@ -42,7 +43,12 @@ namespace App_Brycol.VuesModele
 
             foreach (Item i in iReq)
             {
-                SommaireItems.Add(i);
+                if (i.Nom == "Porte" && i.Nom == "Fenêtre")
+                    StructuresItems.Add(i);
+                else
+                    SommaireItems.Add(i);
+
+
 
                 if (!Categories.Contains(i.Categorie.Nom))
                     Categories.Add(i.Categorie.Nom);
@@ -51,6 +57,7 @@ namespace App_Brycol.VuesModele
                     TypesDePiece.Add(i.TypePiece.Nom);
             }
             Items = SommaireItems;
+            Structures = StructuresItems;
             Categories.Add("");
             TypesDePiece.Add("");
 
@@ -81,6 +88,7 @@ namespace App_Brycol.VuesModele
         public const int PRIXMIN = 0;
 
         public ObservableCollection<Item> Items;
+        public ObservableCollection<Item> Structures;
 
         public static ObservableCollection<ItemsPlan> ItemsPlanActuel;
         public static ObservableCollection<ItemsPlan> ItemsPlanModifie;
@@ -130,7 +138,18 @@ namespace App_Brycol.VuesModele
                 _sommaireItems = value;
                 OnPropertyChanged("SommaireItems");
             }
-        }      
+        }
+
+        private ObservableCollection<Item> _structuresItems;
+        public ObservableCollection<Item> StructuresItems
+        {
+            get { return _structuresItems; }
+            set
+            {
+                _structuresItems = value;
+                OnPropertyChanged("StructuresItems");
+            }
+        }
 
         private Item _itemSelectionne;
         public Item ItemSelectionne

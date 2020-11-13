@@ -227,13 +227,22 @@ namespace App_Brycol.VuesModele
             Plan_VM pVM = new Plan_VM();
             pVM.InitPlan();
 
-
-            PlanDeTravail PlanDeTravail = new PlanDeTravail();
-            PlanDeTravail.grdPlanTravail.Children.Clear();
-            PlanDeTravail.grdPlanTravail.Children.Add(new PlanDeTravail2());
-            PlanDeTravail.ShowDialog();
-
-
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.GetType() == typeof(PlanDeTravail))
+                {
+                    Projet_VM.planOuvert = true;
+                    (w as PlanDeTravail).grdPlanTravail.Children.Clear();
+                    (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
+                }
+            }
+            if (!Projet_VM.planOuvert)
+            {
+                PlanDeTravail PlanDeTravail = new PlanDeTravail();
+                PlanDeTravail.grdPlanTravail.Children.Clear();
+                PlanDeTravail.grdPlanTravail.Children.Add(new PlanDeTravail2());
+                PlanDeTravail.ShowDialog();
+            }
         }
 
         private void modifierPiece()

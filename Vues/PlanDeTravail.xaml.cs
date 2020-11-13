@@ -43,6 +43,7 @@ namespace App_Brycol.Vues
                 WarningProjetNonSau popUp = new WarningProjetNonSau();
                 popUp.ShowDialog();
             }
+            Projet_VM.planOuvert = false;
         }
     }
 }

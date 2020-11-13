@@ -401,17 +401,16 @@ namespace App_Brycol.Vues
         private void OuvrirPlan()
         {
             this.Close();
-            bool planOuvert = false;
             foreach (Window w in Application.Current.Windows)
             {
                 if (w.GetType() == typeof(PlanDeTravail))
                 {
-                    planOuvert = true;
+                    Projet_VM.planOuvert = true;
                     (w as PlanDeTravail).grdPlanTravail.Children.Clear();
                     (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
                 }
             }
-            if (!planOuvert)
+            if (!Projet_VM.planOuvert)
             {
                 PlanDeTravail PlanDeTravail = new PlanDeTravail();
                 PlanDeTravail.grdPlanTravail.Children.Clear();

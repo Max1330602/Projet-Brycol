@@ -23,6 +23,7 @@ namespace App_Brycol.VuesModele
         public static Projet ProjetActuel;
         public static bool EstSauvegarde = false;
         public static bool themeSombre = false;
+        public static bool planOuvert = false;
         public ICommand cmdCreerProjet { get; set; }
         public ICommand cmdSauvProjet { get; set; }
         public ICommand cmdSuppProjet { get; set; }

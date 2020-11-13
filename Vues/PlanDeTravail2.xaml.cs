@@ -239,5 +239,11 @@ namespace App_Brycol.Vues
             ArriereBoutons.Background = Brushes.White;
 
         }
+
+        private void btnStructure_Click(object sender, RoutedEventArgs e)
+        {
+            Structures popup = new Structures();
+            popup.ShowDialog();
+        }
     }
 }
