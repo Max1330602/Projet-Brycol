@@ -22,6 +22,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.TextFormatting;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Application = System.Windows.Application;
 using Brush = System.Windows.Media.Brush;
 using Brushes = System.Windows.Media.Brushes;
 using Color = System.Drawing.Color;
@@ -199,6 +200,27 @@ namespace App_Brycol.Vues
                 
                         i.emplacementGauche = Canvas.GetLeft(draggedImage) + offset.X;
                         i.emplacementHaut = Canvas.GetTop(draggedImage) + offset.Y;
+
+                        if (i.Item.Nom == "Porte")
+                        {
+                            if (i.angleRotation == 0)
+                                i.emplacementHaut = -25;
+                            else if (i.angleRotation == 90)
+                                i.emplacementGauche = canvas.Width - 2;
+                            else if (i.angleRotation == 180)
+                                i.emplacementHaut = canvas.Height-30;
+                            else if (i.angleRotation == 270)
+                                i.emplacementGauche = 0;
+
+                            foreach (Window w in Application.Current.Windows)
+                            {
+                                if (w.GetType() == typeof(PlanDeTravail))
+                                {
+                                    (w as PlanDeTravail).grdPlanTravail.Children.Clear();
+                                    (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
+                                }
+                            }
+                        }
 
                         OutilEF.brycolContexte.SaveChanges();
                         draggedImage = null;
@@ -494,7 +516,6 @@ namespace App_Brycol.Vues
                             childTopGauche = new Point(childTopGaucheFixe.X, childTopGaucheFixe.Y - child.DesiredSize.Width);
                             childBotDroite = new Point(childTopGaucheFixe.X + child.DesiredSize.Height, childTopGaucheFixe.Y);
                         }
-
                     }
                    
                 }
