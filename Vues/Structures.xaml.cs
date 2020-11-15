@@ -28,7 +28,22 @@ namespace App_Brycol.Vues
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
+            var vm = (Item_VM)DataContext;
+            if (vm.CmdAjouterItem.CanExecute(null))
+                vm.CmdAjouterItem.Execute(null);
+        }
 
+        private void btnRetour_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.GetType() == typeof(PlanDeTravail))
+                {
+                    (w as PlanDeTravail).grdPlanTravail.Children.Clear();
+                    (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
+                }
+            }
         }
     }
 }
