@@ -238,15 +238,6 @@ namespace App_Brycol.Vues
                                 i.emplacementHaut = canvas.Height-30;
                             else if (i.angleRotation == 270)
                                 i.emplacementGauche = 0;
-
-                            foreach (Window w in Application.Current.Windows)
-                            {
-                                if (w.GetType() == typeof(PlanDeTravail))
-                                {
-                                    (w as PlanDeTravail).grdPlanTravail.Children.Clear();
-                                    (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
-                                }
-                            }
                         }
 
                         OutilEF.brycolContexte.SaveChanges();
@@ -610,8 +601,16 @@ namespace App_Brycol.Vues
 
         private void btnClip(object sender, RoutedEventArgs e)
         {
-            Canvas.SetLeft(canvas, 0);
-            Canvas.SetTop(canvas, 0);
+
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.GetType() == typeof(PlanDeTravail))
+                {
+                    (w as PlanDeTravail).grdPlanTravail.Children.Clear();
+                    (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
+                }
+            }
+
         }
     }
 }
