@@ -13,12 +13,12 @@
         </Grid.RowDefinitions>
         <Rectangle Stroke="Black" StrokeThickness="2" Grid.RowSpan="2"/>
 
-        <Grid Margin="0,0,0,0" Grid.Row="1">
+        <Grid Margin="0,0,0,0" Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
+
             <TextBlock  Foreground="Black" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Center">
                 <Run Text="{Binding LargeurAffichage}"></Run>
                 <Run Text="{Binding UniteMesure}"></Run>
@@ -28,30 +28,30 @@
                 <Run Text="{Binding UniteMesure}"></Run>
             </TextBlock>
 
+            <Canvas x:Name="canvas_Zoom" Margin="10,0,0,0" MouseMove="CanvasZoomMouseMove">
 
-            <Canvas x:Name="canvas_Zoom" Margin="25,0,28,27" MouseMove="CanvasZoomMouseMove" Height="390" Width="750" VerticalAlignment="Bottom">
 
-               
                 <Canvas Background="LightGray" Width="{Binding Largeur}" Height="{Binding Longueur}" 
                                 x:Name="canvas" 
                                 MouseLeftButtonDown="CanvasMouseLeftButtonDown"
                                 MouseLeftButtonUp="CanvasMouseLeftButtonUp"
                                 MouseMove="CanvasMouseMove"
-                                MouseWheel="Canvas_MouseWheel"  ClipToBounds="true" Grid.RowSpan="2"  >
+                                MouseWheel="Canvas_MouseWheel"  Grid.RowSpan="2"  >
                     <Canvas.RenderTransform>
                         <TransformGroup>
                             <TranslateTransform X="0" Y="0"/>
                         </TransformGroup>
                     </Canvas.RenderTransform>
+                    <Button x:Name="btntoolRotation"  Click="btnRotation" Height="20" Content="Rotation" Width="60" FontSize="10" Foreground="FloralWhite" Background="Black" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" RenderTransformOrigin="0.5,0.5"/>
+
+
+                    <Button x:Name="btntoolSupprimer"  Click="btnDelete" Height="20" Content="Supprimer" Width="60" Foreground="FloralWhite" Background="Black" FontSize="10" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" RenderTransformOrigin="0.5,0.5"/>
+
 
                 </Canvas>
-                
 
             </Canvas>
 
-
-            <Button Name="btnDeletePlan" Content="Supprimer un item" Click="btnDelete" Margin="50,413,636,13" Height="20" VerticalAlignment="Bottom" Width="120" IsEnabled="false"/>
-            <Button x:Name="btnRotationPlan" Content="Rotation de l'image" Click="btnRotation" Margin="190,413,484,13" Height="20" VerticalAlignment="Bottom" Width="125" IsEnabled="false"/>
             <Grid Margin="128,413,10,13" DockPanel.Dock="Bottom" Grid.RowSpan="2" Height="20" VerticalAlignment="Bottom">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="7*" />
@@ -84,16 +84,17 @@
                     <ColumnDefinition Width="10" />
                     <!-- espace libre -->
                     <ColumnDefinition Width="Auto" />
-                    
-                    
+
+
                 </Grid.ColumnDefinitions>
 
 
 
 
+                <Button x:Name="btnClipPiece" Click="btnClip" Height="20" Content="Clip" Width="60" FontSize="10" Foreground="Black" Background="White" Panel.ZIndex="5"  Margin="240,-2,52,2" Grid.ColumnSpan="2" />
 
                 <!-- Le bouton 100%.  Scale le canvas à sa grandeur d'origine-->
-                <Button Name="btnEchelle" Grid.Column="1" Click="canvasResizeFull" Content="Mise à l'échelle" Grid.ColumnSpan="6" Margin="90,0,24,0"/>
+                <Button Name="btnEchelle" Grid.Column="1" Click="canvasResizeFull" Content="Mise à l'échelle" Grid.ColumnSpan="4" Margin="79,0,5,0"/>
 
                 <!--Zoom label pour montrer le zoom en cours-->
                 <TextBlock
@@ -131,7 +132,7 @@
                 <!--Bouton pour zoom in-->
                 <Button Name="btnPlus"  Grid.Column="13" Click="btnZoomIn" Content="+"/>
 
-                
+
 
             </Grid>
         </Grid>
