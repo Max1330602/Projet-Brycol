@@ -116,7 +116,8 @@
                 <Button Name="btnmoins" Grid.Column="9" Click="btnZoomOut" Content="-"/>
 
                 <!-- Slider pour zoom in et zoom out-->
-                <Slider
+                <Slider   
+                ValueChanged="Slider_ValueChanged"
                 x:Name="slider1"
                 Grid.Column="11"
                 Maximum="100"

@@ -68,7 +68,7 @@ namespace App_Brycol.Vues
 
         private void btnModifierItem_Click(object sender, RoutedEventArgs e)
         {
-            if (Piece2D.draggedImage != null && Piece2D.draggedImage.Source != null)
+            if (Piece2D.toolbarImage != null && Piece2D.toolbarImage.Source != null)
             {
                 ModifierItem popUp = new ModifierItem();
                 popUp.ShowDialog();

@@ -38,13 +38,13 @@ namespace App_Brycol.Vues
             else
                 EnleverThemeSombre();
 
-            imgItem.Source = Piece2D.draggedImage.Source;
+            imgItem.Source = Piece2D.toolbarImage.Source;
         }
 
         private void btnAnnuler_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            Piece2D.draggedImage = null;
+            Piece2D.toolbarImage = null;
         }
 
         private void btnAppliquer_Click(object sender, RoutedEventArgs e)
@@ -62,11 +62,11 @@ namespace App_Brycol.Vues
 
         private void cmbCouleur_SelectedChange(object sender, SelectionChangedEventArgs e)
         {
-            imgItem.Source = Piece2D.draggedImage.Source;
+            imgItem.Source = Piece2D.toolbarImage.Source;
             foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
             {
                 ip.Tag = ip.ID;
-                if (Piece2D.draggedImage.Source.ToString() == "pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png" && Piece2D.draggedImage.Tag.ToString() == ip.Tag.ToString())
+                if (Piece2D.toolbarImage.Source.ToString() == "pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png" && Piece2D.toolbarImage.Tag.ToString() == ip.Tag.ToString())
                 {
                     Item_VM.ItemsPlanModifie.Add(ip);
                     ip.Couleur = cmbCouleur.SelectedItem.ToString().Replace("System.Windows.Controls.ComboBoxItem: ", "");
@@ -80,7 +80,7 @@ namespace App_Brycol.Vues
                     bmiItem.EndInit();
                     imgItem.Source = bmiItem;
                 }
-                else if (Piece2D.draggedImage.Source.ToString() == "pack://application:,,,/images/ItemsModifies/Item" + ip.Item.ID + "/" + ip.Couleur + ".png" && Piece2D.draggedImage.Tag.ToString() == ip.Tag.ToString())
+                else if (Piece2D.toolbarImage.Source.ToString() == "pack://application:,,,/images/ItemsModifies/Item" + ip.Item.ID + "/" + ip.Couleur + ".png" && Piece2D.toolbarImage.Tag.ToString() == ip.Tag.ToString())
                 {
                     ip.Couleur = cmbCouleur.SelectedItem.ToString().Replace("System.Windows.Controls.ComboBoxItem: ", "");
                     OutilEF.brycolContexte.SaveChanges();
