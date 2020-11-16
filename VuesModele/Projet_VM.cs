@@ -236,7 +236,7 @@ namespace App_Brycol.VuesModele
                             var pReq = from pr in OutilEF.brycolContexte.Projets.Include("Utilisateur") where pr.Nom == Nom select pr;
                             foreach (Projet pr in pReq)
                             {
-                                if (pr.Utilisateur == Utilisateur_VM.utilActuel)
+                                if (pr.Utilisateur == Utilisateur_VM.utilActuel && pr.ID != ProjetActuel.ID)
                                 {
                                     MessageBox.Show("Vous avez déjà un projet qui se nomme " + Nom + ".");
                                     return;
@@ -256,7 +256,7 @@ namespace App_Brycol.VuesModele
                     var pReq = from pr in OutilEF.brycolContexte.Projets.Include("Utilisateur") where pr.Nom == Nom select pr;
                     foreach (Projet pr in pReq)
                     {
-                        if (pr.Utilisateur == Utilisateur_VM.utilActuel)
+                        if (pr.Utilisateur == Utilisateur_VM.utilActuel && pr.ID != ProjetActuel.ID)
                         {
                             MessageBox.Show("Vous avez déjà un projet qui se nomme " + Nom + ".");
                             return;
