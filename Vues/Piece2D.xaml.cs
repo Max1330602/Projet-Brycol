@@ -234,19 +234,8 @@ namespace App_Brycol.Vues
                         i.emplacementGauche = Canvas.GetLeft(draggedImage) + offset.X;
                         i.emplacementHaut = Canvas.GetTop(draggedImage) + offset.Y;
 
-                        if (i.Item.Nom == "Porte")
-                        {
-                            if (i.angleRotation == 0)
-                                i.emplacementHaut = -25;
-                            else if (i.angleRotation == 90)
-                                i.emplacementGauche = canvas.Width - 2;
-                            else if (i.angleRotation == 180)
-                                i.emplacementHaut = canvas.Height-30;
-                            else if (i.angleRotation == 270)
-                                i.emplacementGauche = 0;
-                        }
+                        ClipperPorteExtremite(i);
 
-                        OutilEF.brycolContexte.SaveChanges();
                         if (mousePosition == position)
                         {
                             toolbarImage = draggedImage;
@@ -563,10 +552,16 @@ namespace App_Brycol.Vues
                     }
                     else
                     {
-                        ImageBrush imgBrush = new ImageBrush();
-                        imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/invalideItem.png"));
-                        child.OpacityMask = imgBrush;
-                        Plan_VM.validePourEnregistrer = false;
+                        foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
+                        {
+                            if (ip.Item.Nom != "Porte")
+                            {
+                                ImageBrush imgBrush = new ImageBrush();
+                                imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/invalideItem.png"));
+                                child.OpacityMask = imgBrush;
+                                Plan_VM.validePourEnregistrer = false;
+                            }
+                        }
 
                     }
                 }
@@ -626,6 +621,7 @@ namespace App_Brycol.Vues
 
         }
 
+<<<
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             double zoomSlider = e.NewValue;
@@ -672,5 +668,44 @@ namespace App_Brycol.Vues
             }
             canvas_Zoom.RenderTransform = new ScaleTransform(zoomSliderTemp, zoomSliderTemp);
         }
+===
+        private void ClipperPorteExtremite(ItemsPlan i)
+        {
+            if (i.Item.Nom == "Porte")
+            {
+                if (i.angleRotation == 0)
+                {
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -100 && i.emplacementHaut < canvas.Height - 30)
+                        i.emplacementHaut = -28;
+                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 30)
+                        i.emplacementHaut = canvas.Height - 30;
+                }
+                else if (i.angleRotation == 90)
+                {
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 30)
+                        i.emplacementGauche = 2;
+                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width + 73 && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 30)
+                        i.emplacementGauche = canvas.Width - 2;
+                }
+                else if (i.angleRotation == 180)
+                {
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 30)
+                        i.emplacementHaut = -25;
+                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height + 70)
+                        i.emplacementHaut = canvas.Height - 30;
+                }
+                else if (i.angleRotation == 270)
+                {
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -73 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 30)
+                        i.emplacementGauche = 2;
+                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 30)
+                        i.emplacementGauche = canvas.Width - 2;
+                }
+
+            }
+            OutilEF.brycolContexte.SaveChanges();
+        }
+
+>>>
     }
 }

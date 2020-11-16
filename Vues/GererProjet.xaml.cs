@@ -25,6 +25,7 @@ namespace App_Brycol.Vues
         private List<Button> lstBoutons = new List<Button>();
         private List<Image> lstImagePlans = new List<Image>();
         private List<Label> lstLabels = new List<Label>();
+        private bool Encreation = false;
 
         public GererProjet()
         {
@@ -101,6 +102,7 @@ namespace App_Brycol.Vues
 
         private void btnAjouterPiece_Click(object sender, RoutedEventArgs e)
         {
+            Encreation = true;
             this.Close();
             if (Projet_VM.ProjetActuel.ListePieces.Count() < 8)
             {
@@ -111,6 +113,7 @@ namespace App_Brycol.Vues
             {
                 MessageBox.Show("Déjà 8 pièces sont liées à ce projet", "Maximum de pièces atteint", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            Encreation = false;
         }
 
         private void btnSupprimerPiece_Click(object sender, RoutedEventArgs e)
@@ -542,9 +545,20 @@ namespace App_Brycol.Vues
 
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (Projet_VM.ProjetActuel.ListePieces.Count == 0)
+            if (Projet_VM.ProjetActuel.ListePieces.Count == 0 && !Encreation)
             {
-
+                if (Projet_VM.ProjetActuel != null && Projet_VM.EstSauvegarde == false)
+                {
+                    WarningProjetNonSau popUp = new WarningProjetNonSau();
+                    popUp.ShowDialog();
+                }
+                Projet_VM.planOuvert = false;
+                Projet_VM.ProjetActuel.ListePieces.Clear();
+                Projet_VM.ProjetActuel.ListePlans.Clear();
+                Projet_VM.ProjetActuel = null;
+                Piece_VM.pieceActuel = null;
+                Plan_VM.PlanActuel = null;
+                Plan_VM.uniteDeMesure = "";
             }
         }
 

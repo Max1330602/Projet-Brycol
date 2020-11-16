@@ -20,10 +20,10 @@ namespace App_Brycol.Vues
     /// </summary>
     public partial class WarningSupPro : Window
     {
-        public WarningSupPro()
+        public WarningSupPro(Window w)
         {
             InitializeComponent();
-            DataContext = new Projet_VM();
+            DataContext = w.DataContext;
 
             if (Projet_VM.themeSombre)
                 AppliquerThemeSombre();
