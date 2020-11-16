@@ -22,6 +22,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.TextFormatting;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Application = System.Windows.Application;
 using Brush = System.Windows.Media.Brush;
 using Brushes = System.Windows.Media.Brushes;
 using Color = System.Drawing.Color;
@@ -47,16 +48,27 @@ namespace App_Brycol.Vues
                 AppliquerThemeSombre();
             else
                 EnleverThemeSombre();
-
-            ImageBrush imgBrush = new ImageBrush();
-            imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/planche" + Piece_VM.pieceActuel.TypePlancher.Nom + ".jpg"));
-            canvas.Background = imgBrush;
+            try
+            {
+                ImageBrush imgBrush = new ImageBrush();
+                imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/planche" + Piece_VM.pieceActuel.TypePlancher.Nom + ".jpg"));
+                canvas.Background = imgBrush;
+            }
+            catch (Exception)
+            {
+                ImageBrush imgBrush = new ImageBrush();
+                imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/plancheAucun.jpg"));
+                canvas.Background = imgBrush;
+            }
+            
 
             if (Plan_VM.uniteDeMesure == "Mètres")
             {
-                Canvas.SetLeft(canvas, (600 / 2) - (Piece_VM.pieceActuel.Largeur * pixelToM / 2));
-                Canvas.SetBottom(canvas, (800 / 2) - (Piece_VM.pieceActuel.Longueur * pixelToM / 2));
-
+                Canvas.SetLeft(canvas, 0);
+                Canvas.SetTop(canvas, 0);
+                
+               
+            /*
                 if (Piece_VM.pieceActuel.Longueur <= 8 || Piece_VM.pieceActuel.Largeur <= 8)
                 {
                     zoom = 1.4 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
@@ -68,13 +80,13 @@ namespace App_Brycol.Vues
                     zoom = 0.9 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
                     zoomMax = 1.2;
                     zoomMin = 0.3;
-                }
+                }*/
 
             }
             else
             {
-                Canvas.SetLeft(canvas, (600 / 2) - (Piece_VM.pieceActuel.Largeur * pixelToPied / 2));
-                Canvas.SetBottom(canvas, (800 / 2) - (Piece_VM.pieceActuel.Longueur * pixelToPied / 2));
+                Canvas.SetLeft(canvas, 0);
+                Canvas.SetBottom(canvas, 0);
 
                 if (Piece_VM.pieceActuel.Longueur <= 26 || Piece_VM.pieceActuel.Largeur <= 26)
                 {
@@ -98,8 +110,11 @@ namespace App_Brycol.Vues
             DataContext = new Plan_VM();
         }
 
+        #region attributs
         private Point clickPosition;
+        private Point position;
         public static Image draggedImage;
+        public static Image toolbarImage;
         private Point mousePosition;
         private bool move;
         public double Zoom;
@@ -112,7 +127,7 @@ namespace App_Brycol.Vues
         private Double zoomMin;
         private Double zoomSpeed = 0.001;
         private Double zoom = 1;
-
+        #endregion
 
         private void OnPropertyChanged([CallerMemberName] String propertyName = "")
         {
@@ -140,27 +155,49 @@ namespace App_Brycol.Vues
 
         private void CanvasMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            btnDeletePlan.IsEnabled = false;
-            btnRotationPlan.IsEnabled = false;
+            
             var image = e.Source as System.Windows.Controls.Image;
             if (e.ClickCount == 2 && image!= null)
             {
-                btnDeletePlan.IsEnabled = true;
-                btnRotationPlan.IsEnabled = true;
+                
 
                 draggedImage = image;
                 draggedImage.Opacity = 0.5;
 
                 move = false;
             }
-           
-            else {
+
+            else
+            {
                 clickPosition = e.GetPosition(canvas); // avoir la position du click
                 if (image != null && canvas.CaptureMouse())
                 {
+                    canvas.Children.Remove(btntoolRotation);
+                    canvas.Children.Remove(btntoolSupprimer);
                     draggedImage = image;
                     draggedImage.Opacity = 1;
 
+                    foreach (ItemsPlan i in Item_VM.ItemsPlanActuel)
+                    {
+                        var bitmap = new BitmapImage(i.Item.ImgItem.UriSource);
+
+                        var imageBD = new Image { Source = bitmap };
+                        imageBD.Tag = i.ID;
+
+                        if (imageBD.Tag.ToString() == draggedImage.Tag.ToString())
+                        {
+                            Canvas.SetLeft(btntoolRotation, i.emplacementGauche + 5);
+                            Canvas.SetTop(btntoolRotation, i.emplacementHaut - 19);
+                            canvas.Children.Add(btntoolRotation);
+                            Canvas.SetLeft(btntoolSupprimer, i.emplacementGauche + 64);
+                            Canvas.SetTop(btntoolSupprimer, i.emplacementHaut - 19);
+                            canvas.Children.Add(btntoolSupprimer);
+                        }
+                    }
+
+
+                    btntoolRotation.Visibility = Visibility.Visible;
+                    btntoolSupprimer.Visibility = Visibility.Visible;
                     move = true;
                     mousePosition = e.GetPosition(canvas);
                     draggedImage = image;
@@ -173,7 +210,7 @@ namespace App_Brycol.Vues
 
         private void CanvasMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var position = e.GetPosition(canvas);
+            position = e.GetPosition(canvas);
             var offset = position - mousePosition;
 
             if (draggedImage != null && move == true)
@@ -200,8 +237,28 @@ namespace App_Brycol.Vues
                         i.emplacementGauche = Canvas.GetLeft(draggedImage) + offset.X;
                         i.emplacementHaut = Canvas.GetTop(draggedImage) + offset.Y;
 
+                        if (i.Item.Nom == "Porte")
+                        {
+                            if (i.angleRotation == 0)
+                                i.emplacementHaut = -25;
+                            else if (i.angleRotation == 90)
+                                i.emplacementGauche = canvas.Width - 2;
+                            else if (i.angleRotation == 180)
+                                i.emplacementHaut = canvas.Height-30;
+                            else if (i.angleRotation == 270)
+                                i.emplacementGauche = 0;
+                        }
+
                         OutilEF.brycolContexte.SaveChanges();
-                        draggedImage = null;
+                        if (mousePosition == position)
+                        {
+                            toolbarImage = draggedImage;
+                            draggedImage = null;
+                        }
+                        else
+                        {
+                            draggedImage = null;
+                        }
                         return;
                     }
                 }
@@ -233,11 +290,8 @@ namespace App_Brycol.Vues
 
         private void btnRotation(object sender, RoutedEventArgs e)
         {
-            
-            if (!move)
-            {
-
-                RotateTransform rotation = draggedImage.RenderTransform as RotateTransform;
+           
+            RotateTransform rotation = toolbarImage.RenderTransform as RotateTransform;
                 double rotationInDegrees = 0;
                 if (rotation !=null)
                 {
@@ -249,23 +303,23 @@ namespace App_Brycol.Vues
                 }                   
                     if (rotationInDegrees == 0 || rotation == null)
                     {
-                        draggedImage.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 90 };
+                        toolbarImage.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 90 };
                     }
                     else if(rotationInDegrees == 90)
                     {
-                        draggedImage.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 180 };
+                        toolbarImage.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 180 };
                     }
                     else if (rotationInDegrees == 180)
                     {
-                        draggedImage.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 270 };
+                        toolbarImage.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 270 };
                     }
                     else if (rotationInDegrees == 270)
                     {
-                        
-                        draggedImage.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 0 };
+
+                        toolbarImage.RenderTransform = new RotateTransform() { CenterX = 0.5, CenterY = 0.5, Angle = 0 };
                     }
                              
-            }
+            
             
 
         }
@@ -301,13 +355,11 @@ namespace App_Brycol.Vues
 
         private void btnDelete(object sender, RoutedEventArgs e)
         {
-            if (!move)
-            {
-
-                if(draggedImage != null)
+           
+            if (draggedImage != null)
                     draggedImage.Source = null;
                 MessageBoxResult resultat;
-                resultat = System.Windows.MessageBox.Show("Voulez-vraiment supprimer cette item ?", "Suppression d'un item", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                resultat = System.Windows.MessageBox.Show("Voulez-vous vraiment supprimer cet item ?", "Suppression d'un item", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
                 if (resultat == MessageBoxResult.Yes)
                 {
                     if (Item_VM.ItemsPlanActuel != null)
@@ -317,10 +369,10 @@ namespace App_Brycol.Vues
                             var bitmap = new BitmapImage(ip.Item.ImgItem.UriSource);
                             var imageBD = new Image { Source = bitmap };
                             imageBD.Tag = ip.ID;
-                            if (imageBD.Tag.ToString() == draggedImage.Tag.ToString())
+                            if (imageBD.Tag.ToString() == toolbarImage.Tag.ToString())
                             {
                                 Item_VM.ItemsPlanActuel.Remove(ip);
-                                draggedImage.Source = null;
+                                toolbarImage.Source = null;
                                 OutilEF.brycolContexte.lstItems.Remove(ip);
                                 OutilEF.brycolContexte.SaveChanges();
 
@@ -330,7 +382,7 @@ namespace App_Brycol.Vues
                     }
                 }
                
-            }
+            
         }
 
         public void initializeItems()
@@ -494,7 +546,6 @@ namespace App_Brycol.Vues
                             childTopGauche = new Point(childTopGaucheFixe.X, childTopGaucheFixe.Y - child.DesiredSize.Width);
                             childBotDroite = new Point(childTopGaucheFixe.X + child.DesiredSize.Height, childTopGaucheFixe.Y);
                         }
-
                     }
                    
                 }
@@ -530,12 +581,7 @@ namespace App_Brycol.Vues
 
         private void EnleverThemeSombre()
         {
-            btnDeletePlan.Background = Brushes.White;
-            btnDeletePlan.Foreground = Brushes.Black;
-
-            btnRotationPlan.Background = Brushes.White;
-            btnRotationPlan.Foreground = Brushes.Black;
-
+            
             btnEchelle.Background = Brushes.White;
             btnEchelle.Foreground = Brushes.Black;
 
@@ -551,11 +597,6 @@ namespace App_Brycol.Vues
             BrushConverter bc = new BrushConverter();
             Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
 
-            btnDeletePlan.Background = CouleurBouton;
-            btnDeletePlan.Foreground = Brushes.White;
-
-            btnRotationPlan.Background = CouleurBouton;
-            btnRotationPlan.Foreground = Brushes.White;
 
             btnEchelle.Background = CouleurBouton;
             btnEchelle.Foreground = Brushes.White;
@@ -567,5 +608,18 @@ namespace App_Brycol.Vues
             btnPlus.Foreground = Brushes.White;
         }
 
+        private void btnClip(object sender, RoutedEventArgs e)
+        {
+
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.GetType() == typeof(PlanDeTravail))
+                {
+                    (w as PlanDeTravail).grdPlanTravail.Children.Clear();
+                    (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
+                }
+            }
+
+        }
     }
 }

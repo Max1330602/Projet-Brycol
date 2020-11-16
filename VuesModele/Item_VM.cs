@@ -43,7 +43,7 @@ namespace App_Brycol.VuesModele
 
             foreach (Item i in iReq)
             {
-                if (i.Nom == "Porte" && i.Nom == "Fenêtre")
+                if (i.Nom == "Porte" || i.Nom == "Fenêtre")
                     StructuresItems.Add(i);
                 else
                     SommaireItems.Add(i);
