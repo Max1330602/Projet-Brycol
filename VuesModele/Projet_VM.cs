@@ -350,12 +350,6 @@ namespace App_Brycol.VuesModele
         }
 
 
-        private void getProjet()
-        {
-                      
-        }
-
-
         private void SauNeoProjet()
         {
             Projet pro = new Projet();
