@@ -150,7 +150,13 @@ namespace App_Brycol.VuesModele
             ProjetActuel = proj;
             ProjetActuel.ListePieces = new ObservableCollection<Piece>();
             ProjetActuel.ListePlans = new ObservableCollection<Plan>();
-            var pieceReq = from piece in OutilEF.brycolContexte.Pieces.Include("TypePlancher").Include("TypePiece") where piece.Projet.ID == ProjetActuel.ID select piece;
+            var pieceReq = from piece in OutilEF.brycolContexte.Pieces.Include("TypePlancher").Include("TypePiece").Include("Projet") where piece.Projet.ID == ProjetActuel.ID select piece;
+            if(pieceReq.Count<Piece>() == 0)
+            {
+                GererProjet popUp = new GererProjet();
+                popUp.ShowDialog();
+                return;
+            }
             foreach (Piece pie in pieceReq)
             {
                 ProjetActuel.ListePieces.Add(pie);
@@ -163,8 +169,11 @@ namespace App_Brycol.VuesModele
                     ProjetActuel.ListePlans.Add(pl);
                 }
             }
-            if(ProjetActuel.ListePieces.Count > 0)
+            if (ProjetActuel.ListePieces.Count > 0)
+            {
                 Piece_VM.pieceActuel = ProjetActuel.ListePieces.First<Piece>();
+                Plan_VM.uniteDeMesure = Piece_VM.pieceActuel.UniteDeMesure;
+            }
             if (ProjetActuel.ListePlans.Count > 0)
             {
                 Plan_VM.PlanActuel = ProjetActuel.ListePlans.First<Plan>();
@@ -179,6 +188,7 @@ namespace App_Brycol.VuesModele
                 }
             }
 
+            
             EstSauvegarde = true;
 
             PlanDeTravail PlanDeTravail = new PlanDeTravail();

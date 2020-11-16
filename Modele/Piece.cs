@@ -19,6 +19,7 @@ namespace App_Brycol.Modele
         public float Largeur { get; set; }
         public float Longueur { get; set; }
         public string Nom { get; set; }
+        public string UniteDeMesure { get; set; }
         [NotMapped]
         public decimal Total { get; set; }
 

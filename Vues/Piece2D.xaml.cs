@@ -48,10 +48,19 @@ namespace App_Brycol.Vues
                 AppliquerThemeSombre();
             else
                 EnleverThemeSombre();
-
-            ImageBrush imgBrush = new ImageBrush();
-            imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/planche" + Piece_VM.pieceActuel.TypePlancher.Nom + ".jpg"));
-            canvas.Background = imgBrush;
+            try
+            {
+                ImageBrush imgBrush = new ImageBrush();
+                imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/planche" + Piece_VM.pieceActuel.TypePlancher.Nom + ".jpg"));
+                canvas.Background = imgBrush;
+            }
+            catch (Exception)
+            {
+                ImageBrush imgBrush = new ImageBrush();
+                imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/plancheAucun.jpg"));
+                canvas.Background = imgBrush;
+            }
+            
 
             if (Plan_VM.uniteDeMesure == "Mètres")
             {

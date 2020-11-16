@@ -308,6 +308,11 @@ namespace App_Brycol.Vues
 
         private void txtProjet_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (txtProjet.Text.Length < 2 || txtProjet.Text.Length > 30)
+            {
+                MessageBox.Show("La longueur du nom du projet n'est pas valide.");
+                return;
+            }
             if (txtProjet.Text != Projet_VM.ProjetActuel.Nom)
             {
                 btnModifNom.Visibility = Visibility.Visible;
