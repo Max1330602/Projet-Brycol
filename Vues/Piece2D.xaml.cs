@@ -569,22 +569,21 @@ namespace App_Brycol.Vues
                 {
                     if ((childTopGauche.X > canvas.Width && childBotDroite.X > canvas.Width) || (childTopGauche.Y > canvas.Height && childBotDroite.Y > canvas.Height) || (childTopGauche.X < 0 && childBotDroite.X < 0) || (childTopGauche.Y < 0 && childBotDroite.Y < 0))
                     {
-                        Canvas.SetLeft(child, canvas.Width /2);
-                        Canvas.SetTop(child, canvas.Height/2);
-                        
+                        Canvas.SetLeft(child, canvas.Width / 2);
+                        Canvas.SetTop(child, canvas.Height / 2);
+
                     }
                     else
                     {
-                        foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
+                        if (!((Image)child).GetValue(Image.SourceProperty).ToString().Contains("26") &&
+                            !((Image)child).GetValue(Image.SourceProperty).ToString().Contains("27") &&
+                            !((Image)child).GetValue(Image.SourceProperty).ToString().Contains("28") &&
+                            !((Image)child).GetValue(Image.SourceProperty).ToString().Contains("29"))
                         {
-                            if (!ip.Item.Nom.Contains("Porte") && !ip.Item.Nom.Contains("Fenêtre"))
-                            {
-                                ImageBrush imgBrush = new ImageBrush();
-                                imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/invalideItem.png"));
-                                child.OpacityMask = imgBrush;
-                                Plan_VM.validePourEnregistrer = false;
-                            }
-
+                            ImageBrush imgBrush = new ImageBrush();
+                            imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/invalideItem.png"));
+                            child.OpacityMask = imgBrush;
+                            Plan_VM.validePourEnregistrer = false;
                         }
 
                     }
@@ -631,9 +630,8 @@ namespace App_Brycol.Vues
             btnPlus.Foreground = Brushes.White;
         }
 
-        private void btnClip(object sender, RoutedEventArgs e)
+        private void btnClipStructure_Click(object sender, RoutedEventArgs e)
         {
-
             foreach (Window w in Application.Current.Windows)
             {
                 if (w.GetType() == typeof(PlanDeTravail))
@@ -642,7 +640,13 @@ namespace App_Brycol.Vues
                     (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
                 }
             }
+        }
 
+        private void btnClip(object sender, RoutedEventArgs e)
+        {
+            Canvas.SetLeft(canvas, 0);
+                Canvas.SetTop(canvas, 0);
+                zoom = 1.4;
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -705,14 +709,14 @@ namespace App_Brycol.Vues
                 }
                 else if (i.angleRotation == 90)
                 {
-                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 30)
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -40 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -40 && i.emplacementHaut < canvas.Height - 30)
                         i.emplacementGauche = 2;
                     else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width + 73 && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 30)
                         i.emplacementGauche = canvas.Width - 2;
                 }
                 else if (i.angleRotation == 180)
                 {
-                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 30)
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -40 && i.emplacementHaut < canvas.Height - 30)
                         i.emplacementHaut = -25;
                     else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height + 70)
                         i.emplacementHaut = canvas.Height - 30;
@@ -745,17 +749,17 @@ namespace App_Brycol.Vues
                 }
                 else if (i.angleRotation == 90)
                 {
-                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -40 && i.emplacementHaut < canvas.Height - 40)
                         i.emplacementGauche = 2;
-                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width + 73 && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
+                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut >  -40 && i.emplacementHaut < canvas.Height - 40)
                         i.emplacementGauche = canvas.Width - 2;
                 }
                 else if (i.angleRotation == 180)
                 {
-                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
-                        i.emplacementHaut = -100;
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -40 && i.emplacementHaut < canvas.Height - 40)
+                        i.emplacementHaut = -33;
                     else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height + 80)
-                        i.emplacementHaut = canvas.Height - 40;
+                        i.emplacementHaut = canvas.Height - 38;
                 }
                 else if (i.angleRotation == 270)
                 {
