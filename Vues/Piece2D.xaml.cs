@@ -235,6 +235,8 @@ namespace App_Brycol.Vues
                         i.emplacementHaut = Canvas.GetTop(draggedImage) + offset.Y;
 
                         ClipperPorteExtremite(i);
+                        ClipperPorteDoubleExtremite(i);
+                        ClipperFenetreDoubleExtremite(i);
                         ClipperFenetreExtremite(i);
 
                         if (mousePosition == position)
@@ -709,35 +711,72 @@ namespace App_Brycol.Vues
 
         private void ClipperPorteExtremite(ItemsPlan i)
         {
-            if (i.Item.Nom.Contains("Porte"))
+            if (i.Item.Nom == "Porte")
             {
                 if (i.angleRotation == 0)
                 {
-                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -100 && i.emplacementHaut < canvas.Height - 30)
-                        i.emplacementHaut = -28;
-                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 30)
-                        i.emplacementHaut = canvas.Height - 30;
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > -9 && i.emplacementGauche < canvas.Width - 66 && i.emplacementHaut > -30 && i.emplacementHaut < canvas.Height - 30)
+                        i.emplacementHaut = 0;
+                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > -9 && i.emplacementGauche < canvas.Width - 66 && i.emplacementHaut > -30 && i.emplacementHaut < canvas.Height - 30)
+                        i.emplacementHaut = canvas.Height;
                 }
                 else if (i.angleRotation == 90)
                 {
-                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -40 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -40 && i.emplacementHaut < canvas.Height - 30)
-                        i.emplacementGauche = 2;
-                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width + 73 && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 30)
-                        i.emplacementGauche = canvas.Width - 2;
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -9 && i.emplacementGauche < canvas.Width + 22 && i.emplacementHaut > -1 && i.emplacementHaut < canvas.Height - 58)
+                        i.emplacementGauche = 0;
+                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > -9 && i.emplacementGauche < canvas.Width + 22 && i.emplacementHaut > -1 && i.emplacementHaut < canvas.Height - 58)
+                        i.emplacementGauche = canvas.Width - 5;
                 }
                 else if (i.angleRotation == 180)
                 {
-                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -40 && i.emplacementHaut < canvas.Height - 30)
-                        i.emplacementHaut = -25;
-                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height + 70)
-                        i.emplacementHaut = canvas.Height - 30;
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 49 && i.emplacementGauche < canvas.Width - 9 && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height)
+                        i.emplacementHaut = 3.45;
+                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 49 && i.emplacementGauche < canvas.Width -9 && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height)
+                        i.emplacementHaut = canvas.Height;
                 }
                 else if (i.angleRotation == 270)
                 {
-                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -73 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 30)
-                        i.emplacementGauche = 2;
-                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 30)
-                        i.emplacementGauche = canvas.Width - 2;
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -38 && i.emplacementGauche < canvas.Width - 9 && i.emplacementHaut > 57 && i.emplacementHaut < canvas.Height)
+                        i.emplacementGauche = -7;
+                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > -38 && i.emplacementGauche < canvas.Width - 9 && i.emplacementHaut > 57 && i.emplacementHaut < canvas.Height)
+                        i.emplacementGauche = canvas.Width - 10;
+                }
+
+            }
+            OutilEF.brycolContexte.SaveChanges();
+        }
+
+        private void ClipperPorteDoubleExtremite(ItemsPlan i)
+        {
+            if (i.Item.Nom == "Porte Double")
+            {
+                if (i.angleRotation == 0)
+                {
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > -18 && i.emplacementGauche < canvas.Width - 133 && i.emplacementHaut > -30 && i.emplacementHaut < canvas.Height - 30)
+                        i.emplacementHaut = 0;
+                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > -18 && i.emplacementGauche < canvas.Width - 133 && i.emplacementHaut > -30 && i.emplacementHaut < canvas.Height - 30)
+                        i.emplacementHaut = canvas.Height;
+                }
+                else if (i.angleRotation == 90)
+                {
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -18 && i.emplacementGauche < canvas.Width + 13 && i.emplacementHaut > -3 && i.emplacementHaut < canvas.Height - 117)
+                        i.emplacementGauche = -15;
+                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > -18 && i.emplacementGauche < canvas.Width + 13 && i.emplacementHaut > -3 && i.emplacementHaut < canvas.Height - 117)
+                        i.emplacementGauche = canvas.Width -15;
+                }
+                else if (i.angleRotation == 180)
+                {
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 99 && i.emplacementGauche < canvas.Width - 15 && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height+29)
+                        i.emplacementHaut = 3.45;
+                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 99 && i.emplacementGauche < canvas.Width - 15 && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height+29)
+                        i.emplacementHaut = canvas.Height;
+                }
+                else if (i.angleRotation == 270)
+                {
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -47 && i.emplacementGauche < canvas.Width - 17 && i.emplacementHaut > 115 && i.emplacementHaut < canvas.Height+2)
+                        i.emplacementGauche = -15;
+                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > -47 && i.emplacementGauche < canvas.Width - 17 && i.emplacementHaut > 115 && i.emplacementHaut < canvas.Height+2)
+                        i.emplacementGauche = canvas.Width - 20;
                 }
 
             }
@@ -746,14 +785,13 @@ namespace App_Brycol.Vues
 
 
 
-
         private void ClipperFenetreExtremite(ItemsPlan i)
         {
-            if (i.Item.Nom.Contains("Fenêtre"))
+            if (i.Item.Nom == "Fenêtre")
             {
                 if (i.angleRotation == 0)
                 {
-                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -120 && i.emplacementHaut < canvas.Height - 40)
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
                         i.emplacementHaut = -37;
                     else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
                         i.emplacementHaut = canvas.Height - 40;
@@ -769,7 +807,44 @@ namespace App_Brycol.Vues
                 {
                     if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -40 && i.emplacementHaut < canvas.Height - 40)
                         i.emplacementHaut = -33;
-                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height + 80)
+                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
+                        i.emplacementHaut = canvas.Height - 38;
+                }
+                else if (i.angleRotation == 270)
+                {
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -73 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
+                        i.emplacementGauche = 2;
+                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
+                        i.emplacementGauche = canvas.Width - 2;
+                }
+
+            }
+            OutilEF.brycolContexte.SaveChanges();
+        }
+
+        private void ClipperFenetreDoubleExtremite(ItemsPlan i)
+        {
+            if (i.Item.Nom == "Fenêtre Double")
+            {
+                if (i.angleRotation == 0)
+                {
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
+                        i.emplacementHaut = -37;
+                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
+                        i.emplacementHaut = canvas.Height - 40;
+                }
+                else if (i.angleRotation == 90)
+                {
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -40 && i.emplacementHaut < canvas.Height - 40)
+                        i.emplacementGauche = 2;
+                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -40 && i.emplacementHaut < canvas.Height - 40)
+                        i.emplacementGauche = canvas.Width - 2;
+                }
+                else if (i.angleRotation == 180)
+                {
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -40 && i.emplacementHaut < canvas.Height - 40)
+                        i.emplacementHaut = -33;
+                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
                         i.emplacementHaut = canvas.Height - 38;
                 }
                 else if (i.angleRotation == 270)
