@@ -118,7 +118,7 @@ namespace App_Brycol.Vues
             {
                 if (Projet_VM.ProjetActuel.ListePieces[i] == Piece_VM.pieceActuel)
                 {
-                    System.Windows.Point PositionAbsolue = plan2D.TranslatePoint(new System.Windows.Point(162, 125), plan2D);
+                    System.Windows.Point PositionAbsolue = plan2D.TranslatePoint(new System.Windows.Point(162, 65), plan2D);
                     System.Windows.Point PositionEcran = this.PointToScreen(PositionAbsolue);
 
                     // Catch width and hight of scatterview

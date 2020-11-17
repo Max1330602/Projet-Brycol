@@ -53,56 +53,56 @@
 
         <Button x:Name="btnPiece1" ToggleButton.Checked="btnPiece1_Click" Grid.Column="1" Grid.Row="1" Background="White" Click="btnPiece1_Click" MouseDoubleClick="btnPiece1_MouseDoubleClick" IsEnabled="false">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <Image x:Name="imgPlan1" Height="125" Stretch="Fill" Opacity="0.8"></Image>
+                <Image x:Name="imgPlan1" Height="125" Stretch="Uniform" Opacity="0.8"></Image>
                 <Label x:Name="txtPiece1" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Height="25"/>
             </StackPanel>
         </Button>
 
         <Button x:Name="btnPiece2" Grid.Column="2" Grid.Row="1" Background="White" Click="btnPiece2_Click"  MouseDoubleClick="btnPiece2_MouseDoubleClick" IsEnabled="False">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <Image x:Name="imgPlan2" Height="125" Stretch="Fill" Opacity="0.8"></Image>
+                <Image x:Name="imgPlan2" Height="125" Stretch="Uniform" Opacity="0.8"></Image>
                 <Label x:Name="txtPiece2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25"/>
             </StackPanel>
         </Button>
 
         <Button x:Name="btnPiece3" Grid.Column="3" Grid.Row="1" Background="White" Click="btnPiece3_Click" MouseDoubleClick="btnPiece3_MouseDoubleClick" IsEnabled="False">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <Image x:Name="imgPlan3" Height="125" Stretch="Fill" Opacity="0.8"></Image>
+                <Image x:Name="imgPlan3" Height="125" Stretch="Uniform" Opacity="0.8"></Image>
                 <Label x:Name="txtPiece3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25"/>
             </StackPanel>
         </Button>
 
         <Button x:Name="btnPiece4" Grid.Column="4" Grid.Row="1" Background="White" Click="btnPiece4_Click" MouseDoubleClick="btnPiece4_MouseDoubleClick" IsEnabled="False">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <Image x:Name="imgPlan4" Height="125" Stretch="Fill" Opacity="0.8"></Image>
+                <Image x:Name="imgPlan4" Height="125" Stretch="Uniform" Opacity="0.8"></Image>
                 <Label x:Name="txtPiece4" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25"/>
             </StackPanel>
         </Button>
 
         <Button x:Name="btnPiece5" Grid.Column="1" Grid.Row="2" Background="White" Click="btnPiece5_Click" MouseDoubleClick="btnPiece5_MouseDoubleClick" IsEnabled="False">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <Image x:Name="imgPlan5" Height="125" Stretch="Fill" Opacity="0.8"></Image>
+                <Image x:Name="imgPlan5" Height="125" Stretch="Uniform" Opacity="0.8"></Image>
                 <Label x:Name="txtPiece5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25"/>
             </StackPanel>
         </Button>
 
         <Button x:Name="btnPiece6" Grid.Column="2" Grid.Row="2" Background="White" Click="btnPiece6_Click" MouseDoubleClick="btnPiece6_MouseDoubleClick" IsEnabled="False">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <Image x:Name="imgPlan6" Height="125" Stretch="Fill" Opacity="0.8"></Image>
+                <Image x:Name="imgPlan6" Height="125" Stretch="Uniform" Opacity="0.8"></Image>
                 <Label x:Name="txtPiece6" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25"/>
             </StackPanel>
         </Button>
 
         <Button x:Name="btnPiece7" Grid.Column="3" Grid.Row="3" Background="White" Click="btnPiece7_Click" MouseDoubleClick="btnPiece7_MouseDoubleClick" IsEnabled="False">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <Image x:Name="imgPlan7" Height="125" Stretch="Fill" Opacity="0.8"></Image>
+                <Image x:Name="imgPlan7" Height="125" Stretch="Uniform" Opacity="0.8"></Image>
                 <Label x:Name="txtPiece7" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25"/>
             </StackPanel>
         </Button>
 
         <Button x:Name="btnPiece8" Grid.Column="4" Grid.Row="4" Background="White" Click="btnPiece8_Click" MouseDoubleClick="btnPiece8_MouseDoubleClick" IsEnabled="False">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
-                <Image x:Name="imgPlan8" Height="125" Stretch="Fill" Opacity="0.8"></Image>
+                <Image x:Name="imgPlan8" Height="125" Stretch="Uniform" Opacity="0.8"></Image>
                 <Label x:Name="txtPiece8" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25"/>
             </StackPanel>
         </Button>
