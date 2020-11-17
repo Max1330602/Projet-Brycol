@@ -328,6 +328,10 @@ namespace App_Brycol.VuesModele
             i.Item = _itemSelectionne;           
             i.emplacementGauche = POS_PAR_DEFAUT;
             i.emplacementHaut = POS_PAR_DEFAUT;
+            if (i.Item.Nom == "Porte")
+                i.cotePorte = "droite";
+            else
+                i.cotePorte = "";
             // HARD CODE
             i.Plan = Plan_VM.PlanActuel;
             if (i.Item != null)

@@ -70,15 +70,35 @@ namespace App_Brycol.Vues
         {
             if (Piece2D.toolbarImage != null && Piece2D.toolbarImage.Source != null)
             {
-                ModifierItem popUp = new ModifierItem();
-                popUp.ShowDialog();
+                foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
+                {
+                    if (Piece2D.toolbarImage.Source.ToString().Contains(ip.Item.ID.ToString()))
+                    {
+                        if (ip.Item.Nom.Contains("Porte Double") || ip.Item.Nom.Contains("Fenêtre"))
+                        {
+                            MessageBox.Show("Impossible de modifier la couleur d'une porte ou d'une fenêtre.");
+                        }
+                        else if (ip.Item.Nom == "Porte")
+                        {
+                            ModifierPorte popUp = new ModifierPorte();
+                            popUp.ShowDialog();
+                            return;
+                        }
+                        else
+                        {
+                            ModifierItem popUp = new ModifierItem();
+                            popUp.ShowDialog();
+                            return;
+                        }
+                    }
+                }
             }
             else
             {
                 MessageBox.Show("Il faut d'abord sélectionner un item dans le plan");
             }
         }
-        
+
 
         private void btnSupprimerItem_Click(object sender, RoutedEventArgs e)
         {

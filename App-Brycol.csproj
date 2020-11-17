@@ -197,6 +197,9 @@
     <Compile Include="Vues\ModifierItem.xaml.cs">
       <DependentUpon>ModifierItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vues\ModifierPorte.xaml.cs">
+      <DependentUpon>ModifierPorte.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vues\Piece2D.xaml.cs">
       <DependentUpon>Piece2D.xaml</DependentUpon>
     </Compile>
@@ -277,6 +280,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vues\ModifierItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\ModifierPorte.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -433,9 +440,6 @@
     <Resource Include="images\Items\invalide.png" />
     <Resource Include="images\Items\invalideItem.png" />
     <Resource Include="images\Items\item26.PNG" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Items\Top\item26.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\Items\invalide1.jpg" />
@@ -698,6 +702,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\Items\Top\item28.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Items\Top\item26droite.png" />
+    <Resource Include="images\Items\Top\item26gauche.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

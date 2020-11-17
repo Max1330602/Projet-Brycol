@@ -17,6 +17,7 @@ namespace App_Brycol.Modele
         public double emplacementGauche { get; set; }
         public double emplacementHaut { get; set; }
         public double angleRotation { get; set; }
+        public string cotePorte { get; set; }
         [NotMapped]
         public object Tag { get; set; }
 

@@ -391,36 +391,58 @@ namespace App_Brycol.Vues
                 foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
                 {
                     var bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png");
-                    try
-                    {
-                        bitmap.EndInit();
+                    if (ip.Item.Nom == "Porte")
+                    {     
+                        try
+                        {
+                            bitmap.BeginInit();
+                            bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ip.cotePorte + ".png");
+                            bitmap.EndInit();
+                        }
+                        catch (Exception e)
+                        {
+                            bitmap = new BitmapImage();
+                            bitmap.BeginInit();
+                            bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item0.png");
+                            bitmap.EndInit();
+                        }
                     }
-                    catch (Exception e)
+                    else
                     {
-                        bitmap = new BitmapImage();
-                        bitmap.BeginInit();
-                        bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item0.png");
-                        bitmap.EndInit();
+                        try
+                        {
+                            bitmap = new BitmapImage();
+                            bitmap.BeginInit();
+                            bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png");
+                            bitmap.EndInit();
+                        }
+                        catch (Exception e)
+                        {
+                            bitmap = new BitmapImage();
+                            bitmap.BeginInit();
+                            bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item0.png");
+                            bitmap.EndInit();
+                        }
                     }
 
                         
 
                     try
                     {
-                        bitmap = new BitmapImage();
-                        bitmap.BeginInit();
-                        bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                        bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                        bitmap.UriSource = new Uri("pack://application:,,,/images/ItemsModifies/Item" + ip.Item.ID + "/" + ip.Couleur + ".png");
-                        bitmap.EndInit();
+                        if (ip.Item.Nom != "Porte")
+                        {
+                            bitmap = new BitmapImage();
+                            bitmap.BeginInit();
+                            bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                            bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                            bitmap.UriSource = new Uri("pack://application:,,,/images/ItemsModifies/Item" + ip.Item.ID + "/" + ip.Couleur + ".png");
+                            bitmap.EndInit();
+                        }
                     }
                     catch (Exception e)
                     {
                         try
-                        {
-
+                        { 
                             bitmap = new BitmapImage();
                             bitmap.BeginInit();
                             bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png");
@@ -731,7 +753,7 @@ namespace App_Brycol.Vues
                 else if (i.angleRotation == 180)
                 {
                     if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
-                        i.emplacementHaut = -37;
+                        i.emplacementHaut = -100;
                     else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height + 80)
                         i.emplacementHaut = canvas.Height - 40;
                 }
