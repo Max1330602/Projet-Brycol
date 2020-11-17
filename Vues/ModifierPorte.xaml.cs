@@ -30,6 +30,12 @@ namespace App_Brycol.Vues
                 cmbPorte.Text = "Droite";
             else
                 cmbPorte.Text = "Gauche";
+
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
+
         }
 
         private void btnAnnuler_Click(object sender, RoutedEventArgs e)
@@ -57,6 +63,39 @@ namespace App_Brycol.Vues
                     (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
                 }
             }
+        }
+
+        private void EnleverThemeSombre()
+        {
+
+            btnAnnuler.Background = Brushes.White;
+            btnAnnuler.Foreground = Brushes.Black;
+
+            btnAppliquer.Background = Brushes.White;
+            btnAnnuler.Foreground = Brushes.Black;
+
+            grdModifPorte.Background = Brushes.White;
+
+            Banniere.Background = Brushes.LightGray;
+
+        }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+            Brush CouleurArriere = (Brush)bc.ConvertFrom("#33342F");
+            Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
+
+            btnAnnuler.Background = CouleurBouton;
+            btnAnnuler.Foreground = Brushes.White;
+
+            btnAppliquer.Background = CouleurBouton;
+            btnAppliquer.Foreground = Brushes.White;
+
+            grdModifPorte.Background = CouleurArriere;
+
+            Banniere.Background = CouleurBanniere;
         }
     }
 }

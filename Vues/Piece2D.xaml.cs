@@ -604,6 +604,12 @@ namespace App_Brycol.Vues
         private void EnleverThemeSombre()
         {
             
+            btnClipStructure.Background = Brushes.White;
+            btnClipStructure.Foreground = Brushes.Black;
+
+            btnClipPiece.Background = Brushes.White;
+            btnClipPiece.Foreground = Brushes.Black;
+
             btnEchelle.Background = Brushes.White;
             btnEchelle.Foreground = Brushes.Black;
 
@@ -619,6 +625,11 @@ namespace App_Brycol.Vues
             BrushConverter bc = new BrushConverter();
             Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
 
+            btnClipStructure.Background = CouleurBouton;
+            btnClipStructure.Foreground = Brushes.White;
+
+            btnClipPiece.Background = CouleurBouton;
+            btnClipPiece.Foreground = Brushes.White;
 
             btnEchelle.Background = CouleurBouton;
             btnEchelle.Foreground = Brushes.White;

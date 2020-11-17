@@ -15,7 +15,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid Name="grdModifPorte">
 
         
         

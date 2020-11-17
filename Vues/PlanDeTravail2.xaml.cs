@@ -201,6 +201,9 @@ namespace App_Brycol.Vues
             btnProjet.Background = CouleurBouton;
             btnProjet.Foreground = Brushes.White;
 
+            btnStructure.Background = CouleurBouton;
+            btnStructure.Foreground = Brushes.White;
+
             btnCoutPiece.Background = CouleurBouton;
             btnCoutPiece.Foreground = Brushes.White;
 
@@ -237,6 +240,9 @@ namespace App_Brycol.Vues
 
             btnCoutPiece.Background = Brushes.White;
             btnCoutPiece.Foreground = Brushes.Black;
+
+            btnStructure.Background = Brushes.White;
+            btnStructure.Foreground = Brushes.Black;
 
             btnEnregistrer.Background = Brushes.White;
             btnEnregistrer.Foreground = Brushes.Black;
