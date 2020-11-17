@@ -76,7 +76,7 @@ namespace App_Brycol.Vues
                     {
                         if (ip.Item.Nom.Contains("Porte Double") || ip.Item.Nom.Contains("Fenêtre"))
                         {
-                            MessageBox.Show("Impossible de modifier la couleur d'une porte ou d'une fenêtre.");
+                            MessageBox.Show("Impossible de modifier une double porte ou une fenêtre quelconque.");
                         }
                         else if (ip.Item.Nom == "Porte")
                         {
