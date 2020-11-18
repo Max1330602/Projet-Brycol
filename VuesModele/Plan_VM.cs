@@ -27,7 +27,7 @@ namespace App_Brycol.VuesModele
         public Plan_VM()
         {
            
-            if(InfoPiece.uniteMesure == "Mètres")
+            if(Piece_VM.pieceActuel.UniteDeMesure == "Mètres")
             {
                 Longueur = Piece_VM.pieceActuel.Longueur * pixelToM;
                 Largeur = Piece_VM.pieceActuel.Largeur * pixelToM;
@@ -41,7 +41,7 @@ namespace App_Brycol.VuesModele
                 LongueurAffichage = Piece_VM.pieceActuel.Longueur;
                 LargeurAffichage = Piece_VM.pieceActuel.Largeur;
             }
-            UniteMesure = InfoPiece.uniteMesure;
+            UniteMesure = Piece_VM.pieceActuel.UniteDeMesure;
             
         }
    

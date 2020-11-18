@@ -433,11 +433,38 @@ namespace App_Brycol.Vues
             {
                 Projet_VM.themeSombre = !Projet_VM.themeSombre;
                 AppliquerThemeSombre();
+                foreach(Window w in Application.Current.Windows)
+                {
+                    if (w.GetType() == typeof(PlanDeTravail))
+                    {
+                        (w as PlanDeTravail).grdPlanTravail.Children.Clear();
+                        (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
+                    }
+                    else if (w.GetType() == typeof(MainWindow))
+                    {
+                        (w as MainWindow).gridMainWindow.Children.Clear();
+                        (w as MainWindow).gridMainWindow.Children.Add(new UCCMenuPrincipal());
+                    }
+                }
             }
             else
             {
                 Projet_VM.themeSombre = !Projet_VM.themeSombre;
                 EnleverThemeSombre();
+
+                foreach (Window w in Application.Current.Windows)
+                {
+                    if (w.GetType() == typeof(PlanDeTravail))
+                    {
+                        (w as PlanDeTravail).grdPlanTravail.Children.Clear();
+                        (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
+                    }
+                    else if (w.GetType() == typeof(MainWindow))
+                    {
+                        (w as MainWindow).gridMainWindow.Children.Clear();
+                        (w as MainWindow).gridMainWindow.Children.Add(new UCCMenuPrincipal());
+                    }
+                }
             }
 
         }

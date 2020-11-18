@@ -43,7 +43,7 @@ namespace App_Brycol.VuesModele
 
             foreach (Item i in iReq)
             {
-                if (i.Nom == "Porte" || i.Nom == "Fenêtre")
+                if (i.Nom.Contains("Porte") || i.Nom.Contains("Fenêtre"))
                     StructuresItems.Add(i);
                 else
                     SommaireItems.Add(i);
@@ -328,6 +328,10 @@ namespace App_Brycol.VuesModele
             i.Item = _itemSelectionne;           
             i.emplacementGauche = POS_PAR_DEFAUT;
             i.emplacementHaut = POS_PAR_DEFAUT;
+            if (i.Item.Nom == "Porte")
+                i.cotePorte = "droite";
+            else
+                i.cotePorte = "";
             // HARD CODE
             i.Plan = Plan_VM.PlanActuel;
             if (i.Item != null)

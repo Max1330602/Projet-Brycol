@@ -70,15 +70,35 @@ namespace App_Brycol.Vues
         {
             if (Piece2D.toolbarImage != null && Piece2D.toolbarImage.Source != null)
             {
-                ModifierItem popUp = new ModifierItem();
-                popUp.ShowDialog();
+                foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
+                {
+                    if (Piece2D.toolbarImage.Source.ToString().Contains(ip.Item.ID.ToString()))
+                    {
+                        if (ip.Item.Nom.Contains("Porte Double") || ip.Item.Nom.Contains("Fenêtre"))
+                        {
+                            MessageBox.Show("Impossible de modifier une double porte ou une fenêtre quelconque.");
+                        }
+                        else if (ip.Item.Nom == "Porte")
+                        {
+                            ModifierPorte popUp = new ModifierPorte();
+                            popUp.ShowDialog();
+                            return;
+                        }
+                        else
+                        {
+                            ModifierItem popUp = new ModifierItem();
+                            popUp.ShowDialog();
+                            return;
+                        }
+                    }
+                }
             }
             else
             {
                 MessageBox.Show("Il faut d'abord sélectionner un item dans le plan");
             }
         }
-        
+
 
         private void btnSupprimerItem_Click(object sender, RoutedEventArgs e)
         {
@@ -98,7 +118,7 @@ namespace App_Brycol.Vues
             {
                 if (Projet_VM.ProjetActuel.ListePieces[i] == Piece_VM.pieceActuel)
                 {
-                    System.Windows.Point PositionAbsolue = plan2D.TranslatePoint(new System.Windows.Point(162, 125), plan2D);
+                    System.Windows.Point PositionAbsolue = plan2D.TranslatePoint(new System.Windows.Point(162, 65), plan2D);
                     System.Windows.Point PositionEcran = this.PointToScreen(PositionAbsolue);
 
                     // Catch width and hight of scatterview
@@ -181,6 +201,9 @@ namespace App_Brycol.Vues
             btnProjet.Background = CouleurBouton;
             btnProjet.Foreground = Brushes.White;
 
+            btnStructure.Background = CouleurBouton;
+            btnStructure.Foreground = Brushes.White;
+
             btnCoutPiece.Background = CouleurBouton;
             btnCoutPiece.Foreground = Brushes.White;
 
@@ -217,6 +240,9 @@ namespace App_Brycol.Vues
 
             btnCoutPiece.Background = Brushes.White;
             btnCoutPiece.Foreground = Brushes.Black;
+
+            btnStructure.Background = Brushes.White;
+            btnStructure.Foreground = Brushes.Black;
 
             btnEnregistrer.Background = Brushes.White;
             btnEnregistrer.Foreground = Brushes.Black;

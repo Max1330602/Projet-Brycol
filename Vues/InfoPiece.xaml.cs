@@ -38,12 +38,12 @@ namespace App_Brycol.Vues
             else
                 EnleverThemeSombre();
 
-            if (Plan_VM.uniteDeMesure == "" || Plan_VM.uniteDeMesure == "Mètres")
+            if (Piece_VM.pieceActuel == null || Piece_VM.pieceActuel.UniteDeMesure == "Mètres")
             {
                 pied.IsChecked = false;
                 metre.IsChecked = true;
             }
-            else if (Plan_VM.uniteDeMesure == "Pieds")
+            else if (Piece_VM.pieceActuel.UniteDeMesure == "Pieds")
             {
                 metre.IsChecked = false;
                 pied.IsChecked = true;
