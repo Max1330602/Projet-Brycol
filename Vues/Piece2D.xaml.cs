@@ -867,6 +867,8 @@ namespace App_Brycol.Vues
             OutilEF.brycolContexte.SaveChanges();
         }
 
+        #region Clip Strucure----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
         private void ClipperPorteDoubleExtremite(ItemsPlan i)
         {
             if (i.Item.Nom == "Porte Double")
@@ -927,7 +929,6 @@ namespace App_Brycol.Vues
             }
             OutilEF.brycolContexte.SaveChanges();
         }
-
 
 
         private void ClipperFenetreExtremite(ItemsPlan i)
@@ -1051,6 +1052,7 @@ namespace App_Brycol.Vues
             }
             OutilEF.brycolContexte.SaveChanges();
         }
+        #endregion
 
 
         private void btnRotationPiece(object sender, RoutedEventArgs e)
