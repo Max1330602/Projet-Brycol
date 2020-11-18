@@ -72,18 +72,7 @@ namespace App_Brycol.Vues
                 zoomDefault = 11 / Piece_VM.pieceActuel.Longueur;
                 zoom = 11 / Piece_VM.pieceActuel.Longueur;
 
-                /* if (Piece_VM.pieceActuel.Longueur <= 8 || Piece_VM.pieceActuel.Largeur <= 8)
-                 {
-                     zoom = 1.4 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
-                     zoomMax = 1.9;
-                     zoomMin = 0.7;
-                 }
-                 else
-                 {
-                     zoom = 0.9 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
-                     zoomMax = 1.2;
-                     zoomMin = 0.3;
-                 }*/
+                
 
             }
             else
@@ -91,19 +80,7 @@ namespace App_Brycol.Vues
                 Canvas.SetLeft(canvas, 0);
                 Canvas.SetTop(canvas, 0);
                 zoom = 1.4;
-                /*if (Piece_VM.pieceActuel.Longueur <= 26 || Piece_VM.pieceActuel.Largeur <= 26)
-                {
-                    zoom = 1.4 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
-                    zoomMax = 1.9;
-                    zoomMin = 0.7;
-                }
-                else
-                {
-                    zoom = 0.9 - ((Piece_VM.pieceActuel.Longueur * 100.0 / 50.0) / 100.0);
-                    zoomMax = 1.2;
-                    zoomMin = 0.3;
-                }*/
-
+               
 
             }
             if (Piece_VM.pieceActuel.Longueur > 10 && Plan_VM.uniteDeMesure == "Mètres")
@@ -731,9 +708,38 @@ namespace App_Brycol.Vues
 
         private void btnClip(object sender, RoutedEventArgs e)
         {
-				Canvas.SetLeft(canvas, 0);
-                Canvas.SetTop(canvas, 0);
-                zoom = zoomDefault;
+            movePiece = false;
+            if (Piece_VM.pieceActuel.Longueur > 10)
+            {
+                rulerText.Visibility = Visibility.Visible;
+                ruler1.Visibility = Visibility.Visible;
+                ruler2.Visibility = Visibility.Visible;
+                ruler3.Visibility = Visibility.Visible;
+                ruler4.Visibility = Visibility.Visible;
+                ruler5.Visibility = Visibility.Visible;
+                ruler6.Visibility = Visibility.Visible;
+                rulerText.Text = "0             2              4              6             8              10              12            14              16             18            20";
+                rulerTextY.Text = "20             18              16              14             12              10              8            6              4            2             0";
+            }
+            else
+            {
+                rulerText.Visibility = Visibility.Visible;
+                rulerTextY.Visibility = Visibility.Visible;
+                ruler1.Visibility = Visibility.Visible;
+                ruler2.Visibility = Visibility.Visible;
+                ruler3.Visibility = Visibility.Visible;
+                ruler4.Visibility = Visibility.Visible;
+                ruler5.Visibility = Visibility.Visible;
+                ruler6.Visibility = Visibility.Visible;
+            }
+
+            Canvas.SetLeft(canvas, 0);
+            Canvas.SetTop(canvas, 0);
+
+            btnClipPiece.Visibility = Visibility.Hidden;
+            btnClipPieceDeclipper.Visibility = Visibility.Visible;
+
+            
         }
 
 
