@@ -251,6 +251,7 @@ namespace App_Brycol.VuesModele
             p.Nom = Nom;
             p.Largeur = (float)Math.Round(Largeur * 100f) / 100f;
             p.Longueur = (float)Math.Round(Longueur * 100f) / 100f;
+            p.UniteDeMesure = Plan_VM.uniteDeMesure;
 
             var treq = from t in OutilEF.brycolContexte.TypePiece where t.Nom == TypePiece select t;
 
