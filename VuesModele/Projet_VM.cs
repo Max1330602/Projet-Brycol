@@ -426,14 +426,16 @@ namespace App_Brycol.VuesModele
             foreach (Piece p in LstPi)
             {
                 ItemPieceProjet Ipp = new ItemPieceProjet();
-                Ipp.NomPiece = p.Nom;
 
                 var PReq3 = from iP in OutilEF.brycolContexte.lstItems.Include("Item") where iP.Plan.Piece.ID == p.ID select iP;
                 foreach (ItemsPlan itemP in PReq3)
                 {
+                    Ipp.NomPiece = p.Nom;
                     Ipp.NomItem = itemP.Item.Nom;
                     Ipp.CoutItem = itemP.Item.Cout;
                     LstIPP.Add(Ipp);
+
+                    Ipp = new ItemPieceProjet();
                 }
 
             }
