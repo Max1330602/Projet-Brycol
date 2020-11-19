@@ -188,12 +188,24 @@ namespace App_Brycol.Vues
 
                         if (imageBD.Tag.ToString() == draggedImage.Tag.ToString())
                         {
-                            Canvas.SetLeft(btntoolRotation, i.emplacementGauche + 5);
-                            Canvas.SetTop(btntoolRotation, i.emplacementHaut - 19);
-                            canvas.Children.Add(btntoolRotation);
-                            Canvas.SetLeft(btntoolSupprimer, i.emplacementGauche + 64);
-                            Canvas.SetTop(btntoolSupprimer, i.emplacementHaut - 19);
-                            canvas.Children.Add(btntoolSupprimer);
+                            if (i.Item.Nom.Contains("Porte") || i.Item.Nom.Contains("Fenêtre"))
+                            {
+                                Canvas.SetLeft(btntoolRotation, i.emplacementGauche + 105);
+                                Canvas.SetTop(btntoolRotation, i.emplacementHaut + 45);
+                                canvas.Children.Add(btntoolRotation);
+                                Canvas.SetLeft(btntoolSupprimer, i.emplacementGauche + 164);
+                                Canvas.SetTop(btntoolSupprimer, i.emplacementHaut + 45);
+                                canvas.Children.Add(btntoolSupprimer);
+                            }
+                            else
+                            {
+                                Canvas.SetLeft(btntoolRotation, i.emplacementGauche + 5);
+                                Canvas.SetTop(btntoolRotation, i.emplacementHaut - 19);
+                                canvas.Children.Add(btntoolRotation);
+                                Canvas.SetLeft(btntoolSupprimer, i.emplacementGauche + 64);
+                                Canvas.SetTop(btntoolSupprimer, i.emplacementHaut - 19);
+                                canvas.Children.Add(btntoolSupprimer);
+                            }
                         }
                     }
                     btntoolRotation.Visibility = Visibility.Visible;
@@ -808,6 +820,7 @@ namespace App_Brycol.Vues
 
         #region Clip Strucure----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+        // BD : 100 60 60
         private void ClipperPorteExtremite(ItemsPlan i)
         {
             if (i.Item.Nom == "Porte")
@@ -869,7 +882,7 @@ namespace App_Brycol.Vues
             OutilEF.brycolContexte.SaveChanges();
         }
 
-
+        // BD : 200 60 60
         private void ClipperPorteDoubleExtremite(ItemsPlan i)
         {
             if (i.Item.Nom == "Porte Double")
@@ -931,7 +944,7 @@ namespace App_Brycol.Vues
             OutilEF.brycolContexte.SaveChanges();
         }
 
-
+        // BD : 100 40 60
         private void ClipperFenetreExtremite(ItemsPlan i)
         {
             if (i.Item.Nom == "Fenêtre")
@@ -992,7 +1005,7 @@ namespace App_Brycol.Vues
             }
             OutilEF.brycolContexte.SaveChanges();
         }
-
+        // BD : 200 40 60
         private void ClipperFenetreDoubleExtremite(ItemsPlan i)
         {
             if (i.Item.Nom == "Fenêtre Double")
