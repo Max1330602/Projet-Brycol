@@ -254,6 +254,8 @@ namespace App_Brycol.Vues
                         ClipperFenetreDoubleExtremite(i);
                         ClipperFenetreExtremite(i);
 
+                        Canvas.SetLeft(draggedImage, i.emplacementGauche);
+                        Canvas.SetTop(draggedImage, i.emplacementHaut);
                         if (mousePosition == position)
                         {
                             toolbarImage = draggedImage;
@@ -662,9 +664,11 @@ namespace App_Brycol.Vues
 
         private void EnleverThemeSombre()
         {
-            
-            btnClipStructure.Background = Brushes.White;
-            btnClipStructure.Foreground = Brushes.Black;
+            btnClipPieceDeclipper.Background = Brushes.White;
+            btnClipPieceDeclipper.Foreground = Brushes.Black;
+
+            btnPieceRotation.Background = Brushes.White;
+            btnPieceRotation.Foreground = Brushes.Black;
 
             btnClipPiece.Background = Brushes.White;
             btnClipPiece.Foreground = Brushes.Black;
@@ -684,8 +688,11 @@ namespace App_Brycol.Vues
             BrushConverter bc = new BrushConverter();
             Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
 
-            btnClipStructure.Background = CouleurBouton;
-            btnClipStructure.Foreground = Brushes.White;
+            btnClipPieceDeclipper.Background = CouleurBouton;
+            btnClipPieceDeclipper.Foreground = Brushes.White;
+
+            btnPieceRotation.Background = CouleurBouton;
+            btnPieceRotation.Foreground = Brushes.White;
 
             btnClipPiece.Background = CouleurBouton;
             btnClipPiece.Foreground = Brushes.White;
@@ -699,24 +706,6 @@ namespace App_Brycol.Vues
             btnPlus.Background = CouleurBouton;
             btnPlus.Foreground = Brushes.White;
         }
-
-        private void btnClipStructure_Click(object sender, RoutedEventArgs e)
-        {
-
-            
-           
-            foreach (Window w in Application.Current.Windows)
-            {
-                if (w.GetType() == typeof(PlanDeTravail))
-                {
-                    (w as PlanDeTravail).grdPlanTravail.Children.Clear();
-                    (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
-                }
-
-            }
-            
-        }
-
 
         private void btnClip(object sender, RoutedEventArgs e)
         {

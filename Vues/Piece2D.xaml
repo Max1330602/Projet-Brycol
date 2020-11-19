@@ -178,9 +178,6 @@
                 <Button x:Name="btnClipPiece" Click="btnClip" Height="20" Content="Clip" Width="60" FontSize="10" Foreground="Black" Background="White" Panel.ZIndex="5"  Margin="130,0,56,0" Visibility="Hidden"/>
                 <Button x:Name="btnClipPieceDeclipper" Click="btnDéclip" Height="20" Content="Déclipper" Width="60" FontSize="10" Foreground="Black" Background="White" Panel.ZIndex="5"  Margin="130,0,56,0" />
 
-                <Button x:Name="btnClipStructure" Click="btnClipStructure_Click" Height="20" Content="Clip Structures" Width="75" FontSize="10" Foreground="Black" Background="White" Panel.ZIndex="5"  Margin="23,0,148,0" />
-
-
                 <!-- Le bouton 100%.  Scale le canvas à sa grandeur d'origine-->
                 <Button x:Name="btnEchelle" Grid.Column="1" Click="canvasResizeFull" Content="Mise à l'échelle" Grid.ColumnSpan="4" Margin="79,0,5,0"/>
 
