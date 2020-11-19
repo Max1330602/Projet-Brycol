@@ -806,58 +806,60 @@ namespace App_Brycol.Vues
             canvas_Zoom.RenderTransform = new ScaleTransform(zoomSliderTemp, zoomSliderTemp);
         }
 
+        #region Clip Strucure----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
         private void ClipperPorteExtremite(ItemsPlan i)
         {
             if (i.Item.Nom == "Porte")
             {
                 if (i.angleRotation == 0)
                 {
-                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > -9 && i.emplacementGauche < canvas.Width - 66 && i.emplacementHaut > -30 && i.emplacementHaut < canvas.Height - 30)
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width - 74 && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height -41)
                         i.emplacementHaut = -5;
-                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > -9 && i.emplacementGauche < canvas.Width - 66 && i.emplacementHaut > -30 && i.emplacementHaut < canvas.Height - 30)
+                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width - 74 && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height -41)
                         i.emplacementHaut = canvas.Height - 10;
                     else
                     {
-                        MessageBox.Show("Emplacement Invalide pour attache une porte sur un mur.");
+                        MessageBox.Show("Emplacement Invalide pour attacher une porte sur un mur.");
                         i.emplacementHaut = canvas.Height / 2;
                         i.emplacementGauche = canvas.Width / 2;
                     }
                 }
                 else if (i.angleRotation == 90)
                 {
-                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -9 && i.emplacementGauche < canvas.Width + 22 && i.emplacementHaut > -1 && i.emplacementHaut < canvas.Height - 58)
-                        i.emplacementGauche = 0;
-                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > -9 && i.emplacementGauche < canvas.Width + 22 && i.emplacementHaut > -1 && i.emplacementHaut < canvas.Height - 58)
-                        i.emplacementGauche = canvas.Width - 5;
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -19 && i.emplacementGauche < canvas.Width -57 && i.emplacementHaut > 14 && i.emplacementHaut < canvas.Height - 61)
+                        i.emplacementGauche = -51;
+                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > -19 && i.emplacementGauche < canvas.Width + -57 && i.emplacementHaut > 14 && i.emplacementHaut < canvas.Height - 61)
+                        i.emplacementGauche = canvas.Width - 54;
                     else
                     {
-                        MessageBox.Show("Emplacement Invalide pour attache une porte sur un mur.");
+                        MessageBox.Show("Emplacement Invalide pour attacher une porte sur un mur.");
                         i.emplacementHaut = canvas.Height / 2;
                         i.emplacementGauche = canvas.Width / 2;
                     }
                 }
                 else if (i.angleRotation == 180)
                 {
-                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 73 && i.emplacementGauche < canvas.Width - 9 && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height)
-                        i.emplacementHaut = 3.45;
-                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 73 && i.emplacementGauche < canvas.Width -9 && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height)
-                        i.emplacementHaut = canvas.Height;
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > -1 && i.emplacementGauche < canvas.Width - 74 && i.emplacementHaut > -5 && i.emplacementHaut < canvas.Height -42)
+                        i.emplacementHaut = -36;
+                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > -1 && i.emplacementGauche < canvas.Width -74 && i.emplacementHaut > -5 && i.emplacementHaut < canvas.Height-42)
+                        i.emplacementHaut = canvas.Height -39;
                     else
                     {
-                        MessageBox.Show("Emplacement Invalide pour attache une porte sur un mur.");
+                        MessageBox.Show("Emplacement Invalide pour attacher une porte sur un mur.");
                         i.emplacementHaut = canvas.Height / 2;
                         i.emplacementGauche = canvas.Width / 2;
                     }
                 }
                 else if (i.angleRotation == 270)
                 {
-                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -38 && i.emplacementGauche < canvas.Width - 9 && i.emplacementHaut > 57 && i.emplacementHaut < canvas.Height)
-                        i.emplacementGauche = -7;
-                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > -38 && i.emplacementGauche < canvas.Width - 9 && i.emplacementHaut > 57 && i.emplacementHaut < canvas.Height)
-                        i.emplacementGauche = canvas.Width - 10;
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -18 && i.emplacementGauche < canvas.Width - 56 && i.emplacementHaut > 14 && i.emplacementHaut < canvas.Height -59)
+                        i.emplacementGauche = -21;
+                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > -18 && i.emplacementGauche < canvas.Width - 56 && i.emplacementHaut > 14 && i.emplacementHaut < canvas.Height -59)
+                        i.emplacementGauche = canvas.Width - 23;
                     else
                     {
-                        MessageBox.Show("Emplacement Invalide pour attache une porte sur un mur.");
+                        MessageBox.Show("Emplacement Invalide pour attacher une porte sur un mur.");
                         i.emplacementHaut = canvas.Height / 2;
                         i.emplacementGauche = canvas.Width / 2;
                     }
@@ -867,7 +869,6 @@ namespace App_Brycol.Vues
             OutilEF.brycolContexte.SaveChanges();
         }
 
-        #region Clip Strucure----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         private void ClipperPorteDoubleExtremite(ItemsPlan i)
         {
@@ -875,52 +876,52 @@ namespace App_Brycol.Vues
             {
                 if (i.angleRotation == 0)
                 {
-                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > -3 && i.emplacementGauche < canvas.Width - 149 && i.emplacementHaut > -30 && i.emplacementHaut < canvas.Height - 30)
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > -3 && i.emplacementGauche < canvas.Width - 150 && i.emplacementHaut > -3 && i.emplacementHaut < canvas.Height - 41)
                         i.emplacementHaut = -5;
-                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > -3 && i.emplacementGauche < canvas.Width - 149 && i.emplacementHaut > -30 && i.emplacementHaut < canvas.Height - 30)
+                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > -3 && i.emplacementGauche < canvas.Width - 150 && i.emplacementHaut > -3 && i.emplacementHaut < canvas.Height - 41)
                         i.emplacementHaut = canvas.Height - 10;
                     else
                     {
-                        MessageBox.Show("Emplacement Invalide pour attache une porte sur un mur.");
+                        MessageBox.Show("Emplacement Invalide pour attacher une porte sur un mur.");
                         i.emplacementHaut = canvas.Height / 2;
                         i.emplacementGauche = canvas.Width / 2;
                     }
                 }
                 else if (i.angleRotation == 90)
                 {
-                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -18 && i.emplacementGauche < canvas.Width + 13 && i.emplacementHaut > -3 && i.emplacementHaut < canvas.Height - 117)
-                        i.emplacementGauche = -15;
-                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > -18 && i.emplacementGauche < canvas.Width + 13 && i.emplacementHaut > -3 && i.emplacementHaut < canvas.Height - 117)
-                        i.emplacementGauche = canvas.Width -15;
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -57 && i.emplacementGauche < canvas.Width -94 && i.emplacementHaut > 50 && i.emplacementHaut < canvas.Height - 97)
+                        i.emplacementGauche = -90;
+                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > -57 && i.emplacementGauche < canvas.Width -94 && i.emplacementHaut > 50 && i.emplacementHaut < canvas.Height - 97)
+                        i.emplacementGauche = canvas.Width - 92;
                     else
                     {
-                        MessageBox.Show("Emplacement Invalide pour attache une porte sur un mur.");
+                        MessageBox.Show("Emplacement Invalide pour attacher une porte sur un mur.");
                         i.emplacementHaut = canvas.Height / 2;
                         i.emplacementGauche = canvas.Width / 2;
                     }
                 }
                 else if (i.angleRotation == 180)
                 {
-                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 99 && i.emplacementGauche < canvas.Width - 15 && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height+29)
-                        i.emplacementHaut = 3.45;
-                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 99 && i.emplacementGauche < canvas.Width - 15 && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height+29)
-                        i.emplacementHaut = canvas.Height;
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > -1 && i.emplacementGauche < canvas.Width - 148 && i.emplacementHaut > -5 && i.emplacementHaut < canvas.Height- 41)
+                        i.emplacementHaut = -37;
+                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > -1 && i.emplacementGauche < canvas.Width - 148 && i.emplacementHaut > -5 && i.emplacementHaut < canvas.Height- 41)
+                        i.emplacementHaut = canvas.Height -37;
                     else
                     {
-                        MessageBox.Show("Emplacement Invalide pour attache une porte sur un mur.");
+                        MessageBox.Show("Emplacement Invalide pour attacher une porte sur un mur.");
                         i.emplacementHaut = canvas.Height / 2;
                         i.emplacementGauche = canvas.Width / 2;
                     }
                 }
                 else if (i.angleRotation == 270)
                 {
-                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -47 && i.emplacementGauche < canvas.Width - 17 && i.emplacementHaut > 115 && i.emplacementHaut < canvas.Height+2)
-                        i.emplacementGauche = -15;
-                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > -47 && i.emplacementGauche < canvas.Width - 17 && i.emplacementHaut > 115 && i.emplacementHaut < canvas.Height+2)
-                        i.emplacementGauche = canvas.Width - 20;
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -57 && i.emplacementGauche < canvas.Width - 93 && i.emplacementHaut > 52 && i.emplacementHaut < canvas.Height-95)
+                        i.emplacementGauche = -58;
+                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > -57 && i.emplacementGauche < canvas.Width - 93 && i.emplacementHaut > 52 && i.emplacementHaut < canvas.Height-95)
+                        i.emplacementGauche = canvas.Width - 62;
                     else
                     {
-                        MessageBox.Show("Emplacement Invalide pour attache une porte sur un mur.");
+                        MessageBox.Show("Emplacement Invalide pour attacher une porte sur un mur.");
                         i.emplacementHaut = canvas.Height / 2;
                         i.emplacementGauche = canvas.Width / 2;
                     }
@@ -937,52 +938,52 @@ namespace App_Brycol.Vues
             {
                 if (i.angleRotation == 0)
                 {
-                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
-                        i.emplacementHaut = -13;
-                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
-                        i.emplacementHaut = canvas.Height -18;
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width -75 && i.emplacementHaut > -13 && i.emplacementHaut < canvas.Height -17)
+                        i.emplacementHaut = -13.5;
+                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width -75 && i.emplacementHaut > -13 && i.emplacementHaut < canvas.Height - 17)
+                        i.emplacementHaut = canvas.Height -16;
                     else
                     {
-                        MessageBox.Show("Emplacement Invalide pour attache une porte sur un mur.");
+                        MessageBox.Show("Emplacement Invalide pour attacher une fenêtre sur un mur.");
                         i.emplacementHaut = canvas.Height / 2;
                         i.emplacementGauche = canvas.Width / 2;
                     }
                 }
                 else if (i.angleRotation == 90)
                 {
-                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -40 && i.emplacementHaut < canvas.Height - 40)
-                        i.emplacementGauche = 2;
-                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut >  -40 && i.emplacementHaut < canvas.Height - 40)
-                        i.emplacementGauche = canvas.Width - 2;
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -35 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 22 && i.emplacementHaut < canvas.Height - 52)
+                        i.emplacementGauche = -36.5;
+                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > -35 && i.emplacementGauche < canvas.Width && i.emplacementHaut >  22 && i.emplacementHaut < canvas.Height - 52)
+                        i.emplacementGauche = canvas.Width - 39;
                     else
                     {
-                        MessageBox.Show("Emplacement Invalide pour attache une porte sur un mur.");
+                        MessageBox.Show("Emplacement Invalide pour attacher une fenêtre sur un mur.");
                         i.emplacementHaut = canvas.Height / 2;
                         i.emplacementGauche = canvas.Width / 2;
                     }
                 }
                 else if (i.angleRotation == 180)
                 {
-                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -40 && i.emplacementHaut < canvas.Height - 40)
-                        i.emplacementHaut = -10;
-                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
-                        i.emplacementHaut = canvas.Height - 15;
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > -1 && i.emplacementGauche < canvas.Width -75 && i.emplacementHaut > -13 && i.emplacementHaut < canvas.Height - 17)
+                        i.emplacementHaut = -13.5;
+                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > -1 && i.emplacementGauche < canvas.Width -75 && i.emplacementHaut > -13 && i.emplacementHaut < canvas.Height - 17)
+                        i.emplacementHaut = canvas.Height - 16;
                     else
                     {
-                        MessageBox.Show("Emplacement Invalide pour attache une porte sur un mur.");
+                        MessageBox.Show("Emplacement Invalide pour attacher une fenêtre sur un mur.");
                         i.emplacementHaut = canvas.Height / 2;
                         i.emplacementGauche = canvas.Width / 2;
                     }
                 }
                 else if (i.angleRotation == 270)
                 {
-                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -73 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
-                        i.emplacementGauche = 2;
-                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
-                        i.emplacementGauche = canvas.Width - 2;
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -36 && i.emplacementGauche < canvas.Width -40 && i.emplacementHaut > 22 && i.emplacementHaut < canvas.Height - 52)
+                        i.emplacementGauche = -36;
+                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > -36 && i.emplacementGauche < canvas.Width -40 && i.emplacementHaut > 22 && i.emplacementHaut < canvas.Height - 52)
+                        i.emplacementGauche = canvas.Width - 39;
                     else
                     {
-                        MessageBox.Show("Emplacement Invalide pour attache une porte sur un mur.");
+                        MessageBox.Show("Emplacement Invalide pour attacher une fenêtre sur un mur.");
                         i.emplacementHaut = canvas.Height / 2;
                         i.emplacementGauche = canvas.Width / 2;
                     }
@@ -998,52 +999,52 @@ namespace App_Brycol.Vues
             {
                 if (i.angleRotation == 0)
                 {
-                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0.5 && i.emplacementGauche < canvas.Width -151 && i.emplacementHaut > -10.1 && i.emplacementHaut < canvas.Height - 20)
                         i.emplacementHaut = -13;
-                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
-                        i.emplacementHaut = canvas.Height-18;
+                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0.5 && i.emplacementGauche < canvas.Width -51 && i.emplacementHaut > -10.1 && i.emplacementHaut < canvas.Height - 20)
+                        i.emplacementHaut = canvas.Height-17;
                     else
                     {
-                        MessageBox.Show("Emplacement Invalide pour attache une porte sur un mur.");
+                        MessageBox.Show("Emplacement Invalide pour attacher une fenêtre sur un mur.");
                         i.emplacementHaut = canvas.Height / 2;
                         i.emplacementGauche = canvas.Width / 2;
                     }
                 }
                 else if (i.angleRotation == 90)
                 {
-                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -40 && i.emplacementHaut < canvas.Height - 40)
-                        i.emplacementGauche = 2;
-                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -40 && i.emplacementHaut < canvas.Height - 40)
-                        i.emplacementGauche = canvas.Width - 2;
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -70.6 && i.emplacementGauche < canvas.Width -80 && i.emplacementHaut > 61 && i.emplacementHaut < canvas.Height - 90)
+                        i.emplacementGauche = -73;
+                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > -70.6 && i.emplacementGauche < canvas.Width -80 && i.emplacementHaut > 61 && i.emplacementHaut < canvas.Height - 90)
+                        i.emplacementGauche = canvas.Width - 77;
                     else
                     {
-                        MessageBox.Show("Emplacement Invalide pour attache une porte sur un mur.");
+                        MessageBox.Show("Emplacement Invalide pour attacher une fenêtre sur un mur.");
                         i.emplacementHaut = canvas.Height / 2;
                         i.emplacementGauche = canvas.Width / 2;
                     }
                 }
                 else if (i.angleRotation == 180)
                 {
-                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > -40 && i.emplacementHaut < canvas.Height - 40)
-                        i.emplacementHaut = -10;
-                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
-                        i.emplacementHaut = canvas.Height - 15;
+                    if (i.emplacementHaut <= canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width -151 && i.emplacementHaut > -10.2 && i.emplacementHaut < canvas.Height - 20)
+                        i.emplacementHaut = -13.5;
+                    else if (i.emplacementHaut > canvas.Height / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width -151 && i.emplacementHaut > -10.2 && i.emplacementHaut < canvas.Height - 20)
+                        i.emplacementHaut = canvas.Height - 16;
                     else
                     {
-                        MessageBox.Show("Emplacement Invalide pour attache une porte sur un mur.");
+                        MessageBox.Show("Emplacement Invalide pour attacher une fenêtre sur un mur.");
                         i.emplacementHaut = canvas.Height / 2;
                         i.emplacementGauche = canvas.Width / 2;
                     }
                 }
                 else if (i.angleRotation == 270)
                 {
-                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -73 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
-                        i.emplacementGauche = 2;
-                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > 0 && i.emplacementGauche < canvas.Width && i.emplacementHaut > 0 && i.emplacementHaut < canvas.Height - 40)
-                        i.emplacementGauche = canvas.Width - 2;
+                    if (i.emplacementGauche <= canvas.Width / 2 && i.emplacementGauche > -70.6 && i.emplacementGauche < canvas.Width -80.5 && i.emplacementHaut > 60.5 && i.emplacementHaut < canvas.Height - 90.5)
+                        i.emplacementGauche = -73;
+                    else if (i.emplacementGauche > canvas.Width / 2 && i.emplacementGauche > -70.6 && i.emplacementGauche < canvas.Width -80.5 && i.emplacementHaut > 60.5 && i.emplacementHaut < canvas.Height - 90.5)
+                        i.emplacementGauche = canvas.Width -76.5;
                     else
                     {
-                        MessageBox.Show("Emplacement Invalide pour attache une porte sur un mur.");
+                        MessageBox.Show("Emplacement Invalide pour attacher une fenêtre sur un mur.");
                         i.emplacementHaut = canvas.Height / 2;
                         i.emplacementGauche = canvas.Width / 2;
                     }

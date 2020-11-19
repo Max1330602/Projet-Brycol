@@ -29,7 +29,7 @@
         <Border x:Name="ArriereBoutons" Grid.Row="1" Grid.Column="0" Background="White"></Border>
         <Border x:Name="ArrierePlan" Grid.Row="1" Grid.Column="1" Background="White"></Border>
 
-        <Label Name="lblProjet" Grid.ColumnSpan="2" Grid.Row="0" FontSize="20" Height="40" Width="500" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Nom du Projet + Nom Pièce Active"/>
+        <Label Name="lblProjet" Grid.ColumnSpan="2" Grid.Row="0" FontSize="20" Height="40" Width="1500" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Nom du Projet + Nom Pièce Active"/>
 
 
 
@@ -50,10 +50,6 @@
 
         <Rectangle x:Name="rectangle" Grid.Column="1" Grid.Row="1" Stroke="Black" StrokeThickness="4" Margin="8,21,6,67">
         </Rectangle>
-
-
-
-        <ContentPresenter Name="presenteurContenu2" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2"></ContentPresenter>
 
         <!-- Plan 2D de la pièce-->
         <local:Piece2D x:Name="plan2D" Grid.Column="1" Grid.Row="1" Margin="12,25,10,71" ClipToBounds="true"></local:Piece2D>
