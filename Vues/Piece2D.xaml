@@ -39,7 +39,7 @@
                 <Run Text="{Binding LongueurAffichage}"></Run>
                 <Run Text="{Binding UniteMesure}"></Run>
             </TextBlock>
-            
+
             <Canvas x:Name="canvas_Zoom" Margin="50,45,0,0" MouseMove="CanvasZoomMouseMove">
 
 
@@ -59,9 +59,9 @@
 
 
                 </Canvas>
-                <TextBlock x:Name="rulerText" Text="0             1              2              3             4              5              6             7              8             9            10" Canvas.Top="-31" Canvas.Left="-1"/>
+                <TextBlock x:Name="rulerText" FontSize="7" Canvas.Top="-19" Width="345"><Run Text="0            "/><Run Text="  "/><Run Text="1              "/><Run Text=" "/><Run Text="2              "/><Run Text=" "/><Run Text="3             "/><Run Text=" "/><Run Text="4              "/><Run Text=" "/><Run Text="5              "/><Run Text=" "/><Run Text="6             "/><Run Text="  "/><Run Text="7              8             "/><Run Text="  "/><Run Text="9            "/><Run Text=" 10"/></TextBlock>
 
-                <Image x:Name="ruler1" Source="/images/ruler.png" Height="16"  Width="238" Canvas.Top="-16" RenderTransformOrigin="0.5,0.5" Canvas.Left="-2" >
+                <Image x:Name="ruler1" Source="/images/ruler.png" Height="10"  Width="232" Canvas.Top="-10" RenderTransformOrigin="0.5,0.5" Canvas.Left="-43" Panel.ZIndex="1" >
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -71,7 +71,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ruler2" Source="/App-Brycol;component/images/ruler.png" Height="16"  Width="238" Canvas.Top="-16" RenderTransformOrigin="0.5,0.5" Canvas.Left="228" >
+                <Image x:Name="ruler2" Source="/App-Brycol;component/images/ruler.png" Height="10"  Width="232" Canvas.Top="-10" RenderTransformOrigin="0.5,0.5" Canvas.Left="101" >
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -81,7 +81,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ruler3" Source="/App-Brycol;component/images/ruler.png" Height="16"  Width="238" Canvas.Top="-16" RenderTransformOrigin="0.5,0.5" Canvas.Left="279" >
+                <Image x:Name="ruler3" Source="/App-Brycol;component/images/ruler.png" Height="10"  Width="232" Canvas.Top="-10" RenderTransformOrigin="0.5,0.5" Canvas.Left="133" >
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -91,7 +91,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ruler4" Source="/App-Brycol;component/images/ruler.png" Height="16"  Width="238" Canvas.Top="108" RenderTransformOrigin="0.5,0.5" Canvas.Left="-127" >
+                <Image x:Name="ruler4" Source="/App-Brycol;component/images/ruler.png" Height="10"  Width="232" Canvas.Top="68" RenderTransformOrigin="0.5,0.5" Canvas.Left="-121" >
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -101,7 +101,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ruler5" Source="/App-Brycol;component/images/ruler.png" Height="16"  Width="238" Canvas.Top="339" RenderTransformOrigin="0.5,0.5" Canvas.Left="-127" >
+                <Image x:Name="ruler5" Source="/App-Brycol;component/images/ruler.png" Height="10"  Width="232" Canvas.Top="212" RenderTransformOrigin="0.5,0.5" Canvas.Left="-121" >
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -111,7 +111,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <Image x:Name="ruler6" Source="/App-Brycol;component/images/ruler.png" Height="16"  Width="238" Canvas.Top="390" RenderTransformOrigin="0.5,0.5" Canvas.Left="-127" >
+                <Image x:Name="ruler6" Source="/App-Brycol;component/images/ruler.png" Height="10"  Width="232" Canvas.Top="241" RenderTransformOrigin="0.5,0.5" Canvas.Left="-121" >
                     <Image.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -121,7 +121,7 @@
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
-                <TextBlock x:Name="rulerTextY" Text="10             9              8              7             6              5              4             3              2             1             0" Canvas.Top="252" Canvas.Left="-284" RenderTransformOrigin="0.5,0.5">
+                <TextBlock x:Name="rulerTextY" FontSize="7" Canvas.Top="155" Canvas.Left="-176" RenderTransformOrigin="0.5,0.5">
                     <TextBlock.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -129,8 +129,7 @@
                             <RotateTransform Angle="-90"/>
                             <TranslateTransform/>
                         </TransformGroup>
-                    </TextBlock.RenderTransform>
-                </TextBlock>
+                    </TextBlock.RenderTransform><Run Text="10             9              "/><Run Text=" "/><Run Text="8            "/><Run Text=" "/><Run Text="  7             "/><Run Text=" "/><Run Text="6              5              4             "/><Run Text="  "/><Run Text="3          "/><Run Text="    "/><Run Text=" 2          "/><Run Text="   "/><Run Text=" "/><Run Text="1"/><Run Text="           "/><Run Text="   "/><Run Text=" 0"/></TextBlock>
 
 
 
