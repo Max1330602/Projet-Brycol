@@ -37,7 +37,7 @@ namespace App_Brycol.Modele
                 {
                     bmiItem.EndInit();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                         bmiItem = new BitmapImage();
                         bmiItem.BeginInit();

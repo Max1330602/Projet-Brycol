@@ -206,7 +206,7 @@ namespace App_Brycol.VuesModele
                 var test = OutilEF.brycolContexte.Projets.Max<Projet>(t => t.ID);
                 test += 1;
                 p.Nom = "Projet" + test;
-            } catch (Exception e)
+            } catch (Exception)
             {
                 p.Nom = "Projet";
             }

@@ -488,7 +488,7 @@ namespace App_Brycol.Vues
                             bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ip.cotePorte + ".png");
                             bitmap.EndInit();
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             bitmap = new BitmapImage();
                             bitmap.BeginInit();
@@ -505,7 +505,7 @@ namespace App_Brycol.Vues
                             bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png");
                             bitmap.EndInit();
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             bitmap = new BitmapImage();
                             bitmap.BeginInit();
@@ -528,7 +528,7 @@ namespace App_Brycol.Vues
                             bitmap.EndInit();
                         }
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         try
                         { 
@@ -537,7 +537,7 @@ namespace App_Brycol.Vues
                             bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png");
                             bitmap.EndInit();
                         }
-                        catch(Exception e2)
+                        catch(Exception)
                         {
                             bitmap = new BitmapImage();
                             bitmap.BeginInit();
