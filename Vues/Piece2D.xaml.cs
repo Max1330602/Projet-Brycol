@@ -62,31 +62,28 @@ namespace App_Brycol.Vues
                 canvas.Background = imgBrush;
             }
             
-
             if (Plan_VM.uniteDeMesure == "Mètres")
             {
                 Canvas.SetLeft(canvas, 0);
                 Canvas.SetTop(canvas, 0);
 
-
                 zoomDefault = 11 / Piece_VM.pieceActuel.Longueur;
                 zoom = 11 / Piece_VM.pieceActuel.Longueur;
-
-                
 
             }
             else
             {
                 Canvas.SetLeft(canvas, 0);
                 Canvas.SetTop(canvas, 0);
-                zoom = 1.4;
-               
+                zoomDefault = 36.08 / Piece_VM.pieceActuel.Longueur;
+                zoom = 36.08 / Piece_VM.pieceActuel.Longueur;
+
 
             }
             if (Piece_VM.pieceActuel.Longueur > 10 && Plan_VM.uniteDeMesure == "Mètres")
             {
-                rulerText.Text = "0             2              4              6             8             10            12           14            16           18           20";
-                rulerTextY.Text = "20             18              16              14             12              10              8            6              4            2             0";
+                rulerText.Text = "0              2              4              6              8             10            12            14             16            18            20";
+                rulerTextY.Text = "20             18             16              14             12              10              8            6              4            2             0";
                 
             }
             /*else if(Plan_VM.uniteDeMesure == "Pieds" && Piece_VM.pieceActuel.Longueur < 32)
@@ -104,9 +101,8 @@ namespace App_Brycol.Vues
             ruler4.Visibility = Visibility.Visible;
             ruler5.Visibility = Visibility.Visible;
             ruler6.Visibility = Visibility.Visible;
-
-            canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transforme la grandeur du canvas
-            
+            btnPieceRotation.Visibility = Visibility.Hidden;
+            canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transforme la grandeur du canvas           
 
             DataContext = new Plan_VM();
         }
@@ -177,7 +173,7 @@ namespace App_Brycol.Vues
                     canvas.Children.Remove(btntoolRotation);
                     canvas.Children.Remove(btntoolSupprimer);
                     draggedImage = image;
-                    draggedImage.Opacity = 1;
+                    
 
                     foreach (ItemsPlan i in Item_VM.ItemsPlanActuel)
                     {
@@ -190,6 +186,7 @@ namespace App_Brycol.Vues
                         {
                             if (i.Item.Nom.Contains("Porte") || i.Item.Nom.Contains("Fenêtre"))
                             {
+                               
                                 Canvas.SetLeft(btntoolRotation, i.emplacementGauche + 105);
                                 Canvas.SetTop(btntoolRotation, i.emplacementHaut + 45);
                                 canvas.Children.Add(btntoolRotation);
@@ -199,12 +196,25 @@ namespace App_Brycol.Vues
                             }
                             else
                             {
-                                Canvas.SetLeft(btntoolRotation, i.emplacementGauche + 5);
-                                Canvas.SetTop(btntoolRotation, i.emplacementHaut - 19);
-                                canvas.Children.Add(btntoolRotation);
-                                Canvas.SetLeft(btntoolSupprimer, i.emplacementGauche + 64);
-                                Canvas.SetTop(btntoolSupprimer, i.emplacementHaut - 19);
-                                canvas.Children.Add(btntoolSupprimer);
+                                if (i.emplacementHaut > 19)
+                                {
+                                    Canvas.SetLeft(btntoolRotation, i.emplacementGauche + 5);
+                                    Canvas.SetTop(btntoolRotation, i.emplacementHaut - 19);
+                                    canvas.Children.Add(btntoolRotation);
+                                    Canvas.SetLeft(btntoolSupprimer, i.emplacementGauche + 64);
+                                    Canvas.SetTop(btntoolSupprimer, i.emplacementHaut - 19);
+                                    canvas.Children.Add(btntoolSupprimer);
+                                }
+                                else
+                                {
+                                    Canvas.SetLeft(btntoolRotation, i.emplacementGauche + 5);
+                                    Canvas.SetTop(btntoolRotation, i.emplacementHaut+ i.Item.Longueur-15);
+                                    canvas.Children.Add(btntoolRotation);
+                                    Canvas.SetLeft(btntoolSupprimer, i.emplacementGauche + 64);
+                                    Canvas.SetTop(btntoolSupprimer, i.emplacementHaut + i.Item.Longueur-15);
+                                    canvas.Children.Add(btntoolSupprimer);
+                                }
+                                
                             }
                         }
                     }
@@ -229,8 +239,8 @@ namespace App_Brycol.Vues
             {
                 canvas.ReleaseMouseCapture();
                 System.Windows.Controls.Panel.SetZIndex(draggedImage, 0);
-
                 
+
                 foreach (ItemsPlan i in Item_VM.ItemsPlanActuel)
                 {
                     var bitmap = new BitmapImage(i.Item.ImgItem.UriSource);
@@ -248,6 +258,39 @@ namespace App_Brycol.Vues
                 
                         i.emplacementGauche = Canvas.GetLeft(draggedImage) + offset.X;
                         i.emplacementHaut = Canvas.GetTop(draggedImage) + offset.Y;
+
+                        if (i.Item.Nom.Contains("Porte") || i.Item.Nom.Contains("Fenêtre"))
+                        {
+
+                            Canvas.SetLeft(btntoolRotation, i.emplacementGauche + 105);
+                            Canvas.SetTop(btntoolRotation, i.emplacementHaut + 45);
+                          
+                            Canvas.SetLeft(btntoolSupprimer, i.emplacementGauche + 164);
+                            Canvas.SetTop(btntoolSupprimer, i.emplacementHaut + 45);
+                           
+                        }
+                        else
+                        {
+                            if (i.emplacementHaut > 19)
+                            {
+                                Canvas.SetLeft(btntoolRotation, i.emplacementGauche + 5);
+                                Canvas.SetTop(btntoolRotation, i.emplacementHaut - 19);
+                              
+                                Canvas.SetLeft(btntoolSupprimer, i.emplacementGauche + 64);
+                                Canvas.SetTop(btntoolSupprimer, i.emplacementHaut - 19);
+                               
+                            }
+                            else
+                            {
+                                Canvas.SetLeft(btntoolRotation, i.emplacementGauche + 5);
+                                Canvas.SetTop(btntoolRotation, i.emplacementHaut + i.Item.Longueur - 15);
+                               
+                                Canvas.SetLeft(btntoolSupprimer, i.emplacementGauche + 64);
+                                Canvas.SetTop(btntoolSupprimer, i.emplacementHaut + i.Item.Longueur - 15);
+                                
+                            }
+
+                        }
 
                         ClipperPorteExtremite(i);
                         ClipperPorteDoubleExtremite(i);
@@ -277,7 +320,8 @@ namespace App_Brycol.Vues
            
                 if (draggedImage != null && move == true)
                 {
-                    var position = e.GetPosition(canvas);
+              
+                var position = e.GetPosition(canvas);
                     var offset = position - mousePosition;
                     mousePosition = position;
                     Canvas.SetLeft(draggedImage, Canvas.GetLeft(draggedImage) + offset.X);
@@ -293,20 +337,7 @@ namespace App_Brycol.Vues
                         Point mousePos = e.GetPosition(canvas_Zoom); // position absolu de la souris
                         Canvas.SetLeft(canvas, mousePos.X - clickPosition.X); // bouger le canvas
                         Canvas.SetTop(canvas, mousePos.Y - clickPosition.Y);
-                        // var offset = position - mousePos;
-                        /*if (rotationPiece == 0)
-                        {
-
-                                      
-                            Canvas.SetLeft(canvas, mousePos.X - clickPosition.X); // bouger le canvas
-                            Canvas.SetTop(canvas, mousePos.Y - clickPosition.Y);
-                        }
-                        else if(rotationPiece == 180)
-                            {
-                            Canvas.SetLeft(canvas, Canvas.GetLeft(canvas)- offset.X); // bouger le canvas
-                            Canvas.SetTop(canvas, Canvas.GetTop(canvas) - offset.Y);
-                        }
-                        }*/
+                   
                     }
                     }
                 }
@@ -422,7 +453,9 @@ namespace App_Brycol.Vues
                             {
                                 Item_VM.ItemsPlanActuel.Remove(ip);
                                 toolbarImage.Source = null;
-                                OutilEF.brycolContexte.lstItems.Remove(ip);
+                                btntoolRotation.Visibility = Visibility.Hidden;
+                                btntoolSupprimer.Visibility = Visibility.Hidden;
+                            OutilEF.brycolContexte.lstItems.Remove(ip);
                                 OutilEF.brycolContexte.SaveChanges();
 
                                 return;
@@ -710,6 +743,7 @@ namespace App_Brycol.Vues
         private void btnClip(object sender, RoutedEventArgs e)
         {
             movePiece = false;
+            btnPieceRotation.Visibility = Visibility.Hidden;
             if (Piece_VM.pieceActuel.Longueur > 10)
             {
                 rulerText.Visibility = Visibility.Visible;
@@ -746,6 +780,7 @@ namespace App_Brycol.Vues
 
         private void btnDéclip(object sender, RoutedEventArgs e)
         {
+            btnPieceRotation.Visibility = Visibility.Visible;
             rulerText.Visibility = Visibility.Hidden;
             rulerTextY.Visibility = Visibility.Hidden;
             ruler1.Visibility = Visibility.Hidden;
