@@ -147,5 +147,11 @@ namespace App_Brycol.Vues
             btnVoirCoutPiece.Background = CouleurBouton;
             btnVoirCoutPiece.Foreground = Brushes.White;
         }
+
+        private void btnPayer_Click(object sender, RoutedEventArgs e)
+        {
+            Transaction popup = new Transaction();
+            popup.ShowDialog();
+        }
     }
 }
