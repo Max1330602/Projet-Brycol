@@ -22,6 +22,8 @@ namespace App_Brycol.VuesModele
 
         public static Projet ProjetActuel;
         public static bool EstSauvegarde = false;
+        public static bool themeSombre = false;
+        public static bool planOuvert = false;
         public ICommand cmdCreerProjet { get; set; }
         public ICommand cmdSauvProjet { get; set; }
         public ICommand cmdSuppProjet { get; set; }
@@ -148,7 +150,13 @@ namespace App_Brycol.VuesModele
             ProjetActuel = proj;
             ProjetActuel.ListePieces = new ObservableCollection<Piece>();
             ProjetActuel.ListePlans = new ObservableCollection<Plan>();
-            var pieceReq = from piece in OutilEF.brycolContexte.Pieces where piece.Projet.ID == ProjetActuel.ID select piece;
+            var pieceReq = from piece in OutilEF.brycolContexte.Pieces.Include("TypePlancher").Include("TypePiece").Include("Projet") where piece.Projet.ID == ProjetActuel.ID select piece;
+            if(pieceReq.Count<Piece>() == 0)
+            {
+                GererProjet popUp = new GererProjet();
+                popUp.ShowDialog();
+                return;
+            }
             foreach (Piece pie in pieceReq)
             {
                 ProjetActuel.ListePieces.Add(pie);
@@ -161,24 +169,33 @@ namespace App_Brycol.VuesModele
                     ProjetActuel.ListePlans.Add(pl);
                 }
             }
-            Piece_VM.pieceActuel = ProjetActuel.ListePieces.First<Piece>();
-            Plan_VM.PlanActuel = ProjetActuel.ListePlans.First<Plan>();
-            int idPlan = ProjetActuel.ListePlans.First<Plan>().ID;
-            var itemReq = from item in OutilEF.brycolContexte.lstItems.Include("Item") where item.Plan.ID == idPlan select item;
-            Item_VM.ItemsPlanActuel = new ObservableCollection<ItemsPlan>();
-            foreach (ItemsPlan i in itemReq)
+            if (ProjetActuel.ListePieces.Count > 0)
             {
-                if(i.Item != null)
-                    Item_VM.ItemsPlanActuel.Add(i);
+                Piece_VM.pieceActuel = ProjetActuel.ListePieces.First<Piece>();
+                Plan_VM.uniteDeMesure = Piece_VM.pieceActuel.UniteDeMesure;
+            }
+            if (ProjetActuel.ListePlans.Count > 0)
+            {
+                Plan_VM.PlanActuel = ProjetActuel.ListePlans.First<Plan>();
+                int idPlan = ProjetActuel.ListePlans.First<Plan>().ID;
+
+                var itemReq = from item in OutilEF.brycolContexte.lstItems.Include("Item") where item.Plan.ID == idPlan select item;
+                Item_VM.ItemsPlanActuel = new ObservableCollection<ItemsPlan>();
+                foreach (ItemsPlan i in itemReq)
+                {
+                    if (i.Item != null)
+                        Item_VM.ItemsPlanActuel.Add(i);
+                }
             }
 
-            Application.Current.MainWindow.WindowState = WindowState.Maximized;
-            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
-            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
-            Application.Current.Windows[1].Close();
-            gridMW.Children.Clear();
-            gridMW.Children.Add(cpMW);
-            cpMW.Content = new PlanDeTravail();
+            
+            EstSauvegarde = true;
+
+            PlanDeTravail PlanDeTravail = new PlanDeTravail();
+            PlanDeTravail.grdPlanTravail.Children.Clear();
+            PlanDeTravail.grdPlanTravail.Children.Add(new PlanDeTravail2());
+            PlanDeTravail.ShowDialog();
+
         }
 
         public void CreerProjet(Object param)
@@ -189,7 +206,7 @@ namespace App_Brycol.VuesModele
                 var test = OutilEF.brycolContexte.Projets.Max<Projet>(t => t.ID);
                 test += 1;
                 p.Nom = "Projet" + test;
-            } catch (Exception e)
+            } catch (Exception)
             {
                 p.Nom = "Projet";
             }
@@ -226,6 +243,15 @@ namespace App_Brycol.VuesModele
                     switch (result)
                     {
                         case MessageBoxResult.Yes:
+                            var pReq = from pr in OutilEF.brycolContexte.Projets.Include("Utilisateur") where pr.Nom == Nom select pr;
+                            foreach (Projet pr in pReq)
+                            {
+                                if (pr.Utilisateur == Utilisateur_VM.utilActuel && pr.ID != ProjetActuel.ID)
+                                {
+                                    MessageBox.Show("Vous avez déjà un projet qui se nomme " + Nom + ".");
+                                    return;
+                                }
+                            }
                             SauNeoProjet();
                             break;
                         case MessageBoxResult.No:
@@ -237,12 +263,19 @@ namespace App_Brycol.VuesModele
                 }
                 else
                 {
+                    var pReq = from pr in OutilEF.brycolContexte.Projets.Include("Utilisateur") where pr.Nom == Nom select pr;
+                    foreach (Projet pr in pReq)
+                    {
+                        if (pr.Utilisateur == Utilisateur_VM.utilActuel && pr.ID != ProjetActuel.ID)
+                        {
+                            MessageBox.Show("Vous avez déjà un projet qui se nomme " + Nom + ".");
+                            return;
+                        }
+                    }
+                  
                     p.Nom = Nom;
                     OutilEF.brycolContexte.SaveChanges();
                 }
-
-
-
 
                 ProjetActuel = p;
                 EstSauvegarde = true;
@@ -258,11 +291,15 @@ namespace App_Brycol.VuesModele
                 }
             }
 
-            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
-            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
-            gridMW.Children.Clear();
-            gridMW.Children.Add(cpMW);
-            cpMW.Content = new PlanDeTravail();
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.GetType() == typeof(PlanDeTravail))
+                {
+                    (w as PlanDeTravail).grdPlanTravail.Children.Clear();
+                    (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
+                }
+            }
+
 
         }
 
@@ -273,7 +310,15 @@ namespace App_Brycol.VuesModele
             Plan pla = new Plan();
             List<ItemsPlan> lstItPla = new List<ItemsPlan>();
 
-            pro = OutilEF.brycolContexte.Projets.Find(ProjetActuel.ID);
+            if (ProjetSelectionne == null)
+            {
+                ProjetSelectionne = ProjetActuel.Nom;
+            }
+
+            var ProReq = from pr in OutilEF.brycolContexte.Projets where pr.Nom == ProjetSelectionne select pr;
+            foreach (Projet pr in ProReq)
+                pro = pr;
+
             var PieReq = from pie in OutilEF.brycolContexte.Pieces where pie.Projet.ID == pro.ID select pie;
 
             foreach (Piece pie in PieReq)
@@ -302,12 +347,6 @@ namespace App_Brycol.VuesModele
             }
             OutilEF.brycolContexte.Projets.Remove(pro);
             OutilEF.brycolContexte.SaveChanges();
-        }
-
-
-        private void getProjet()
-        {
-                      
         }
 
 
@@ -387,14 +426,16 @@ namespace App_Brycol.VuesModele
             foreach (Piece p in LstPi)
             {
                 ItemPieceProjet Ipp = new ItemPieceProjet();
-                Ipp.NomPiece = p.Nom;
 
                 var PReq3 = from iP in OutilEF.brycolContexte.lstItems.Include("Item") where iP.Plan.Piece.ID == p.ID select iP;
                 foreach (ItemsPlan itemP in PReq3)
                 {
+                    Ipp.NomPiece = p.Nom;
                     Ipp.NomItem = itemP.Item.Nom;
                     Ipp.CoutItem = itemP.Item.Cout;
                     LstIPP.Add(Ipp);
+
+                    Ipp = new ItemPieceProjet();
                 }
 
             }

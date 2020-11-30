@@ -28,7 +28,7 @@ namespace App_Brycol.Modele
                 {
                     bmiPlan.EndInit();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     bmiPlan = new BitmapImage();
                     bmiPlan.BeginInit();

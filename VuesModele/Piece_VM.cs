@@ -194,10 +194,10 @@ namespace App_Brycol.VuesModele
             Piece p = new Piece();
             p.Projet = Projet_VM.ProjetActuel;
             p.Nom = Nom;
-            p.Largeur = Largeur;
-            p.Longueur = Longueur;
+            p.Largeur = (float)Math.Round(Largeur * 100f) / 100f;
+            p.Longueur = (float)Math.Round(Longueur * 100f) / 100f;
             p.Projet.ListePieces.Add(p);
-
+            p.UniteDeMesure = Plan_VM.uniteDeMesure;
             var treq = from t in OutilEF.brycolContexte.TypePiece where t.Nom == TypePiece select t;
 
             if (treq.Count() == 0)
@@ -227,22 +227,31 @@ namespace App_Brycol.VuesModele
             Plan_VM pVM = new Plan_VM();
             pVM.InitPlan();
 
-            
-            Application.Current.MainWindow.WindowState = WindowState.Maximized;          
-            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
-            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
-            gridMW.Children.Clear();
-            gridMW.Children.Add(cpMW);
-            cpMW.Content = new PlanDeTravail();
-
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.GetType() == typeof(PlanDeTravail))
+                {
+                    Projet_VM.planOuvert = true;
+                    (w as PlanDeTravail).grdPlanTravail.Children.Clear();
+                    (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
+                }
+            }
+            if (!Projet_VM.planOuvert)
+            {
+                PlanDeTravail PlanDeTravail = new PlanDeTravail();
+                PlanDeTravail.grdPlanTravail.Children.Clear();
+                PlanDeTravail.grdPlanTravail.Children.Add(new PlanDeTravail2());
+                PlanDeTravail.ShowDialog();
+            }
         }
 
         private void modifierPiece()
         {
             Piece p = OutilEF.brycolContexte.Pieces.Find(pieceActuel.ID);
             p.Nom = Nom;
-            p.Largeur = Largeur;
-            p.Longueur = Longueur;
+            p.Largeur = (float)Math.Round(Largeur * 100f) / 100f;
+            p.Longueur = (float)Math.Round(Longueur * 100f) / 100f;
+            p.UniteDeMesure = Plan_VM.uniteDeMesure;
 
             var treq = from t in OutilEF.brycolContexte.TypePiece where t.Nom == TypePiece select t;
 
@@ -269,11 +278,14 @@ namespace App_Brycol.VuesModele
             OutilEF.brycolContexte.SaveChanges();
             pieceActuel = p;
 
-            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
-            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
-            gridMW.Children.Clear();
-            gridMW.Children.Add(cpMW);
-            cpMW.Content = new PlanDeTravail();
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.GetType() == typeof(PlanDeTravail))
+                {
+                    (w as PlanDeTravail).grdPlanTravail.Children.Clear();
+                    (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
+                }
+            }
 
             //---TODO-----------------------------------------------------------------------
             var plreq = from pl in OutilEF.brycolContexte.Plans.Include("Piece") where pl.Piece.ID == pieceActuel.ID select pl;

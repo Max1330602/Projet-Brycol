@@ -16,11 +16,11 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid x:Name="grdWarning">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Voulez-vous vraiment supprimer le projet?"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,30,0,20">
-                <Button Name="btnComfirm" Click="btnComfirm_Click" Content="Oui"  Width="90"/>
+                <Button Name="btnComfirm" Command="{Binding cmdSuppProjet}" Click="btnComfirm_Click" Content="Oui"  Width="90"/>
                 <Button Name="btnRefus" Click="btnRefus_Click" Content="Non"  Width="90" Margin="10,0,0,0"/>
             </StackPanel>
 

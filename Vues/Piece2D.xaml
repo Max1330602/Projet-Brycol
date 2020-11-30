@@ -4,8 +4,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:App_Brycol.Vues"
+             
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontFamily" Value="Constantia Bold"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Width" Value="130"/>
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
@@ -13,45 +24,117 @@
         </Grid.RowDefinitions>
         <Rectangle Stroke="Black" StrokeThickness="2" Grid.RowSpan="2"/>
 
-        <Grid Margin="0,0,0,0" Grid.Row="1">
+        <Grid Margin="0,0,0,0" Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
+
             <TextBlock  Foreground="Black" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Center">
                 <Run Text="{Binding LargeurAffichage}"></Run>
                 <Run Text="{Binding UniteMesure}"></Run>
+                <Run Text=" par"></Run>
             </TextBlock>
-            <TextBlock  Foreground="Black" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,210,4,210">
+            <TextBlock  Foreground="Black" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="488,0,308,0" >
                 <Run Text="{Binding LongueurAffichage}"></Run>
                 <Run Text="{Binding UniteMesure}"></Run>
             </TextBlock>
 
+            <Canvas x:Name="canvas_Zoom" Margin="50,45,0,0" MouseMove="CanvasZoomMouseMove">
 
-            <Canvas x:Name="canvas_Zoom" Margin="25,0,28,27" MouseMove="CanvasZoomMouseMove" Height="390" Width="750" VerticalAlignment="Bottom">
 
-               
                 <Canvas Background="LightGray" Width="{Binding Largeur}" Height="{Binding Longueur}" 
                                 x:Name="canvas" 
                                 MouseLeftButtonDown="CanvasMouseLeftButtonDown"
                                 MouseLeftButtonUp="CanvasMouseLeftButtonUp"
                                 MouseMove="CanvasMouseMove"
-                                MouseWheel="Canvas_MouseWheel"  ClipToBounds="true" Grid.RowSpan="2"  >
+                                MouseWheel="Canvas_MouseWheel"  Grid.RowSpan="2"  >
                     <Canvas.RenderTransform>
                         <TransformGroup>
                             <TranslateTransform X="0" Y="0"/>
                         </TransformGroup>
                     </Canvas.RenderTransform>
+                    <Button x:Name="btntoolRotation" Click="btnRotation" Height="20" Content="Rotation" Width="60" FontSize="10" Foreground="FloralWhite" Background="Black" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" RenderTransformOrigin="0.5,0.5"/>
+                    <Button x:Name="btntoolSupprimer"  Click="btnDelete" Height="20" Content="Supprimer" Width="60" Foreground="FloralWhite" Background="Black" FontSize="10" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" RenderTransformOrigin="0.5,0.5"/>
+
 
                 </Canvas>
-                
+                <TextBlock x:Name="rulerText" FontSize="7" Canvas.Top="-19" Width="345"><Run Text="0            "/><Run Text="  "/><Run Text="1              "/><Run Text=" "/><Run Text="2              "/><Run Text=" "/><Run Text="3             "/><Run Text=" "/><Run Text="4              "/><Run Text=" "/><Run Text="5              "/><Run Text=" "/><Run Text="6             "/><Run Text="  "/><Run Text="7              8             "/><Run Text="  "/><Run Text="9            "/><Run Text=" 10"/></TextBlock>
+
+                <Image x:Name="ruler1" Source="/images/ruler.png" Height="10"  Width="232" Canvas.Top="-10" RenderTransformOrigin="0.5,0.5" Canvas.Left="-43" Panel.ZIndex="1" >
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="ruler2" Source="/App-Brycol;component/images/ruler.png" Height="10"  Width="232" Canvas.Top="-10" RenderTransformOrigin="0.5,0.5" Canvas.Left="101" >
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="ruler3" Source="/App-Brycol;component/images/ruler.png" Height="10"  Width="232" Canvas.Top="-10" RenderTransformOrigin="0.5,0.5" Canvas.Left="133" >
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="ruler4" Source="/App-Brycol;component/images/ruler.png" Height="10"  Width="232" Canvas.Top="68" RenderTransformOrigin="0.5,0.5" Canvas.Left="-121" >
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-270"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="ruler5" Source="/App-Brycol;component/images/ruler.png" Height="10"  Width="232" Canvas.Top="212" RenderTransformOrigin="0.5,0.5" Canvas.Left="-121" >
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-270"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="ruler6" Source="/App-Brycol;component/images/ruler.png" Height="10"  Width="232" Canvas.Top="241" RenderTransformOrigin="0.5,0.5" Canvas.Left="-121" >
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-270"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <TextBlock x:Name="rulerTextY" FontSize="7" Canvas.Top="155" Canvas.Left="-176" RenderTransformOrigin="0.5,0.5">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform><Run Text="10             9              "/><Run Text=" "/><Run Text="8            "/><Run Text=" "/><Run Text="  7             "/><Run Text=" "/><Run Text="6              5              4             "/><Run Text="  "/><Run Text="3          "/><Run Text="    "/><Run Text=" 2          "/><Run Text="   "/><Run Text=" "/><Run Text="1"/><Run Text="           "/><Run Text="   "/><Run Text=" 0"/></TextBlock>
+
+
 
             </Canvas>
 
-
-            <Button Name="btnDeletePlan" Content="Supprimer un item" Click="btnDelete" Margin="50,413,636,13" Height="20" VerticalAlignment="Bottom" Width="120" IsEnabled="false"/>
-            <Button x:Name="btnRotationPlan" Content="Rotation de l'image" Click="btnRotation" Margin="190,413,484,13" Height="20" VerticalAlignment="Bottom" Width="125" IsEnabled="false"/>
             <Grid Margin="128,413,10,13" DockPanel.Dock="Bottom" Grid.RowSpan="2" Height="20" VerticalAlignment="Bottom">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="7*" />
@@ -84,16 +167,18 @@
                     <ColumnDefinition Width="10" />
                     <!-- espace libre -->
                     <ColumnDefinition Width="Auto" />
-                    
-                    
+
+
                 </Grid.ColumnDefinitions>
 
 
 
-
+                <Button x:Name="btnPieceRotation" Click="btnRotationPiece" Height="20" Content="Rotation pièce" FontSize="10" Foreground="Black" Background="White" Panel.ZIndex="5"  Margin="224,0,52,0" Grid.ColumnSpan="2" />
+                <Button x:Name="btnClipPiece" Click="btnClip" Height="20" Content="Clip" Width="60" FontSize="10" Foreground="Black" Background="White" Panel.ZIndex="5"  Margin="130,0,56,0" Visibility="Hidden"/>
+                <Button x:Name="btnClipPieceDeclipper" Click="btnDéclip" Height="20" Content="Déclipper" Width="60" FontSize="10" Foreground="Black" Background="White" Panel.ZIndex="5"  Margin="130,0,56,0" />
 
                 <!-- Le bouton 100%.  Scale le canvas à sa grandeur d'origine-->
-                <Button Grid.Column="1" Click="canvasResizeFull" Content="Mise à l'échelle" Grid.ColumnSpan="6" Margin="90,0,24,0"/>
+                <Button x:Name="btnEchelle" Grid.Column="1" Click="canvasResizeFull" Content="Mise à l'échelle" Grid.ColumnSpan="4" Margin="79,0,5,0"/>
 
                 <!--Zoom label pour montrer le zoom en cours-->
                 <TextBlock
@@ -112,10 +197,11 @@
                 />
 
                 <!-- Bouton pour zoom out-->
-                <Button Grid.Column="9" Click="btnZoomOut" Content="-"/>
+                <Button Name="btnmoins" Grid.Column="9" Click="btnZoomOut" Content="-"/>
 
                 <!-- Slider pour zoom in et zoom out-->
-                <Slider
+                <Slider   
+                ValueChanged="Slider_ValueChanged"
                 x:Name="slider1"
                 Grid.Column="11"
                 Maximum="100"
@@ -129,11 +215,12 @@
                 />
 
                 <!--Bouton pour zoom in-->
-                <Button Grid.Column="13" Click="btnZoomIn" Content="+"/>
+                <Button Name="btnPlus"  Grid.Column="13" Click="btnZoomIn" Content="+"/>
 
-                
+
 
             </Grid>
+
         </Grid>
 
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_Brycol.Vues"
         mc:Ignorable="d"
-        Title="Aide" Height="450" Width="800" Icon="pack://application:,,,/images/favicon.png">
+        Title="Aide" MinHeight="450" MinWidth="800" Icon="pack://application:,,,/images/favicon.png">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
@@ -23,7 +23,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="0" Grid.ColumnSpan="3" Background="LightGray"></Border>
+        <Border x:Name="Banniere"  Grid.Row="0" Grid.ColumnSpan="3" Background="LightGray"></Border>
+        <Border x:Name="Corps"  Grid.Row="1" Grid.ColumnSpan="2" Background="White"></Border>
 
         <Image Grid.Row="0" Grid.Column="1" Source="/images/logo.png" HorizontalAlignment="Right"></Image>
 

@@ -28,6 +28,12 @@ namespace App_Brycol.Vues
         {
             InitializeComponent();
             DataContext = new Piece_VM("");
+
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
+
             switch (UCEcran)
             {
                 case "Piece":
@@ -97,6 +103,55 @@ namespace App_Brycol.Vues
             btnVoirCoutDetailProjet.Visibility = Visibility.Collapsed;
             btnVoirCoutProjet.Visibility = Visibility.Visible;
 
+        }
+
+        private void EnleverThemeSombre()
+        {
+            Banniere.Background = Brushes.LightGray;
+
+            grdCoutParent.Background = Brushes.White;
+
+            btnOk.Background = Brushes.White;
+            btnOk.Foreground = Brushes.Black;
+
+            btnVoirCoutProjet.Background = Brushes.White;
+            btnVoirCoutProjet.Foreground = Brushes.Black;
+
+            btnVoirCoutDetailProjet.Background = Brushes.White;
+            btnVoirCoutDetailProjet.Foreground = Brushes.Black;
+
+            btnVoirCoutPiece.Background = Brushes.White;
+            btnVoirCoutPiece.Foreground = Brushes.Black;
+        }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+            Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
+            Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
+
+            Banniere.Background = CouleurBanniere;
+
+            grdCoutParent.Background = CouleurArrierePlan;
+
+            btnOk.Background = CouleurBouton;
+            btnOk.Foreground = Brushes.White;
+
+            btnVoirCoutProjet.Background = CouleurBouton;
+            btnVoirCoutProjet.Foreground = Brushes.White;
+
+            btnVoirCoutDetailProjet.Background = CouleurBouton;
+            btnVoirCoutDetailProjet.Foreground = Brushes.White;
+
+            btnVoirCoutPiece.Background = CouleurBouton;
+            btnVoirCoutPiece.Foreground = Brushes.White;
+        }
+
+        private void btnPayer_Click(object sender, RoutedEventArgs e)
+        {
+            Transaction popup = new Transaction();
+            popup.ShowDialog();
         }
     }
 }

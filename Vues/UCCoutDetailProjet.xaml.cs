@@ -27,8 +27,32 @@ namespace App_Brycol.Vues
             DataContext = new Projet_VM();
             DG_coutItem.Items.Refresh();
 
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
+
             lblNomProjet.Content = Projet_VM.ProjetActuel.Nom;
             lblTotal.Content = Projet_VM.Total().ToString() + "$";
+        }
+
+        private void EnleverThemeSombre()
+        {
+            DG_coutItem.RowBackground = Brushes.White;
+            DG_coutItem.AlternatingRowBackground = Brushes.White;
+
+            DG_coutItem.Background = Brushes.White;
+        }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
+
+            DG_coutItem.RowBackground = Brushes.LightGray;
+            DG_coutItem.AlternatingRowBackground = Brushes.Gray;
+
+            DG_coutItem.Background = CouleurArrierePlan;
         }
     }
 }

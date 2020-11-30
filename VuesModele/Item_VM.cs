@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,8 +24,10 @@ namespace App_Brycol.VuesModele
         {
             cmdAjouterItem = new Commande(AjouterItem); 
             SommaireItems = new ObservableCollection<Item>();
+            StructuresItems = new ObservableCollection<Item>();
             ListeItems = new ObservableCollection<Item>();
-
+            Categories = new ObservableCollection<string>();
+            TypesDePiece = new ObservableCollection<string>();
             if (ItemsPlanActuel == null)
                 ItemsPlanActuel = new ObservableCollection<ItemsPlan>();
 
@@ -39,36 +42,93 @@ namespace App_Brycol.VuesModele
             var iReq = from i in OutilEF.brycolContexte.Meubles.Include("Categorie").Include("TypePiece") select i;
 
             foreach (Item i in iReq)
-                SommaireItems.Add(i);
+            {
+                if (i.Nom.Contains("Porte") || i.Nom.Contains("Fenêtre"))
+                    StructuresItems.Add(i);
+                else
+                    SommaireItems.Add(i);
 
+
+
+                if (!Categories.Contains(i.Categorie.Nom))
+                    Categories.Add(i.Categorie.Nom);
+
+                if (!TypesDePiece.Contains(i.TypePiece.Nom))
+                    TypesDePiece.Add(i.TypePiece.Nom);
+            }
             Items = SommaireItems;
+            Structures = StructuresItems;
+            Categories.Add("");
+            TypesDePiece.Add("");
 
         }
         #region Propriétés
 
+        private ICommand _cmdAjouterItem;
+        public ICommand CmdAjouterItem
+        {
+            get
+            {
+                if (_cmdAjouterItem == null)
+                    _cmdAjouterItem = new Commande(AjouterItem);
+                return _cmdAjouterItem;
+            }
+            set
+            {
+                _cmdAjouterItem = value;
+            }
+        }
+
         public ICommand cmdAjouterItemModifie { get; set;}
-        public ICommand cmdAjouterItem { get; set; }
         public ICommand cmdInitItem { get; set; }
+        public ICommand cmdAjouterItem { get; set; }
+
         public const int POS_PAR_DEFAUT = 0;
         public const int PRIXMAX = 1000000;
         public const int PRIXMIN = 0;
 
         public ObservableCollection<Item> Items;
+        public ObservableCollection<Item> Structures;
 
         public static ObservableCollection<ItemsPlan> ItemsPlanActuel;
         public static ObservableCollection<ItemsPlan> ItemsPlanModifie;
 
-        private Categorie _Categorie;
+        private Categorie _categorie;
         public Categorie Categorie 
         {
-            get { return _Categorie; }
+            get { return _categorie; }
             set
             {
-                _Categorie = value;
+                _categorie = value;
                 OnPropertyChanged("Categorie");
             }
 
         }
+
+        private ObservableCollection<string> _categories;
+        public ObservableCollection<string> Categories
+        {
+            get { return _categories; }
+            set
+            {
+                _categories = value;
+                OnPropertyChanged("Categories");
+            }
+
+        }
+
+        private ObservableCollection<string> _typesDePiece;
+        public ObservableCollection<string> TypesDePiece
+        {
+            get { return _typesDePiece; }
+            set
+            {
+                _typesDePiece = value;
+                OnPropertyChanged("TypesDePiece");
+            }
+
+        }
+
         private ObservableCollection<Item> _sommaireItems;
         public ObservableCollection<Item> SommaireItems
         {
@@ -78,7 +138,18 @@ namespace App_Brycol.VuesModele
                 _sommaireItems = value;
                 OnPropertyChanged("SommaireItems");
             }
-        }      
+        }
+
+        private ObservableCollection<Item> _structuresItems;
+        public ObservableCollection<Item> StructuresItems
+        {
+            get { return _structuresItems; }
+            set
+            {
+                _structuresItems = value;
+                OnPropertyChanged("StructuresItems");
+            }
+        }
 
         private Item _itemSelectionne;
         public Item ItemSelectionne
@@ -240,11 +311,13 @@ namespace App_Brycol.VuesModele
                 SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.Cout > FiltrePrixMin &&
                                                                                          si.Cout < FiltrePrixMax));
             else
-                SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.TypePiece.Nom.Contains(FiltreType) &&
-                                                                                         si.Categorie.Nom.Contains(FiltreCategorie) &&
-                                                                                         si.Nom.Contains(FiltreNom) &&
+            {  SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => Regex.IsMatch(si.TypePiece.Nom, FiltreType, RegexOptions.IgnoreCase) && //si.TypePiece.Nom.Contains(FiltreType) &&
+                                                                                        Regex.IsMatch(si.Categorie.Nom, FiltreCategorie, RegexOptions.IgnoreCase) && //si.Categorie.Nom.Contains(FiltreCategorie) &&
+                                                                                        Regex.IsMatch(si.Nom, FiltreNom, RegexOptions.IgnoreCase) && //si.Nom.Contains(FiltreNom) &&
                                                                                          si.Cout > FiltrePrixMin &&
                                                                                          si.Cout < FiltrePrixMax));
+            
+            }
         }
 
         public void AjouterItem(Object param)
@@ -255,6 +328,10 @@ namespace App_Brycol.VuesModele
             i.Item = _itemSelectionne;           
             i.emplacementGauche = POS_PAR_DEFAUT;
             i.emplacementHaut = POS_PAR_DEFAUT;
+            if (i.Item.Nom == "Porte")
+                i.cotePorte = "droite";
+            else
+                i.cotePorte = "";
             // HARD CODE
             i.Plan = Plan_VM.PlanActuel;
             if (i.Item != null)

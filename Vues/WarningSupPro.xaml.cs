@@ -20,17 +20,19 @@ namespace App_Brycol.Vues
     /// </summary>
     public partial class WarningSupPro : Window
     {
-        public WarningSupPro()
+        public WarningSupPro(Window w)
         {
             InitializeComponent();
-            DataContext = new Projet_VM();
+            DataContext = w.DataContext;
+
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
         }
 
         private void btnComfirm_Click(object sender, RoutedEventArgs e)
         {
-            Projet_VM.EstSauvegarde = true;
-            Application.Current.MainWindow.Close();
-
             this.Close();
         }
 
@@ -38,5 +40,34 @@ namespace App_Brycol.Vues
         {
             this.Close();
         }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+            Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
+
+            grdWarning.Background = CouleurArrierePlan;
+
+            btnComfirm.Background = CouleurBouton;
+            btnComfirm.Foreground = Brushes.White;
+
+            btnRefus.Background = CouleurBouton;
+            btnRefus.Foreground = Brushes.White;
+
+        }
+
+        private void EnleverThemeSombre()
+        {
+            grdWarning.Background = Brushes.White;
+
+            btnComfirm.Background = Brushes.White;
+            btnComfirm.Foreground = Brushes.Black;
+
+            btnRefus.Background = Brushes.White;
+            btnRefus.Foreground = Brushes.Black;
+        }
+
+
     }
 }

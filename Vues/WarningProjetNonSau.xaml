@@ -16,7 +16,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid x:Name="grdWarning">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Le projet n'a pas été sauvegarder."/>
             <TextBlock Text="Voulez-vous le sauvegarder?"/>

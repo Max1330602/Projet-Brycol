@@ -25,6 +25,7 @@ namespace App_Brycol.Vues
         private List<Button> lstBoutons = new List<Button>();
         private List<Image> lstImagePlans = new List<Image>();
         private List<Label> lstLabels = new List<Label>();
+        private bool Encreation = false;
 
         public GererProjet()
         {
@@ -62,6 +63,13 @@ namespace App_Brycol.Vues
             lstLabels.Add(txtPiece7);
             lstLabels.Add(txtPiece8);
 
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
+            
+
+
             for (int i = 0; i < Projet_VM.ProjetActuel.ListePieces.Count(); i++)
             {
                 lstBoutons[i].IsEnabled = true;
@@ -80,15 +88,21 @@ namespace App_Brycol.Vues
             if (Projet_VM.ProjetActuel.ListePieces.Count == 0)
             {
                 btnCoutProjet.IsEnabled = false;
+                if (Projet_VM.themeSombre)
+                    AppliquerThemeSombre();
             }
             else
             {
                 btnCoutProjet.IsEnabled = true;
+                if (Projet_VM.themeSombre)
+                    AppliquerThemeSombre();
             }
         }
 
+
         private void btnAjouterPiece_Click(object sender, RoutedEventArgs e)
         {
+            Encreation = true;
             this.Close();
             if (Projet_VM.ProjetActuel.ListePieces.Count() < 8)
             {
@@ -99,6 +113,7 @@ namespace App_Brycol.Vues
             {
                 MessageBox.Show("Déjà 8 pièces sont liées à ce projet", "Maximum de pièces atteint", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            Encreation = false;
         }
 
         private void btnSupprimerPiece_Click(object sender, RoutedEventArgs e)
@@ -248,9 +263,13 @@ namespace App_Brycol.Vues
                     }
                     else
                     {
-                        b.Background = new SolidColorBrush(Colors.LightBlue);
                         btnPlan.IsEnabled = !btnPlan.IsEnabled;
                         btnSupprimerPiece.IsEnabled = !btnSupprimerPiece.IsEnabled;
+                        if (Projet_VM.themeSombre)
+                        {
+                            AppliquerThemeSombre();
+                        }
+                        b.Background = new SolidColorBrush(Colors.LightBlue);
                     }
 
                 }
@@ -268,8 +287,22 @@ namespace App_Brycol.Vues
                         else
                         {
                             b.Background = new SolidColorBrush(Colors.White);
+                            if (Projet_VM.themeSombre)
+                            {
+                                AppliquerThemeSombre();
+                                btnSupprimerPiece.Background = Brushes.White;
+                                btnSupprimerPiece.Foreground = Brushes.Black;
+
+                                btnPlan.Background = Brushes.White;
+                                btnPlan.Foreground = Brushes.Black;
+                            }
+                            else
+                            {
+                                EnleverThemeSombre();
+                            }
                             btnPlan.IsEnabled = !btnPlan.IsEnabled;
                             btnSupprimerPiece.IsEnabled = !btnSupprimerPiece.IsEnabled;
+                            
                         }
                     i++;
                 }
@@ -278,10 +311,43 @@ namespace App_Brycol.Vues
 
         private void txtProjet_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (txtProjet.Text.Length < 2 || txtProjet.Text.Length > 30)
+            {
+                MessageBox.Show("La longueur du nom du projet n'est pas valide.");
+                return;
+            }
+            if (txtProjet.Text != Projet_VM.ProjetActuel.Nom)
+            {
+                btnModifNom.Visibility = Visibility.Visible;
+                return;
+            }
+            btnModifNom.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void btnModifNom_Click(object sender, RoutedEventArgs e)
+        {
+            bool estExistant = false;
+
+            var pReq = from pr in OutilEF.brycolContexte.Projets.Include("Utilisateur") where pr.Nom == txtProjet.Text select pr;
+            foreach (Projet pr in pReq)
+            {
+                if (pr.Utilisateur == Utilisateur_VM.utilActuel && Projet_VM.ProjetActuel.ID != pr.ID)
+                    estExistant = true;
+            }
+            if (estExistant)
+            {
+                MessageBox.Show("Vous avez déjà un projet qui se nomme " + txtProjet.Text + ".");
+                txtProjet.Text = Projet_VM.ProjetActuel.Nom;
+                btnModifNom.Visibility = Visibility.Collapsed;
+                return;
+            }
             Projet p = OutilEF.brycolContexte.Projets.Find(Projet_VM.ProjetActuel.ID);
             Projet_VM.ProjetActuel.Nom = txtProjet.Text;
             p.Nom = Projet_VM.ProjetActuel.Nom;
             OutilEF.brycolContexte.SaveChanges();
+
+            btnModifNom.Visibility = Visibility.Collapsed;
         }
 
         private void btnPiece1_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -342,12 +408,186 @@ namespace App_Brycol.Vues
 
         private void OuvrirPlan()
         {
-            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
-            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
             this.Close();
-            gridMW.Children.Clear();
-            gridMW.Children.Add(cpMW);
-            cpMW.Content = new PlanDeTravail();
+            foreach (Window w in Application.Current.Windows)
+            {
+                if (w.GetType() == typeof(PlanDeTravail))
+                {
+                    Projet_VM.planOuvert = true;
+                    (w as PlanDeTravail).grdPlanTravail.Children.Clear();
+                    (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
+                }
+            }
+            if (!Projet_VM.planOuvert)
+            {
+                PlanDeTravail PlanDeTravail = new PlanDeTravail();
+                PlanDeTravail.grdPlanTravail.Children.Clear();
+                PlanDeTravail.grdPlanTravail.Children.Add(new PlanDeTravail2());
+                PlanDeTravail.ShowDialog();
+            }
         }
+
+        private void btnThemeSombre_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Projet_VM.themeSombre)
+            {
+                Projet_VM.themeSombre = !Projet_VM.themeSombre;
+                AppliquerThemeSombre();
+                foreach(Window w in Application.Current.Windows)
+                {
+                    if (w.GetType() == typeof(PlanDeTravail))
+                    {
+                        (w as PlanDeTravail).grdPlanTravail.Children.Clear();
+                        (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
+                    }
+                    else if (w.GetType() == typeof(MainWindow))
+                    {
+                        (w as MainWindow).gridMainWindow.Children.Clear();
+                        (w as MainWindow).gridMainWindow.Children.Add(new UCCMenuPrincipal());
+                    }
+                }
+            }
+            else
+            {
+                Projet_VM.themeSombre = !Projet_VM.themeSombre;
+                EnleverThemeSombre();
+
+                foreach (Window w in Application.Current.Windows)
+                {
+                    if (w.GetType() == typeof(PlanDeTravail))
+                    {
+                        (w as PlanDeTravail).grdPlanTravail.Children.Clear();
+                        (w as PlanDeTravail).grdPlanTravail.Children.Add(new PlanDeTravail2());
+                    }
+                    else if (w.GetType() == typeof(MainWindow))
+                    {
+                        (w as MainWindow).gridMainWindow.Children.Clear();
+                        (w as MainWindow).gridMainWindow.Children.Add(new UCCMenuPrincipal());
+                    }
+                }
+            }
+
+        }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+            Brush CouleurArriere = (Brush)bc.ConvertFrom("#33342F");
+            Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
+
+            btnAjouterPiece.Background = CouleurBouton;
+            btnAjouterPiece.Foreground = Brushes.White;
+
+            if (btnPlan.IsEnabled && btnSupprimerPiece.IsEnabled && btnCoutProjet.IsEnabled)
+            {
+                btnPlan.Background = CouleurBouton;
+                btnPlan.Foreground = Brushes.White;
+
+                btnSupprimerPiece.Background = CouleurBouton;
+                btnSupprimerPiece.Foreground = Brushes.White;
+
+                btnCoutProjet.Background = CouleurBouton;
+                btnCoutProjet.Foreground = Brushes.White;
+            }
+            else if (!btnPlan.IsEnabled && !btnSupprimerPiece.IsEnabled && btnCoutProjet.IsEnabled)
+            {
+                btnCoutProjet.Background = CouleurBouton;
+                btnCoutProjet.Foreground = Brushes.White;
+            }
+            
+            foreach (Button b in lstBoutons)
+            {
+                b.Background = CouleurBouton;
+                b.Foreground = Brushes.White;
+            }
+
+            foreach (Label l in lstLabels)
+            {
+                if (l.Content != null)
+                {
+                    l.Background = CouleurBouton;
+                    l.Foreground = Brushes.White;
+                }
+            }
+
+            btnThemeSombre.Background = CouleurBouton;
+
+            btnQuitter.Background = CouleurBouton;
+            btnQuitter.Foreground = Brushes.White;
+
+            txtProjet.Background = CouleurBanniere;
+            Banniere.Background = CouleurBanniere;
+            arriereBoutons.Background = CouleurArriere;
+        }
+
+        private void EnleverThemeSombre()
+        {
+
+            btnAjouterPiece.Background = Brushes.White;
+            btnAjouterPiece.Foreground = Brushes.Black;
+
+            if (btnPlan.IsEnabled && btnSupprimerPiece.IsEnabled && btnCoutProjet.IsEnabled)
+            {
+                btnPlan.Background = Brushes.White;
+                btnPlan.Foreground = Brushes.Black;
+
+                btnSupprimerPiece.Background = Brushes.White;
+                btnSupprimerPiece.Foreground = Brushes.Black;
+
+                btnCoutProjet.Background = Brushes.White;
+                btnCoutProjet.Foreground = Brushes.Black;
+            }
+            else if (!btnPlan.IsEnabled && !btnSupprimerPiece.IsEnabled && btnCoutProjet.IsEnabled)
+            {
+                btnCoutProjet.Background = Brushes.White;
+                btnCoutProjet.Foreground = Brushes.Black;
+            }
+
+            foreach (Button b in lstBoutons)
+            {
+                b.Background = Brushes.White;
+                b.Foreground = Brushes.Black;
+            }
+
+            foreach (Label l in lstLabels)
+            {
+                if (l.Content != null)
+                {
+                    l.Background = Brushes.White;
+                    l.Foreground = Brushes.Black;
+                }
+            }
+
+            btnThemeSombre.Background = Brushes.White;
+
+            btnQuitter.Background = Brushes.White;
+            btnQuitter.Foreground = Brushes.Black;
+
+            txtProjet.Background = Brushes.LightGray;
+            Banniere.Background = Brushes.LightGray;
+            arriereBoutons.Background = Brushes.White;
+
+        }
+
+        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (Projet_VM.ProjetActuel.ListePieces.Count == 0 && !Encreation)
+            {
+                if (Projet_VM.ProjetActuel != null && Projet_VM.EstSauvegarde == false)
+                {
+                    WarningProjetNonSau popUp = new WarningProjetNonSau();
+                    popUp.ShowDialog();
+                }
+                Projet_VM.planOuvert = false;
+                Projet_VM.ProjetActuel.ListePieces.Clear();
+                Projet_VM.ProjetActuel.ListePlans.Clear();
+                Projet_VM.ProjetActuel = null;
+                Piece_VM.pieceActuel = null;
+                Plan_VM.PlanActuel = null;
+                Plan_VM.uniteDeMesure = "";
+            }
+        }
+
     }
 }

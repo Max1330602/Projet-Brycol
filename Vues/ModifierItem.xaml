@@ -3,10 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:App_Brycol.Vues"
         mc:Ignorable="d"
         Closed="Window_Closed"
-        Title="ModifierItem" Height="450" Width="800" Icon="pack://application:,,,/images/favicon.png">
+        Title="ModifierItem" MinHeight="450" MinWidth="800" Icon="pack://application:,,,/images/favicon.png">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
@@ -14,19 +13,20 @@
             <Setter Property="FontSize" Value="15"/>
         </Style>
     </Window.Resources>
-    
-    <Grid>
+
+    <Grid x:Name="grdModifierItem">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        
-        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="LightGray"></Border>
+
+        <Border x:Name="Banniere" Grid.Row="0" Grid.ColumnSpan="2" Background="LightGray"></Border>
+        <Border x:Name="imgBackground" Grid.Row="1" Margin="32,32,32,32" Background="White"></Border>
 
         <Label Grid.ColumnSpan="2" Grid.Row="0" FontSize="20" Height="40" Width="500" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Modifier Item Sélectionné"/>
 
@@ -34,7 +34,7 @@
         <Rectangle Grid.Column="0" Grid.Row="1" Stroke="Black" StrokeThickness="2" Margin="32,32,32,32">
 
         </Rectangle>
-        
+
         <Image x:Name="imgItem" Grid.Column="0" Grid.Row="1" Margin="32,32,32,32" ></Image>
 
         <Label Grid.Column="1" Grid.Row="1" FontSize="20" Height="40" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Couleur Item " Margin="10,12,114,0"/>
@@ -47,12 +47,12 @@
             <ComboBoxItem x:Name="Mauve" Content="Mauve" Background="Purple"></ComboBoxItem>
             <ComboBoxItem x:Name="Brun" Content="Brun" Background="SaddleBrown"></ComboBoxItem>
         </ComboBox>
-
+        
         <Button x:Name="btnAppliquer" Command="{ Binding cmdAjouterItemModifie }" Grid.Column="1" Grid.Row="1"  Height="25" Width="75" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,10,10,10" Content="Appliquer" Click="btnAppliquer_Click"></Button>
         <Button x:Name="btnAnnuler" Grid.Column="1" Grid.Row="1"  Height="25" Width="75" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,10,105,10" Content="Annuler" Click="btnAnnuler_Click"></Button>
-        
-        
-        <Image Grid.Row="0" Grid.Column="1" Source="/images/logo.png" HorizontalAlignment="Right"></Image>
+
+
+        <Image Grid.Row="1" Grid.Column="1" Source="/images/logo.png" HorizontalAlignment="Right" Margin="0,0,0,343" Width="110"></Image>
 
 
     </Grid>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App_Brycol.VuesModele;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,34 @@ namespace App_Brycol.Vues
         public Aide()
         {
             InitializeComponent();
+
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
+        }
+
+        private void EnleverThemeSombre()
+        {
+            Banniere.Background = Brushes.LightGray;
+            Corps.Background = Brushes.White;
+
+            btnTerminer.Background = Brushes.White;
+            btnTerminer.Foreground = Brushes.Black;
+        }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+            Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
+            Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
+
+            Banniere.Background = CouleurBanniere;
+            Corps.Background = Brushes.LightGray;
+
+            btnTerminer.Background = CouleurBouton;
+            btnTerminer.Foreground = Brushes.White;
         }
 
         private void btnTerminer_click(object sender, RoutedEventArgs e)
