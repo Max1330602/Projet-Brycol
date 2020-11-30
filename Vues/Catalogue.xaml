@@ -51,9 +51,9 @@
             <TextBlock Name="txbPrixMax" Grid.Row="3"  Text="Prix max.:"></TextBlock>
             <TextBox Name="txtPrixMax"  Text="{Binding FiltrePrixMax, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="3"></TextBox>
             <TextBlock Name="txbCategorie" Grid.Row="4" Text="Catégorie:"></TextBlock>
-            <ComboBox SelectedItem="{ Binding FiltreCategorie, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Categories}" Grid.Column="1" Grid.Row="4" />
+            <ComboBox SelectedItem="{ Binding FiltreCategorie, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Categories}" Grid.Column="1" Grid.Row="4" SelectedValue="Tous"></ComboBox>
             <TextBlock Name="txbTypePiece" Grid.Row="5" Text="Type de pièce:"></TextBlock>
-            <ComboBox SelectedItem="{ Binding FiltreType, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding TypesDePiece}" Grid.Column="1" Grid.Row="5" />
+            <ComboBox SelectedItem="{ Binding FiltreType, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding TypesDePiece}" Grid.Column="1" Grid.Row="5" SelectedValue="Tous"></ComboBox>
         </Grid>
         <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DG_items" Grid.Row="1" Grid.Column="1" ItemsSource="{ Binding SommaireItems}" SelectedItem="{ Binding ItemSelectionne}">
             <DataGrid.Resources>

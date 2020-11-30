@@ -91,7 +91,7 @@ namespace App_Brycol.Vues
             Plan_VM.uniteDeMesure = uniteMesure;
 
             if (txtUniMesu != null)
-                txtUniMesu.Text = "m";
+                txtUniMesu.Text = "m²";
 
             if (txtLongueur.Value != null && txtLargeur.Value != null)
             {
@@ -110,7 +110,7 @@ namespace App_Brycol.Vues
             Plan_VM.uniteDeMesure = uniteMesure;
 
             if (txtUniMesu != null)
-                txtUniMesu.Text = "p";
+                txtUniMesu.Text = "p²";
 
             if (txtLongueur.Value != null && txtLargeur.Value != null)
             {
