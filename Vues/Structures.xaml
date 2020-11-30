@@ -21,7 +21,7 @@
 
         <Border x:Name="Banniere" Grid.Row="0" Grid.ColumnSpan="3" Background="LightGray"></Border>
         <Label Content="Structures" FontSize="20"></Label>
-        <Image Grid.Row="0" Grid.ColumnSpan="3" Source="/images/logo.png" HorizontalAlignment="Right"></Image>
+        <Image Grid.Row="0" Grid.ColumnSpan="3" x:Name="logo" Source="/images/logo.png" HorizontalAlignment="Right"></Image>
 
         <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DG_items" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding StructuresItems}" SelectedItem="{Binding ItemSelectionne}">
             <DataGrid.Resources>
@@ -34,6 +34,7 @@
                 <DataGridTextColumn Header="Prix" Binding="{ Binding Cout }"></DataGridTextColumn>
                 <DataGridTextColumn Header="Catégorie" Binding="{ Binding Categorie.Nom }"></DataGridTextColumn>
                 <DataGridTextColumn Header="Pièce" Binding="{ Binding TypePiece.Nom }"></DataGridTextColumn>
+                <DataGridTextColumn Header="Fournisseur" Binding="{ Binding Fournisseur }"></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Image" Width="100*" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -58,6 +59,8 @@
             </DataGrid>
 
         </Grid>
+        
+        <Border x:Name="Pied" Grid.Row="2" Grid.ColumnSpan="3" Background="White"></Border>
 
 
         <Button Name="btnAjouter" Command="{ Binding cmdAjouterItem }" Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="1" Width="100" Height="25" Content="Ajouter" HorizontalAlignment="Right" Margin="0,0,10,10"></Button>

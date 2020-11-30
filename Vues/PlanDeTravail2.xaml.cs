@@ -66,40 +66,6 @@ namespace App_Brycol.Vues
             popUp.ShowDialog();
         }
 
-        private void btnModifierItem_Click(object sender, RoutedEventArgs e)
-        {
-            if (Piece2D.toolbarImage != null && Piece2D.toolbarImage.Source != null)
-            {
-                foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
-                {
-                    if (Piece2D.toolbarImage.Source.ToString().Contains(ip.Item.ID.ToString()))
-                    {
-                        if (ip.Item.Nom.Contains("Porte Double") || ip.Item.Nom.Contains("Fenêtre"))
-                        {
-                            MessageBox.Show("Impossible de modifier une double porte ou une fenêtre quelconque.");
-                        }
-                        else if (ip.Item.Nom == "Porte")
-                        {
-                            ModifierPorte popUp = new ModifierPorte();
-                            popUp.ShowDialog();
-                            return;
-                        }
-                        else
-                        {
-                            ModifierItem popUp = new ModifierItem();
-                            popUp.ShowDialog();
-                            return;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Il faut d'abord sélectionner un item dans le plan");
-            }
-        }
-
-
         private void btnSupprimerItem_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Voulez-vraiment supprimer cet item ?", "Suppression d'item", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
@@ -180,6 +146,14 @@ namespace App_Brycol.Vues
             Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
             Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
 
+            BitmapImage bmiLogo = new BitmapImage();
+            bmiLogo.BeginInit();
+            bmiLogo.CacheOption = BitmapCacheOption.OnLoad;
+            bmiLogo.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            bmiLogo.UriSource = new Uri("pack://application:,,,/images/logoclair.png");
+            bmiLogo.EndInit();
+            logo.Source = bmiLogo;
+
             btnAide.Background = CouleurBouton;
             btnAide.Foreground = Brushes.White;
 
@@ -191,9 +165,6 @@ namespace App_Brycol.Vues
 
             btnCatalogue.Background = CouleurBouton;
             btnCatalogue.Foreground = Brushes.White;
-
-            btnModifierItem.Background = CouleurBouton;
-            btnModifierItem.Foreground = Brushes.White;
 
             btnModifierPiece.Background = CouleurBouton;
             btnModifierPiece.Foreground = Brushes.White;
@@ -228,9 +199,6 @@ namespace App_Brycol.Vues
 
             btnCatalogue.Background = Brushes.White;
             btnCatalogue.Foreground = Brushes.Black;
-
-            btnModifierItem.Background = Brushes.White;
-            btnModifierItem.Foreground = Brushes.Black;
 
             btnModifierPiece.Background = Brushes.White;
             btnModifierPiece.Foreground = Brushes.Black;

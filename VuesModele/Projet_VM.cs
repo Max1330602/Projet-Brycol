@@ -433,6 +433,7 @@ namespace App_Brycol.VuesModele
                     Ipp.NomPiece = p.Nom;
                     Ipp.NomItem = itemP.Item.Nom;
                     Ipp.CoutItem = itemP.Item.Cout;
+                    Ipp.FournisseurItem = itemP.Item.Fournisseur;
                     LstIPP.Add(Ipp);
 
                     Ipp = new ItemPieceProjet();

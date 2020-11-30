@@ -11,6 +11,7 @@ namespace App_Brycol.Modele
         public string NomPiece{get; set; }
         public string NomItem { get; set; }
         public decimal CoutItem { get; set; }
+        public string FournisseurItem { get; set; }
 
 
         public ItemPieceProjet()

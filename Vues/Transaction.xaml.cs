@@ -19,7 +19,7 @@ namespace App_Brycol.Vues
     /// <summary>
     /// Logique d'interaction pour Transaction.xaml
     /// </summary>
-    public partial class Transaction : Window
+    public partial class Transaction : UserControl
     {
         public Transaction()
         {

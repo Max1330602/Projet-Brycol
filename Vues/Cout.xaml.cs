@@ -22,6 +22,7 @@ namespace App_Brycol.Vues
     {
         private UCCoutPiece uCCoutPiece { get; set; }
         private UCCoutProjet uCCoutProjet { get; set; }
+        private Transaction uCCTransaction { get; set; }
         private UCCoutDetailProjet uCCoutDetailProjet { get; set; }
 
         public Cout(string UCEcran )
@@ -72,6 +73,7 @@ namespace App_Brycol.Vues
             grdCoutParent.Children.Add(uCCoutProjet);
             btnVoirCoutProjet.Visibility = Visibility.Collapsed;
             btnVoirCoutDetailProjet.Visibility = Visibility.Visible;
+            btnTransaction.Visibility = Visibility.Hidden;
             btnVoirCoutPiece.Visibility = Visibility.Visible;
 
         }
@@ -87,6 +89,7 @@ namespace App_Brycol.Vues
             grdCoutParent.Children.Add(uCCoutPiece);
             btnVoirCoutPiece.Visibility = Visibility.Collapsed;
             btnVoirCoutDetailProjet.Visibility = Visibility.Collapsed;
+            btnTransaction.Visibility = Visibility.Hidden;
             btnVoirCoutProjet.Visibility = Visibility.Visible;
 
         }
@@ -101,6 +104,7 @@ namespace App_Brycol.Vues
             grdCoutParent.Children.Add(uCCoutDetailProjet);
             btnVoirCoutPiece.Visibility = Visibility.Collapsed;
             btnVoirCoutDetailProjet.Visibility = Visibility.Collapsed;
+            btnTransaction.Visibility = Visibility.Visible;
             btnVoirCoutProjet.Visibility = Visibility.Visible;
 
         }
@@ -113,6 +117,12 @@ namespace App_Brycol.Vues
 
             btnOk.Background = Brushes.White;
             btnOk.Foreground = Brushes.Black;
+
+            btnTransaction.Background = Brushes.White;
+            btnTransaction.Foreground = Brushes.Black;
+
+            btnAnnulerTransaction.Background = Brushes.White;
+            btnAnnulerTransaction.Foreground = Brushes.Black;
 
             btnVoirCoutProjet.Background = Brushes.White;
             btnVoirCoutProjet.Foreground = Brushes.Black;
@@ -138,6 +148,12 @@ namespace App_Brycol.Vues
             btnOk.Background = CouleurBouton;
             btnOk.Foreground = Brushes.White;
 
+            btnTransaction.Background = CouleurBouton;
+            btnTransaction.Foreground = Brushes.White;
+
+            btnAnnulerTransaction.Background = CouleurBouton;
+            btnAnnulerTransaction.Foreground = Brushes.White;
+
             btnVoirCoutProjet.Background = CouleurBouton;
             btnVoirCoutProjet.Foreground = Brushes.White;
 
@@ -150,8 +166,32 @@ namespace App_Brycol.Vues
 
         private void btnPayer_Click(object sender, RoutedEventArgs e)
         {
-            Transaction popup = new Transaction();
-            popup.ShowDialog();
+            uCCTransaction = new Transaction();
+            this.Width = this.Width + uCCTransaction.Width;
+            ColumnDefinition ColonneTransaction = new ColumnDefinition();
+            ColonneTransaction.Width = new GridLength(400, GridUnitType.Pixel);
+            grdCoutParent.ColumnDefinitions.Add(ColonneTransaction);
+
+
+            Grid.SetColumn(uCCTransaction, 1);
+            Grid.SetRow(uCCTransaction, 0);
+            Grid.SetRowSpan(uCCTransaction, 2);
+            grdCoutParent.Children.Add(uCCTransaction);
+
+            btnTransaction.Visibility = Visibility.Hidden;
+            btnAnnulerTransaction.Visibility = Visibility.Visible;
+
+            
+        }
+
+        private void btnAnnulerPayer_Click(object sender, RoutedEventArgs e)
+        {
+            this.Width = 800;
+            grdCoutParent.Children.Remove(uCCTransaction);
+            grdCoutParent.ColumnDefinitions.RemoveAt(1);
+
+            btnTransaction.Visibility = Visibility.Visible;
+            btnAnnulerTransaction.Visibility = Visibility.Hidden;
         }
     }
 }

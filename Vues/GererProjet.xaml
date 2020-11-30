@@ -108,7 +108,7 @@
         </Button>
 
 
-        <Image Grid.Row="0" Grid.Column="4" Source="/images/logo.png" HorizontalAlignment="Right"></Image>
+        <Image Grid.Row="0" Grid.Column="4" x:Name="logo" Source="/images/logo.png" HorizontalAlignment="Right"></Image>
 
 
 

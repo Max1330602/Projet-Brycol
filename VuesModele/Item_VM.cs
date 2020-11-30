@@ -194,6 +194,20 @@ namespace App_Brycol.VuesModele
             }
         }
 
+        private string _fournisseur;
+        public string Fournisseur
+        {
+            get
+            {
+                return _fournisseur;
+            }
+            set
+            {
+                _fournisseur = value;
+                OnPropertyChanged("Fournisseur");
+            }
+        }
+
         private string _filtreNom;
         public string FiltreNom
         {

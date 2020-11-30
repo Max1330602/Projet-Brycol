@@ -23,6 +23,12 @@ namespace App_Brycol.Vues
         public Structures()
         {
             InitializeComponent();
+
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
+
             DataContext = new Item_VM();
         }
 
@@ -45,5 +51,61 @@ namespace App_Brycol.Vues
                 }
             }
         }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+            Brush CouleurArriere = (Brush)bc.ConvertFrom("#33342F");
+            Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
+            Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
+
+            BitmapImage bmiLogo = new BitmapImage();
+            bmiLogo.BeginInit();
+            bmiLogo.CacheOption = BitmapCacheOption.OnLoad;
+            bmiLogo.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            bmiLogo.UriSource = new Uri("pack://application:,,,/images/logoclair.png");
+            bmiLogo.EndInit();
+            logo.Source = bmiLogo;
+
+            btnAjouter.Background = CouleurBouton;
+            btnAjouter.Foreground = Brushes.White;
+
+            btnRetour.Background = CouleurBouton;
+            btnRetour.Foreground = Brushes.White;
+
+            DG_items.RowBackground = Brushes.LightGray;
+            DG_items.AlternatingRowBackground = Brushes.Gray;
+            DG_items.Background = CouleurArriere;
+
+            DG_ListeItems.RowBackground = Brushes.Gray;
+            DG_ListeItems.AlternatingRowBackground = Brushes.LightGray;
+            DG_ListeItems.Background = CouleurArriere;
+
+            Pied.Background = CouleurArrierePlan;
+            Banniere.Background = CouleurBanniere;;
+        }
+
+        private void EnleverThemeSombre()
+        {
+            btnAjouter.Background = Brushes.White;
+            btnAjouter.Foreground = Brushes.Black;
+
+            btnRetour.Background = Brushes.White;
+            btnRetour.Foreground = Brushes.Black;
+
+            DG_items.RowBackground = Brushes.White;
+            DG_items.AlternatingRowBackground = Brushes.White;
+            DG_items.Background = Brushes.White;
+
+            DG_ListeItems.RowBackground = Brushes.White;
+            DG_ListeItems.AlternatingRowBackground = Brushes.White;
+            DG_ListeItems.Background = Brushes.White;
+
+            Pied.Background = Brushes.White;
+            Banniere.Background = Brushes.LightGray;
+        }
+
+
     }
 }
