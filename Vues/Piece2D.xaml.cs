@@ -743,6 +743,8 @@ namespace App_Brycol.Vues
         private void btnClip(object sender, RoutedEventArgs e)
         {
             movePiece = false;
+            rotationPiece = 0;
+            canvas.RenderTransform = new RotateTransform(rotationPiece);
             btnPieceRotation.Visibility = Visibility.Hidden;
             if (Piece_VM.pieceActuel.Longueur > 10)
             {

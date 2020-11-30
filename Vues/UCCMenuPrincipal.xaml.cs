@@ -1,4 +1,5 @@
-﻿using App_Brycol.VuesModele;
+﻿using App_Brycol.Outils;
+using App_Brycol.VuesModele;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,12 @@ namespace App_Brycol.Vues
                 AppliquerThemeSombre();
             else
                 EnleverThemeSombre();
+
+            var pReq = (from p in OutilEF.brycolContexte.Projets.Include("Utilisateur") where p.Utilisateur.Nom == Utilisateur_VM.utilActuel.Nom select p.Nom).ToList();
+            if (pReq.Count() != 0)
+            {
+                btnTeleverserProjet.IsEnabled = true;
+            }
 
         }
 

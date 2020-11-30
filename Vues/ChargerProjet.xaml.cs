@@ -96,5 +96,15 @@ namespace App_Brycol.Vues
             btnOk.IsEnabled = true;
             btnSupprimer.IsEnabled = true;
         }
+
+        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
+            gridMW.Children.Clear();
+            gridMW.Children.Add(cpMW);
+            cpMW.Content = new UCCMenuPrincipal();
+        }
     }
 }
