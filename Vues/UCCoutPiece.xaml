@@ -22,6 +22,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Nom d'item" Binding="{Binding Nom}" Width="*"/>
                 <DataGridTextColumn Header="Prix" Binding="{Binding Cout}" Width=".5*"/>
+                <DataGridTextColumn Header="Fournisseur" Binding="{ Binding Fournisseur }" Width=".5*"/>
             </DataGrid.Columns>
         </DataGrid>
 

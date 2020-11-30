@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
 
         <Border x:Name="Banniere" Grid.Row="0" Background="LightGray"/>
-        <Image Grid.Row="0" Source="/images/logo.png" HorizontalAlignment="Right"/>
+        <Image Grid.Row="0" x:Name="logo" Source="/images/logo.png" HorizontalAlignment="Right"/>
 
         <TextBlock Text="Nom du projet" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="125" Margin="35,35,0,0"/>
         <TextBox Text="{Binding Nom}"  Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"  Height="25" Width="304" Margin="125,35,0,0"/>

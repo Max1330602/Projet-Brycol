@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="App_Brycol.Vues.Transaction"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:App_Brycol.Vues"
+        mc:Ignorable="d"
+        Height="315" Width="320">
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontFamily" Value="Constantia Bold"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+    </UserControl.Resources>
+
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="190"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="450"/>
+        </Grid.ColumnDefinitions>
+
+        <Border x:Name="Banniere" Background="LightGray"></Border>
+        <Label Content="Coordonnées Bancaires"></Label>
+
+        <Label x:Name="lblnoCarte" Grid.Row="1" Content="No Carte : " Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"></Label>
+        <TextBox x:Name="txtnoCarte"  Grid.Row="1" Width="120" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,10,0,0"></TextBox>
+
+        <Label x:Name="lblMois"  Grid.Row="1" Content="Mois Exp : " Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0"></Label>
+        <TextBox x:Name="txtMois"  Grid.Row="1" Width="120" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,50,0,0"></TextBox>
+
+        <Label x:Name="lblAnnee"  Grid.Row="1" Content="Année Exp : " Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,90,0,0"></Label>
+        <TextBox x:Name="txtAnnee"  Grid.Row="1" Width="120" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,90,0,0"></TextBox>
+
+        <Label x:Name="lblType"  Grid.Row="1" Content="Type : " Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,130,0,0"></Label>
+        <StackPanel Grid.Row="1" Height="25" Orientation="Horizontal" Margin="100,130,10,35">
+            <RadioButton x:Name="visa" Height="25" Width="25"/>
+            <Image Source="/images/visa.png"></Image>
+            <RadioButton x:Name="mastercard" Height="25" Width="25" Margin="10,0,0,0"/>
+            <Image Source="/images/mastercard.png"></Image>
+            <RadioButton x:Name="amex" Height="25" Width="25" Margin="10,0,0,0"/>
+            <Image Source="/images/amex.png"></Image>
+        </StackPanel>
+
+        <Button x:Name="btnPayer" Grid.Row="1" Content="Confirmer" Width="100" Height="24" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,0" Click="btnConfirmer_Click"></Button>
+
+    </Grid>
+</UserControl>

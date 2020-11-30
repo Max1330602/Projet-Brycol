@@ -172,6 +172,7 @@ namespace App_Brycol.Vues
                 {
                     canvas.Children.Remove(btntoolRotation);
                     canvas.Children.Remove(btntoolSupprimer);
+                    canvas.Children.Remove(btntoolModifier);
                     draggedImage = image;
                     
 
@@ -193,6 +194,9 @@ namespace App_Brycol.Vues
                                 Canvas.SetLeft(btntoolSupprimer, i.emplacementGauche + 164);
                                 Canvas.SetTop(btntoolSupprimer, i.emplacementHaut + 45);
                                 canvas.Children.Add(btntoolSupprimer);
+                                Canvas.SetLeft(btntoolModifier, i.emplacementGauche + 224);
+                                Canvas.SetTop(btntoolModifier, i.emplacementHaut + 45);
+                                canvas.Children.Add(btntoolModifier);
                             }
                             else
                             {
@@ -204,6 +208,9 @@ namespace App_Brycol.Vues
                                     Canvas.SetLeft(btntoolSupprimer, i.emplacementGauche + 64);
                                     Canvas.SetTop(btntoolSupprimer, i.emplacementHaut - 19);
                                     canvas.Children.Add(btntoolSupprimer);
+                                    Canvas.SetLeft(btntoolModifier, i.emplacementGauche + 124);
+                                    Canvas.SetTop(btntoolModifier, i.emplacementHaut -19);
+                                    canvas.Children.Add(btntoolModifier);
                                 }
                                 else
                                 {
@@ -213,6 +220,9 @@ namespace App_Brycol.Vues
                                     Canvas.SetLeft(btntoolSupprimer, i.emplacementGauche + 64);
                                     Canvas.SetTop(btntoolSupprimer, i.emplacementHaut + i.Item.Longueur-15);
                                     canvas.Children.Add(btntoolSupprimer);
+                                    Canvas.SetLeft(btntoolModifier, i.emplacementGauche + 124);
+                                    Canvas.SetTop(btntoolModifier, i.emplacementHaut + i.Item.Longueur - 15);
+                                    canvas.Children.Add(btntoolModifier);
                                 }
                                 
                             }
@@ -220,6 +230,7 @@ namespace App_Brycol.Vues
                     }
                     btntoolRotation.Visibility = Visibility.Visible;
                     btntoolSupprimer.Visibility = Visibility.Visible;
+                    btntoolModifier.Visibility = Visibility.Visible;
                     move = true;
                     mousePosition = e.GetPosition(canvas);
                     draggedImage = image;
@@ -267,7 +278,10 @@ namespace App_Brycol.Vues
                           
                             Canvas.SetLeft(btntoolSupprimer, i.emplacementGauche + 164);
                             Canvas.SetTop(btntoolSupprimer, i.emplacementHaut + 45);
-                           
+
+                            Canvas.SetLeft(btntoolModifier, i.emplacementGauche + 224);
+                            Canvas.SetTop(btntoolModifier, i.emplacementHaut + 45);
+
                         }
                         else
                         {
@@ -278,7 +292,10 @@ namespace App_Brycol.Vues
                               
                                 Canvas.SetLeft(btntoolSupprimer, i.emplacementGauche + 64);
                                 Canvas.SetTop(btntoolSupprimer, i.emplacementHaut - 19);
-                               
+
+                                Canvas.SetLeft(btntoolModifier, i.emplacementGauche + 124);
+                                Canvas.SetTop(btntoolModifier, i.emplacementHaut - 19);
+
                             }
                             else
                             {
@@ -287,7 +304,10 @@ namespace App_Brycol.Vues
                                
                                 Canvas.SetLeft(btntoolSupprimer, i.emplacementGauche + 64);
                                 Canvas.SetTop(btntoolSupprimer, i.emplacementHaut + i.Item.Longueur - 15);
-                                
+
+                                Canvas.SetLeft(btntoolModifier, i.emplacementGauche + 124);
+                                Canvas.SetTop(btntoolModifier, i.emplacementHaut + i.Item.Longueur - 15);
+
                             }
 
                         }
@@ -396,8 +416,40 @@ namespace App_Brycol.Vues
                 }
             }          
         }
-       
-        
+
+        private void btnModifier(object sender, RoutedEventArgs e)
+        {
+            if (Piece2D.toolbarImage != null && Piece2D.toolbarImage.Source != null)
+            {
+                foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
+                {
+                    if (Piece2D.toolbarImage.Source.ToString().Contains(ip.Item.ID.ToString()))
+                    {
+                        if (ip.Item.Nom.Contains("Porte Double") || ip.Item.Nom.Contains("Fenêtre"))
+                        {
+                            MessageBox.Show("Impossible de modifier une double porte ou une fenêtre quelconque.");
+                        }
+                        else if (ip.Item.Nom == "Porte")
+                        {
+                            ModifierPorte popUp = new ModifierPorte();
+                            popUp.ShowDialog();
+                            return;
+                        }
+                        else
+                        {
+                            ModifierItem popUp = new ModifierItem();
+                            popUp.ShowDialog();
+                            return;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Il faut d'abord sélectionner un item dans le plan");
+            }
+
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -455,6 +507,7 @@ namespace App_Brycol.Vues
                                 toolbarImage.Source = null;
                                 btntoolRotation.Visibility = Visibility.Hidden;
                                 btntoolSupprimer.Visibility = Visibility.Hidden;
+                                btntoolModifier.Visibility = Visibility.Hidden;
                             OutilEF.brycolContexte.lstItems.Remove(ip);
                                 OutilEF.brycolContexte.SaveChanges();
 
@@ -1103,10 +1156,5 @@ namespace App_Brycol.Vues
             canvas.RenderTransform = new RotateTransform(rotationPiece);
 
         }
-
-       
-
-
-
     }
 }
