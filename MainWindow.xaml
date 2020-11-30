@@ -18,8 +18,6 @@
     </Window.Resources>
     
     <Grid Name="gridMainWindow">
-
-
         <ContentPresenter Name="presenteurContenu" Grid.RowSpan="3"></ContentPresenter>
     </Grid>
 </Window>

@@ -58,8 +58,8 @@ namespace App_Brycol.VuesModele
             }
             Items = SommaireItems;
             Structures = StructuresItems;
-            Categories.Add("");
-            TypesDePiece.Add("");
+            Categories.Add("Tous");
+            TypesDePiece.Add("Tous");
 
         }
         #region Propriétés
@@ -306,6 +306,10 @@ namespace App_Brycol.VuesModele
         public void filtrer()
 
         {
+            if (FiltreCategorie == "Tous")
+                FiltreCategorie = "";
+            else if (FiltreType == "Tous")
+                FiltreType = "";
             //Si la liste n'est pas vide ni égale à 0
             if (SommaireItems != null && SommaireItems.Count != 0)
                 filtreCombine();
@@ -321,6 +325,10 @@ namespace App_Brycol.VuesModele
 
         public void filtreCombine()
         {
+            if (FiltreCategorie == "Tous")
+                FiltreCategorie = "";
+            else if (FiltreType == "Tous")
+                FiltreType = "";
             if (FiltreNom == "" && FiltreCategorie == "" && FiltreType == "")
                 SommaireItems = new ObservableCollection<Item>(SommaireItems.Where(si => si.Cout > FiltrePrixMin &&
                                                                                          si.Cout < FiltrePrixMax));
