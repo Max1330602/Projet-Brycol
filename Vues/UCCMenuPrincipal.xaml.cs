@@ -45,7 +45,8 @@ namespace App_Brycol.Vues
 
         private void btnPartagerProjet_Click(object sender, RoutedEventArgs e)
         {
-
+            PartagerProjet popup = new PartagerProjet();
+            popup.ShowDialog();
         }
 
         private void btnTeleverserProjet_Click(object sender, RoutedEventArgs e)

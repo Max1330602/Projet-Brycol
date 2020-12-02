@@ -248,6 +248,9 @@
     <Compile Include="Vues\ModifierPorte.xaml.cs">
       <DependentUpon>ModifierPorte.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vues\PartagerProjet.xaml.cs">
+      <DependentUpon>PartagerProjet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vues\Piece2D.xaml.cs">
       <DependentUpon>Piece2D.xaml</DependentUpon>
     </Compile>
@@ -335,6 +338,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vues\ModifierPorte.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\PartagerProjet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
