@@ -434,6 +434,7 @@ namespace App_Brycol.VuesModele
                     Ipp.NomItem = itemP.Item.Nom;
                     Ipp.CoutItem = itemP.Item.Cout;
                     Ipp.FournisseurItem = itemP.Item.Fournisseur;
+                    Ipp.EstPayeItem = itemP.EstPaye;
                     LstIPP.Add(Ipp);
 
                     Ipp = new ItemPieceProjet();
@@ -457,7 +458,10 @@ namespace App_Brycol.VuesModele
 
             var LiReq = from Li in OutilEF.brycolContexte.lstItems.Include("Item") where Li.Plan.ID == plan.ID select Li;
             foreach (ItemsPlan Li in LiReq)
-                St += Li.Item.Cout;
+            {
+                if (Li.EstPaye == "Non")
+                    St += Li.Item.Cout;
+            }
 
             return St;
 

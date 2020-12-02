@@ -23,7 +23,7 @@ namespace App_Brycol.Vues
         private UCCoutPiece uCCoutPiece { get; set; }
         private UCCoutProjet uCCoutProjet { get; set; }
         private Transaction uCCTransaction { get; set; }
-        private UCCoutDetailProjet uCCoutDetailProjet { get; set; }
+        public static UCCoutDetailProjet uCCoutDetailProjet { get; set; }
 
         public Cout(string UCEcran )
         {
