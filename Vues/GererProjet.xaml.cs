@@ -332,11 +332,6 @@ namespace App_Brycol.Vues
 
         private void txtProjet_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (txtProjet.Text.Length < 2 || txtProjet.Text.Length > 30)
-            {
-                MessageBox.Show("La longueur du nom du projet n'est pas valide.");
-                return;
-            }
             if (txtProjet.Text != Projet_VM.ProjetActuel.Nom)
             {
                 btnModifNom.Visibility = Visibility.Visible;
@@ -349,6 +344,14 @@ namespace App_Brycol.Vues
         private void btnModifNom_Click(object sender, RoutedEventArgs e)
         {
             bool estExistant = false;
+
+            if (txtProjet.Text.Length < 2 || txtProjet.Text.Length > 30)
+            {
+                MessageBox.Show("La longueur du nom du projet n'est pas valide.");
+                txtProjet.Text = Projet_VM.ProjetActuel.Nom;
+                btnModifNom.Visibility = Visibility.Collapsed;
+                return;
+            }
 
             var pReq = from pr in OutilEF.brycolContexte.Projets.Include("Utilisateur") where pr.Nom == txtProjet.Text select pr;
             foreach (Projet pr in pReq)
