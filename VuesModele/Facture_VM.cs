@@ -8,5 +8,6 @@ namespace App_Brycol.VuesModele
 {
     class Facture_VM
     {
+
     }
 }

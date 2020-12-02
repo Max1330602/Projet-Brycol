@@ -19,6 +19,7 @@ namespace App_Brycol.Outils
         public DbSet<Piece> Pieces { get; set; }
         public DbSet<Plan> Plans { get; set; }
         public DbSet<Utilisateur> Utilisateurs { get; set; }
+        public DbSet<Facture> Factures { get; set; }
 
         public BrycolContexte() : base("name=connexionBrycol")
         {

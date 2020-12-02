@@ -24,6 +24,9 @@ namespace App_Brycol.Vues
     /// </summary>
     public partial class Transaction : UserControl
     {
+        private List<string> lstFournisseurUnique { get; set; }
+        private List<Facture> lstFacturesCrees = new List<Facture>();
+        private List<ItemsPlan> lstItemsPlansProjet { get; set; }
         public static UCCoutDetailProjet uccdp { get; set; }
         public Transaction()
         {
@@ -32,19 +35,33 @@ namespace App_Brycol.Vues
 
         private void btnConfirmer_Click(object sender, RoutedEventArgs e)
         {
+            StringBuilder MessageConfirmation = new StringBuilder();
+
             if (validerChampsCarte())
             {
-                MessageBox.Show("Transaction approuvée : x Factures, (x, : 0,00$, x:0,00$, x:0,00$)");
+                RemplirListesItemsPlanProjetetFournisseur();
+                if (lstFournisseurUnique.Count() > 1)
+                    MessageConfirmation.Append("Transactions approuvées : " + lstFournisseurUnique.Count() + " Factures\n");
+                else
+                    MessageConfirmation.Append("Transaction approuvée : " + lstFournisseurUnique.Count() + " Facture\n");
+                foreach(Facture f in lstFacturesCrees)
+                {
+                    MessageConfirmation.Append(f.Fournisseur + ": " + f.Montant + "$\n");
+                }
+                MessageBox.Show(MessageConfirmation.ToString());
+
             }
-            ChangerEtatItemsPlans();
-            
+
         }
 
-        private void ChangerEtatItemsPlans()
+        private void RemplirListesItemsPlanProjetetFournisseur()
         {
             List<Piece> LstPi = new List<Piece>();
+            lstItemsPlansProjet = new List<ItemsPlan>();
             ObservableCollection<ItemPieceProjet> LstIPP = new ObservableCollection<ItemPieceProjet>();
             ObservableCollection<ItemsPlan> LstIP = new ObservableCollection<ItemsPlan>();
+            List<string> lstFournisseur = new List<string>();
+            lstFournisseurUnique = new List<string>();
 
             var PReq = from p in OutilEF.brycolContexte.Pieces where p.Projet.ID == Projet_VM.ProjetActuel.ID select p;
             foreach (Piece p in PReq)
@@ -55,10 +72,17 @@ namespace App_Brycol.Vues
                 var PReq3 = from iP in OutilEF.brycolContexte.lstItems.Include("Item") where iP.Plan.Piece.ID == p.ID select iP;
                 foreach (ItemsPlan itemP in PReq3)
                 {
-                    itemP.EstPaye = "Oui";
+                    if (itemP.EstPaye == "Non")
+                    {
+                        lstFournisseur.Add(itemP.Item.Fournisseur);
+                    }
+                    lstItemsPlansProjet.Add(itemP);
                 }
-                OutilEF.brycolContexte.SaveChanges();
             }
+
+            lstFournisseurUnique = lstFournisseur.Distinct().ToList();
+
+            CreerFactures();
 
             foreach (Window w in Application.Current.Windows)
             {
@@ -70,6 +94,34 @@ namespace App_Brycol.Vues
                     (w as Cout).grdCoutParent.Children.Add(uccdp);
                 }
             }
+        }
+
+        private void CreerFactures()
+        {
+            Facture factureFournisseur;
+            foreach(string f in lstFournisseurUnique)
+            {
+                factureFournisseur = new Facture();
+                foreach(ItemsPlan ip in lstItemsPlansProjet)
+                {
+                    if (ip.Item.Fournisseur == f && ip.EstPaye == "Non")
+                    {
+                        factureFournisseur.Montant += ip.Item.Cout;
+                        ip.EstPaye = "Oui";
+                    }
+                }
+                decimal tps = Projet_VM.CalTPS(factureFournisseur.Montant);
+                decimal tvq = Projet_VM.CalTVQ(factureFournisseur.Montant);
+                factureFournisseur.Montant = Projet_VM.CalTotal(factureFournisseur.Montant, tps, tvq);
+
+                factureFournisseur.Utilisateur = Utilisateur_VM.utilActuel;
+                factureFournisseur.Date = DateTime.Now;
+                factureFournisseur.Fournisseur = f;
+                lstFacturesCrees.Add(factureFournisseur);
+                if (factureFournisseur != null)
+                    OutilEF.brycolContexte.Factures.Add(factureFournisseur);
+            }
+            OutilEF.brycolContexte.SaveChanges();
         }
 
         bool validerChampsCarte()
