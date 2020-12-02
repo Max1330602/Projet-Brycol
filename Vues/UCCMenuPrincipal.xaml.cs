@@ -33,10 +33,12 @@ namespace App_Brycol.Vues
                 EnleverThemeSombre();
 
             var pReq = (from p in OutilEF.brycolContexte.Projets.Include("Utilisateur") where p.Utilisateur.Nom == Utilisateur_VM.utilActuel.Nom select p.Nom).ToList();
+
             if (pReq.Count() != 0)
             {
                 btnTeleverserProjet.IsEnabled = true;
             }
+
 
         }
 
@@ -56,8 +58,12 @@ namespace App_Brycol.Vues
             btnCreerProjet.Background = Brushes.White;
             btnCreerProjet.Foreground = Brushes.Black;
 
-            btnTeleverserProjet.Background = Brushes.White;
-            btnTeleverserProjet.Foreground = Brushes.Black;
+            if (btnTeleverserProjet.IsEnabled)
+            {
+                btnTeleverserProjet.Background = Brushes.White;
+                btnTeleverserProjet.Foreground = Brushes.Black;
+            }
+
 
         }
 
