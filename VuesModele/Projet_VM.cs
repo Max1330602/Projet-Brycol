@@ -66,7 +66,9 @@ namespace App_Brycol.VuesModele
 
             var pReq = (from p in OutilEF.brycolContexte.Projets.Include("Utilisateur") where p.Utilisateur.Nom == Utilisateur_VM.utilActuel.Nom select p.Nom).ToList();
 
-            ProjetSelectionne = pReq.First();
+            if (pReq.Count() != 0)
+                ProjetSelectionne = pReq.First();
+
 
 
         }

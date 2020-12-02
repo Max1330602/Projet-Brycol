@@ -37,8 +37,14 @@ namespace App_Brycol.Vues
             if (pReq.Count() != 0)
             {
                 btnTeleverserProjet.IsEnabled = true;
+                btnPartagerProjet.IsEnabled = true;
             }
 
+
+        }
+
+        private void btnPartagerProjet_Click(object sender, RoutedEventArgs e)
+        {
 
         }
 
@@ -62,6 +68,9 @@ namespace App_Brycol.Vues
             {
                 btnTeleverserProjet.Background = Brushes.White;
                 btnTeleverserProjet.Foreground = Brushes.Black;
+
+                btnPartagerProjet.Background = Brushes.White;
+                btnPartagerProjet.Foreground = Brushes.Black;
             }
 
 
@@ -84,5 +93,6 @@ namespace App_Brycol.Vues
             btnTeleverserProjet.Background = CouleurBouton;
             btnTeleverserProjet.Foreground = Brushes.White;
         }
+
     }
 }
