@@ -431,10 +431,13 @@ namespace App_Brycol.VuesModele
                 foreach (ItemsPlan itemP in PReq3)
                 {
                     Ipp.NomPiece = p.Nom;
-                    Ipp.NomItem = itemP.Item.Nom;
-                    Ipp.CoutItem = itemP.Item.Cout;
+                    Ipp.NomItem = itemP.Item.Nom;;
                     Ipp.FournisseurItem = itemP.Item.Fournisseur;
                     Ipp.EstPayeItem = itemP.EstPaye;
+                    if (Ipp.EstPayeItem == "Oui")
+                        Ipp.CoutItem = 0.00M;
+                    else
+                        Ipp.CoutItem = itemP.Item.Cout;
                     LstIPP.Add(Ipp);
 
                     Ipp = new ItemPieceProjet();

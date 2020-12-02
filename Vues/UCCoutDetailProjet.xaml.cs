@@ -1,4 +1,5 @@
-﻿using App_Brycol.VuesModele;
+﻿using App_Brycol.Modele;
+using App_Brycol.VuesModele;
 using System;
 using System.Collections.Generic;
 using System.Linq;

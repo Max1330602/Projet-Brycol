@@ -24,6 +24,7 @@ namespace App_Brycol.Vues
     /// </summary>
     public partial class Transaction : UserControl
     {
+        public static UCCoutDetailProjet uccdp { get; set; }
         public Transaction()
         {
             InitializeComponent();
@@ -63,7 +64,7 @@ namespace App_Brycol.Vues
             {
                 if (w.GetType() == typeof(Cout))
                 {
-                    UCCoutDetailProjet uccdp = new UCCoutDetailProjet();
+                    uccdp = new UCCoutDetailProjet();
                     (w as Cout).grdCoutParent.Children.Remove(Cout.uCCoutDetailProjet);
                     Grid.SetRow(uccdp, 1);
                     (w as Cout).grdCoutParent.Children.Add(uccdp);
