@@ -494,7 +494,7 @@ namespace App_Brycol.VuesModele
 
             foreach (Piece p in ProjetActuel.ListePieces)
             {
-                SouPo += CalSouTo(p);
+                SouPo = CalSouTo(p);
                 ToPo += CalTotal(SouPo, CalTPS(SouPo), CalTVQ(SouPo));
             }
             return ToPo;

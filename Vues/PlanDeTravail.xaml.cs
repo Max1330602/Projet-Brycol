@@ -51,6 +51,13 @@ namespace App_Brycol.Vues
             Plan_VM.PlanActuel = null;
             Plan_VM.uniteDeMesure = "";
 
+            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
+            gridMW.Children.Clear();
+            gridMW.Children.Add(cpMW);
+            cpMW.Content = new UCCMenuPrincipal();
+
+
         }
     }
 }

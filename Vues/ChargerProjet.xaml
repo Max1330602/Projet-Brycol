@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:App_Brycol.Vues"
         mc:Ignorable="d"
+        Closing="OnClosing"
         Title="ChargerProjet" Height="450" Width="500">
     <Window.Resources>
         <Style TargetType="Button">

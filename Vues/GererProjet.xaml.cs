@@ -251,6 +251,26 @@ namespace App_Brycol.Vues
             Plan_VM.PlanActuel = Projet_VM.ProjetActuel.ListePlans[7];
         }
 
+        private void btnDeselecPiece_Click(object sender, RoutedEventArgs e)
+        {
+            int i = 0;
+
+            foreach (Button b in lstBoutons)
+            {
+                if (i < Projet_VM.ProjetActuel.ListePieces.Count())
+                    if (Projet_VM.ProjetActuel.ListePieces[i] != null)
+                    {
+                        b.IsEnabled = true;
+                        b.Background = new SolidColorBrush(Colors.White);
+                    }
+                i++;
+            }
+            btnPlan.IsEnabled = false;
+            btnSupprimerPiece.IsEnabled = false;
+            btnDeselecPiece.Visibility = Visibility.Collapsed;
+
+        }
+
         private void selectionnerBouton(object sender)
         {
             if (!btnPlan.IsEnabled && !btnSupprimerPiece.IsEnabled)
@@ -263,6 +283,7 @@ namespace App_Brycol.Vues
                     }
                     else
                     {
+                        btnDeselecPiece.Visibility = Visibility.Visible;
                         btnPlan.IsEnabled = !btnPlan.IsEnabled;
                         btnSupprimerPiece.IsEnabled = !btnSupprimerPiece.IsEnabled;
                         if (Projet_VM.themeSombre)
@@ -583,9 +604,17 @@ namespace App_Brycol.Vues
                 Projet_VM.ProjetActuel.ListePieces.Clear();
                 Projet_VM.ProjetActuel.ListePlans.Clear();
                 Projet_VM.ProjetActuel = null;
+                Projet_VM.EstSauvegarde = false;
                 Piece_VM.pieceActuel = null;
                 Plan_VM.PlanActuel = null;
                 Plan_VM.uniteDeMesure = "";
+
+
+                Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+                ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
+                gridMW.Children.Clear();
+                gridMW.Children.Add(cpMW);
+                cpMW.Content = new UCCMenuPrincipal();
             }
         }
 
