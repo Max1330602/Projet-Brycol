@@ -203,6 +203,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Modele\Categorie.cs" />
+    <Compile Include="Modele\Facture.cs" />
     <Compile Include="Modele\Item.cs" />
     <Compile Include="Modele\ItemPieceProjet.cs" />
     <Compile Include="Modele\ItemsPlan.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Outils\BrycolContexte.cs" />
     <Compile Include="Outils\Commande.cs" />
     <Compile Include="Outils\OutilEF.cs" />
+    <Compile Include="VuesModele\Facture_VM.cs" />
     <Compile Include="VuesModele\ItemsPlan_VM.cs" />
     <Compile Include="VuesModele\Item_VM.cs" />
     <Compile Include="VuesModele\Piece_VM.cs" />

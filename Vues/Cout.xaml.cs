@@ -23,7 +23,7 @@ namespace App_Brycol.Vues
         private UCCoutPiece uCCoutPiece { get; set; }
         private UCCoutProjet uCCoutProjet { get; set; }
         private Transaction uCCTransaction { get; set; }
-        private UCCoutDetailProjet uCCoutDetailProjet { get; set; }
+        public static UCCoutDetailProjet uCCoutDetailProjet { get; set; }
 
         public Cout(string UCEcran )
         {
@@ -66,6 +66,7 @@ namespace App_Brycol.Vues
         {
             grdCoutParent.Children.Remove(uCCoutPiece);
             grdCoutParent.Children.Remove(uCCoutDetailProjet);
+            grdCoutParent.Children.Remove(Transaction.uccdp);
 
             uCCoutProjet = new UCCoutProjet();
             Grid.SetRow(uCCoutProjet, 1);
@@ -75,6 +76,9 @@ namespace App_Brycol.Vues
             btnVoirCoutDetailProjet.Visibility = Visibility.Visible;
             btnTransaction.Visibility = Visibility.Hidden;
             btnVoirCoutPiece.Visibility = Visibility.Visible;
+
+            if (btnAnnulerTransaction.Visibility == Visibility.Visible)
+                btnAnnulerPayer_Click(btnAnnulerTransaction, e);
 
         }
 

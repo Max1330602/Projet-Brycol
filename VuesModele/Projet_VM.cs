@@ -71,7 +71,13 @@ namespace App_Brycol.VuesModele
             if (pReq.Count() != 0)
                 ProjetSelectionne = pReq.First();
 
-
+            Utilisateur_VM.utilActuel.ListeFactures = new ObservableCollection<Facture>();
+            if (Utilisateur_VM.utilActuel != null)
+            {
+                var PReq = from f in OutilEF.brycolContexte.Factures where f.Utilisateur.ID == Utilisateur_VM.utilActuel.ID select f;
+                foreach (Facture f in PReq)
+                    Utilisateur_VM.utilActuel.ListeFactures.Add(f);
+            }
 
         }
 
@@ -542,16 +548,22 @@ namespace App_Brycol.VuesModele
                 var PReq3 = from iP in OutilEF.brycolContexte.lstItems.Include("Item") where iP.Plan.Piece.ID == p.ID select iP;
                 foreach (ItemsPlan itemP in PReq3)
                 {
+
                     Ipp.NomPiece = p.Nom;
                     Ipp.NomItem = itemP.Item.Nom;
-                    Ipp.CoutItem = itemP.Item.Cout;
                     Ipp.FournisseurItem = itemP.Item.Fournisseur;
+                    Ipp.EstPayeItem = itemP.EstPaye;
+                    if (Ipp.EstPayeItem == "Oui")
+                        Ipp.CoutItem = 0.00M;
+                    else
+                        Ipp.CoutItem = itemP.Item.Cout;
                     LstIPP.Add(Ipp);
 
                     Ipp = new ItemPieceProjet();
                 }
 
             }
+
 
             return LstIPP;
 
@@ -569,7 +581,30 @@ namespace App_Brycol.VuesModele
 
             var LiReq = from Li in OutilEF.brycolContexte.lstItems.Include("Item") where Li.Plan.ID == plan.ID select Li;
             foreach (ItemsPlan Li in LiReq)
+            {
                 St += Li.Item.Cout;
+            }
+
+            return St;
+
+        }
+
+        public static decimal CalSouToIPP(Piece laPiece)
+        {
+            Plan plan = new Plan();
+            decimal St = 0M;
+
+            var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == laPiece.ID select p;
+
+            foreach (Plan p in PReq)
+                plan = p;
+
+            var LiReq = from Li in OutilEF.brycolContexte.lstItems.Include("Item") where Li.Plan.ID == plan.ID select Li;
+            foreach (ItemsPlan Li in LiReq)
+            {
+                if (Li.EstPaye == "Non")
+                    St += Li.Item.Cout;
+            }
 
             return St;
 
@@ -592,6 +627,20 @@ namespace App_Brycol.VuesModele
         public static decimal CalTotal(decimal St, decimal montantTPS, decimal montantTVQ)
         {
             return decimal.Round((St + montantTPS + montantTVQ), 2, MidpointRounding.AwayFromZero);
+
+        }
+
+        public static decimal TotalIPP()
+        {
+            decimal SouPo = 0M;
+            decimal ToPo = 0M;
+
+            foreach (Piece p in ProjetActuel.ListePieces)
+            {
+                SouPo = CalSouToIPP(p);
+                ToPo += CalTotal(SouPo, CalTPS(SouPo), CalTVQ(SouPo));
+            }
+            return ToPo;
 
         }
 

@@ -412,6 +412,7 @@ namespace App_Brycol.VuesModele
                 i.cotePorte = "droite";
             else
                 i.cotePorte = "";
+            i.EstPaye = "Non";
             // HARD CODE
             i.Plan = Plan_VM.PlanActuel;
             if (i.Item != null)

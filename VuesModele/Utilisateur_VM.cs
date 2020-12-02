@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
 
 namespace App_Brycol.VuesModele
 {
@@ -25,6 +26,8 @@ namespace App_Brycol.VuesModele
             cmdLogin = new Commande(Login);
             cmdLoginTriche = new Commande(LoginTriche);
             cmdCreeUtil = new Commande(CreeUtil);
+
+            ListeFactures = new ObservableCollection<Facture>();
         }
 
         public void Login(Object param)
@@ -124,6 +127,17 @@ namespace App_Brycol.VuesModele
             {
                 _motPasse = value;
                 OnPropertyChanged("MotPasse");
+            }
+        }
+
+        private ObservableCollection<Facture> _listeFactures;
+        public ObservableCollection<Facture> ListeFactures
+        {
+            get { return _listeFactures; }
+            set
+            {
+                _listeFactures = value;
+                OnPropertyChanged("ListeFactures");
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using App_Brycol.VuesModele;
+﻿using App_Brycol.Modele;
+using App_Brycol.VuesModele;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace App_Brycol.Vues
                 EnleverThemeSombre();
 
             lblNomProjet.Content = Projet_VM.ProjetActuel.Nom;
-            lblTotal.Content = Projet_VM.Total().ToString() + "$";
+            lblTotal.Content = Projet_VM.TotalIPP().ToString() + "$";
         }
 
         private void EnleverThemeSombre()
