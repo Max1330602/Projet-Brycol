@@ -81,15 +81,17 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Name="txblst"  Text="Liste des éléments ajoutés"></TextBlock>
-
-            <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DG_ListeItems" Grid.Row="1" Grid.Column="2" ItemsSource="{ Binding ListeItems}">
+            
+                <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DG_ListeItems" Grid.Row="1" Grid.Column="2"  ItemsSource="{ Binding ListeItems }" SelectedItem="{ Binding ItemSelect }">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{ Binding Nom }"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
 
+            <Button Command="{ Binding cmdSupprimerItem }" Name="btnSupprimer"  Grid.Row="3" Content="Supprimer"></Button>
         </Grid>
 
         <Border x:Name="Pied" Grid.Row="2" Grid.ColumnSpan="3" Background="White"></Border>
