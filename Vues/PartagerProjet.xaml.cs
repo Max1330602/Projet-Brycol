@@ -23,6 +23,7 @@ namespace App_Brycol.Vues
     {
         private UCUnProUnUser uCUnProUser { get; set; }
         private UCPluProjUnUser uCPluProUnUser { get; set; }
+        private UCPluProPluUser ucPluProPluUser { get; set; }
 
         public PartagerProjet()
         {
@@ -84,6 +85,7 @@ namespace App_Brycol.Vues
         {
             grdPartage.Children.Remove(uCUnProUser);
             grdPartage.Children.Remove(uCPluProUnUser);
+            grdPartage.Children.Remove(ucPluProPluUser);
 
             uCUnProUser = new UCUnProUnUser();
             Grid.SetRow(uCUnProUser, 2);
@@ -95,6 +97,7 @@ namespace App_Brycol.Vues
         {
             grdPartage.Children.Remove(uCUnProUser);
             grdPartage.Children.Remove(uCPluProUnUser);
+            grdPartage.Children.Remove(ucPluProPluUser);
 
             uCPluProUnUser = new UCPluProjUnUser();
             Grid.SetRow(uCPluProUnUser, 2);
@@ -104,7 +107,15 @@ namespace App_Brycol.Vues
 
         private void btnPluProPluUti_Click(object sender, RoutedEventArgs e)
         {
+            grdPartage.Children.Remove(uCUnProUser);
+            grdPartage.Children.Remove(uCPluProUnUser);
+            grdPartage.Children.Remove(ucPluProPluUser);
 
+            ucPluProPluUser = new UCPluProPluUser();
+            Grid.SetRow(ucPluProPluUser, 2);
+
+            grdPartage.Children.Add(ucPluProPluUser);
+            
         }
     }
 }

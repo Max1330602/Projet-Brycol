@@ -18,11 +18,11 @@ using System.Windows.Shapes;
 namespace App_Brycol.Vues
 {
     /// <summary>
-    /// Logique d'interaction pour UCPluProjUnUser.xaml
+    /// Logique d'interaction pour UCPluProPluUser.xaml
     /// </summary>
-    public partial class UCPluProjUnUser : UserControl
+    public partial class UCPluProPluUser : UserControl
     {
-        public UCPluProjUnUser()
+        public UCPluProPluUser()
         {
             InitializeComponent();
 
@@ -33,7 +33,7 @@ namespace App_Brycol.Vues
 
             var uReq = (from u in OutilEF.brycolContexte.Utilisateurs select u.Nom).ToList();
             uReq.Remove(Utilisateur_VM.utilActuel.Nom);
-            cmbUtili.ItemsSource = uReq;
+            lsbUti.ItemsSource = uReq;
 
             if (Projet_VM.themeSombre)
                 AppliquerThemeSombre();
@@ -71,15 +71,33 @@ namespace App_Brycol.Vues
             }
         }
 
-        private void cmbUtili_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void btnPrendreUti_Click(object sender, RoutedEventArgs e)
         {
+            lsbUtiPa.Items.Clear(); // S'il y a des items, les supprimmer
+
+            Projet_VM.LstUtilisateurPartage.Clear();
+
+            foreach (object o in lsbUti.SelectedItems)
+            {
+                lsbUtiPa.Items.Add(o);
+                Projet_VM.LstUtilisateurPartage.Add(o.ToString());
+            }
+
             if (lsbProPa.Items.Count != 0)
                 btnPartage.IsEnabled = true;
             else
                 btnPartage.IsEnabled = false;
         }
 
-        private void BtnPrendre_Click(object sender, RoutedEventArgs e)
+        private void btnRemettreUti_Click(object sender, RoutedEventArgs e)
+        {
+            lsbUtiPa.Items.Clear();
+            Projet_VM.LstUtilisateurPartage.Clear();
+
+            btnPartage.IsEnabled = false;
+        }
+
+        private void btnPrendrePro_Click(object sender, RoutedEventArgs e)
         {
             lsbProPa.Items.Clear(); // S'il y a des items, les supprimmer
 
@@ -91,19 +109,19 @@ namespace App_Brycol.Vues
                 Projet_VM.LstProjetPartage.Add(o.ToString());
             }
 
-            if (cmbUtili.SelectedItem != null)
+            if (lsbUtiPa.Items.Count != 0)
                 btnPartage.IsEnabled = true;
             else
                 btnPartage.IsEnabled = false;
+
         }
 
-        private void BtnRemettre_Click(object sender, RoutedEventArgs e)
+        private void btnRemettrePro_Click(object sender, RoutedEventArgs e)
         {
             lsbProPa.Items.Clear();
             Projet_VM.LstProjetPartage.Clear();
 
             btnPartage.IsEnabled = false;
         }
-
     }
 }
