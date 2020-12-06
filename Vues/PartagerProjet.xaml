@@ -7,7 +7,7 @@
         WindowStartupLocation ="CenterScreen"
         ResizeMode="NoResize"
         mc:Ignorable="d"
-        Title="Partager Projet" Height="450" Width="500">
+        Title="Partager Projet" Height="500" Width="650">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
@@ -16,33 +16,27 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid x:Name="grdPartage">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="0.2*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
         <Border Name="Banniere" Grid.Row="0" Grid.ColumnSpan="2" Background="LightGray"></Border>
-        <Label Grid.ColumnSpan="2" Grid.Row="0" FontSize="20" Height="40" Width="500" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Charger un projet"/>
+        <Label Grid.ColumnSpan="2" Grid.Row="0" FontSize="20" Height="40" Width="500" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Partage de projets"/>
         <Image Grid.Row="0" Grid.Column="1" x:Name="logo" Source="/images/logo.png" HorizontalAlignment="Right"></Image>
 
-        <StackPanel Grid.Row="1">
-            <StackPanel Orientation="Horizontal" Margin="10">
-                <Label Name="lblProjet" FontSize="25" Width="125">Projets</Label>
-                <ComboBox SelectedItem="{ Binding ProjetSelectionne }" SelectionChanged="cmbProjets_SelectionChanged" Name="cmbProjets" Height="30" Width="250" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0"></ComboBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10">
-                <Label Name="lblUtili" FontSize="25" Width="125">Utilisateur</Label>
-                <ComboBox SelectedItem="{ Binding UtiliSelectionne }" SelectionChanged="cmbUtili_SelectionChanged" Name="cmbUtili" Height="30" Width="250" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0"></ComboBox>
-            </StackPanel>
-            </StackPanel>
-
-        <Button Name="btnPartage" Command="{Binding cmdPartagerProjet}" IsEnabled="False" Grid.Row="1" Height="25" Content="Partager Projet" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,10,10,10"/>
-        <Button Name="btnQuitter" Click="btnQuitter_Click" Grid.Row="1" Height="25" Content="Quitter" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,10,130,10"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+            <Button Name="btnUnProUnUti" Click="btnUnProUnUti_Click" Margin="10,0,0,0" Content="1 projet 1 utilisateur"/>
+            <Button Name="btnPluProUnUti" Click="btnPluProUnUti_Click" Margin="10,0,0,0" Content="* projets 1 utilisateur"/>
+            <Button Name="btnPluProPluUti" Click="btnPluProPluUti_Click" Margin="10,0,0,0" Content="* projets * utilisateurs"/>
+        </StackPanel>
+        
 
 
     </Grid>
