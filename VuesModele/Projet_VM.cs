@@ -28,7 +28,9 @@ namespace App_Brycol.VuesModele
         public ICommand cmdSauvProjet { get; set; }
         public ICommand cmdSuppProjet { get; set; }
         public ICommand cmdChargerProjet { get; set; }
-        public ICommand cmdPartagerProjet { get; set; }
+        public ICommand cmdPartagerUnProjetUnUti { get; set; }
+        public ICommand cmdPartagerPluProjetUnUti { get; set; }
+        public ICommand cmdPartagerPluProjetPluUti { get; set; }
 
         public Projet_VM()
         {
@@ -36,7 +38,9 @@ namespace App_Brycol.VuesModele
             cmdSauvProjet = new Commande(SauvProjet);
             cmdSuppProjet = new Commande(SuppProjet);
             cmdChargerProjet = new Commande(Charger);
-            cmdPartagerProjet = new Commande(PartaProjet);
+            cmdPartagerUnProjetUnUti = new Commande(PartagerUnProjetUnUti);
+            cmdPartagerPluProjetUnUti = new Commande(PartagerPluProjetUnUti);
+            cmdPartagerPluProjetPluUti = new Commande(PartagerPluProjetPluUti);
 
             ListePieces = new ObservableCollection<Piece>();
             ListePlans = new ObservableCollection<Plan>();
@@ -155,6 +159,12 @@ namespace App_Brycol.VuesModele
                 OnPropertyChanged("UtiliSelectionne");
             }
         }
+
+        public static List<string> LstProjetPartage = new List<string>();
+
+        public static List<string> LstUtilisateurPartage = new List<string>();
+
+
         #endregion
 
         public void Charger(Object param)
@@ -429,7 +439,30 @@ namespace App_Brycol.VuesModele
             OutilEF.brycolContexte.SaveChanges();
         }
 
-        private void PartaProjet(Object param)
+        private void PartagerUnProjetUnUti(Object param)
+        {
+            PartaProjet(UtiliSelectionne, ProjetSelectionne);
+            MessageBox.Show("Le partage a été réussi.");
+        }
+
+        private void PartagerPluProjetUnUti(Object param)
+        {
+            foreach (string pro in LstProjetPartage)
+                PartaProjet(UtiliSelectionne, pro);
+
+            MessageBox.Show("Le partage a été réussi.");
+        }
+
+        private void PartagerPluProjetPluUti(Object param)
+        {
+            foreach (string uti in LstUtilisateurPartage)
+                foreach (string pro in LstProjetPartage)
+                    PartaProjet(uti, pro);
+
+            MessageBox.Show("Le partage a été réussi.");
+        }
+
+        private void PartaProjet(string UtiliParatage, string ProPartage)
         {
             Projet pro = new Projet();
             Utilisateur utili = new Utilisateur();
@@ -439,32 +472,32 @@ namespace App_Brycol.VuesModele
             int cmptDoublon = 0;
             bool existeDeja = false;
 
-            var UtiReq = from uti in OutilEF.brycolContexte.Utilisateurs where uti.Nom == UtiliSelectionne select uti;
+            var UtiReq = from uti in OutilEF.brycolContexte.Utilisateurs where uti.Nom == UtiliParatage select uti;
             foreach (Utilisateur uti in UtiReq)
                 utili = uti;
 
-            var pReq = from p in OutilEF.brycolContexte.Projets.Include("Utilisateur") where p.Nom == ProjetSelectionne && p.Utilisateur.Nom == Utilisateur_VM.utilActuel.Nom select p;
+            var pReq = from p in OutilEF.brycolContexte.Projets.Include("Utilisateur") where p.Nom == ProPartage && p.Utilisateur.Nom == Utilisateur_VM.utilActuel.Nom select p;
             foreach (Projet p in pReq)
                 pro = p;
 
-            var npReq = from p in OutilEF.brycolContexte.Projets.Include("Utilisateur") where p.Utilisateur.Nom == UtiliSelectionne select p;
+            var npReq = from p in OutilEF.brycolContexte.Projets.Include("Utilisateur") where p.Utilisateur.Nom == UtiliParatage select p;
             foreach(Projet p in npReq)
                 if (p.Nom == pro.Nom)
                 {
                     existeDeja = true;
-                    pro.Nom = ProjetSelectionne + "_" + Utilisateur_VM.utilActuel.Nom + "_" + cmptDoublon.ToString();
+                    pro.Nom = ProPartage + "_" + Utilisateur_VM.utilActuel.Nom + "_" + cmptDoublon.ToString();
                 }
 
 
             if (existeDeja)
                 foreach (Projet p in npReq)
-                    if (p.Nom.Contains(ProjetSelectionne + "_" + Utilisateur_VM.utilActuel.Nom))
+                    if (p.Nom.Contains(ProPartage + "_" + Utilisateur_VM.utilActuel.Nom))
                     {
                         cmptDoublon++;
                     }
 
             if (cmptDoublon != 0)
-                pro.Nom = ProjetSelectionne + "_" + Utilisateur_VM.utilActuel.Nom + "_" + cmptDoublon.ToString();
+                pro.Nom = ProPartage + "_" + Utilisateur_VM.utilActuel.Nom + "_" + cmptDoublon.ToString();
 
 
             var PieReq = from pie in OutilEF.brycolContexte.Pieces where pie.Projet.ID == pro.ID select pie;
@@ -518,8 +551,6 @@ namespace App_Brycol.VuesModele
             }
 
             OutilEF.brycolContexte.SaveChanges();
-
-            MessageBox.Show("Le partage a été réussi.");
         }
 
         private ObservableCollection<ItemPieceProjet> CreatlstIPP()
