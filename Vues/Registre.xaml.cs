@@ -24,7 +24,46 @@ namespace App_Brycol.Vues
         {
             InitializeComponent();
 
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
+
             DataContext = new Utilisateur_VM();
+        }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+            Brush CouleurArriere = (Brush)bc.ConvertFrom("#33342F");
+            Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
+            Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
+
+            Banniere.Background = CouleurBanniere;
+            DG_factures.Background = CouleurArrierePlan;
+
+            DG_factures.RowBackground = Brushes.LightGray;
+            DG_factures.AlternatingRowBackground = Brushes.Gray;
+
+            Pied.Background = CouleurArrierePlan;
+
+            btnRetour.Background = CouleurBouton;
+            btnRetour.Foreground = Brushes.White;
+        }
+
+        private void EnleverThemeSombre()
+        {
+            Banniere.Background = Brushes.LightGray;
+            DG_factures.Background = Brushes.White;
+
+            DG_factures.RowBackground = Brushes.White;
+            DG_factures.AlternatingRowBackground = Brushes.White;
+
+            Pied.Background = Brushes.White;
+
+            btnRetour.Background = Brushes.White;
+            btnRetour.Foreground = Brushes.Black;
         }
 
         private void btnRetour_Click(object sender, RoutedEventArgs e)

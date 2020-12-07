@@ -62,14 +62,12 @@ namespace App_Brycol.Vues
             Banniere.Background = CouleurBanniere;
             lblProjet.Background = CouleurArrierePlan;
 
-            if (btnOk.IsEnabled)
-            {
-                btnOk.Background = CouleurBouton;
-                btnOk.Foreground = Brushes.White;
+            btnOk.Background = CouleurBouton;
+            btnOk.Foreground = Brushes.White;
 
-                btnSupprimer.Background = CouleurBouton;
-                btnSupprimer.Foreground = Brushes.White;
-            }
+            btnSupprimer.Background = CouleurBouton;
+            btnSupprimer.Foreground = Brushes.White;
+
         }
 
         private void btnSupprimer_Click(object sender, RoutedEventArgs e)

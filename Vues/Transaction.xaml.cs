@@ -31,6 +31,26 @@ namespace App_Brycol.Vues
         public Transaction()
         {
             InitializeComponent();
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
+
+        }
+
+        private void EnleverThemeSombre()
+        {
+            btnPayer.Background = Brushes.White;
+            btnPayer.Foreground = Brushes.Black;
+        }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+
+            btnPayer.Background = CouleurBouton;
+            btnPayer.Foreground = Brushes.White;
         }
 
         private void btnConfirmer_Click(object sender, RoutedEventArgs e)

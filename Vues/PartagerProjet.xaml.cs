@@ -49,6 +49,8 @@ namespace App_Brycol.Vues
         {
             Banniere.Background = Brushes.LightGray;
 
+            grdPartage.Background = Brushes.White;
+
             btnUnProUnUti.Background = Brushes.White;
             btnUnProUnUti.Foreground = Brushes.Black;
 
@@ -57,7 +59,6 @@ namespace App_Brycol.Vues
 
             btnPluProPluUti.Background = Brushes.White;
             btnPluProPluUti.Foreground = Brushes.Black;
-
 
         }
 
@@ -69,6 +70,8 @@ namespace App_Brycol.Vues
             Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
 
             Banniere.Background = CouleurBanniere;
+
+            grdPartage.Background = CouleurArrierePlan;
 
             btnUnProUnUti.Background = CouleurBouton;
             btnUnProUnUti.Foreground = Brushes.White;

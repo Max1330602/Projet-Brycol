@@ -91,6 +91,9 @@ namespace App_Brycol.Vues
             btnCreerProjet.Background = CouleurBouton;
             btnCreerProjet.Foreground = Brushes.White;
 
+            btnPartagerProjet.Background = CouleurBouton;
+            btnPartagerProjet.Foreground = Brushes.White;
+
             btnTeleverserProjet.Background = CouleurBouton;
             btnTeleverserProjet.Foreground = Brushes.White;
         }
