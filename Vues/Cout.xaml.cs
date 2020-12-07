@@ -79,7 +79,11 @@ namespace App_Brycol.Vues
             btnVoirCoutPiece.Visibility = Visibility.Visible;
 
             if (btnAnnulerTransaction.Visibility == Visibility.Visible)
+            {
                 btnAnnulerPayer_Click(btnAnnulerTransaction, e);
+                btnAnnulerTransaction.Visibility = Visibility.Hidden;
+                btnTransaction.Visibility = Visibility.Hidden;
+            }
 
         }
 
