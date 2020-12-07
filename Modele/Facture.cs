@@ -13,6 +13,7 @@ namespace App_Brycol.Modele
     {
         public int ID { get; set; }
         public Utilisateur Utilisateur { get; set; }
+        public Projet Projet { get; set; }
         public DateTime Date { get; set; }
         public string Fournisseur { get; set; }
         public decimal Montant { get; set; } 

@@ -265,6 +265,9 @@
     <Compile Include="Vues\PlanDeTravail2.xaml.cs">
       <DependentUpon>PlanDeTravail2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vues\Registre.xaml.cs">
+      <DependentUpon>Registre.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vues\Structures.xaml.cs">
       <DependentUpon>Structures.xaml</DependentUpon>
     </Compile>
@@ -362,6 +365,10 @@
     <Page Include="Vues\PlanDeTravail2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vues\Registre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vues\Structures.xaml">
       <SubType>Designer</SubType>

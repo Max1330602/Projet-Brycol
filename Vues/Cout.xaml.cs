@@ -75,6 +75,7 @@ namespace App_Brycol.Vues
             btnVoirCoutProjet.Visibility = Visibility.Collapsed;
             btnVoirCoutDetailProjet.Visibility = Visibility.Visible;
             btnTransaction.Visibility = Visibility.Hidden;
+            btnRegistre.Visibility = Visibility.Hidden;
             btnVoirCoutPiece.Visibility = Visibility.Visible;
 
             if (btnAnnulerTransaction.Visibility == Visibility.Visible)
@@ -93,6 +94,7 @@ namespace App_Brycol.Vues
             grdCoutParent.Children.Add(uCCoutPiece);
             btnVoirCoutPiece.Visibility = Visibility.Collapsed;
             btnVoirCoutDetailProjet.Visibility = Visibility.Collapsed;
+            btnRegistre.Visibility = Visibility.Hidden;
             btnTransaction.Visibility = Visibility.Hidden;
             btnVoirCoutProjet.Visibility = Visibility.Visible;
 
@@ -108,6 +110,7 @@ namespace App_Brycol.Vues
             grdCoutParent.Children.Add(uCCoutDetailProjet);
             btnVoirCoutPiece.Visibility = Visibility.Collapsed;
             btnVoirCoutDetailProjet.Visibility = Visibility.Collapsed;
+            btnRegistre.Visibility = Visibility.Visible;
             btnTransaction.Visibility = Visibility.Visible;
             btnVoirCoutProjet.Visibility = Visibility.Visible;
 
@@ -121,6 +124,9 @@ namespace App_Brycol.Vues
 
             btnOk.Background = Brushes.White;
             btnOk.Foreground = Brushes.Black;
+
+            btnRegistre.Background = Brushes.White;
+            btnRegistre.Foreground = Brushes.Black;
 
             btnTransaction.Background = Brushes.White;
             btnTransaction.Foreground = Brushes.Black;
@@ -148,6 +154,9 @@ namespace App_Brycol.Vues
             Banniere.Background = CouleurBanniere;
 
             grdCoutParent.Background = CouleurArrierePlan;
+
+            btnRegistre.Background = CouleurBouton;
+            btnRegistre.Foreground = Brushes.White;
 
             btnOk.Background = CouleurBouton;
             btnOk.Foreground = Brushes.White;
@@ -196,6 +205,12 @@ namespace App_Brycol.Vues
 
             btnTransaction.Visibility = Visibility.Visible;
             btnAnnulerTransaction.Visibility = Visibility.Hidden;
+        }
+
+        private void btnRegistre_Click(object sender, RoutedEventArgs e)
+        {
+            Registre popup = new Registre();
+            popup.ShowDialog();
         }
     }
 }

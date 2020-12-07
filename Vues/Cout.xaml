@@ -35,9 +35,10 @@
         <Button Name="btnTransaction" Content="Payer" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="30" Margin="0,0,100,10" Visibility="Hidden" Click="btnPayer_Click"/>
         <Button Name="btnAnnulerTransaction" Content="Annuler Paiement" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="150" Height="30" Margin="0,0,100,10" Visibility="Hidden" Click="btnAnnulerPayer_Click"/>
         <StackPanel Orientation="Horizontal" Grid.Row="2">
-            <Button Name="btnVoirCoutProjet" Content="Voir le coût du projet"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="175" Height="30" Margin="15,0,0,10" Visibility = "Collapsed"  Click="btnVoirCoutProjet_Click"/>
+            <Button Name="btnVoirCoutProjet" Content="Voir le coût du projet"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="175" Height="30" Margin="15,0,0,10" Visibility = "Visible"  Click="btnVoirCoutProjet_Click"/>
             <Button Name="btnVoirCoutDetailProjet" Content="Voir le coût détaillé du projet" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="225" Height="30" Margin="15,0,0,10" Visibility = "Collapsed"  Click="btnVoirCoutDetailProjet_Click"  />
             <Button Name="btnVoirCoutPiece" Content="Voir le coût de la pièce sélectionnée" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="265" Height="30" Margin="15,0,0,10" Visibility = "Collapsed" Click="btnVoirCoutPiece_Click"  />
+            <Button Name="btnRegistre" Content="Registre" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Height="30" Margin="15,0,0,10" Visibility="Hidden" Click="btnRegistre_Click"/>
         </StackPanel>
 
     </Grid>

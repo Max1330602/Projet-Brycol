@@ -28,6 +28,13 @@ namespace App_Brycol.VuesModele
             cmdCreeUtil = new Commande(CreeUtil);
 
             ListeFactures = new ObservableCollection<Facture>();
+            if (utilActuel != null && Projet_VM.ProjetActuel != null)
+            {
+                var PReq = from f in OutilEF.brycolContexte.Factures where f.Utilisateur.ID == utilActuel.ID select f;
+                foreach (Facture f in PReq)
+                    if (f.Projet != null && Projet_VM.ProjetActuel.ID == f.Projet.ID)
+                        ListeFactures.Add(f);
+            }
         }
 
         public void Login(Object param)

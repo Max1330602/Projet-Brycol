@@ -70,15 +70,6 @@ namespace App_Brycol.VuesModele
 
             if (pReq.Count() != 0)
                 ProjetSelectionne = pReq.First();
-
-            Utilisateur_VM.utilActuel.ListeFactures = new ObservableCollection<Facture>();
-            if (Utilisateur_VM.utilActuel != null)
-            {
-                var PReq = from f in OutilEF.brycolContexte.Factures where f.Utilisateur.ID == Utilisateur_VM.utilActuel.ID select f;
-                foreach (Facture f in PReq)
-                    Utilisateur_VM.utilActuel.ListeFactures.Add(f);
-            }
-
         }
 
         #region Propriétés

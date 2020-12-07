@@ -18,6 +18,9 @@ namespace App_Brycol.Modele
         [NotMapped]
         public ObservableCollection<Facture> ListeFactures { get; set; }
 
-        public Utilisateur() { }
+        public Utilisateur() 
+        { 
+            ListeFactures = new ObservableCollection<Facture>();
+        }
     }
 }

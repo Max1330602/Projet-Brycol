@@ -113,7 +113,7 @@ namespace App_Brycol.Vues
                 decimal tps = Projet_VM.CalTPS(factureFournisseur.Montant);
                 decimal tvq = Projet_VM.CalTVQ(factureFournisseur.Montant);
                 factureFournisseur.Montant = Projet_VM.CalTotal(factureFournisseur.Montant, tps, tvq);
-
+                factureFournisseur.Projet = Projet_VM.ProjetActuel;
                 factureFournisseur.Utilisateur = Utilisateur_VM.utilActuel;
                 factureFournisseur.Date = DateTime.Now;
                 factureFournisseur.Fournisseur = f;
