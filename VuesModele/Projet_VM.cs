@@ -28,6 +28,9 @@ namespace App_Brycol.VuesModele
         public ICommand cmdSauvProjet { get; set; }
         public ICommand cmdSuppProjet { get; set; }
         public ICommand cmdChargerProjet { get; set; }
+        public ICommand cmdPartagerUnProjetUnUti { get; set; }
+        public ICommand cmdPartagerPluProjetUnUti { get; set; }
+        public ICommand cmdPartagerPluProjetPluUti { get; set; }
 
         public Projet_VM()
         {
@@ -35,6 +38,9 @@ namespace App_Brycol.VuesModele
             cmdSauvProjet = new Commande(SauvProjet);
             cmdSuppProjet = new Commande(SuppProjet);
             cmdChargerProjet = new Commande(Charger);
+            cmdPartagerUnProjetUnUti = new Commande(PartagerUnProjetUnUti);
+            cmdPartagerPluProjetUnUti = new Commande(PartagerPluProjetUnUti);
+            cmdPartagerPluProjetPluUti = new Commande(PartagerPluProjetPluUti);
 
             ListePieces = new ObservableCollection<Piece>();
             ListePlans = new ObservableCollection<Plan>();
@@ -64,7 +70,10 @@ namespace App_Brycol.VuesModele
                 Nom = ProjetActuel.Nom;
             }
 
+            var pReq = (from p in OutilEF.brycolContexte.Projets.Include("Utilisateur") where p.Utilisateur.Nom == Utilisateur_VM.utilActuel.Nom select p.Nom).ToList();
 
+            if (pReq.Count() != 0)
+                ProjetSelectionne = pReq.First();
         }
 
         #region Propriétés
@@ -139,12 +148,29 @@ namespace App_Brycol.VuesModele
                 OnPropertyChanged("ProjetSelectionne");
             }
         }
+
+        private string _utiliSelectionne;
+        public string UtiliSelectionne
+        {
+            get { return _utiliSelectionne; }
+            set
+            {
+                _utiliSelectionne = value;
+                OnPropertyChanged("UtiliSelectionne");
+            }
+        }
+
+        public static List<string> LstProjetPartage = new List<string>();
+
+        public static List<string> LstUtilisateurPartage = new List<string>();
+
+
         #endregion
 
         public void Charger(Object param)
         {
             Projet proj = new Projet();
-            var pReq = from p in OutilEF.brycolContexte.Projets where p.Nom == ProjetSelectionne select p;
+            var pReq = from p in OutilEF.brycolContexte.Projets.Include("Utilisateur") where p.Nom == ProjetSelectionne && p.Utilisateur.Nom == Utilisateur_VM.utilActuel.Nom select p;
             foreach (Projet pro in pReq)
                 proj = pro;
             ProjetActuel = proj;
@@ -413,6 +439,120 @@ namespace App_Brycol.VuesModele
             OutilEF.brycolContexte.SaveChanges();
         }
 
+        private void PartagerUnProjetUnUti(Object param)
+        {
+            PartaProjet(UtiliSelectionne, ProjetSelectionne);
+            MessageBox.Show("Le partage a été réussi.");
+        }
+
+        private void PartagerPluProjetUnUti(Object param)
+        {
+            foreach (string pro in LstProjetPartage)
+                PartaProjet(UtiliSelectionne, pro);
+
+            MessageBox.Show("Le partage a été réussi.");
+        }
+
+        private void PartagerPluProjetPluUti(Object param)
+        {
+            foreach (string uti in LstUtilisateurPartage)
+                foreach (string pro in LstProjetPartage)
+                    PartaProjet(uti, pro);
+
+            MessageBox.Show("Le partage a été réussi.");
+        }
+
+        private void PartaProjet(string UtiliParatage, string ProPartage)
+        {
+            Projet pro = new Projet();
+            Utilisateur utili = new Utilisateur();
+            List<Piece> lstPie = new List<Piece>();
+            Plan pla = new Plan();
+            List<ItemsPlan> lstItPla = new List<ItemsPlan>();
+            int cmptDoublon = 0;
+            bool existeDeja = false;
+
+            var UtiReq = from uti in OutilEF.brycolContexte.Utilisateurs where uti.Nom == UtiliParatage select uti;
+            foreach (Utilisateur uti in UtiReq)
+                utili = uti;
+
+            var pReq = from p in OutilEF.brycolContexte.Projets.Include("Utilisateur") where p.Nom == ProPartage && p.Utilisateur.Nom == Utilisateur_VM.utilActuel.Nom select p;
+            foreach (Projet p in pReq)
+                pro = p;
+
+            var npReq = from p in OutilEF.brycolContexte.Projets.Include("Utilisateur") where p.Utilisateur.Nom == UtiliParatage select p;
+            foreach(Projet p in npReq)
+                if (p.Nom == pro.Nom)
+                {
+                    existeDeja = true;
+                    pro.Nom = ProPartage + "_" + Utilisateur_VM.utilActuel.Nom + "_" + cmptDoublon.ToString();
+                }
+
+
+            if (existeDeja)
+                foreach (Projet p in npReq)
+                    if (p.Nom.Contains(ProPartage + "_" + Utilisateur_VM.utilActuel.Nom))
+                    {
+                        cmptDoublon++;
+                    }
+
+            if (cmptDoublon != 0)
+                pro.Nom = ProPartage + "_" + Utilisateur_VM.utilActuel.Nom + "_" + cmptDoublon.ToString();
+
+
+            var PieReq = from pie in OutilEF.brycolContexte.Pieces where pie.Projet.ID == pro.ID select pie;
+
+            pro.Utilisateur = utili;
+            ListePieces = new ObservableCollection<Piece>();
+            pro.ListePieces = ListePieces;
+
+            ListePlans = new ObservableCollection<Plan>();
+            pro.ListePlans = ListePlans;
+
+            OutilEF.brycolContexte.Projets.Add(pro);
+
+
+            foreach (Piece pie in PieReq)
+                lstPie.Add(pie);
+
+            foreach (Piece pie in lstPie)
+            {
+                var PlanReq = from plan in OutilEF.brycolContexte.Plans where plan.Piece.ID == pie.ID select plan;
+
+                pie.Projet = pro;
+                OutilEF.brycolContexte.Pieces.Add(pie);
+                pro.ListePieces.Add(pie);
+
+                foreach (Plan plan in PlanReq)
+                {
+                    pla = plan;
+                    pro.ListePlans.Add(pla);
+                }
+
+                var IteReq = from ite in OutilEF.brycolContexte.lstItems where ite.Plan.ID == pla.ID select ite;
+
+
+                pla.Piece = pie;
+                OutilEF.brycolContexte.Plans.Add(pla);
+
+                foreach (ItemsPlan itPl in IteReq)
+                    lstItPla.Add(itPl);
+
+
+                foreach (ItemsPlan itPl in lstItPla)
+                {
+
+                    itPl.Plan = pla;
+                    OutilEF.brycolContexte.lstItems.Add(itPl);
+                }
+
+                lstItPla.Clear();
+
+            }
+
+            OutilEF.brycolContexte.SaveChanges();
+        }
+
         private ObservableCollection<ItemPieceProjet> CreatlstIPP()
         {
             ObservableCollection<ItemPieceProjet> LstIPP = new ObservableCollection<ItemPieceProjet>();
@@ -430,16 +570,22 @@ namespace App_Brycol.VuesModele
                 var PReq3 = from iP in OutilEF.brycolContexte.lstItems.Include("Item") where iP.Plan.Piece.ID == p.ID select iP;
                 foreach (ItemsPlan itemP in PReq3)
                 {
+
                     Ipp.NomPiece = p.Nom;
                     Ipp.NomItem = itemP.Item.Nom;
-                    Ipp.CoutItem = itemP.Item.Cout;
                     Ipp.FournisseurItem = itemP.Item.Fournisseur;
+                    Ipp.EstPayeItem = itemP.EstPaye;
+                    if (Ipp.EstPayeItem == "Oui")
+                        Ipp.CoutItem = 0.00M;
+                    else
+                        Ipp.CoutItem = itemP.Item.Cout;
                     LstIPP.Add(Ipp);
 
                     Ipp = new ItemPieceProjet();
                 }
 
             }
+
 
             return LstIPP;
 
@@ -457,7 +603,30 @@ namespace App_Brycol.VuesModele
 
             var LiReq = from Li in OutilEF.brycolContexte.lstItems.Include("Item") where Li.Plan.ID == plan.ID select Li;
             foreach (ItemsPlan Li in LiReq)
+            {
                 St += Li.Item.Cout;
+            }
+
+            return St;
+
+        }
+
+        public static decimal CalSouToIPP(Piece laPiece)
+        {
+            Plan plan = new Plan();
+            decimal St = 0M;
+
+            var PReq = from p in OutilEF.brycolContexte.Plans where p.Piece.ID == laPiece.ID select p;
+
+            foreach (Plan p in PReq)
+                plan = p;
+
+            var LiReq = from Li in OutilEF.brycolContexte.lstItems.Include("Item") where Li.Plan.ID == plan.ID select Li;
+            foreach (ItemsPlan Li in LiReq)
+            {
+                if (Li.EstPaye == "Non")
+                    St += Li.Item.Cout;
+            }
 
             return St;
 
@@ -483,6 +652,20 @@ namespace App_Brycol.VuesModele
 
         }
 
+        public static decimal TotalIPP()
+        {
+            decimal SouPo = 0M;
+            decimal ToPo = 0M;
+
+            foreach (Piece p in ProjetActuel.ListePieces)
+            {
+                SouPo = CalSouToIPP(p);
+                ToPo += CalTotal(SouPo, CalTPS(SouPo), CalTVQ(SouPo));
+            }
+            return ToPo;
+
+        }
+
         public static decimal Total()
         {
             decimal SouPo = 0M;
@@ -490,7 +673,7 @@ namespace App_Brycol.VuesModele
 
             foreach (Piece p in ProjetActuel.ListePieces)
             {
-                SouPo += CalSouTo(p);
+                SouPo = CalSouTo(p);
                 ToPo += CalTotal(SouPo, CalTPS(SouPo), CalTVQ(SouPo));
             }
             return ToPo;

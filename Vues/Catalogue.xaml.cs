@@ -75,6 +75,9 @@ namespace App_Brycol.Vues
             btnAjouter.Background = Brushes.White;
             btnAjouter.Foreground = Brushes.Black;
 
+            btnSupprimer.Background = Brushes.White;
+            btnSupprimer.Foreground = Brushes.Black;
+
             btnRetour.Background = Brushes.White;
             btnRetour.Foreground = Brushes.Black;
 
@@ -110,6 +113,9 @@ namespace App_Brycol.Vues
 
             btnAjouter.Background = CouleurBouton;
             btnAjouter.Foreground = Brushes.White;
+
+            btnSupprimer.Background = CouleurBouton;
+            btnSupprimer.Foreground = Brushes.White;
 
             btnRetour.Background = CouleurBouton;
             btnRetour.Foreground = Brushes.White;

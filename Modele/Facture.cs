@@ -7,20 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace App_Brycol.Modele
 {
-    public class Utilisateur
+    public class Facture
     {
         public int ID { get; set; }
-        public string Nom { get; set; }
-        public string MotPasse { get; set; }
-        [NotMapped]
-        public ObservableCollection<Facture> ListeFactures { get; set; }
+        public Utilisateur Utilisateur { get; set; }
+        public Projet Projet { get; set; }
+        public DateTime Date { get; set; }
+        public string Fournisseur { get; set; }
+        public decimal Montant { get; set; } 
 
-        public Utilisateur() 
-        { 
-            ListeFactures = new ObservableCollection<Facture>();
+        public Facture()
+        {
+
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
 
 namespace App_Brycol.VuesModele
 {
@@ -25,6 +26,15 @@ namespace App_Brycol.VuesModele
             cmdLogin = new Commande(Login);
             cmdLoginTriche = new Commande(LoginTriche);
             cmdCreeUtil = new Commande(CreeUtil);
+
+            ListeFactures = new ObservableCollection<Facture>();
+            if (utilActuel != null && Projet_VM.ProjetActuel != null)
+            {
+                var PReq = from f in OutilEF.brycolContexte.Factures where f.Utilisateur.ID == utilActuel.ID select f;
+                foreach (Facture f in PReq)
+                    if (f.Projet != null && Projet_VM.ProjetActuel.ID == f.Projet.ID)
+                        ListeFactures.Add(f);
+            }
         }
 
         public void Login(Object param)
@@ -124,6 +134,17 @@ namespace App_Brycol.VuesModele
             {
                 _motPasse = value;
                 OnPropertyChanged("MotPasse");
+            }
+        }
+
+        private ObservableCollection<Facture> _listeFactures;
+        public ObservableCollection<Facture> ListeFactures
+        {
+            get { return _listeFactures; }
+            set
+            {
+                _listeFactures = value;
+                OnPropertyChanged("ListeFactures");
             }
         }
 

@@ -203,6 +203,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Modele\Categorie.cs" />
+    <Compile Include="Modele\Facture.cs" />
     <Compile Include="Modele\Item.cs" />
     <Compile Include="Modele\ItemPieceProjet.cs" />
     <Compile Include="Modele\ItemsPlan.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Outils\BrycolContexte.cs" />
     <Compile Include="Outils\Commande.cs" />
     <Compile Include="Outils\OutilEF.cs" />
+    <Compile Include="VuesModele\Facture_VM.cs" />
     <Compile Include="VuesModele\ItemsPlan_VM.cs" />
     <Compile Include="VuesModele\Item_VM.cs" />
     <Compile Include="VuesModele\Piece_VM.cs" />
@@ -248,6 +250,9 @@
     <Compile Include="Vues\ModifierPorte.xaml.cs">
       <DependentUpon>ModifierPorte.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vues\PartagerProjet.xaml.cs">
+      <DependentUpon>PartagerProjet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vues\Piece2D.xaml.cs">
       <DependentUpon>Piece2D.xaml</DependentUpon>
     </Compile>
@@ -259,6 +264,9 @@
     </Compile>
     <Compile Include="Vues\PlanDeTravail2.xaml.cs">
       <DependentUpon>PlanDeTravail2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\Registre.xaml.cs">
+      <DependentUpon>Registre.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vues\Structures.xaml.cs">
       <DependentUpon>Structures.xaml</DependentUpon>
@@ -283,6 +291,15 @@
     </Compile>
     <Compile Include="Vues\UCInscrire.xaml.cs">
       <DependentUpon>UCInscrire.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\UCPluProjUnUser.xaml.cs">
+      <DependentUpon>UCPluProjUnUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\UCPluProPluUser.xaml.cs">
+      <DependentUpon>UCPluProPluUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\UCUnProUnUser.xaml.cs">
+      <DependentUpon>UCUnProUnUser.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vues\WarningProjetNonSau.xaml.cs">
       <DependentUpon>WarningProjetNonSau.xaml</DependentUpon>
@@ -338,6 +355,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Vues\PartagerProjet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Vues\Piece2D.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
@@ -353,6 +374,10 @@
     <Page Include="Vues\PlanDeTravail2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vues\Registre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vues\Structures.xaml">
       <SubType>Designer</SubType>
@@ -383,6 +408,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vues\UCInscrire.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\UCPluProjUnUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\UCPluProPluUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\UCUnProUnUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

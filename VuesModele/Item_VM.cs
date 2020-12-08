@@ -22,7 +22,8 @@ namespace App_Brycol.VuesModele
     {
         public Item_VM()
         {
-            cmdAjouterItem = new Commande(AjouterItem); 
+            cmdAjouterItem = new Commande(AjouterItem);
+            cmdSupprimerItem = new Commande(SupprimerItem);
             SommaireItems = new ObservableCollection<Item>();
             StructuresItems = new ObservableCollection<Item>();
             ListeItems = new ObservableCollection<Item>();
@@ -82,6 +83,7 @@ namespace App_Brycol.VuesModele
         public ICommand cmdAjouterItemModifie { get; set;}
         public ICommand cmdInitItem { get; set; }
         public ICommand cmdAjouterItem { get; set; }
+        public ICommand cmdSupprimerItem { get; set; }
 
         public const int POS_PAR_DEFAUT = 0;
         public const int PRIXMAX = 1000000;
@@ -92,6 +94,18 @@ namespace App_Brycol.VuesModele
 
         public static ObservableCollection<ItemsPlan> ItemsPlanActuel;
         public static ObservableCollection<ItemsPlan> ItemsPlanModifie;
+
+        private ObservableCollection<Item> _listeItems;
+        public ObservableCollection<Item> ListeItems
+        {
+            get { return _listeItems; }
+            set
+            {
+                _listeItems = value;
+                OnPropertyChanged("ListeItems");
+            }
+
+        }
 
         private Categorie _categorie;
         public Categorie Categorie 
@@ -151,6 +165,25 @@ namespace App_Brycol.VuesModele
             }
         }
 
+        private Item _itemSelect;
+        public Item ItemSelect
+        {
+            get { return _itemSelect; }
+            set
+            {
+                if (value != null)
+                {
+                    _itemSelect = value;
+                }
+                else
+                {
+                    _itemSelect = null;
+                }
+                OnPropertyChanged("ItemSelect");
+            }
+        }
+
+
         private Item _itemSelectionne;
         public Item ItemSelectionne
         {
@@ -169,16 +202,16 @@ namespace App_Brycol.VuesModele
             }
         }
 
-        private ObservableCollection<Item> _listeItems;
-        public  ObservableCollection<Item> ListeItems
+        private ItemsPlan _itemAjoute;
+        public ItemsPlan ItemAjoute
         {
-            get { return _listeItems; }
+            get { return _itemAjoute; }
             set
-            {              
-                _listeItems = value;
-                OnPropertyChanged("ListeItems");
+            {
+                _itemAjoute = value;
+                OnPropertyChanged("ItemAjoute");
             }
-        }
+        }        
 
         private string _nom;
         public string Nom
@@ -342,6 +375,31 @@ namespace App_Brycol.VuesModele
             }
         }
 
+        public void SupprimerItem(Object param)
+        {
+            ItemsPlan i = new ItemsPlan();
+
+            i.Item = _itemSelect;
+            i.Plan = Plan_VM.PlanActuel;
+            if (i.Item != null)
+            {
+                ListeItems.Remove(i.Item);
+                ItemsPlanActuel.Remove(i);
+                var IteReq = from ite in OutilEF.brycolContexte.lstItems where ite.Plan.ID == Plan_VM.PlanActuel.ID select ite;
+                foreach (ItemsPlan ite in IteReq)
+                {
+                    if(ite.Item.ID == i.Item.ID)
+                    {
+                        OutilEF.brycolContexte.lstItems.Remove(ite);
+                        goto Save;
+                    }
+                }
+            Save:
+                OutilEF.brycolContexte.SaveChanges();
+            }
+        }
+
+
         public void AjouterItem(Object param)
         { 
             
@@ -354,6 +412,7 @@ namespace App_Brycol.VuesModele
                 i.cotePorte = "droite";
             else
                 i.cotePorte = "";
+            i.EstPaye = "Non";
             // HARD CODE
             i.Plan = Plan_VM.PlanActuel;
             if (i.Item != null)
