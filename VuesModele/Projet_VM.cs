@@ -484,7 +484,7 @@ namespace App_Brycol.VuesModele
             List<Piece> lstPie = new List<Piece>();
             Plan pla = new Plan();
             List<ItemsPlan> lstItPla = new List<ItemsPlan>();
-            int cmptDoublon = 0;
+            int cmptDoublon = 1;
             bool existeDeja = false;
 
             var UtiReq = from uti in OutilEF.brycolContexte.Utilisateurs where uti.Nom == UtiliParatage select uti;
@@ -500,7 +500,7 @@ namespace App_Brycol.VuesModele
                 if (p.Nom == pro.Nom)
                 {
                     existeDeja = true;
-                    pro.Nom = ProPartage + "_" + Utilisateur_VM.utilActuel.Nom + "_" + cmptDoublon.ToString();
+                    pro.Nom = ProPartage + "_" + Utilisateur_VM.utilActuel.Nom;
                 }
 
 
@@ -511,7 +511,7 @@ namespace App_Brycol.VuesModele
                         cmptDoublon++;
                     }
 
-            if (cmptDoublon != 0)
+            if (cmptDoublon != 1)
                 pro.Nom = ProPartage + "_" + Utilisateur_VM.utilActuel.Nom + "_" + cmptDoublon.ToString();
 
 

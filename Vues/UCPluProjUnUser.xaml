@@ -12,6 +12,18 @@
             <Setter Property="FontFamily" Value="Constantia Bold"/>
             <Setter Property="FontSize" Value="15"/>
         </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Constantia"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Constantia"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="FontFamily" Value="Constantia"/>
+        </Style>
+        <Style TargetType="ListBox">
+            <Setter Property="FontFamily" Value="Constantia"/>
+        </Style>
     </UserControl.Resources>
 
     <Grid>
@@ -41,7 +53,7 @@
                 
             </StackPanel>
         </StackPanel>
-
-        <Button Name="btnPartage" Command="{Binding cmdPartagerPluProjetUnUti}" IsEnabled="False" Height="25" Content="Partager Projet" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,10,10,10"/>
+        <TextBlock Text="Le patage peut prendre quelque secondes à faire" VerticalAlignment="Bottom"  Margin="10,50,0,50"/>
+        <Button Name="btnPartage" Command="{Binding cmdPartagerPluProjetUnUti}" Click="btnPartage_Click" IsEnabled="False" Height="25" Content="Partager Projet" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10"/>
     </Grid>
 </UserControl>
