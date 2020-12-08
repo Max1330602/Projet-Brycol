@@ -24,6 +24,7 @@ namespace App_Brycol.VuesModele
         public static bool EstSauvegarde = false;
         public static bool themeSombre = false;
         public static bool planOuvert = false;
+        public ICommand cmdDeconnexion { get; set; }
         public ICommand cmdCreerProjet { get; set; }
         public ICommand cmdSauvProjet { get; set; }
         public ICommand cmdSuppProjet { get; set; }
@@ -34,6 +35,7 @@ namespace App_Brycol.VuesModele
 
         public Projet_VM()
         {
+            cmdDeconnexion = new Commande(Deconnexion);
             cmdCreerProjet = new Commande(CreerProjet);
             cmdSauvProjet = new Commande(SauvProjet);
             cmdSuppProjet = new Commande(SuppProjet);
@@ -223,6 +225,19 @@ namespace App_Brycol.VuesModele
             PlanDeTravail.ShowDialog();
 
         }
+
+        public void Deconnexion(Object param)
+        {
+            Utilisateur_VM.utilActuel = null;
+            ProjetActuel = null;
+
+            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
+            gridMW.Children.Clear();
+            gridMW.Children.Add(cpMW);
+            cpMW.Content = new UCCLogin();
+        }
+
 
         public void CreerProjet(Object param)
         {

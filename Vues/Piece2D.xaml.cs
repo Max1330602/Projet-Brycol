@@ -555,7 +555,9 @@ namespace App_Brycol.Vues
                         {
                             bitmap = new BitmapImage();
                             bitmap.BeginInit();
-                            bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png");
+                            string path = System.Windows.Forms.Application.StartupPath;
+                            string pathCorrect = path.Substring(0, path.IndexOf("bin")) + "images\\items\\Top\\";
+                            bitmap.UriSource = new Uri(pathCorrect + "item" + ip.Item.ID + ".png");
                             bitmap.EndInit();
                         }
                         catch (Exception)
@@ -587,7 +589,9 @@ namespace App_Brycol.Vues
                         { 
                             bitmap = new BitmapImage();
                             bitmap.BeginInit();
-                            bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png");
+                            string path = System.Windows.Forms.Application.StartupPath;
+                            string pathCorrect = path.Substring(0, path.IndexOf("bin")) + "images\\items\\Top\\";
+                            bitmap.UriSource = new Uri(pathCorrect + "item" + ip.Item.ID + ".png");
                             bitmap.EndInit();
                         }
                         catch(Exception)

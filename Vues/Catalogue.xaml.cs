@@ -140,5 +140,12 @@ namespace App_Brycol.Vues
             txbCategorie.Foreground = Brushes.White;
             txbTypePiece.Foreground = Brushes.White;
         }
+
+        private void btnModifCatalogue_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+            ModifCatalogue popUp = new ModifCatalogue();
+            popUp.ShowDialog();
+        }
     }
 }
