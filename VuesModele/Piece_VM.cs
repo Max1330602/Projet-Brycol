@@ -26,6 +26,7 @@ namespace App_Brycol.VuesModele
         public static decimal Total;
         public string ParamOption;
 
+
         public Piece_VM(string paramOpt)
         {
             SousTotal = 0;

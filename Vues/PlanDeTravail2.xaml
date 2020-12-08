@@ -28,12 +28,7 @@
         <Border x:Name="Banniere" Grid.Row="0" Grid.ColumnSpan="3" Background="LightGray"></Border>
         <Border x:Name="ArriereBoutons" Grid.Row="1" Grid.Column="0" Background="White"></Border>
         <Border x:Name="ArrierePlan" Grid.Row="1" Grid.Column="1" Background="White"></Border>
-
-        <Label Name="lblProjet" Grid.ColumnSpan="2" Grid.Row="0" FontSize="20" Height="40" Width="1500" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Nom du Projet + Nom Pièce Active"/>
-
-
-
-
+        <Label Name="lblProjet" Grid.ColumnSpan="2" FontSize="20" Height="40" Width="1500" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Nom du Projet + Nom Pièce Active"/>
         <Image Grid.Row="1" Grid.Column="0" x:Name="logo" Source="/images/logo.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="25,0,0,71"></Image>
 
         <Button Grid.Column="0" Grid.Row="1" Name="btnAide" Click="btnAide_Click" Height="25" Content="Aide" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15,25,0,0"></Button>

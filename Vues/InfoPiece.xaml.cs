@@ -48,12 +48,19 @@ namespace App_Brycol.Vues
                 metre.IsChecked = false;
                 pied.IsChecked = true;
             }
+            
 
         }
       
 
         private void btnContinuer_Click(object sender, RoutedEventArgs e)
         {
+            if ((bool)chkDimensions.IsChecked)
+            {
+                this.Close();
+                btnContinuer.SetBinding(Button.CommandProperty, new Binding("cmdPiece"));
+                return;
+            }
             if ((bool)pied.IsChecked && (Double.Parse(txtLongueur.Text) > 100 || Double.Parse(txtLongueur.Text) < 3))
             {
                 MessageBox.Show("Les dimensions ne sont pas valides. (Maximum 100 pieds et minimum de 3 pieds)");
@@ -157,6 +164,19 @@ namespace App_Brycol.Vues
 
             btnContinuer.Background = CouleurBouton;
             btnContinuer.Foreground = Brushes.White;
+        }
+
+        private void CheckBoxChangedON(object sender, RoutedEventArgs e)
+        {
+            
+               
+
+        }
+
+        private void CheckBoxChangedOFF(object sender, RoutedEventArgs e)
+        {
+
+            
         }
     }
 }

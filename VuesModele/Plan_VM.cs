@@ -23,6 +23,12 @@ namespace App_Brycol.VuesModele
         public const int echelle = 50;
         public static bool validePourEnregistrer = true;
         public static string uniteDeMesure = "";
+        public static bool catalogueClick = false;
+        public static double canvasPieceTop;
+        public static double canvasPieceLeft;
+        public static bool clip = true;
+        public static double zoomPiece;
+        public static double rotationPieceVM;
 
         public Plan_VM()
         {

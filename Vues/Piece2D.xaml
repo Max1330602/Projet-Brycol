@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:App_Brycol.Vues"
+             Loaded="UserControl_Loaded"
              
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -25,6 +26,7 @@
         <Rectangle Stroke="Black" StrokeThickness="2" Grid.RowSpan="2"/>
 
         <Grid Margin="0,0,0,0" Grid.Row="2">
+
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
@@ -40,15 +42,15 @@
                 <Run Text="{Binding UniteMesure}"></Run>
             </TextBlock>
 
-            <Canvas x:Name="canvas_Zoom" Margin="50,45,0,0" MouseMove="CanvasZoomMouseMove">
+            <Canvas x:Name="canvas_Zoom" MouseMove="CanvasZoomMouseMove" MouseLeftButtonDown="CanvasZoomLeftButtonDown" MouseLeftButtonUp="CanvasZoomMouseLeftButtonUp" Background="White" Margin="20,20,0,0" Grid.RowSpan="2" SnapsToDevicePixels="True">
 
-
+                <!-- |||||||||||||||||||||||| Canvas pour afficher la pièce ||||||||||||||||||||||||||||||||||-->
                 <Canvas Background="LightGray" Width="{Binding Largeur}" Height="{Binding Longueur}" 
                                 x:Name="canvas" 
                                 MouseLeftButtonDown="CanvasMouseLeftButtonDown"
                                 MouseLeftButtonUp="CanvasMouseLeftButtonUp"
                                 MouseMove="CanvasMouseMove"
-                                MouseWheel="Canvas_MouseWheel"  Grid.RowSpan="2"  >
+                                MouseWheel="Canvas_MouseWheel"  Grid.RowSpan="2"  SnapsToDevicePixels="True">
                     <Canvas.RenderTransform>
                         <TransformGroup>
                             <TranslateTransform X="0" Y="0"/>
@@ -57,9 +59,55 @@
                     <Button x:Name="btntoolRotation" Click="btnRotation" Height="20" Content="Rotation" Width="60" FontSize="10" Foreground="FloralWhite" Background="Black" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" RenderTransformOrigin="0.5,0.5"/>
                     <Button x:Name="btntoolSupprimer"  Click="btnDelete" Height="20" Content="Supprimer" Width="60" Foreground="FloralWhite" Background="Black" FontSize="10" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" RenderTransformOrigin="0.5,0.5"/>
                     <Button x:Name="btntoolModifier"  Click="btnModifier" Height="20" Content="Modifier" Width="60" Foreground="FloralWhite" Background="Black" FontSize="10" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" RenderTransformOrigin="0.5,0.5"/>
-
+                    <Popup Name="popupItem" AllowsTransparency = "True" StaysOpen='False' PopupAnimation = "Fade" PlacementTarget="{Binding ElementName=canvas}"  Placement="Top"  HorizontalOffset="75"  VerticalOffset="0">
+                        <TextBlock  x:Name="popupText" TextWrapping = "Wrap" FontSize="24" FontWeight="ExtraBold" FontFamily="Times new roman" Foreground = "Black" Text = "Item sélectionné" Background="LightGreen" />
+                    </Popup>
 
                 </Canvas>
+                <Popup Name="popupMur1" AllowsTransparency = "True" IsOpen="false" PopupAnimation = "Fade" PlacementTarget="{Binding ElementName=canvas}"  Placement="Top"  HorizontalOffset="75"  VerticalOffset="0">
+                    <Button Name="btntxtmur1" Click="btnMurChoix1" Content="Mur #1" Background="Black" FontSize="10" Foreground="White" Width="60"/>
+                </Popup>
+                <Popup Name="popupMur2" AllowsTransparency = "True" IsOpen="false" PopupAnimation = "Fade" PlacementTarget="{Binding ElementName=canvas}"  Placement="Right"  HorizontalOffset="0"  VerticalOffset="75">
+                    <Button Name="btntxtmur2" Click="btnMurChoix2" Content="Mur #2" Background="Black" FontSize="10" Foreground="White" Width="60"/>
+                </Popup>
+                <Popup Name="popupMur3" AllowsTransparency = "True" IsOpen="false" PopupAnimation = "Fade" PlacementTarget="{Binding ElementName=canvas}"  Placement="Bottom"  HorizontalOffset="75"  VerticalOffset="0">
+                    <Button Name="btntxtmur3" Click="btnMurChoix3" Content="Mur #3" Background="Black" FontSize="10" Foreground="White" Width="60"/>
+                </Popup>
+                <Popup Name="popupMur4" AllowsTransparency = "True" IsOpen="false" PopupAnimation = "Fade" PlacementTarget="{Binding ElementName=canvas}"  Placement="Left"  HorizontalOffset="0"  VerticalOffset="75">
+                    <Button Name="btntxtmur4" Click="btnMurChoix4" Content="Mur #4" Background="Black" FontSize="10" Foreground="White" Width="60"/>
+                </Popup>
+
+                <!-- |||||||||||||||||||||||| Canvas pour afficher le mur latéral ||||||||||||||||||||||||||||||||||-->
+                <Canvas Background="#800000" Width="{Binding Largeur}" Height="250" 
+                                x:Name="canvasMur" 
+                                MouseLeftButtonDown="CanvasMurMouseLeftButtonDown"
+                                MouseLeftButtonUp="CanvasMurMouseLeftButtonUp"
+                                MouseMove="CanvasMurMouseMove"
+                                MouseWheel="CanvasMur_MouseWheel"
+                                SnapsToDevicePixels="True"
+                                Grid.RowSpan="2"  Visibility="Hidden" Panel.ZIndex="5">
+                    <Canvas.RenderTransform>
+                        <TransformGroup>
+                            <TranslateTransform X="0" Y="0"/>
+                        </TransformGroup>
+                    </Canvas.RenderTransform>
+                    <Button x:Name="btntoolMurRotation" Click="btnRotation" Height="20" Content="Rotation" Width="60" FontSize="10" Foreground="FloralWhite" Background="Black" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" RenderTransformOrigin="0.5,0.5"/>
+                    <Button x:Name="btntoolMurSupprimer"  Click="btnDelete" Height="20" Content="Supprimer" Width="60" Foreground="FloralWhite" Background="Black" FontSize="10" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" RenderTransformOrigin="0.5,0.5"/>
+                    <Button x:Name="btntoolMurModifier"  Click="btnModifier" Height="20" Content="Modifier" Width="60" Foreground="FloralWhite" Background="Black" FontSize="10" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" RenderTransformOrigin="0.5,0.5"/>
+                    <Popup Name="popupMur" AllowsTransparency = "True" IsOpen="false" PopupAnimation = "Fade" PlacementTarget="{Binding ElementName=canvasMur}"  Placement="Bottom"  HorizontalOffset="75"  VerticalOffset="0">
+                        <TextBlock  x:Name="popupMurText" TextWrapping = "Wrap" FontSize="18" FontWeight="ExtraBold" FontFamily="Times new roman" Foreground = "White" Text = "Vue du mur extérieur" Background="Black" />
+                    </Popup>
+
+                </Canvas>
+                <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+                <TextBlock Name="txtLargeur" Foreground="Black" Height="20" Width="60"/>
+                <TextBlock Name="txtLongueur" Foreground="Black" Height="20" Width="60">
+                    <TextBlock.LayoutTransform>
+                        <RotateTransform Angle="-90" />
+                    </TextBlock.LayoutTransform>
+                </TextBlock>
+
+
                 <TextBlock x:Name="rulerText" FontSize="7" Canvas.Top="-19" Width="345"><Run Text="0            "/><Run Text="  "/><Run Text="1              "/><Run Text=" "/><Run Text="2              "/><Run Text=" "/><Run Text="3             "/><Run Text=" "/><Run Text="4              "/><Run Text=" "/><Run Text="5              "/><Run Text=" "/><Run Text="6             "/><Run Text="  "/><Run Text="7              8             "/><Run Text="  "/><Run Text="9            "/><Run Text=" 10"/></TextBlock>
 
                 <Image x:Name="ruler1" Source="/images/ruler.png" Height="10"  Width="232" Canvas.Top="-10" RenderTransformOrigin="0.5,0.5" Canvas.Left="-43" Panel.ZIndex="1" >
@@ -131,10 +179,10 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </TextBlock.RenderTransform><Run Text="10             9              "/><Run Text=" "/><Run Text="8            "/><Run Text=" "/><Run Text="  7             "/><Run Text=" "/><Run Text="6              5              4             "/><Run Text="  "/><Run Text="3          "/><Run Text="    "/><Run Text=" 2          "/><Run Text="   "/><Run Text=" "/><Run Text="1"/><Run Text="           "/><Run Text="   "/><Run Text=" 0"/></TextBlock>
-
-
-
+                
             </Canvas>
+
+
 
             <Grid Margin="128,413,10,13" DockPanel.Dock="Bottom" Grid.RowSpan="2" Height="20" VerticalAlignment="Bottom">
                 <Grid.ColumnDefinitions>
@@ -171,8 +219,7 @@
 
 
                 </Grid.ColumnDefinitions>
-
-
+                <TextBlock Text="Button aide disponible!" Width="130" Margin="-48,0,164,0" Height="20" Canvas.Left="52" Canvas.Top="393"/>
 
                 <Button x:Name="btnPieceRotation" Click="btnRotationPiece" Height="20" Content="Rotation pièce" FontSize="10" Foreground="Black" Background="White" Panel.ZIndex="5"  Margin="224,0,52,0" Grid.ColumnSpan="2" />
                 <Button x:Name="btnClipPiece" Click="btnClip" Height="20" Content="Clip" Width="60" FontSize="10" Foreground="Black" Background="White" Panel.ZIndex="5"  Margin="130,0,56,0" Visibility="Hidden"/>
@@ -198,7 +245,7 @@
                 />
 
                 <!-- Bouton pour zoom out-->
-                <Button Name="btnmoins" Grid.Column="9" Click="btnZoomOut" Content="-"/>
+                <Button Name="btnmoins" Grid.Column="9" Click="btnZoomOut" Content="-" Width="20"/>
 
                 <!-- Slider pour zoom in et zoom out-->
                 <Slider   
@@ -216,7 +263,7 @@
                 />
 
                 <!--Bouton pour zoom in-->
-                <Button Name="btnPlus"  Grid.Column="13" Click="btnZoomIn" Content="+"/>
+                <Button Name="btnPlus"  Grid.Column="13" Click="btnZoomIn" Content="+" Width="20"/>
 
 
 
@@ -226,4 +273,5 @@
 
 
     </Grid>
+
 </UserControl>

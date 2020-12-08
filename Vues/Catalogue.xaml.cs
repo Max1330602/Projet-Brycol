@@ -44,6 +44,7 @@ namespace App_Brycol.Vues
         
         private void btnRetour_Click(object sender, RoutedEventArgs e)
         {
+            Plan_VM.catalogueClick = true;
             this.Close();
             foreach (Window w in Application.Current.Windows)
             {

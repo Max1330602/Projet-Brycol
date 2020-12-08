@@ -16,7 +16,7 @@
             <Setter Property="FontSize" Value="15"/>
         </Style>
     </Window.Resources>
-    
+
     <Grid x:Name="grdInfoPiece">
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"></RowDefinition>
@@ -24,11 +24,12 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width=".2*"/>
+            <ColumnDefinition Width="58*"/>
+            <ColumnDefinition Width="11*"/>
         </Grid.ColumnDefinitions>
 
         <Image x:Name="logo" Source="/images/logo.png" Grid.Column="1"/>
+        <CheckBox  x:Name="chkDimensions" Content="Indéfinies" Checked="CheckBoxChangedON" Unchecked="CheckBoxChangedOFF" HorizontalAlignment="Left" Margin="275,58,0,0" Grid.Row="1" VerticalAlignment="Top" Height="15" Width="71"/>
 
         <StackPanel Grid.RowSpan="2" Margin="20,20,0,0">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
@@ -60,16 +61,16 @@
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Text="Type de plancher" Height="25" Width="125" />
                 <ComboBox SelectedItem="{ Binding TypePlancher}" ItemsSource="{Binding TypesDePlancher}" Height="25" Width="125"/>
-
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Height="35">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Name="btnAnnuler" Click="btnAnnuler_Click" Grid.Row="2" Width="100" Height="25" Content="Annuler" HorizontalAlignment="Right" Margin="0,0,20,10"/>
                 <Button Name="btnContinuer" Click="btnContinuer_Click" Grid.Row="2" Width="100" Height="25" Content="Continuer" HorizontalAlignment="Right" Margin="0,0,10,10"/>
             </StackPanel>
         </StackPanel>
+
 
     </Grid>
 </Window>

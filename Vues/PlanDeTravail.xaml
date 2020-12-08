@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:App_Brycol.Vues"           
              WindowState="Maximized"
              Closing="OnClosing"
-             mc:Ignorable="d" MinHeight="700" MinWidth="1000">
+             mc:Ignorable="d" MinHeight="900" MinWidth="1300">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
