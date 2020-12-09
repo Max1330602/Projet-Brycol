@@ -381,16 +381,17 @@ namespace App_Brycol.VuesModele
 
             i.Item = _itemSelect;
             i.Plan = Plan_VM.PlanActuel;
+
             if (i.Item != null)
             {
-                ListeItems.Remove(i.Item);
-                ItemsPlanActuel.Remove(i);
                 var IteReq = from ite in OutilEF.brycolContexte.lstItems where ite.Plan.ID == Plan_VM.PlanActuel.ID select ite;
                 foreach (ItemsPlan ite in IteReq)
                 {
                     if(ite.Item.ID == i.Item.ID)
                     {
                         OutilEF.brycolContexte.lstItems.Remove(ite);
+                        ListeItems.Remove(i.Item);
+                        ItemsPlanActuel.Remove(ite);
                         goto Save;
                     }
                 }
