@@ -150,11 +150,11 @@ namespace App_Brycol.Vues
         
         void setCanvasPiece()
             {
+           
             if (Item_VM.ItemsPlanActuel != null)
             {
                 setStructureCanvas();
-            }
-            
+            }           
             try
             {
                 ImageBrush imgBrushMur = new ImageBrush();
@@ -166,9 +166,7 @@ namespace App_Brycol.Vues
                 ImageBrush imgBrush = new ImageBrush();
                 imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/plancheAucun.jpg"));
                 canvasMur.Background = imgBrush;
-            }
-            
-
+            }           
             if (Piece_VM.pieceActuel.Longueur == 0 && Piece_VM.pieceActuel.Largeur == 0)
             {
                 zoom = 1.2;
@@ -176,8 +174,6 @@ namespace App_Brycol.Vues
                 Canvas.SetTop(canvas_Zoom, 0);
                 canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transforme la grandeur du canvas         
             }
-
-
             try
             {
                 ImageBrush imgBrush = new ImageBrush();
@@ -190,83 +186,50 @@ namespace App_Brycol.Vues
                 imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/plancheAucun.jpg"));
                 canvas.Background = imgBrush;
             }
-           
-            if (Plan_VM.uniteDeMesure == "Mètres" && Piece_VM.pieceActuel.Longueur != 0 && Piece_VM.pieceActuel.Largeur != 0)
+            if (!Plan_VM.catalogueClick)
             {
-                if (!Plan_VM.catalogueClick)
+                Canvas.SetLeft(canvas, 10);
+                Canvas.SetTop(canvas, 10);             
+                if (Plan_VM.uniteDeMesure == "Mètres")
                 {
-                    Canvas.SetLeft(canvas, 10);
-                    Canvas.SetTop(canvas, 10);
-
                     zoomDefault = 11 / Piece_VM.pieceActuel.Longueur;
                     zoom = 11 / Piece_VM.pieceActuel.Longueur;
-                    
-                    canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transforme la grandeur du canvas  
-
-                    /*
-                    if (Piece_VM.pieceActuel.Longueur > 10 && Plan_VM.uniteDeMesure == "Mètres")
-                    {
-                        rulerText.Text = "0              2              4              6              8             10            12            14             16            18            20";
-                        rulerTextY.Text = "20             18             16              14             12              10              8            6              4            2             0";
-
-                    }*/
-
-
-                    /*else if(Plan_VM.uniteDeMesure == "Pieds" && Piece_VM.pieceActuel.Longueur < 32)
-                    {
-                        rulerText.Text = "0             3.3              4              6             8             10            12           14            16           18           20";
-                        rulerTextY.Text = "20             18              16              14             12              10              8            6              4            2             0";
-                    }*/
-                    montrerClip();
-
                 }
                 else
                 {
-                    if (Plan_VM.clip)
-                    {
-                        montrerClip();
-                        Canvas.SetLeft(canvas, 10);
-                        Canvas.SetTop(canvas, 10);
-
-                    }
-                    else
-                    {
-                        cacherClip();
-                        canvas.RenderTransformOrigin = new Point(0.5, 0.5);
-                        canvas.RenderTransform = new RotateTransform(Plan_VM.rotationPieceVM);
-                    }
-                    
-                    canvas_Zoom.RenderTransform = new ScaleTransform(Plan_VM.zoomPiece, Plan_VM.zoomPiece); // transforme la grandeur du canvas 
-                    Canvas.SetLeft(canvas, Plan_VM.canvasPieceLeft);
-                    Canvas.SetTop(canvas, Plan_VM.canvasPieceTop);                   
-
+                    zoomDefault = 36.08 / Piece_VM.pieceActuel.Longueur;
+                    zoom = 36.08 / Piece_VM.pieceActuel.Longueur;
                 }
-               
-                
-
+                canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transforme la grandeur du canvas  
+                montrerClip();
             }
-            else if (Plan_VM.uniteDeMesure == "Pieds" && Piece_VM.pieceActuel.Longueur != 0 && Piece_VM.pieceActuel.Largeur != 0)
+            else
             {
-                Canvas.SetLeft(canvas, 10);
-                Canvas.SetTop(canvas, 10);
-                zoomDefault = 36.08 / Piece_VM.pieceActuel.Longueur;
-                zoom = 36.08 / Piece_VM.pieceActuel.Longueur;
-                canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transforme la grandeur du canvas    
-            }         
+               
+            
+                if (Plan_VM.clip)
+                {
+                    montrerClip();
+                    Canvas.SetLeft(canvas, 10);
+                    Canvas.SetTop(canvas, 10);
+                }
+                else
+                {
+                    montrerClip();
+                    canvas.RenderTransformOrigin = new Point(0.5, 0.5);
+                    canvas.RenderTransform = new RotateTransform(Plan_VM.rotationPieceVM);
+                }
+                canvas_Zoom.RenderTransform = new ScaleTransform(Plan_VM.zoomPiece, Plan_VM.zoomPiece); // transforme la grandeur du canvas 
+                Canvas.SetLeft(canvas, Plan_VM.canvasPieceLeft);
+                Canvas.SetTop(canvas, Plan_VM.canvasPieceTop);
+            }
         }
 
         private void cacherClip()
         {
 
             btnPieceRotation.Visibility = Visibility.Visible;
-            rulerText.Visibility = Visibility.Hidden;
-            rulerTextY.Visibility = Visibility.Hidden;
-            ruler1.Visibility = Visibility.Hidden;
-            ruler2.Visibility = Visibility.Hidden;
-            ruler3.Visibility = Visibility.Hidden;
-            ruler4.Visibility = Visibility.Hidden;
-            ruler5.Visibility = Visibility.Hidden;
-            ruler6.Visibility = Visibility.Hidden;
+            
             movePiece = true;
             btnClipPiece.Visibility = Visibility.Visible;
             btnClipPieceDeclipper.Visibility = Visibility.Hidden;
@@ -274,15 +237,78 @@ namespace App_Brycol.Vues
 
         private void montrerClip()
         {
+            if (Plan_VM.PlanActuel.Piece.UniteDeMesure == "Mètres")
+            {
+                for (int i = 0; i <= Plan_VM.PlanActuel.Piece.Largeur; i++)
+                {
+                    Label txtb = new Label();
+                    txtb.Height = 30;
+                    txtb.BorderBrush = Brushes.White;
+                    txtb.FontSize = 12;
+                    txtb.FontFamily = new FontFamily("Century Gothic");
+                    txtb.Content = i.ToString();
+                    Canvas.SetTop(txtb, -23);
+                    Canvas.SetLeft(txtb, i * pixelToM - 10);
+                    canvas.Children.Add(txtb);
+                }
+                for (int i = 1; i <= Plan_VM.PlanActuel.Piece.Longueur; i++)
+                {
+                    Label txtb = new Label();
+                    txtb.Height = 30;
+                    txtb.BorderBrush = Brushes.White;
+                    txtb.FontFamily = new FontFamily("Century Gothic");
+                    txtb.FontSize = 12;
+                    txtb.Content = i.ToString();
+                    Canvas.SetTop(txtb, i * pixelToM - 23);
+                    Canvas.SetLeft(txtb, -17);
+                    canvas.Children.Add(txtb);
+                }
+            }
+            else
+            {
+                for (int i = 0; i <= Plan_VM.PlanActuel.Piece.Largeur; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        Label txtb = new Label();
+                        txtb.Height = 30;
+                        txtb.BorderBrush = Brushes.White;
+                        txtb.FontSize = 12;
+                        txtb.FontFamily = new FontFamily("Century Gothic");
+                        txtb.Content = i.ToString();
+                        Canvas.SetTop(txtb, -23);
+                        Canvas.SetLeft(txtb, i * pixelToPied - 10);
+                        canvas.Children.Add(txtb);
+                    }
+                }
+                for (int i = 1; i <= Plan_VM.PlanActuel.Piece.Longueur; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        Label txtb = new Label();
+                        txtb.Height = 30;
+                        txtb.BorderBrush = Brushes.White;
+                        txtb.FontSize = 12;
+                        txtb.FontFamily = new FontFamily("Century Gothic");
+                        txtb.Content = i.ToString();
+                        Canvas.SetTop(txtb, i * pixelToPied - 23);
+                        Canvas.SetLeft(txtb, -17);
+                        if (i >= 10)
+                        {
+                            Canvas.SetLeft(txtb, -23);
+                        }
 
-            rulerText.Visibility = Visibility.Visible;
-            rulerTextY.Visibility = Visibility.Visible;
-            ruler1.Visibility = Visibility.Visible;
-            ruler2.Visibility = Visibility.Visible;
-            ruler3.Visibility = Visibility.Visible;
-            ruler4.Visibility = Visibility.Visible;
-            ruler5.Visibility = Visibility.Visible;
-            ruler6.Visibility = Visibility.Visible;
+                        canvas.Children.Add(txtb);
+                    }
+                }
+            }
+
+            Canvas.SetLeft(canvas, 10);
+            Canvas.SetTop(canvas, 10);
+
+            btnClipPiece.Visibility = Visibility.Hidden;
+            btnClipPieceDeclipper.Visibility = Visibility.Visible;
+
             btnPieceRotation.Visibility = Visibility.Hidden;
         }
        
@@ -291,15 +317,12 @@ namespace App_Brycol.Vues
             
             var image = e.Source as System.Windows.Controls.Image;
             if (e.ClickCount == 2 && image!= null)
-            {
-                
-
+            {                
                 draggedImage = image;
                 draggedImage.Opacity = 0.5;
 
                 move = false;
             }
-
             else
             {
                 clickPosition = e.GetPosition(canvas); // avoir la position du click
@@ -350,41 +373,9 @@ namespace App_Brycol.Vues
                     }
 
                     canvasMur.Visibility = Visibility.Visible;
+                    popupMurText.Visibility = Visibility.Visible;
                     popupMur.IsOpen = true;
-                   
-                }
-                else if (clickPosition.Y > (Plan_VM.PlanActuel.Piece.Longueur*pixelToM)-5)
-                {
-                    btntoolRotation.Visibility = Visibility.Hidden;
-                    btntoolSupprimer.Visibility = Visibility.Hidden;
-                    btntoolModifier.Visibility = Visibility.Hidden;
-                    btntoolMurRotation.Visibility = Visibility.Hidden;
-                    btntoolMurSupprimer.Visibility = Visibility.Hidden;
-                    btntoolMurModifier.Visibility = Visibility.Hidden;
-                    foreach (Image child in canvasMur.Children.OfType<Image>())
-                    {
-                        foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
-                        {
-                            var bitmap = new BitmapImage(ip.Item.ImgItem.UriSource);
 
-                            var imageBD = new Image { Source = bitmap };
-                            imageBD.Tag = ip.ID;
-                            if (imageBD.Tag.ToString() == child.Tag.ToString())
-                            {
-                                if (ip.mur == 3)
-                                {
-                                    child.Visibility = Visibility.Visible;
-                                }
-                                else
-                                {
-                                    child.Visibility = Visibility.Hidden;
-                                }
-                            }
-                        }
-                    }
-                    canvasMur.Width = Plan_VM.PlanActuel.Piece.Largeur * pixelToM;
-                    canvasMur.Visibility = Visibility.Visible;
-                    popupMur.IsOpen = true;
                 }
                 else if (clickPosition.X < 5)
                 {
@@ -395,40 +386,6 @@ namespace App_Brycol.Vues
                     btntoolMurSupprimer.Visibility = Visibility.Hidden;
                     btntoolMurModifier.Visibility = Visibility.Hidden;
                     foreach (Image child in canvasMur.Children.OfType<Image>())
-                        {
-                            foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
-                            {
-                                var bitmap = new BitmapImage(ip.Item.ImgItem.UriSource);
-
-                                var imageBD = new Image { Source = bitmap };
-                                imageBD.Tag = ip.ID;
-                                if (imageBD.Tag.ToString() == child.Tag.ToString())
-                                {
-                                    if (ip.mur == 4)
-                                    {
-                                        child.Visibility = Visibility.Visible;
-                                    }
-                                    else
-                                    {
-                                        child.Visibility = Visibility.Hidden;
-                                    }
-                                }
-                            }
-                        
-                        }
-                    canvasMur.Width = Plan_VM.PlanActuel.Piece.Longueur * pixelToM;
-                    canvasMur.Visibility = Visibility.Visible;
-                    popupMur.IsOpen = true;
-                }
-                else if (clickPosition.X > (Plan_VM.PlanActuel.Piece.Largeur * pixelToM) - 5)
-                {
-                    btntoolRotation.Visibility = Visibility.Hidden;
-                    btntoolSupprimer.Visibility = Visibility.Hidden;
-                    btntoolModifier.Visibility = Visibility.Hidden;
-                    btntoolMurRotation.Visibility = Visibility.Hidden;
-                    btntoolMurSupprimer.Visibility = Visibility.Hidden;
-                    btntoolMurModifier.Visibility = Visibility.Hidden;
-                    foreach (Image child in canvasMur.Children.OfType<Image>())
                     {
                         foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
                         {
@@ -438,7 +395,7 @@ namespace App_Brycol.Vues
                             imageBD.Tag = ip.ID;
                             if (imageBD.Tag.ToString() == child.Tag.ToString())
                             {
-                                if (ip.mur == 2)
+                                if (ip.mur == 4)
                                 {
                                     child.Visibility = Visibility.Visible;
                                 }
@@ -448,9 +405,20 @@ namespace App_Brycol.Vues
                                 }
                             }
                         }
+
                     }
-                    canvasMur.Width = Plan_VM.PlanActuel.Piece.Longueur * pixelToM;
+                    if (Plan_VM.PlanActuel.Piece.UniteDeMesure == "Mètres")
+                    {
+                        canvasMur.Width = Plan_VM.PlanActuel.Piece.Longueur * pixelToM;
+
+                    }
+                    else
+                    {
+                        canvasMur.Width = Plan_VM.PlanActuel.Piece.Longueur * pixelToPied;
+
+                    }
                     canvasMur.Visibility = Visibility.Visible;
+                    popupMurText.Visibility = Visibility.Visible;
                     popupMur.IsOpen = true;
                 }
                 else
@@ -461,6 +429,191 @@ namespace App_Brycol.Vues
                     btntoolMurModifier.Visibility = Visibility.Hidden;
                     popupMur.IsOpen = false;
                 }
+                if (Plan_VM.PlanActuel.Piece.UniteDeMesure == "Mètres")
+                {
+                   
+                   if (clickPosition.Y > (Plan_VM.PlanActuel.Piece.Longueur * pixelToM) - 5)
+                    {
+                        btntoolRotation.Visibility = Visibility.Hidden;
+                        btntoolSupprimer.Visibility = Visibility.Hidden;
+                        btntoolModifier.Visibility = Visibility.Hidden;
+                        btntoolMurRotation.Visibility = Visibility.Hidden;
+                        btntoolMurSupprimer.Visibility = Visibility.Hidden;
+                        btntoolMurModifier.Visibility = Visibility.Hidden;
+                        foreach (Image child in canvasMur.Children.OfType<Image>())
+                        {
+                            foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
+                            {
+                                var bitmap = new BitmapImage(ip.Item.ImgItem.UriSource);
+
+                                var imageBD = new Image { Source = bitmap };
+                                imageBD.Tag = ip.ID;
+                                if (imageBD.Tag.ToString() == child.Tag.ToString())
+                                {
+                                    if (ip.mur == 3)
+                                    {
+                                        child.Visibility = Visibility.Visible;
+                                    }
+                                    else
+                                    {
+                                        child.Visibility = Visibility.Hidden;
+                                    }
+                                }
+                            }
+                        }
+                        if (Plan_VM.PlanActuel.Piece.UniteDeMesure == "Mètres")
+                        {
+                            canvasMur.Width = Plan_VM.PlanActuel.Piece.Largeur * pixelToM;
+
+                        }
+                        else
+                        {
+                            canvasMur.Width = Plan_VM.PlanActuel.Piece.Largeur * pixelToPied;
+
+                        }
+                        canvasMur.Visibility = Visibility.Visible;
+                        popupMurText.Visibility = Visibility.Visible;
+                        popupMur.IsOpen = true;
+                    }
+                    else if (clickPosition.X > (Plan_VM.PlanActuel.Piece.Largeur * pixelToM) - 5)
+                    {
+                        btntoolRotation.Visibility = Visibility.Hidden;
+                        btntoolSupprimer.Visibility = Visibility.Hidden;
+                        btntoolModifier.Visibility = Visibility.Hidden;
+                        btntoolMurRotation.Visibility = Visibility.Hidden;
+                        btntoolMurSupprimer.Visibility = Visibility.Hidden;
+                        btntoolMurModifier.Visibility = Visibility.Hidden;
+                        foreach (Image child in canvasMur.Children.OfType<Image>())
+                        {
+                            foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
+                            {
+                                var bitmap = new BitmapImage(ip.Item.ImgItem.UriSource);
+
+                                var imageBD = new Image { Source = bitmap };
+                                imageBD.Tag = ip.ID;
+                                if (imageBD.Tag.ToString() == child.Tag.ToString())
+                                {
+                                    if (ip.mur == 2)
+                                    {
+                                        child.Visibility = Visibility.Visible;
+                                    }
+                                    else
+                                    {
+                                        child.Visibility = Visibility.Hidden;
+                                    }
+                                }
+                            }
+                        }
+                        if (Plan_VM.PlanActuel.Piece.UniteDeMesure == "Mètres")
+                        {
+                            canvasMur.Width = Plan_VM.PlanActuel.Piece.Longueur * pixelToM;
+
+                        }
+                        else
+                        {
+                            canvasMur.Width = Plan_VM.PlanActuel.Piece.Longueur * pixelToPied;
+
+                        }
+                        canvasMur.Visibility = Visibility.Visible;
+                        popupMurText.Visibility = Visibility.Visible;
+                        popupMur.IsOpen = true;
+                    }
+                }
+                else
+                {
+                    if (clickPosition.Y > (Plan_VM.PlanActuel.Piece.Longueur * pixelToPied) - 5)
+                    {
+                        btntoolRotation.Visibility = Visibility.Hidden;
+                        btntoolSupprimer.Visibility = Visibility.Hidden;
+                        btntoolModifier.Visibility = Visibility.Hidden;
+                        btntoolMurRotation.Visibility = Visibility.Hidden;
+                        btntoolMurSupprimer.Visibility = Visibility.Hidden;
+                        btntoolMurModifier.Visibility = Visibility.Hidden;
+                        foreach (Image child in canvasMur.Children.OfType<Image>())
+                        {
+                            foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
+                            {
+                                var bitmap = new BitmapImage(ip.Item.ImgItem.UriSource);
+
+                                var imageBD = new Image { Source = bitmap };
+                                imageBD.Tag = ip.ID;
+                                if (imageBD.Tag.ToString() == child.Tag.ToString())
+                                {
+                                    if (ip.mur == 3)
+                                    {
+                                        child.Visibility = Visibility.Visible;
+                                    }
+                                    else
+                                    {
+                                        child.Visibility = Visibility.Hidden;
+                                    }
+                                }
+                            }
+                        }
+                        if (Plan_VM.PlanActuel.Piece.UniteDeMesure == "Mètres")
+                        {
+                            canvasMur.Width = Plan_VM.PlanActuel.Piece.Largeur * pixelToM;
+
+                        }
+                        else
+                        {
+                            canvasMur.Width = Plan_VM.PlanActuel.Piece.Largeur * pixelToPied;
+
+                        }
+                        canvasMur.Visibility = Visibility.Visible;
+                        popupMurText.Visibility = Visibility.Visible;
+                        popupMur.IsOpen = true;
+                    }
+                    else if (clickPosition.X > (Plan_VM.PlanActuel.Piece.Largeur * pixelToPied) - 5)
+                    {
+                        btntoolRotation.Visibility = Visibility.Hidden;
+                        btntoolSupprimer.Visibility = Visibility.Hidden;
+                        btntoolModifier.Visibility = Visibility.Hidden;
+                        btntoolMurRotation.Visibility = Visibility.Hidden;
+                        btntoolMurSupprimer.Visibility = Visibility.Hidden;
+                        btntoolMurModifier.Visibility = Visibility.Hidden;
+                        foreach (Image child in canvasMur.Children.OfType<Image>())
+                        {
+                            foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
+                            {
+                                var bitmap = new BitmapImage(ip.Item.ImgItem.UriSource);
+
+                                var imageBD = new Image { Source = bitmap };
+                                imageBD.Tag = ip.ID;
+                                if (imageBD.Tag.ToString() == child.Tag.ToString())
+                                {
+                                    if (ip.mur == 2)
+                                    {
+                                        child.Visibility = Visibility.Visible;
+                                    }
+                                    else
+                                    {
+                                        child.Visibility = Visibility.Hidden;
+                                    }
+                                }
+                            }
+                        }
+                        if (Plan_VM.PlanActuel.Piece.UniteDeMesure == "Mètres")
+                        {
+                            canvasMur.Width = Plan_VM.PlanActuel.Piece.Longueur * pixelToM;
+
+                        }
+                        else
+                        {
+                            canvasMur.Width = Plan_VM.PlanActuel.Piece.Longueur * pixelToPied;
+
+                        }
+                        canvasMur.Visibility = Visibility.Visible;
+                        popupMurText.Visibility = Visibility.Visible;
+                        popupMur.IsOpen = true;
+                    }
+                }
+                
+                
+          
+                
+              
+               
                 #endregion
 
                 if (image != null && canvas.CaptureMouse())
@@ -660,7 +813,7 @@ namespace App_Brycol.Vues
              }
              else if (i.Item.Nom == "Fenêtre")
             {
-                Canvas.SetLeft(image, i.emplacementGauche + 75);
+                Canvas.SetLeft(image, i.emplacementGauche + 150);
                 Canvas.SetTop(image, -14);
             }
             else
@@ -888,7 +1041,7 @@ namespace App_Brycol.Vues
             if (zoom > zoomMax) { zoom = zoomMax; } // Limite le maximum
 
             Point mousePos = e.GetPosition(canvas);
-            Plan_VM.zoomPiece = zoom;
+           // Plan_VM.zoomPiece = zoom;
             if (movePiece)
             {
                 canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom, mousePos.X, mousePos.Y); // transforme la grandeur du canvas selon la position de la souris
@@ -999,9 +1152,9 @@ namespace App_Brycol.Vues
             canvas.Children.Clear();
             canvasMur.Children.Clear();
             setCanvasPiece();
-            
-           
-          
+       
+
+
             if (Item_VM.ItemsPlanActuel != null)
             {
                 Item_VM.ItemsPlanActuel.Clear();
@@ -1352,7 +1505,7 @@ namespace App_Brycol.Vues
 
                 }
             }
-            if (canvas.Children != null)
+            if (canvas.Children.OfType<Image>().Count() != 0)
             {
                 foreach (UIElement child in canvas.Children)
                 {
@@ -1585,31 +1738,82 @@ namespace App_Brycol.Vues
             rotationPiece = 0;
             canvas.RenderTransform = new RotateTransform(rotationPiece);
             btnPieceRotation.Visibility = Visibility.Hidden;
-            if (Piece_VM.pieceActuel.Longueur > 10)
+            foreach (Label item in canvas.Children.OfType<Label>().ToList())
             {
-                rulerText.Visibility = Visibility.Visible;
-                ruler1.Visibility = Visibility.Visible;
-                ruler2.Visibility = Visibility.Visible;
-                ruler3.Visibility = Visibility.Visible;
-                ruler4.Visibility = Visibility.Visible;
-                ruler5.Visibility = Visibility.Visible;
-                ruler6.Visibility = Visibility.Visible;
-                rulerText.Text = "0             2              4              6             8              10              12            14              16             18            20";
-                rulerTextY.Text = "20             18              16              14             12              10              8            6              4            2             0";
+                canvas.Children.Remove(item);
+            }
+            if (Plan_VM.PlanActuel.Piece.UniteDeMesure == "Mètres")
+            {
+                for (int i = 0; i <= Plan_VM.PlanActuel.Piece.Largeur; i++)
+                {
+                    Label txtb = new Label();
+                    txtb.Height = 30;
+                    txtb.BorderBrush = Brushes.White;
+                    txtb.FontSize = 12;
+                    txtb.FontFamily = new FontFamily("Century Gothic");
+                    txtb.Content = i.ToString();
+                    Canvas.SetTop(txtb, -23);
+                    Canvas.SetLeft(txtb, i * pixelToM - 10);
+                    canvas.Children.Add(txtb);
+                }
+                for (int i = 1; i <= Plan_VM.PlanActuel.Piece.Longueur; i++)
+                {
+                    Label txtb = new Label();
+                    txtb.Height = 30;
+                    txtb.BorderBrush = Brushes.White;
+                    txtb.FontFamily = new FontFamily("Century Gothic");
+                    txtb.FontSize = 12;
+                    txtb.Content = i.ToString();
+                    Canvas.SetTop(txtb, i * pixelToM - 23);
+                    Canvas.SetLeft(txtb, -17);
+                    if (i >= 10)
+                    {
+                        Canvas.SetLeft(txtb, -23);
+                    }
+                    canvas.Children.Add(txtb);
+                }
             }
             else
             {
-                rulerText.Visibility = Visibility.Visible;
-                rulerTextY.Visibility = Visibility.Visible;
-                ruler1.Visibility = Visibility.Visible;
-                ruler2.Visibility = Visibility.Visible;
-                ruler3.Visibility = Visibility.Visible;
-                ruler4.Visibility = Visibility.Visible;
-                ruler5.Visibility = Visibility.Visible;
-                ruler6.Visibility = Visibility.Visible;
+                for (int i = 0; i <= Plan_VM.PlanActuel.Piece.Largeur; i++)
+                {
+                    if (i%2 == 0)
+                    {                
+                    Label txtb = new Label();
+                    txtb.Height = 30;
+                    txtb.BorderBrush = Brushes.White;
+                    txtb.FontSize = 12;
+                    txtb.FontFamily = new FontFamily("Century Gothic");
+                    txtb.Content = i.ToString();
+                    Canvas.SetTop(txtb, -23);
+                    Canvas.SetLeft(txtb, i * pixelToPied - 10);
+                    canvas.Children.Add(txtb);
+                    }
+                }
+                for (int i = 1; i <= Plan_VM.PlanActuel.Piece.Longueur; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        Label txtb = new Label();
+                        txtb.Height = 30;
+                        txtb.BorderBrush = Brushes.White;
+                        txtb.FontSize = 12;
+                        txtb.FontFamily = new FontFamily("Century Gothic");
+                        txtb.Content = i.ToString();
+                        Canvas.SetTop(txtb, i * pixelToPied - 23);
+                        Canvas.SetLeft(txtb, -17);
+                        if (i >= 10)
+                        {
+                            Canvas.SetLeft(txtb, -23);
+                        }
+
+                        canvas.Children.Add(txtb);
+                    }
+                }
             }
-            Canvas.SetLeft(canvas, 0);
-            Canvas.SetTop(canvas, 0);
+            
+            Canvas.SetLeft(canvas, 10);
+            Canvas.SetTop(canvas, 10);
 
             btnClipPiece.Visibility = Visibility.Hidden;
             btnClipPieceDeclipper.Visibility = Visibility.Visible;           
@@ -1619,14 +1823,7 @@ namespace App_Brycol.Vues
         {
             Plan_VM.clip = false;
             btnPieceRotation.Visibility = Visibility.Visible;
-            rulerText.Visibility = Visibility.Hidden;
-            rulerTextY.Visibility = Visibility.Hidden;
-            ruler1.Visibility = Visibility.Hidden;
-            ruler2.Visibility = Visibility.Hidden;
-            ruler3.Visibility = Visibility.Hidden;
-            ruler4.Visibility = Visibility.Hidden;
-            ruler5.Visibility = Visibility.Hidden;
-            ruler6.Visibility = Visibility.Hidden;
+            
             movePiece = true;
             btnClipPiece.Visibility = Visibility.Visible;
             btnClipPieceDeclipper.Visibility = Visibility.Hidden;

@@ -62,6 +62,7 @@ namespace App_Brycol.Vues
 
         private void btnCatalogue_Click(object sender, RoutedEventArgs e)
         {
+            
             Catalogue popUp = new Catalogue();
             popUp.ShowDialog();
         }
