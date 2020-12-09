@@ -244,6 +244,9 @@
     <Compile Include="Vues\Enregistrer.xaml.cs">
       <DependentUpon>Enregistrer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vues\ModifCatalogue.xaml.cs">
+      <DependentUpon>ModifCatalogue.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vues\ModifierItem.xaml.cs">
       <DependentUpon>ModifierItem.xaml</DependentUpon>
     </Compile>
@@ -344,6 +347,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vues\Enregistrer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\ModifCatalogue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -464,6 +471,7 @@
     <Resource Include="images\Items\item16.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\Items\item26.PNG" />
     <Resource Include="images\Items\Top\item11.png" />
     <Resource Include="images\logo.png" />
     <Resource Include="images\soleil.png" />
@@ -494,9 +502,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\Items\item1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Items\item0.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="images\ItemsModifies\Item24\" />
@@ -531,7 +536,10 @@
   <ItemGroup>
     <Resource Include="images\Items\invalide.png" />
     <Resource Include="images\Items\invalideItem.png" />
+<<<<<<< HEAD
     <Resource Include="images\Items\item26.png" />
+=======
+>>>>>>> c01c100ad3ad6052fe78150bb7d9a20870cd874d
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\Items\invalide1.jpg" />
@@ -813,7 +821,11 @@
     <Resource Include="images\logoclair.png" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Resource Include="images\Items\mur.jpg" />
+=======
+    <Resource Include="images\Items\item0.png" />
+>>>>>>> c01c100ad3ad6052fe78150bb7d9a20870cd874d
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

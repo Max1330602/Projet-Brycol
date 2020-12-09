@@ -123,5 +123,12 @@ namespace App_Brycol.Vues
 
             btnPartage.IsEnabled = false;
         }
+
+        private void btnPartage_Click(object sender, RoutedEventArgs e)
+        {
+            lsbUtiPa.Items.Clear();
+            lsbProPa.Items.Clear();
+            btnPartage.IsEnabled = false;
+        }
     }
 }

@@ -24,6 +24,7 @@ namespace App_Brycol.VuesModele
         public static bool EstSauvegarde = false;
         public static bool themeSombre = false;
         public static bool planOuvert = false;
+        public ICommand cmdDeconnexion { get; set; }
         public ICommand cmdCreerProjet { get; set; }
         public ICommand cmdSauvProjet { get; set; }
         public ICommand cmdSuppProjet { get; set; }
@@ -34,6 +35,7 @@ namespace App_Brycol.VuesModele
 
         public Projet_VM()
         {
+            cmdDeconnexion = new Commande(Deconnexion);
             cmdCreerProjet = new Commande(CreerProjet);
             cmdSauvProjet = new Commande(SauvProjet);
             cmdSuppProjet = new Commande(SuppProjet);
@@ -223,6 +225,19 @@ namespace App_Brycol.VuesModele
             PlanDeTravail.ShowDialog();
 
         }
+
+        public void Deconnexion(Object param)
+        {
+            Utilisateur_VM.utilActuel = null;
+            ProjetActuel = null;
+
+            Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
+            ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");
+            gridMW.Children.Clear();
+            gridMW.Children.Add(cpMW);
+            cpMW.Content = new UCCLogin();
+        }
+
 
         public void CreerProjet(Object param)
         {
@@ -469,7 +484,7 @@ namespace App_Brycol.VuesModele
             List<Piece> lstPie = new List<Piece>();
             Plan pla = new Plan();
             List<ItemsPlan> lstItPla = new List<ItemsPlan>();
-            int cmptDoublon = 0;
+            int cmptDoublon = 1;
             bool existeDeja = false;
 
             var UtiReq = from uti in OutilEF.brycolContexte.Utilisateurs where uti.Nom == UtiliParatage select uti;
@@ -485,7 +500,7 @@ namespace App_Brycol.VuesModele
                 if (p.Nom == pro.Nom)
                 {
                     existeDeja = true;
-                    pro.Nom = ProPartage + "_" + Utilisateur_VM.utilActuel.Nom + "_" + cmptDoublon.ToString();
+                    pro.Nom = ProPartage + "_" + Utilisateur_VM.utilActuel.Nom;
                 }
 
 
@@ -496,7 +511,7 @@ namespace App_Brycol.VuesModele
                         cmptDoublon++;
                     }
 
-            if (cmptDoublon != 0)
+            if (cmptDoublon != 1)
                 pro.Nom = ProPartage + "_" + Utilisateur_VM.utilActuel.Nom + "_" + cmptDoublon.ToString();
 
 

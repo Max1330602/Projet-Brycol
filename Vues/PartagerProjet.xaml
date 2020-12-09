@@ -14,6 +14,9 @@
             <Setter Property="FontFamily" Value="Constantia Bold"/>
             <Setter Property="FontSize" Value="15"/>
         </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Constantia"/>
+        </Style>
     </Window.Resources>
 
     <Grid x:Name="grdPartage">

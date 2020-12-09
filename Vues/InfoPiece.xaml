@@ -15,6 +15,15 @@
             <Setter Property="FontFamily" Value="Constantia Bold"/>
             <Setter Property="FontSize" Value="15"/>
         </Style>
+        <Style TargetType="RadioButton">
+            <Setter Property="FontFamily" Value="Constantia"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Constantia"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="FontFamily" Value="Constantia"/>
+        </Style>
     </Window.Resources>
 
     <Grid x:Name="grdInfoPiece">
