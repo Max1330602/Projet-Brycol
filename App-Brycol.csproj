@@ -471,7 +471,6 @@
     <Resource Include="images\Items\item16.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\Items\item26.PNG" />
     <Resource Include="images\Items\Top\item11.png" />
     <Resource Include="images\logo.png" />
     <Resource Include="images\soleil.png" />
@@ -536,10 +535,7 @@
   <ItemGroup>
     <Resource Include="images\Items\invalide.png" />
     <Resource Include="images\Items\invalideItem.png" />
-<<<<<<< HEAD
     <Resource Include="images\Items\item26.png" />
-=======
->>>>>>> c01c100ad3ad6052fe78150bb7d9a20870cd874d
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\Items\invalide1.jpg" />
@@ -821,11 +817,8 @@
     <Resource Include="images\logoclair.png" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Resource Include="images\Items\mur.jpg" />
-=======
     <Resource Include="images\Items\item0.png" />
->>>>>>> c01c100ad3ad6052fe78150bb7d9a20870cd874d
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

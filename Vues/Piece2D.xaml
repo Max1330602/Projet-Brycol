@@ -182,7 +182,7 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </TextBlock.RenderTransform><Run Text="10             9              "/><Run Text=" "/><Run Text="8            "/><Run Text=" "/><Run Text="  7             "/><Run Text=" "/><Run Text="6              5              4             "/><Run Text="  "/><Run Text="3          "/><Run Text="    "/><Run Text=" 2          "/><Run Text="   "/><Run Text=" "/><Run Text="1"/><Run Text="           "/><Run Text="   "/><Run Text=" 0"/></TextBlock>
-                
+
             </Canvas>
 
 
@@ -222,7 +222,8 @@
 
 
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Button aide disponible!" Width="130" Margin="-48,0,164,0" Height="20" Canvas.Left="52" Canvas.Top="393"/>
+                <TextBlock Text="Bouton aide disponible!" Width="130" Margin="-48,0,164,0" Height="20" Canvas.Left="52" Canvas.Top="393"/>
+                <Button Content="Désélectionner items" Margin="0,-25,7,25" Width="Auto" Click="click_deselect" Grid.ColumnSpan="5" Grid.Column="9"></Button>
 
                 <Button x:Name="btnPieceRotation" Click="btnRotationPiece" Height="20" Content="Rotation pièce" FontSize="10" Foreground="Black" Background="White" Panel.ZIndex="5"  Margin="224,0,52,0" Grid.ColumnSpan="2" />
                 <Button x:Name="btnClipPiece" Click="btnClip" Height="20" Content="Clip" Width="60" FontSize="10" Foreground="Black" Background="White" Panel.ZIndex="5"  Margin="130,0,56,0" Visibility="Hidden"/>

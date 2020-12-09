@@ -1608,14 +1608,11 @@ namespace App_Brycol.Vues
                 ruler5.Visibility = Visibility.Visible;
                 ruler6.Visibility = Visibility.Visible;
             }
-
             Canvas.SetLeft(canvas, 0);
             Canvas.SetTop(canvas, 0);
 
             btnClipPiece.Visibility = Visibility.Hidden;
-            btnClipPieceDeclipper.Visibility = Visibility.Visible;
-
-            
+            btnClipPieceDeclipper.Visibility = Visibility.Visible;           
         }
 
         private void btnDéclip(object sender, RoutedEventArgs e)
@@ -1674,7 +1671,6 @@ namespace App_Brycol.Vues
                 case 100:            
                     zoomSliderTemp = 1.9;
                     break;           
-
 
                 default:
                     break;
@@ -1985,8 +1981,7 @@ namespace App_Brycol.Vues
                             }
                         }
                     }
-                }
-            
+                }            
                 if (Keyboard.IsKeyDown(Key.M)) 
                 {
                    
@@ -2028,13 +2023,8 @@ namespace App_Brycol.Vues
                             popupText.Foreground = Brushes.Black;
                         }
                     }
-
-
                     popupItem.IsOpen = true;
-                    return;
-                    
-                    
-                   
+                    return;                                                       
                 }
                 return;
             }
@@ -2219,6 +2209,11 @@ namespace App_Brycol.Vues
         private void CanvasMur_MouseWheel(object sender, MouseWheelEventArgs e)
         {
 
-        }        
+        }
+
+        private void click_deselect(object sender, RoutedEventArgs e)
+        {
+            itemSelectionee.Clear();
+        }
     }
 }
