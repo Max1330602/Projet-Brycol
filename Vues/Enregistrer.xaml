@@ -15,9 +15,6 @@
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Constantia"/>
         </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="Constantia"/>
-        </Style>
     </Window.Resources>
     
     <Grid Name="grdEnregistrer" Margin="0,0,0,-1">
