@@ -15,9 +15,6 @@
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Constantia"/>
         </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="Constantia"/>
-        </Style>
     </UserControl.Resources>
 
     <Grid Name="grdInscription">
