@@ -23,7 +23,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid x:Name="grdModifierCatalogue">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="400*"/>

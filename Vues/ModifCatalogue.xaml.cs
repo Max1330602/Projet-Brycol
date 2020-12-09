@@ -20,6 +20,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Brush = System.Windows.Media.Brush;
+using Brushes = System.Windows.Media.Brushes;
 
 namespace App_Brycol.Vues
 {
@@ -32,6 +34,58 @@ namespace App_Brycol.Vues
         {
             InitializeComponent();
             DataContext = new Item_VM();
+
+            if (Projet_VM.themeSombre)
+                AppliquerThemeSombre();
+            else
+                EnleverThemeSombre();
+
+        }
+
+        private void AppliquerThemeSombre()
+        {
+            BrushConverter bc = new BrushConverter();
+            Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+            Brush CouleurArriere = (Brush)bc.ConvertFrom("#33342F");
+            Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
+            Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
+
+            Banniere.Background = CouleurBanniere;
+
+            btnAjouter.Background = CouleurBouton;
+            btnAjouter.Foreground = Brushes.White;
+
+            btnCharger1.Background = CouleurBouton;
+            btnCharger1.Foreground = Brushes.White;
+            
+            btnCharger2.Background = CouleurBouton;
+            btnCharger2.Foreground = Brushes.White;
+
+            btnRetour.Background = CouleurBouton;
+            btnRetour.Foreground = Brushes.White;
+
+            grdModifierCatalogue.Background = CouleurArriere;
+            Pied.Background = CouleurArrierePlan;
+        }
+
+        private void EnleverThemeSombre()
+        {
+            Banniere.Background = Brushes.LightGray;
+
+            btnAjouter.Background = Brushes.White;
+            btnAjouter.Foreground = Brushes.Black;
+
+            btnCharger1.Background = Brushes.White;
+            btnCharger1.Foreground = Brushes.Black;
+
+            btnCharger2.Background = Brushes.White;
+            btnCharger2.Foreground = Brushes.Black;
+
+            btnRetour.Background = Brushes.White;
+            btnRetour.Foreground = Brushes.Black;
+
+            Pied.Background = Brushes.White;
+            grdModifierCatalogue.Background = Brushes.White;
         }
 
         private void btnCharger1_Click(object sender, RoutedEventArgs e)

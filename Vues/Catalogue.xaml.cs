@@ -80,6 +80,9 @@ namespace App_Brycol.Vues
             btnRetour.Background = Brushes.White;
             btnRetour.Foreground = Brushes.Black;
 
+            btnModifierCatalogue.Background = Brushes.White;
+            btnModifierCatalogue.Foreground = Brushes.Black;
+
             DG_items.RowBackground = Brushes.White;
             DG_items.AlternatingRowBackground = Brushes.White;
 
@@ -118,6 +121,9 @@ namespace App_Brycol.Vues
 
             btnRetour.Background = CouleurBouton;
             btnRetour.Foreground = Brushes.White;
+
+            btnModifierCatalogue.Background = CouleurBouton;
+            btnModifierCatalogue.Foreground = Brushes.White;
 
             DG_items.RowBackground = Brushes.LightGray;
             DG_items.AlternatingRowBackground = Brushes.Gray;

@@ -111,6 +111,6 @@
         <Button Name="btnAjouter" Command="{ Binding cmdAjouterItem }" Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="1" Width="100" Height="25" Content="Ajouter" HorizontalAlignment="Right" Margin="0,0,10,10"></Button>
         <Button Name="btnRetour" Click="btnRetour_Click" Grid.Row="2" Grid.ColumnSpan="3" Grid.Column="1" Width="100" Height="25" Content="Retour" HorizontalAlignment="Right" Margin="0,0,125,10"></Button>
 
-        <Button Click="btnModifCatalogue_Click" Margin="0,0,0,10" Content="Modifier catalogue" Grid.Row="2" Width="140" Height="25"></Button>
+        <Button Name="btnModifierCatalogue" Click="btnModifCatalogue_Click" Margin="0,0,0,10" Content="Modifier catalogue" Grid.Row="2" Width="140" Height="25"></Button>
     </Grid>
 </Window>
