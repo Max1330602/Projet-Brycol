@@ -213,13 +213,14 @@ namespace App_Brycol.VuesModele
             else
                 p.TypePlancher = tPlancherReq.First();
 
-
+           
             if (Nom == null)
-            {
+            {            
                 var test = OutilEF.brycolContexte.Pieces.Max<Piece>(t => t.ID);
                 test += 1;
                 p.Nom = "Piece" + test;
             }
+           
 
             OutilEF.brycolContexte.Pieces.Add(p);
             OutilEF.brycolContexte.SaveChanges();
