@@ -66,7 +66,6 @@ namespace App_Brycol.Vues
         {
             grdCoutParent.Children.Remove(uCCoutPiece);
             grdCoutParent.Children.Remove(uCCoutDetailProjet);
-     
 
             uCCoutProjet = new UCCoutProjet();
             Grid.SetRow(uCCoutProjet, 1);

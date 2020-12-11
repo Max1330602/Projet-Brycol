@@ -67,7 +67,11 @@ namespace App_Brycol.Vues
                 {
                     MessageConfirmation.Append(f.Fournisseur + ": " + f.Montant + "$\n");
                 }
-                MessageBox.Show(MessageConfirmation.ToString());
+
+                if (lstFournisseurUnique.Count() == 0)
+                    MessageBox.Show("Il n'y a rien à payer");
+                else
+                    MessageBox.Show(MessageConfirmation.ToString());
 
             }
 
@@ -111,7 +115,6 @@ namespace App_Brycol.Vues
 
                     Cout.uCCoutDetailProjet = new UCCoutDetailProjet();
                     Grid.SetRow(Cout.uCCoutDetailProjet, 1);
-
                     (w as Cout).grdCoutParent.Children.Add(Cout.uCCoutDetailProjet);
                 }
             }
@@ -184,6 +187,11 @@ namespace App_Brycol.Vues
                (anneeCourante == Int64.Parse(txtAnnee.Text) && moisCourant > Int64.Parse(txtMois.Text)))
             {
                 MessageBox.Show("Date d'expiration dépassée");
+                return false;
+            }
+            else if (Int64.Parse(txtMois.Text) < 1 || Int64.Parse(txtMois.Text) > 12)
+            {
+                MessageBox.Show("Le mois doit être entre 1 et 12");
                 return false;
             }
             return true;
