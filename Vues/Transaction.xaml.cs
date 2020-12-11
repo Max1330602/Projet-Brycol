@@ -27,7 +27,6 @@ namespace App_Brycol.Vues
         private List<string> lstFournisseurUnique { get; set; }
         private List<Facture> lstFacturesCrees = new List<Facture>();
         private List<ItemsPlan> lstItemsPlansProjet { get; set; }
-        public static UCCoutDetailProjet uccdp { get; set; }
         public Transaction()
         {
             InitializeComponent();
@@ -108,10 +107,12 @@ namespace App_Brycol.Vues
             {
                 if (w.GetType() == typeof(Cout))
                 {
-                    uccdp = new UCCoutDetailProjet();
                     (w as Cout).grdCoutParent.Children.Remove(Cout.uCCoutDetailProjet);
-                    Grid.SetRow(uccdp, 1);
-                    (w as Cout).grdCoutParent.Children.Add(uccdp);
+
+                    Cout.uCCoutDetailProjet = new UCCoutDetailProjet();
+                    Grid.SetRow(Cout.uCCoutDetailProjet, 1);
+
+                    (w as Cout).grdCoutParent.Children.Add(Cout.uCCoutDetailProjet);
                 }
             }
         }

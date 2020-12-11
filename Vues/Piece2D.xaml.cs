@@ -98,10 +98,11 @@ namespace App_Brycol.Vues
         {
             foreach (ItemsPlan i in Item_VM.ItemsPlanActuel)
             {
-                var bitmap = new BitmapImage(i.Item.ImgItem.UriSource);
+                
+                    var bitmap = new BitmapImage(i.Item.ImgItem.UriSource);
 
-                var imageBD = new Image { Source = bitmap };
-                imageBD.Tag = i.ID;
+                    var imageBD = new Image { Source = bitmap };
+                    imageBD.Tag = i.ID;
 
                     foreach (Image image in canvas.Children.OfType<Image>())
                     {
@@ -142,9 +143,8 @@ namespace App_Brycol.Vues
 
                         }
                     }
-
-                }
             }
+        }
         
         void setCanvasPiece()
             {
