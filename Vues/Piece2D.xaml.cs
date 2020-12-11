@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -1089,7 +1090,15 @@ namespace App_Brycol.Vues
                     draggedImage.Source = null;
 
                 MessageBoxResult resultat;
-                resultat = System.Windows.MessageBox.Show("Voulez-vous vraiment supprimer cet item ?", "Suppression d'un item", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                if (itemSelectionee.Count >1)
+                {
+                    resultat = System.Windows.MessageBox.Show("Voulez-vous vraiment supprimer ces items", "Suppression des items", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                }
+                else
+                {
+                    resultat = System.Windows.MessageBox.Show("Voulez-vous vraiment supprimer cet item ?", "Suppression d'un item", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                }
+                
                 if (resultat == MessageBoxResult.Yes)
                 {
                     if (Item_VM.ItemsPlanActuel != null)
@@ -1106,6 +1115,19 @@ namespace App_Brycol.Vues
                             if (imageBD.Tag.ToString() == toolbarImage.Tag.ToString())
                             {
                                 foreach (Image image in canvas.Children.OfType<Image>())
+                                {
+                                    // Pour le simple delete
+                                    if (imageBD.Tag.ToString() == image.Tag.ToString())
+                                    {
+                                        Item_VM.ItemsPlanActuel.Remove(ip);
+                                        image.Source = null;
+                                        imageBD.Source = null;
+                                        btntoolRotation.Visibility = Visibility.Hidden;
+                                        btntoolSupprimer.Visibility = Visibility.Hidden;
+                                        btntoolModifier.Visibility = Visibility.Hidden;
+                                    }
+                                }
+                                foreach (Image image in canvasMur.Children.OfType<Image>())
                                 {
                                     // Pour le simple delete
                                     if (imageBD.Tag.ToString() == image.Tag.ToString())
@@ -1350,6 +1372,7 @@ namespace App_Brycol.Vues
                     {
                         image.Height = image.Height * 3;
                         image.Width = image.Width * 3;
+                        //MessageBox.Show("Veuillez sélectionner un mur");
                         popupMur1.IsOpen = true;
                         popupMur2.IsOpen = true;
                         popupMur3.IsOpen = true;
@@ -2184,43 +2207,102 @@ namespace App_Brycol.Vues
 
             canvas.RenderTransform = new RotateTransform(rotationPiece);
         }
-
+     
         private void HandleKeyPress(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            
+                   
             if (imageSelection != null)
             {              
                 if (e.Key == Key.Delete)
                 {
                     MessageBoxResult resultat;
-                    resultat = System.Windows.MessageBox.Show("Voulez-vous vraiment supprimer cet item ?", "Suppression d'un item", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                    if (itemSelectionee.Count > 1)
+                    {
+                        resultat = System.Windows.MessageBox.Show("Voulez-vous vraiment supprimer ces items", "Suppression des items", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                    }
+                    else
+                    {
+                        resultat = System.Windows.MessageBox.Show("Voulez-vous vraiment supprimer cet item ?", "Suppression d'un item", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                    }
+
                     if (resultat == MessageBoxResult.Yes)
                     {
                         if (Item_VM.ItemsPlanActuel != null)
                         {
-                            foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
+                            foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel.ToList())
                             {
+
                                 var bitmap = new BitmapImage(ip.Item.ImgItem.UriSource);
                                 var imageBD = new Image { Source = bitmap };
                                 imageBD.Tag = ip.ID;
-                                if (imageBD.Tag.ToString() == imageSelection.Tag.ToString())
+                                if (itemSelectionee.Count == 0)
                                 {
-                                    Item_VM.ItemsPlanActuel.Remove(ip);
-                                    imageSelection.Source = null;
-                                    imageSelection = null;
-                                    btntoolRotation.Visibility = Visibility.Hidden;
-                                    btntoolSupprimer.Visibility = Visibility.Hidden;
-                                    btntoolModifier.Visibility = Visibility.Hidden;
-                                    OutilEF.brycolContexte.lstItems.Remove(ip);
-                                    OutilEF.brycolContexte.SaveChanges();
-
-                                    return;
+                                    // Pour le simple delete
+                                    if (imageBD.Tag.ToString() == toolbarImage.Tag.ToString())
+                                    {
+                                        foreach (Image image in canvas.Children.OfType<Image>())
+                                        {
+                                            // Pour le simple delete
+                                            if (imageBD.Tag.ToString() == image.Tag.ToString())
+                                            {
+                                                Item_VM.ItemsPlanActuel.Remove(ip);
+                                                image.Source = null;
+                                                btntoolRotation.Visibility = Visibility.Hidden;
+                                                btntoolSupprimer.Visibility = Visibility.Hidden;
+                                                btntoolModifier.Visibility = Visibility.Hidden;
+                                            }
+                                        }
+                                        Item_VM.ItemsPlanActuel.Remove(ip);
+                                        toolbarImage.Source = null;
+                                        imageBD.Source = null;
+                                        btntoolRotation.Visibility = Visibility.Hidden;
+                                        btntoolSupprimer.Visibility = Visibility.Hidden;
+                                        btntoolModifier.Visibility = Visibility.Hidden;
+                                        OutilEF.brycolContexte.lstItems.Remove(ip);
+                                        OutilEF.brycolContexte.SaveChanges();
+                                        return;
+                                    }
                                 }
+                                else
+                                {
+                                    // Pour la sélection multiple!
+                                    foreach (Image item in itemSelectionee.ToList())
+                                    {
+                                        if (imageBD.Tag.ToString() == item.Tag.ToString())
+                                        {
+                                            foreach (Image image in canvas.Children.OfType<Image>())
+                                            {
+
+                                                if (imageBD.Tag.ToString() == image.Tag.ToString())
+                                                {
+                                                    Item_VM.ItemsPlanActuel.Remove(ip);
+                                                    image.Source = null;
+                                                    btntoolRotation.Visibility = Visibility.Hidden;
+                                                    btntoolSupprimer.Visibility = Visibility.Hidden;
+                                                    btntoolModifier.Visibility = Visibility.Hidden;
+                                                }
+                                            }
+                                            itemSelectionee.Remove(item);
+                                            Item_VM.ItemsPlanActuel.Remove(ip);
+                                            item.Source = null;
+                                            btntoolRotation.Visibility = Visibility.Hidden;
+                                            btntoolSupprimer.Visibility = Visibility.Hidden;
+                                            btntoolModifier.Visibility = Visibility.Hidden;
+                                            OutilEF.brycolContexte.lstItems.Remove(ip);
+                                            OutilEF.brycolContexte.SaveChanges();
+                                        }
+                                    }
+                                }
+
+
                             }
                         }
                     }
-                }            
-                if (Keyboard.IsKeyDown(Key.M)) 
+                    itemSelectionee.Clear();
+                }
+                
+            }
+            if (Keyboard.IsKeyDown(Key.M)) 
                 {
                    
                    popupItem.IsOpen = false;
@@ -2265,12 +2347,13 @@ namespace App_Brycol.Vues
                     return;                                                       
                 }
                 return;
-            }
-            return;
+           
+      
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+    
             var window = Window.GetWindow(this);
             window.KeyDown += HandleKeyPress;
         }
@@ -2451,6 +2534,26 @@ namespace App_Brycol.Vues
 
         private void click_deselect(object sender, RoutedEventArgs e)
         {
+            if (itemSelectionee.Count > 0)
+            {
+                
+                Popup codePopup = new Popup();
+                TextBlock popupText = new TextBlock();
+                popupText.Text = "Succès";
+                popupText.Background = Brushes.LightGreen;
+                popupText.Foreground = Brushes.Black;
+                popupText.FontSize = 24;
+                popupText.FontWeight = FontWeights.ExtraBold;
+                popupText.FontFamily = new FontFamily("Times new roman");
+                codePopup.Child = popupText;
+                codePopup.PopupAnimation = PopupAnimation.Fade;
+                codePopup.PlacementTarget = btnDeselection;
+                codePopup.Placement = PlacementMode.Left;
+                codePopup.StaysOpen = false;
+                codePopup.IsOpen = true;
+
+            }
+
             itemSelectionee.Clear();
         }
     }
