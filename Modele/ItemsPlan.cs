@@ -16,6 +16,9 @@ namespace App_Brycol.Modele
         public string Couleur { get; set; }
         public double emplacementGauche { get; set; }
         public double emplacementHaut { get; set; }
+        public double emplacementGaucheTOP { get; set; }
+        public double emplacementHautTOP { get; set; }
+        public double angleRotationTOP { get; set; }
         public double angleRotation { get; set; }
         public string cotePorte { get; set; }
         public int mur { get; set; }

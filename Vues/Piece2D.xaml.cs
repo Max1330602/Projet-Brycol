@@ -37,12 +37,11 @@ namespace App_Brycol.Vues
                 AppliquerThemeSombre();
             else
                 EnleverThemeSombre();
-            Plan_VM.zoomPiece = 11 / Piece_VM.pieceActuel.Longueur;
+          
             DataContext = new Plan_VM();      
         }
 
         #region attributs--------------------------------------------------------------------------------------------------------------------------------
-        int compteur;
         private Point clickPosition;
         private Point position;
         public static Image draggedImage;
@@ -66,10 +65,9 @@ namespace App_Brycol.Vues
         public bool validation;
 
         // Zoom
-        private Double zoomMax = 1.9;
-        private Double zoomMin = 0.8;
-        private Double zoomSpeed = 0.001;
-        private Double zoom;
+        private Double zoomMax;
+        private Double zoomMin;
+       // private Double zoomSpeed = 0.001;
         private Double zoomDefault;
         private Stack<String> stackItem = new Stack<string>();
         private List<Image> itemSelectionee = new List<Image>();
@@ -167,13 +165,7 @@ namespace App_Brycol.Vues
                 imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/plancheAucun.jpg"));
                 canvasMur.Background = imgBrush;
             }           
-            if (Piece_VM.pieceActuel.Longueur == 0 && Piece_VM.pieceActuel.Largeur == 0)
-            {
-                zoom = 1.2;
-                Canvas.SetLeft(canvas_Zoom, 0);
-                Canvas.SetTop(canvas_Zoom, 0);
-                canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transforme la grandeur du canvas         
-            }
+           
             try
             {
                 ImageBrush imgBrush = new ImageBrush();
@@ -186,51 +178,67 @@ namespace App_Brycol.Vues
                 imgBrush.ImageSource = new BitmapImage(new Uri("pack://application:,,,/images/Items/plancheAucun.jpg"));
                 canvas.Background = imgBrush;
             }
-            if (!Plan_VM.catalogueClick)
+
+            if (Piece_VM.pieceActuel.Longueur == 0 && Piece_VM.pieceActuel.Largeur == 0)
             {
+                Canvas.SetLeft(canvas_Zoom, 5);
+                Canvas.SetTop(canvas_Zoom, 5);
+                
+                canvas_Zoom.RenderTransform = new ScaleTransform(1.3, 1.3); // transforme la grandeur du canvas               
+            }
+            else if (!Plan_VM.catalogueClick)
+            {
+                Plan_VM.sliderPiece = 50;
                 Canvas.SetLeft(canvas, 10);
                 Canvas.SetTop(canvas, 10);             
                 if (Plan_VM.uniteDeMesure == "Mètres")
                 {
-                    zoomDefault = 11 / Piece_VM.pieceActuel.Longueur;
-                    zoom = 11 / Piece_VM.pieceActuel.Longueur;
+                    Plan_VM.zoomPiece = 10 / Piece_VM.pieceActuel.Longueur;
+                    Plan_VM.zoomDefault = 10 / Piece_VM.pieceActuel.Longueur;
+                    Plan_VM.zoomMax = Plan_VM.zoomPiece+2.4;
+                    Plan_VM.zoomMin = Plan_VM.zoomPiece-2.4;
+
                 }
                 else
                 {
-                    zoomDefault = 36.08 / Piece_VM.pieceActuel.Longueur;
-                    zoom = 36.08 / Piece_VM.pieceActuel.Longueur;
+                    Plan_VM.zoomPiece = 32.81 / Piece_VM.pieceActuel.Longueur;
+                    Plan_VM.zoomDefault = 32.81 / Piece_VM.pieceActuel.Longueur;
+                    Plan_VM.zoomMax = Plan_VM.zoomPiece + 2.4;
+                    Plan_VM.zoomMin = Plan_VM.zoomPiece - 2.4;
+
                 }
-                canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transforme la grandeur du canvas  
+                canvas_Zoom.RenderTransform = new ScaleTransform(Plan_VM.zoomPiece, Plan_VM.zoomPiece); // transforme la grandeur du canvas  
                 montrerClip();
-            }
+            }             
             else
-            {
-               
-            
+            {       
                 if (Plan_VM.clip)
                 {
+                    movePiece = false;
                     montrerClip();
                     Canvas.SetLeft(canvas, 10);
                     Canvas.SetTop(canvas, 10);
+                  
                 }
                 else
                 {
+                    movePiece = true;
                     montrerClip();
+                    cacherClip();
                     canvas.RenderTransformOrigin = new Point(0.5, 0.5);
                     canvas.RenderTransform = new RotateTransform(Plan_VM.rotationPieceVM);
+                    Canvas.SetLeft(canvas, Plan_VM.canvasPieceLeft);
+                    Canvas.SetTop(canvas, Plan_VM.canvasPieceTop);
                 }
-                canvas_Zoom.RenderTransform = new ScaleTransform(Plan_VM.zoomPiece, Plan_VM.zoomPiece); // transforme la grandeur du canvas 
-                Canvas.SetLeft(canvas, Plan_VM.canvasPieceLeft);
-                Canvas.SetTop(canvas, Plan_VM.canvasPieceTop);
+                slider1.Value = Plan_VM.sliderPiece;
+                //canvas_Zoom.RenderTransform = new ScaleTransform(Plan_VM.zoomPiece, Plan_VM.zoomPiece); // transforme la grandeur du canvas 
+
             }
         }
 
         private void cacherClip()
         {
-
-            btnPieceRotation.Visibility = Visibility.Visible;
-            
-            movePiece = true;
+            btnPieceRotation.Visibility = Visibility.Visible;                       
             btnClipPiece.Visibility = Visibility.Visible;
             btnClipPieceDeclipper.Visibility = Visibility.Hidden;
         }
@@ -303,9 +311,7 @@ namespace App_Brycol.Vues
                 }
             }
 
-            Canvas.SetLeft(canvas, 10);
-            Canvas.SetTop(canvas, 10);
-
+            
             btnClipPiece.Visibility = Visibility.Hidden;
             btnClipPieceDeclipper.Visibility = Visibility.Visible;
 
@@ -608,12 +614,7 @@ namespace App_Brycol.Vues
                         popupMur.IsOpen = true;
                     }
                 }
-                
-                
-          
-                
-              
-               
+  
                 #endregion
 
                 if (image != null && canvas.CaptureMouse())
@@ -720,12 +721,22 @@ namespace App_Brycol.Vues
                         i.emplacementHaut = Canvas.GetTop(draggedImage) + offset.Y;
                         foreach (Image image in canvas.Children.OfType<Image>())
                         {
+                            
                             if (imageBD.Tag.ToString() == image.Tag.ToString())
                             {
-                                positionnerStructureDansPiece(i, image);                                                                                                   
-                            }
-                        }
+                                positionnerStructureDansPiece(i, image);
+                                i.emplacementGaucheTOP = Canvas.GetLeft(image) + offset.X;
+                                i.emplacementHautTOP = Canvas.GetTop(image) + offset.Y;
+                                RotateTransform rotationTOP = image.RenderTransform as RotateTransform;
+                                if (rotationTOP != null)
+                                {
 
+                                    i.angleRotationTOP = rotationTOP.Angle;
+                                }
+                            }
+                            
+
+                        }
                             if (i.Item.Nom.Contains("Porte") || i.Item.Nom.Contains("Fenêtre"))
                             {
                             Canvas.SetLeft(btntoolRotation, i.emplacementGauche + 105);
@@ -736,7 +747,6 @@ namespace App_Brycol.Vues
 
                             Canvas.SetLeft(btntoolModifier, i.emplacementGauche + 224);
                             Canvas.SetTop(btntoolModifier, i.emplacementHaut + 45);
-
                             }
                             else
                             {
@@ -750,7 +760,6 @@ namespace App_Brycol.Vues
 
                                     Canvas.SetLeft(btntoolModifier, i.emplacementGauche + 124);
                                     Canvas.SetTop(btntoolModifier, i.emplacementHaut - 19);
-
                                 }
                                 else
                                 {
@@ -762,7 +771,6 @@ namespace App_Brycol.Vues
 
                                     Canvas.SetLeft(btntoolModifier, i.emplacementGauche + 124);
                                     Canvas.SetTop(btntoolModifier, i.emplacementHaut + i.Item.Longueur - 15);
-
                                 }
                             }
                         if (canvasMur.Visibility == Visibility.Hidden)
@@ -805,7 +813,9 @@ namespace App_Brycol.Vues
              {
                  Canvas.SetLeft(image, i.emplacementGauche+74);
                  Canvas.SetTop(image, -5);
-             }
+               
+                 
+                }
              else if (i.Item.Nom == "Porte Double")
              {
                  Canvas.SetLeft(image, i.emplacementGauche +150);
@@ -1033,33 +1043,42 @@ namespace App_Brycol.Vues
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        // Zoom avec la roue à zoom
+        // Zoom avec la roue à souris
         private void Canvas_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            zoom += zoomSpeed * e.Delta; // Ajuste la vitesse du zoom (e.Delta = Souris roue à zoom )
-            if (zoom < zoomMin) { zoom = zoomMin; } // Limite le minimum
-            if (zoom > zoomMax) { zoom = zoomMax; } // Limite le maximum
+            //Plan_VM.zoomPiece += zoomSpeed * e.Delta; // Ajuste la vitesse du zoom (e.Delta = Souris roue à zoom )
+            if (Plan_VM.zoomPiece < Plan_VM.zoomMin) { Plan_VM.zoomPiece = Plan_VM.zoomMin; } // Limite le minimum
+            if (Plan_VM.zoomPiece > Plan_VM.zoomMax) { Plan_VM.zoomPiece = Plan_VM.zoomMax; } // Limite le maximum
 
             Point mousePos = e.GetPosition(canvas);
-           // Plan_VM.zoomPiece = zoom;
-            if (movePiece)
-            {
-                canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom, mousePos.X, mousePos.Y); // transforme la grandeur du canvas selon la position de la souris
-            }
-            else
-            {                
-                canvas_Zoom.RenderTransform = new ScaleTransform(zoom, zoom); // transforme la grandeur du canvas si la pièce est clip
-            }
-                
-
-            if (e.Delta<0)
+            if (e.Delta < 0)
             {
                 slider1.Value = slider1.Ticks.Select(x => (double?)x).LastOrDefault(x => x < slider1.Value) ?? slider1.Value;
+                if (Plan_VM.sliderPiece >= 5)
+                {
+                    Plan_VM.sliderPiece = Plan_VM.sliderPiece - 5;
+                }
             }
             else
             {
+                if (Plan_VM.sliderPiece <= 95)
+                {
+                    Plan_VM.sliderPiece = Plan_VM.sliderPiece + 5;
+                }
                 slider1.Value = slider1.Ticks.Select(x => (double?)x).FirstOrDefault(x => x > slider1.Value) ?? slider1.Value;
             }
+            // Plan_VM.zoomPiece = zoom;
+           /* if (movePiece)
+            {
+                canvas_Zoom.RenderTransform = new ScaleTransform(Plan_VM.zoomPiece, Plan_VM.zoomPiece, mousePos.X, mousePos.Y); // transforme la grandeur du canvas selon la position de la souris
+            }
+            else
+            {
+                canvas_Zoom.RenderTransform = new ScaleTransform(Plan_VM.zoomPiece, Plan_VM.zoomPiece); //transforme la grandeur du canvas si la pièce est clip
+            }*/
+                
+
+            
            
         }
         
@@ -1112,13 +1131,13 @@ namespace App_Brycol.Vues
                         else
                         {
                             // Pour la sélection multiple!
-                            foreach (Image item in itemSelectionee)
+                            foreach (Image item in itemSelectionee.ToList())
                             {
                                 if (imageBD.Tag.ToString() == item.Tag.ToString())
                                 {
                                     foreach (Image image in canvas.Children.OfType<Image>())
                                     {
-                                        // Pour le simple delete
+                                       
                                         if (imageBD.Tag.ToString() == image.Tag.ToString())
                                         {
                                             Item_VM.ItemsPlanActuel.Remove(ip);
@@ -1128,6 +1147,7 @@ namespace App_Brycol.Vues
                                             btntoolModifier.Visibility = Visibility.Hidden;
                                         }
                                     }
+                                    itemSelectionee.Remove(item);
                                     Item_VM.ItemsPlanActuel.Remove(ip);
                                     item.Source = null;
                                     btntoolRotation.Visibility = Visibility.Hidden;
@@ -1148,12 +1168,11 @@ namespace App_Brycol.Vues
 
         public async void initializeItems()
         {
+           
             imageSelection = null;
             canvas.Children.Clear();
             canvasMur.Children.Clear();
             setCanvasPiece();
-       
-
 
             if (Item_VM.ItemsPlanActuel != null)
             {
@@ -1161,6 +1180,7 @@ namespace App_Brycol.Vues
                 var ireq = from ip in OutilEF.brycolContexte.lstItems.Include("Plan") where ip.Plan.Piece.ID == Piece_VM.pieceActuel.ID select ip;
                 foreach (ItemsPlan i in ireq)
                     Item_VM.ItemsPlanActuel.Add(i);
+               
                 foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
                 {
                     var bitmap = new BitmapImage();
@@ -1247,46 +1267,76 @@ namespace App_Brycol.Vues
                             bitmap.UriSource = new Uri("pack://application:,,,/images/Items/Top/item0.png");
                             bitmap.EndInit();
                         }
-                    }
-                    
+                    }                   
                     
                     var image = new Image { Source = bitmap };
                     var imageTop = new Image { Source = bitmapTop };
                     Canvas.SetLeft(image, ip.emplacementGauche);
                     Canvas.SetTop(image, ip.emplacementHaut);
-                    Canvas.SetLeft(imageTop, ip.emplacementGauche);
-                    Canvas.SetTop(imageTop, ip.emplacementHaut);
+                    Canvas.SetLeft(imageTop, ip.emplacementGaucheTOP);
+                    Canvas.SetTop(imageTop, ip.emplacementHautTOP);
                     image.Tag = ip.ID;
                     imageTop.Tag = ip.ID;
                     #region angle-----------------------------------------------------------------------------------------------------------------
-                    if (ip.angleRotation == 0)
+                    if (ip.angleRotation == 0 || ip.angleRotationTOP == 0)
                     {
-                        image.RenderTransformOrigin = new Point(0.5, 0.5);
-                        image.RenderTransform = new RotateTransform(0);
-                        imageTop.RenderTransformOrigin = new Point(0.5, 0.5);
-                        imageTop.RenderTransform = new RotateTransform(0);
+                        if (ip.angleRotation == 0)
+                        {
+                            image.RenderTransformOrigin = new Point(0.5, 0.5);
+                            image.RenderTransform = new RotateTransform(0);
+                        }
+                        if(ip.angleRotationTOP == 0)
+                        {
+                            imageTop.RenderTransformOrigin = new Point(0.5, 0.5);
+                            imageTop.RenderTransform = new RotateTransform(0);
+                        }
+                        
+                        
                     }
-                    else if (ip.angleRotation == 90)
+                    if (ip.angleRotation == 90 || ip.angleRotationTOP == 90)
                     {
-                        image.RenderTransformOrigin = new Point(0.5, 0.5);
-                        image.RenderTransform = new RotateTransform(90);
-                        imageTop.RenderTransformOrigin = new Point(0.5, 0.5);
-                        imageTop.RenderTransform = new RotateTransform(90);
+                        if (ip.angleRotation == 90)
+                        {
+                            image.RenderTransformOrigin = new Point(0.5, 0.5);
+                            image.RenderTransform = new RotateTransform(90);
+                        }
+                        if(ip.angleRotationTOP == 90)
+                        {
+                            imageTop.RenderTransformOrigin = new Point(0.5, 0.5);
+                            imageTop.RenderTransform = new RotateTransform(90);
+                        }
+                        
+                        
                     }
-                    else if (ip.angleRotation == 180)
+                    if (ip.angleRotation == 180 || ip.angleRotationTOP == 180)
                     {
-                        image.RenderTransformOrigin = new Point(0.5, 0.5);
-                        image.RenderTransform = new RotateTransform(180);
-                        imageTop.RenderTransformOrigin = new Point(0.5, 0.5);
-                        imageTop.RenderTransform = new RotateTransform(90);
-                    }
-                    else if (ip.angleRotation == 270)
-                    {
+                        if (ip.angleRotation == 180)
+                        {
+                            image.RenderTransformOrigin = new Point(0.5, 0.5);
+                            image.RenderTransform = new RotateTransform(180);
+                        }
+                        if(ip.angleRotationTOP == 180)
+                        {
 
-                        image.RenderTransformOrigin = new Point(0.5, 0.5);
-                        image.RenderTransform = new RotateTransform(270);
-                        imageTop.RenderTransformOrigin = new Point(0.5, 0.5);
-                        imageTop.RenderTransform = new RotateTransform(90);
+                            imageTop.RenderTransformOrigin = new Point(0.5, 0.5);
+                            imageTop.RenderTransform = new RotateTransform(180);
+                        }
+                       
+                    }
+                    if (ip.angleRotation == 270 || ip.angleRotationTOP == 270)
+                    {
+                        if (ip.angleRotation == 270)
+                        {
+                            image.RenderTransformOrigin = new Point(0.5, 0.5);
+                            image.RenderTransform = new RotateTransform(270);
+                        }
+                        if(ip.angleRotationTOP == 270)
+                        {
+                            imageTop.RenderTransformOrigin = new Point(0.5, 0.5);
+                            imageTop.RenderTransform = new RotateTransform(270);
+                        }
+                        
+                        
                     }
                     
                     #endregion
@@ -1366,40 +1416,49 @@ namespace App_Brycol.Vues
 
         private void canvasResizeFull(object sender, RoutedEventArgs e)
         {
-
-            double zoomm = zoomDefault;
-            canvas_Zoom.RenderTransform = new ScaleTransform(zoomm, zoomm); // transforme la grandeur du canvas
-            canvas_Zoom.RenderTransform = new ScaleTransform(zoomm, zoomm); // transforme la grandeur du canvas
+            Canvas.SetLeft(canvas, 10);
+            Canvas.SetTop(canvas, 10);
+            Plan_VM.sliderPiece = 50;
+            Plan_VM.zoomPiece = Plan_VM.zoomDefault;
+            canvas_Zoom.RenderTransform = new ScaleTransform(Plan_VM.zoomPiece, Plan_VM.zoomPiece); // transforme la grandeur du canvas  
             slider1.Value = 50;
+            
+                
         }
 
         private void btnZoomIn(object sender, RoutedEventArgs e)
         {
-            zoom = zoom + 0.12;
-            if (zoom < zoomMin) { zoom = zoomMin; } // Limite le minimum
-            if (zoom > zoomMax) { zoom = zoomMax; } // Limite le maximum
-            Plan_VM.zoomPiece = zoom;
-            slider1.Value = slider1.Ticks.Select(x => (double?)x).FirstOrDefault(x => x > slider1.Value) ?? slider1.Value;
-
-
-            canvas.RenderTransform = new ScaleTransform(zoom, zoom); // transforme la grandeur du canvas
+            //Plan_VM.zoomPiece = Plan_VM.zoomPiece + 0.07;
+            if (Plan_VM.zoomPiece < Plan_VM.zoomMin) { Plan_VM.zoomPiece = Plan_VM.zoomMin; } // Limite le minimum
+            if (Plan_VM.zoomPiece > Plan_VM.zoomMax) { Plan_VM.zoomPiece = Plan_VM.zoomMax; } // Limite le maximum
           
+            slider1.Value = slider1.Ticks.Select(x => (double?)x).FirstOrDefault(x => x > slider1.Value) ?? slider1.Value;
+            if (Plan_VM.sliderPiece <= 95)
+            {
+                Plan_VM.sliderPiece = Plan_VM.sliderPiece + 5;
+            }
+           // canvas_Zoom.RenderTransform = new ScaleTransform(Plan_VM.zoomPiece, Plan_VM.zoomPiece); // transforme la grandeur du canvas
+
         }
 
         private void btnZoomOut(object sender, RoutedEventArgs e)
         {
-            zoom = zoom - 0.12;
-            if (zoom < zoomMin) { zoom = zoomMin; } // Limite le minimum
-            if (zoom > zoomMax) { zoom = zoomMax; } // Limite le maximum
-            Plan_VM.zoomPiece = zoom;
+            //Plan_VM.zoomPiece = Plan_VM.zoomPiece - 0.07;
+            if (Plan_VM.zoomPiece < Plan_VM.zoomMin) { Plan_VM.zoomPiece = Plan_VM.zoomMin; } // Limite le minimum
+            if (Plan_VM.zoomPiece > Plan_VM.zoomMax) { Plan_VM.zoomPiece = Plan_VM.zoomMax; } // Limite le maximum
+       
             slider1.Value = slider1.Ticks.Select(x => (double?)x).LastOrDefault(x => x < slider1.Value) ?? slider1.Value;
-
-            canvas.RenderTransform = new ScaleTransform(zoom, zoom);  // transforme la grandeur du canvas
+            if (Plan_VM.sliderPiece >= 5)
+            {
+                Plan_VM.sliderPiece = Plan_VM.sliderPiece - 5;
+            }
+            
+            //canvas_Zoom.RenderTransform = new ScaleTransform(Plan_VM.zoomPiece, Plan_VM.zoomPiece);  // transforme la grandeur du canvas
         }          
 
         private void CanvasZoomLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (Piece_VM.pieceActuel.Longueur == 0 && Piece_VM.pieceActuel.Largeur == 00)
+            if (Piece_VM.pieceActuel.Longueur == 0 && Piece_VM.pieceActuel.Largeur == 0)
             {
                 start = e.GetPosition(canvas_Zoom);
             }
@@ -1424,7 +1483,7 @@ namespace App_Brycol.Vues
                 };
 
 
-                // Update the X & Y as the mouse moves
+              
                 if (e.LeftButton == MouseButtonState.Pressed && pieceCreer == false)
                 {
                     if (canvas_Zoom.Children.Count > 1)
@@ -1665,12 +1724,14 @@ namespace App_Brycol.Vues
                         pieceCreer = true;
                         Piece_VM.pieceActuel.Longueur = Convert.ToSingle(rectanglePieceHeight) / pixelToM;
                         Piece_VM.pieceActuel.Largeur = Convert.ToSingle(rectanglePieceWidth) / pixelToM;
-
                         canvas.Width = rectanglePieceWidth;
                         canvas.Height = rectanglePieceHeight;
-
+                        txtLargeur2.Text = (Convert.ToSingle(rectanglePieceWidth) / pixelToM).ToString();
+                        txtLongueur2.Text = (Convert.ToSingle(rectanglePieceHeight) / pixelToM).ToString();
+                        txtUnite1.Text = Piece_VM.pieceActuel.UniteDeMesure.ToString();
+                        txtUnite2.Text = Piece_VM.pieceActuel.UniteDeMesure.ToString();
                         canvas_Zoom.Children.RemoveRange(1, 3);
-
+                        montrerClip();
 
 
                         setCanvasPiece();
@@ -1832,47 +1893,27 @@ namespace App_Brycol.Vues
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             double zoomSlider = e.NewValue;
-            double zoomSliderTemp = 0;
-            switch (zoomSlider)
+            if(e.OldValue == 0)
             {
-                case 1:
-                    zoomSliderTemp = 0.8;
-                    break;
-                case 10:
-                    zoomSliderTemp = 0.92;
-                    break;
-                case 20:
-                    zoomSliderTemp = 1.04;
-                    break;
-                case 30:
-                    zoomSliderTemp = 1.16;
-                    break;
-                case 40:
-                    zoomSliderTemp = 1.28;
-                    break;           
-                case 50:             
-                    zoomSliderTemp = 1.4;
-                    break;           
-                case 60:             
-                    zoomSliderTemp = 1.52;
-                    break;           
-                case 70:             
-                    zoomSliderTemp = 1.64;
-                    break;           
-                case 80:             
-                    zoomSliderTemp = 1.76;
-                    break;           
-                case 90:             
-                    zoomSliderTemp = 1.88;
-                    break;           
-                case 100:            
-                    zoomSliderTemp = 1.9;
-                    break;           
-
-                default:
-                    break;
+                canvas_Zoom.RenderTransform = new ScaleTransform(Plan_VM.zoomPiece, Plan_VM.zoomPiece);
             }
-            canvas_Zoom.RenderTransform = new ScaleTransform(zoomSliderTemp, zoomSliderTemp);
+            else if (e.OldValue == 1 && zoomSlider != 5)
+            {
+                canvas_Zoom.RenderTransform = new ScaleTransform(Plan_VM.zoomPiece, Plan_VM.zoomPiece);
+            }
+            else if (zoomSlider < e.OldValue )
+            {
+                Plan_VM.zoomPiece = Plan_VM.zoomPiece - 0.12;
+                canvas_Zoom.RenderTransform = new ScaleTransform(Plan_VM.zoomPiece, Plan_VM.zoomPiece);
+            }
+            else if (zoomSlider > e.OldValue)
+            {
+                Plan_VM.zoomPiece = Plan_VM.zoomPiece + 0.12;
+                canvas_Zoom.RenderTransform = new ScaleTransform(Plan_VM.zoomPiece, Plan_VM.zoomPiece);
+  
+            }
+           
+
         }
 
         #region Clip Strucure----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

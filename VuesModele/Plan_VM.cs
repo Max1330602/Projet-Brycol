@@ -28,7 +28,11 @@ namespace App_Brycol.VuesModele
         public static double canvasPieceLeft;
         public static bool clip = true;
         public static double zoomPiece;
+        public static double zoomMax;
+        public static double zoomMin;
+        public static double zoomDefault;
         public static double rotationPieceVM;
+        public static int sliderPiece;
 
         public Plan_VM()
         {
