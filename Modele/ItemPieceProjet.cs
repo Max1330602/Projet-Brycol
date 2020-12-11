@@ -8,12 +8,12 @@ namespace App_Brycol.Modele
 {
     class ItemPieceProjet
     {
-        public string NomPiece{get; set; }
+        public string NomPiece { get; set; }
         public string NomItem { get; set; }
         public decimal CoutItem { get; set; }
         public string FournisseurItem { get; set; }
         public string EstPayeItem { get; set; }
-
+        public static List<ItemPieceProjet> lstItemNonPayé { get; set; }
 
         public ItemPieceProjet()
         {
