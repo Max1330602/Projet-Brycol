@@ -79,19 +79,6 @@ namespace App_Brycol.Vues
                     BitmapImage bmiItem = new BitmapImage();
                     try
                     {
-                        bmiItem.EndInit();
-                    }
-                    catch (Exception)
-                    {
-                        bmiItem = new BitmapImage();
-                        bmiItem.BeginInit();
-                        bmiItem.UriSource = new Uri("../../images/Items/item0.png", UriKind.Relative);
-                        bmiItem.EndInit();
-
-
-                    }
-                    try
-                    {
                         bmiItem.BeginInit();
                         bmiItem.CacheOption = BitmapCacheOption.OnLoad;
                         bmiItem.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
