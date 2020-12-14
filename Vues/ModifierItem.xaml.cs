@@ -66,19 +66,44 @@ namespace App_Brycol.Vues
             foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
             {
                 ip.Tag = ip.ID;
-                if (Piece2D.toolbarImage.Source.ToString() == "pack://application:,,,/images/Items/Top/item" + ip.Item.ID + ".png" && Piece2D.toolbarImage.Tag.ToString() == ip.Tag.ToString())
+                string path = "file:///" + System.Windows.Forms.Application.StartupPath;
+                path = path.Replace("\\", "/");
+                string pathCorrect = path.Substring(0, path.IndexOf("bin")) + "images/items/Top/";
+
+                if (Piece2D.toolbarImage.Source.ToString() == pathCorrect + "item" + ip.Item.ID + ".png" && Piece2D.toolbarImage.Tag.ToString() == ip.Tag.ToString())
                 {
                     Item_VM.ItemsPlanModifie.Add(ip);
                     ip.Couleur = cmbCouleur.SelectedItem.ToString().Replace("System.Windows.Controls.ComboBoxItem: ", "");
                     OutilEF.brycolContexte.SaveChanges();
 
                     BitmapImage bmiItem = new BitmapImage();
-                    bmiItem.BeginInit();
-                    bmiItem.CacheOption = BitmapCacheOption.OnLoad;
-                    bmiItem.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-                    bmiItem.UriSource = new Uri("pack://application:,,,/images/ItemsModifies/Item" + ip.Item.ID + "/" + ip.Couleur + ".png");
-                    bmiItem.EndInit();
-                    imgItem.Source = bmiItem;
+                    try
+                    {
+                        bmiItem.EndInit();
+                    }
+                    catch (Exception)
+                    {
+                        bmiItem = new BitmapImage();
+                        bmiItem.BeginInit();
+                        bmiItem.UriSource = new Uri("../../images/Items/item0.png", UriKind.Relative);
+                        bmiItem.EndInit();
+
+
+                    }
+                    try
+                    {
+                        bmiItem.BeginInit();
+                        bmiItem.CacheOption = BitmapCacheOption.OnLoad;
+                        bmiItem.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                        bmiItem.UriSource = new Uri("pack://application:,,,/images/ItemsModifies/Item" + ip.Item.ID + "/" + ip.Couleur + ".png");
+                        bmiItem.EndInit();
+                        imgItem.Source = bmiItem;
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Impossible de modifier une image ajoutée au catalogue.");
+                        return;
+                    }
                 }
                 else if (Piece2D.toolbarImage.Source.ToString() == "pack://application:,,,/images/ItemsModifies/Item" + ip.Item.ID + "/" + ip.Couleur + ".png" && Piece2D.toolbarImage.Tag.ToString() == ip.Tag.ToString())
                 {
