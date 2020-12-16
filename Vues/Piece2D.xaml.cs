@@ -1243,9 +1243,12 @@ namespace App_Brycol.Vues
                         {
                             bitmap = new BitmapImage();
                             bitmap.BeginInit();
+                            bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                            bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+
                             string path = System.Windows.Forms.Application.StartupPath;
-                            string pathCorrect = path.Substring(0, path.IndexOf("bin")) + "images\\items\\Top\\";
-                            bitmap.UriSource = new Uri(pathCorrect + "item" + ip.Item.ID + ".png");
+                            string pathCorrect = path.Substring(0, path.IndexOf("Brycol")) + "images\\items\\Top\\";
+                            bitmap.UriSource = new Uri("..\\..\\images\\Items\\Top\\" + "item" + ip.Item.ID + ".png", UriKind.Relative);
                             bitmap.EndInit();
                         }
                         catch (Exception)
@@ -1277,9 +1280,11 @@ namespace App_Brycol.Vues
                         { 
                             bitmap = new BitmapImage();
                             bitmap.BeginInit();
-                            string path = System.Windows.Forms.Application.StartupPath;
-                            string pathCorrect = path.Substring(0, path.IndexOf("bin")) + "images\\items\\Top\\";
-                            bitmap.UriSource = new Uri(pathCorrect + "item" + ip.Item.ID + ".png");
+                            bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                            bitmap.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                            //string path = System.Windows.Forms.Application.StartupPath;
+                            //string pathCorrect = path.Substring(0, path.IndexOf("Brycol")) + "images\\items\\Top\\";
+                            bitmap.UriSource = new Uri("..\\..\\images\\Items\\Top\\" + "item" + ip.Item.ID + ".png", UriKind.Relative);
                             bitmap.EndInit();
                         }
                         catch(Exception)
