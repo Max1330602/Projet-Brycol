@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:App_Brycol.Vues"
         mc:Ignorable="d"
         Height="315" Width="320">
@@ -35,10 +36,10 @@
         <TextBox x:Name="txtnoCarte"  Grid.Row="1" Width="120" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,10,0,0"></TextBox>
 
         <Label x:Name="lblMois"  Grid.Row="1" Content="Mois Exp : " Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0"></Label>
-        <TextBox x:Name="txtMois"  Grid.Row="1" Width="120" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,50,0,0"></TextBox>
+        <xctk:DoubleUpDown Name="txtMois" Value="1" Height="25" Margin="110,50,220,116" Grid.Row="1"/>
 
         <Label x:Name="lblAnnee"  Grid.Row="1" Content="Année Exp : " Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,90,0,0"></Label>
-        <TextBox x:Name="txtAnnee"  Grid.Row="1" Width="120" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,90,0,0"></TextBox>
+        <xctk:DoubleUpDown Name="txtAnnee" Value="2020" Height="25" Margin="110,90,220,76" Grid.Row="1"/>
 
         <Label x:Name="lblType"  Grid.Row="1" Content="Type : " Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,130,0,0"></Label>
         <StackPanel Grid.Row="1" Height="25" Orientation="Horizontal" Margin="100,130,10,35">
