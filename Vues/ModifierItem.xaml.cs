@@ -41,7 +41,7 @@ namespace App_Brycol.Vues
             imgItem.Source = Piece2D.toolbarImage.Source;
         }
 
-        private void btnAnnuler_Click(object sender, RoutedEventArgs e)
+        private void btnRetour_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
             Piece2D.toolbarImage = null;
@@ -123,8 +123,8 @@ namespace App_Brycol.Vues
             btnAppliquer.Background = Brushes.White;
             btnAppliquer.Foreground = Brushes.Black;
 
-            btnAnnuler.Background = Brushes.White;
-            btnAnnuler.Foreground = Brushes.Black;
+            btnRetour.Background = Brushes.White;
+            btnRetour.Foreground = Brushes.Black;
         }
 
         private void AppliquerThemeSombre()
@@ -143,8 +143,8 @@ namespace App_Brycol.Vues
             btnAppliquer.Background = CouleurBouton;
             btnAppliquer.Foreground = Brushes.White;
 
-            btnAnnuler.Background = CouleurBouton;
-            btnAnnuler.Foreground = Brushes.White;
+            btnRetour.Background = CouleurBouton;
+            btnRetour.Foreground = Brushes.White;
         }
 
 

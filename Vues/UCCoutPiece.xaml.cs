@@ -42,8 +42,8 @@ namespace App_Brycol.Vues
         {
             DG_coutItem.Background = Brushes.White;
 
-            DG_coutItem.RowBackground = Brushes.White;
-            DG_coutItem.AlternatingRowBackground = Brushes.White;
+            DG_coutItem.RowBackground = Brushes.CornflowerBlue;
+            DG_coutItem.AlternatingRowBackground = Brushes.White; 
         }
 
         private void AppliquerThemeSombre()

@@ -31,7 +31,7 @@
         <Border x:Name="Banniere" Grid.Row="0" Background="LightGray"/>
         <Image Grid.Row="0" x:Name="logo" Source="/images/logo.png" HorizontalAlignment="Right"/>
 
-        <Button Name="btnOk" Content="Ok" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="30" Margin="0,0,15,10" Click="btnOk_Click"/>
+        <Button Name="btnRetour" Content="Retour" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="30" Margin="0,0,15,10" Click="btnRetour_Click"/>
         <Button Name="btnTransaction" Content="Payer" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="30" Margin="0,0,100,10" Visibility="Hidden" Click="btnPayer_Click"/>
         <Button Name="btnAnnulerTransaction" Content="Annuler Paiement" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="150" Height="30" Margin="0,0,100,10" Visibility="Hidden" Click="btnAnnulerPayer_Click"/>
         <StackPanel Orientation="Horizontal" Grid.Row="2">

@@ -43,9 +43,12 @@ namespace App_Brycol.Vues
 
         }
 
+
         private void EnleverThemeSombre()
         {
-            lblProjet.Background = Brushes.White;
+            Banniere.Background = Brushes.LightGray;
+
+            grdPartage.Background = Brushes.White;
 
             btnRetour.Background = Brushes.White;
             btnRetour.Foreground = Brushes.Black;
@@ -56,7 +59,6 @@ namespace App_Brycol.Vues
                 btnPartage.Foreground = Brushes.Black;
 
             }
-
         }
 
         private void AppliquerThemeSombre()
@@ -66,7 +68,9 @@ namespace App_Brycol.Vues
             Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
             Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
 
-            lblProjet.Background = CouleurArrierePlan;
+            Banniere.Background = CouleurBanniere;
+
+            grdPartage.Background = CouleurArrierePlan;
 
             btnRetour.Background = CouleurBouton;
             btnRetour.Foreground = Brushes.White;
@@ -77,6 +81,8 @@ namespace App_Brycol.Vues
                 btnPartage.Foreground = Brushes.White;
 
             }
+
+
         }
 
         private void btnPrendreUti_Click(object sender, RoutedEventArgs e)

@@ -41,7 +41,7 @@
         </ComboBox>
 
         <Button x:Name="btnAppliquer" Content="Appliquer" Grid.Row="1"  Height="25" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,10,10,10" Click="btnAppliquer_Click"></Button>
-        <Button x:Name="btnAnnuler" Content="Annuler" Grid.Row="1"  Height="25" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,10,10,10" Click="btnAnnuler_Click"></Button>
+        <Button x:Name="btnRetour" Content="Retour" Grid.Row="1"  Height="25" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,10,10,10" Click="btnRetour_Click"></Button>
         
     </Grid>
 </Window>

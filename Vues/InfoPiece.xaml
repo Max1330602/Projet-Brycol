@@ -75,7 +75,7 @@
 
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Height="35">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="btnAnnuler" Click="btnAnnuler_Click" Grid.Row="2" Width="100" Height="25" Content="Annuler" HorizontalAlignment="Right" Margin="0,0,20,10"/>
+                <Button Name="btnRetour" Click="btnRetour_Click" Grid.Row="2" Width="100" Height="25" Content="Retour" HorizontalAlignment="Right" Margin="0,0,20,10"/>
                 <Button Name="btnContinuer" Click="btnContinuer_Click" Grid.Row="2" Width="100" Height="25" Content="Continuer" HorizontalAlignment="Right" Margin="0,0,10,10"/>
             </StackPanel>
         </StackPanel>
