@@ -26,7 +26,6 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
-            <RowDefinition Height="0.1*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -34,13 +33,53 @@
         <Label Grid.ColumnSpan="2" Grid.Row="0" FontSize="20" Height="40" Width="500" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Partage de projets"/>
         <Image Grid.Row="0" Grid.Column="1" x:Name="logo" Source="/images/logo.png" HorizontalAlignment="Right"></Image>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-            <Button Name="btnUnProUnUti" Click="btnUnProUnUti_Click" Margin="10,0,0,0" Content="1 projet 1 utilisateur"/>
-            <Button Name="btnPluProUnUti" Click="btnPluProUnUti_Click" Margin="10,0,0,0" Content="* projets 1 utilisateur"/>
-            <Button Name="btnPluProPluUti" Click="btnPluProPluUti_Click" Margin="10,0,0,0" Content="* projets * utilisateurs"/>
+        <StackPanel Grid.Row="1">
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <Label Name="lblUtilisateur" FontSize="25" Width="125">Utilisateur</Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <StackPanel>
+                    <Label Name="lblChoixUtil" Content="Liste des utilisateurs"/>
+                    <ListBox x:Name="lsbUti" HorizontalAlignment="Left" SelectionMode="Multiple" Height="100" VerticalAlignment="Top" Width="200"/>
+                </StackPanel>
+
+                <StackPanel Margin="20,30,20,0">
+                    <Button x:Name="btnPrendreUti" Content=">>" HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" Height="32" Click="btnPrendreUti_Click"/>
+                    <Button x:Name="btnRemettreUti" Content="&lt;&lt;" HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" Height="32" Margin="0,10,0,0" Click="btnRemettreUti_Click"/>
+                </StackPanel>
+                <StackPanel >
+                    <Label Content="Liste des utilisateur choisis"/>
+
+                    <ListBox x:Name="lsbUtiPa"  HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="200" />
+                </StackPanel>
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <Label Name="lblProjet" FontSize="25" Width="125">Projets</Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <StackPanel>
+                    <Label Name="lblChoix" Content="Liste de vos projets"/>
+                    <ListBox x:Name="lsbPro" HorizontalAlignment="Left" SelectionMode="Multiple" Height="100" VerticalAlignment="Top" Width="200"/>
+                </StackPanel>
+
+                <StackPanel Margin="20,30,20,0">
+                    <Button x:Name="btnPrendrePro" Content=">>" HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" Height="32" Click="btnPrendrePro_Click"/>
+                    <Button x:Name="btnRemettrePro" Content="&lt;&lt;" HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" Height="32" Margin="0,10,0,0" Click="btnRemettrePro_Click"/>
+                </StackPanel>
+                <StackPanel >
+                    <Label Content="Liste des projets choisis"/>
+                    <ListBox x:Name="lsbProPa"  HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="200" />
+                </StackPanel>
+
+            </StackPanel>
         </StackPanel>
-        
-
-
+        <TextBlock Text="Le patage peut prendre quelque secondes à faire" Grid.Row="1" VerticalAlignment="Bottom"  Margin="10,50,0,50"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
+            <Button Name="btnRetour" Content="Retour" Click="btnRetour_Click" HorizontalAlignment="Right" Margin="10,10,10,10"/>
+            <Button Name="btnPartage" Command="{Binding cmdPartagerPluProjetPluUti}" Click="btnPartage_Click" IsEnabled="False" Height="25" Content="Partager Projet"  Margin="10,10,10,10"/>
+        </StackPanel>
+       
     </Grid>
 </Window>

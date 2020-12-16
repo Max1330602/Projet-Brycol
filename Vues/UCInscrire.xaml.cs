@@ -31,7 +31,7 @@ namespace App_Brycol.Vues
 
         }
 
-        private void btnAnnuler_Click(object sender, RoutedEventArgs e)
+        private void btnRetour_Click(object sender, RoutedEventArgs e)
         {
             uCLogin = new UCCLogin();
             Grid.SetRow(uCLogin, 1);
@@ -69,8 +69,8 @@ namespace App_Brycol.Vues
 
             grdInscription.Background = Brushes.White;
 
-            btnAnnuler.Background = Brushes.White;
-            btnAnnuler.Foreground = Brushes.Black;
+            btnRetour.Background = Brushes.White;
+            btnRetour.Foreground = Brushes.Black;
 
             btnInscrire.Background = Brushes.White;
             btnInscrire.Foreground = Brushes.Black;
@@ -88,8 +88,8 @@ namespace App_Brycol.Vues
 
             grdInscription.Background = CouleurArrierePlan;
 
-            btnAnnuler.Background = CouleurBouton;
-            btnAnnuler.Foreground = Brushes.White;
+            btnRetour.Background = CouleurBouton;
+            btnRetour.Foreground = Brushes.White;
 
             btnInscrire.Background = CouleurBouton;
             btnInscrire.Foreground = Brushes.White;

@@ -295,15 +295,6 @@
     <Compile Include="Vues\UCInscrire.xaml.cs">
       <DependentUpon>UCInscrire.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vues\UCPluProjUnUser.xaml.cs">
-      <DependentUpon>UCPluProjUnUser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Vues\UCPluProPluUser.xaml.cs">
-      <DependentUpon>UCPluProPluUser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Vues\UCUnProUnUser.xaml.cs">
-      <DependentUpon>UCUnProUnUser.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Vues\WarningProjetNonSau.xaml.cs">
       <DependentUpon>WarningProjetNonSau.xaml</DependentUpon>
     </Compile>
@@ -415,18 +406,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vues\UCInscrire.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Vues\UCPluProjUnUser.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Vues\UCPluProPluUser.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Vues\UCUnProUnUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -21,9 +21,7 @@ namespace App_Brycol.Vues
     /// </summary>
     public partial class PartagerProjet : Window
     {
-        private UCUnProUnUser uCUnProUser { get; set; }
-        private UCPluProjUnUser uCPluProUnUser { get; set; }
-        private UCPluProPluUser ucPluProPluUser { get; set; }
+
 
         public PartagerProjet()
         {
@@ -31,34 +29,33 @@ namespace App_Brycol.Vues
 
             DataContext = new Projet_VM();
 
+            var pReq = (from p in OutilEF.brycolContexte.Projets.Include("Utilisateur") where p.Utilisateur.Nom == Utilisateur_VM.utilActuel.Nom select p.Nom).ToList();
+            lsbPro.ItemsSource = pReq;
+
+            var uReq = (from u in OutilEF.brycolContexte.Utilisateurs select u.Nom).ToList();
+            uReq.Remove(Utilisateur_VM.utilActuel.Nom);
+            lsbUti.ItemsSource = uReq;
+
             if (Projet_VM.themeSombre)
                 AppliquerThemeSombre();
             else
                 EnleverThemeSombre();
 
-            uCUnProUser = new UCUnProUnUser();
-            Grid.SetRow(uCUnProUser, 2);
-
-            grdPartage.Children.Add(uCUnProUser);
-
-
-
         }
 
         private void EnleverThemeSombre()
         {
-            Banniere.Background = Brushes.LightGray;
+            lblProjet.Background = Brushes.White;
 
-            grdPartage.Background = Brushes.White;
+            btnRetour.Background = Brushes.White;
+            btnRetour.Foreground = Brushes.Black;
 
-            btnUnProUnUti.Background = Brushes.White;
-            btnUnProUnUti.Foreground = Brushes.Black;
+            if (btnPartage.IsEnabled)
+            {
+                btnPartage.Background = Brushes.White;
+                btnPartage.Foreground = Brushes.Black;
 
-            btnPluProUnUti.Background = Brushes.White;
-            btnPluProUnUti.Foreground = Brushes.Black;
-
-            btnPluProPluUti.Background = Brushes.White;
-            btnPluProPluUti.Foreground = Brushes.Black;
+            }
 
         }
 
@@ -69,56 +66,82 @@ namespace App_Brycol.Vues
             Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
             Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
 
-            Banniere.Background = CouleurBanniere;
+            lblProjet.Background = CouleurArrierePlan;
 
-            grdPartage.Background = CouleurArrierePlan;
+            btnRetour.Background = CouleurBouton;
+            btnRetour.Foreground = Brushes.White;
 
-            btnUnProUnUti.Background = CouleurBouton;
-            btnUnProUnUti.Foreground = Brushes.White;
+            if (btnPartage.IsEnabled)
+            {
+                btnPartage.Background = CouleurBouton;
+                btnPartage.Foreground = Brushes.White;
 
-            btnPluProUnUti.Background = CouleurBouton;
-            btnPluProUnUti.Foreground = Brushes.White;
+            }
+        }
 
-            btnPluProPluUti.Background = CouleurBouton;
-            btnPluProPluUti.Foreground = Brushes.White;
+        private void btnPrendreUti_Click(object sender, RoutedEventArgs e)
+        {
+            lsbUtiPa.Items.Clear(); // S'il y a des items, les supprimmer
+
+            Projet_VM.LstUtilisateurPartage.Clear();
+
+            foreach (object o in lsbUti.SelectedItems)
+            {
+                lsbUtiPa.Items.Add(o);
+                Projet_VM.LstUtilisateurPartage.Add(o.ToString());
+            }
+
+            if (lsbProPa.Items.Count != 0)
+                btnPartage.IsEnabled = true;
+            else
+                btnPartage.IsEnabled = false;
+        }
+
+        private void btnRemettreUti_Click(object sender, RoutedEventArgs e)
+        {
+            lsbUtiPa.Items.Clear();
+            Projet_VM.LstUtilisateurPartage.Clear();
+
+            btnPartage.IsEnabled = false;
+        }
+
+        private void btnPrendrePro_Click(object sender, RoutedEventArgs e)
+        {
+            lsbProPa.Items.Clear(); // S'il y a des items, les supprimmer
+
+            Projet_VM.LstProjetPartage.Clear();
+
+            foreach (object o in lsbPro.SelectedItems)
+            {
+                lsbProPa.Items.Add(o);
+                Projet_VM.LstProjetPartage.Add(o.ToString());
+            }
+
+            if (lsbUtiPa.Items.Count != 0)
+                btnPartage.IsEnabled = true;
+            else
+                btnPartage.IsEnabled = false;
 
         }
 
-        private void btnUnProUnUti_Click(object sender, RoutedEventArgs e)
+        private void btnRemettrePro_Click(object sender, RoutedEventArgs e)
         {
-            grdPartage.Children.Remove(uCUnProUser);
-            grdPartage.Children.Remove(uCPluProUnUser);
-            grdPartage.Children.Remove(ucPluProPluUser);
+            lsbProPa.Items.Clear();
+            Projet_VM.LstProjetPartage.Clear();
 
-            uCUnProUser = new UCUnProUnUser();
-            Grid.SetRow(uCUnProUser, 2);
-
-            grdPartage.Children.Add(uCUnProUser);
+            btnPartage.IsEnabled = false;
         }
 
-        private void btnPluProUnUti_Click(object sender, RoutedEventArgs e)
+        private void btnPartage_Click(object sender, RoutedEventArgs e)
         {
-            grdPartage.Children.Remove(uCUnProUser);
-            grdPartage.Children.Remove(uCPluProUnUser);
-            grdPartage.Children.Remove(ucPluProPluUser);
-
-            uCPluProUnUser = new UCPluProjUnUser();
-            Grid.SetRow(uCPluProUnUser, 2);
-
-            grdPartage.Children.Add(uCPluProUnUser);
+            lsbUtiPa.Items.Clear();
+            lsbProPa.Items.Clear();
+            btnPartage.IsEnabled = false;
         }
 
-        private void btnPluProPluUti_Click(object sender, RoutedEventArgs e)
+        private void btnRetour_Click(object sender, RoutedEventArgs e)
         {
-            grdPartage.Children.Remove(uCUnProUser);
-            grdPartage.Children.Remove(uCPluProUnUser);
-            grdPartage.Children.Remove(ucPluProPluUser);
-
-            ucPluProPluUser = new UCPluProPluUser();
-            Grid.SetRow(ucPluProPluUser, 2);
-
-            grdPartage.Children.Add(ucPluProPluUser);
-            
+            this.Close();
         }
     }
 }
