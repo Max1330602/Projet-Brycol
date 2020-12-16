@@ -59,6 +59,7 @@
                     <Button x:Name="btntoolRotation" Click="btnRotation" Height="20" Content="Rotation" Width="60" FontSize="10" Foreground="FloralWhite" Background="Black" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" RenderTransformOrigin="0.5,0.5"/>
                     <Button x:Name="btntoolSupprimer"  Click="btnDelete" Height="20" Content="Supprimer" Width="60" Foreground="FloralWhite" Background="Black" FontSize="10" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" RenderTransformOrigin="0.5,0.5"/>
                     <Button x:Name="btntoolModifier"  Click="btnModifier" Height="20" Content="Modifier" Width="60" Foreground="FloralWhite" Background="Black" FontSize="10" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" RenderTransformOrigin="0.5,0.5"/>
+                    <Button Name="btntoolDeselection" Click="click_deselect" Content="Désélectionner items" Height="20"  FontSize="10" Width="Auto" Foreground="FloralWhite" Background="Black" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" />
                     <Popup Name="popupItem" AllowsTransparency = "True" StaysOpen='False' PopupAnimation = "Fade" PlacementTarget="{Binding ElementName=canvas}"  Placement="Top"  HorizontalOffset="75"  VerticalOffset="0">
                         <TextBlock  x:Name="popupText" TextWrapping = "Wrap" FontSize="24" FontWeight="ExtraBold" FontFamily="Times new roman" Foreground = "Black" Text = "Item sélectionné" Background="LightGreen" />
                     </Popup>
@@ -94,6 +95,8 @@
                     <Button x:Name="btntoolMurRotation" Click="btnRotation" Height="20" Content="Rotation" Width="60" FontSize="10" Foreground="FloralWhite" Background="Black" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" RenderTransformOrigin="0.5,0.5"/>
                     <Button x:Name="btntoolMurSupprimer"  Click="btnDelete" Height="20" Content="Supprimer" Width="60" Foreground="FloralWhite" Background="Black" FontSize="10" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" RenderTransformOrigin="0.5,0.5"/>
                     <Button x:Name="btntoolMurModifier"  Click="btnModifier" Height="20" Content="Modifier" Width="60" Foreground="FloralWhite" Background="Black" FontSize="10" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" RenderTransformOrigin="0.5,0.5"/>
+                    <Button x:Name="btntoolMurDeselection"  Click="click_deselectMur" Height="20" Content="Désélectionner items" Width="Auto" Foreground="FloralWhite" Background="Black" FontSize="10" Canvas.Top="20" Grid.RowSpan="2" Panel.ZIndex="5" RenderTransformOrigin="0.5,0.5"/>
+                    
                     <Popup Name="popupMur" AllowsTransparency = "True" IsOpen="false" PopupAnimation = "Fade" PlacementTarget="{Binding ElementName=canvasMur}"  Placement="Bottom"  HorizontalOffset="75"  VerticalOffset="0">
                         <TextBlock  x:Name="popupMurText" TextWrapping = "Wrap" FontSize="18" FontWeight="ExtraBold" FontFamily="Times new roman" Foreground = "White" Text = "Vue du mur extérieur" Background="Black" />
                     </Popup>
@@ -118,7 +121,7 @@
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock  Foreground="Black" Background="White" FontSize="16" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="-250,-170,39,0"  Panel.ZIndex="5" Width="211" Height="26">
+                <TextBlock  Foreground="Black" Background="White" FontSize="16" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="-250,-140,39,0"  Panel.ZIndex="5" Width="211" Height="26">
                 <Run Text="{Binding LongueurAffichage}" Name="txtLongueur2"></Run>
                 <Run Text="{Binding UniteMesure}" Name="txtUnite1"></Run>
                 <Run Text="par"></Run>
@@ -126,12 +129,9 @@
                 <Run Text="{Binding UniteMesure}" Name="txtUnite2"></Run>
                 </TextBlock>
 
-                <TextBlock Text="Bouton aide disponible!" Foreground="Black" Background="White" FontSize="20" Width="Auto" Margin="-250,-208,39,190"/>
-                <Button Name="btnDeselection" Content="Désélectionner items"  FontSize="20" Width="Auto" Foreground="Black" Background="White" Click="click_deselect" Margin="-250,-60,39,41" />
-
-                <Button x:Name="btnPieceRotation" Click="btnRotationPiece" Content="Rotation pièce" FontSize="20" Foreground="Black" Background="White" Panel.ZIndex="5"  Margin="-250,-96,39,77" Width="Auto" />
-                <Button x:Name="btnClipPiece" Click="btnClip" Content="Clip" Width="Auto" FontSize="20" Foreground="Black" Background="White" Panel.ZIndex="5"  Margin="-250,-133,38,114" Visibility="Hidden"/>
-                <Button x:Name="btnClipPieceDeclipper" Click="btnDéclip" Content="Déclipper" Width="Auto" FontSize="20" Foreground="Black" Background="White" Panel.ZIndex="5"  Margin="-250,-133,38,114" />
+                <Button x:Name="btnPieceRotation" Click="btnRotationPiece" Content="Rotation pièce" FontSize="20" Foreground="Black" Background="White" Panel.ZIndex="5"  Margin="-250,-62,39,44" Width="Auto" />
+                <Button x:Name="btnClipPiece" Click="btnClip" Content="Accrocher" Width="Auto" FontSize="20" Foreground="Black" Background="White" Panel.ZIndex="5"  Margin="-250,-101,38,82" Visibility="Hidden"/>
+                <Button x:Name="btnClipPieceDeclipper" Click="btnDéclip" Content="Détacher" Width="Auto" FontSize="20" Foreground="Black" Background="White" Panel.ZIndex="5"  Margin="-250,-101,38,82" />
 
                 <!-- Le bouton 100%.  Scale le canvas à sa grandeur d'origine-->
                 <Button x:Name="btnEchelle" Grid.Column="1" FontSize="20" Click="canvasResizeFull"  Foreground="Black" Background="White" Content="Mise à l'échelle" Margin="-250,-24,39,5" Width="Auto"/>

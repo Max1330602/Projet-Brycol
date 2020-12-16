@@ -343,9 +343,11 @@ namespace App_Brycol.Vues
                     btntoolRotation.Visibility = Visibility.Hidden;
                     btntoolSupprimer.Visibility = Visibility.Hidden;
                     btntoolModifier.Visibility = Visibility.Hidden;
+                    btntoolDeselection.Visibility = Visibility.Hidden;
                     btntoolMurRotation.Visibility = Visibility.Hidden;
                     btntoolMurSupprimer.Visibility = Visibility.Hidden;
                     btntoolMurModifier.Visibility = Visibility.Hidden;
+                    btntoolMurDeselection.Visibility = Visibility.Hidden;
                     foreach (Image child in canvasMur.Children.OfType<Image>())
                     {
                         foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
@@ -389,9 +391,11 @@ namespace App_Brycol.Vues
                     btntoolRotation.Visibility = Visibility.Hidden;
                     btntoolSupprimer.Visibility = Visibility.Hidden;
                     btntoolModifier.Visibility = Visibility.Hidden;
+                    btntoolDeselection.Visibility = Visibility.Hidden;
                     btntoolMurRotation.Visibility = Visibility.Hidden;
                     btntoolMurSupprimer.Visibility = Visibility.Hidden;
                     btntoolMurModifier.Visibility = Visibility.Hidden;
+                    btntoolMurDeselection.Visibility = Visibility.Hidden;
                     foreach (Image child in canvasMur.Children.OfType<Image>())
                     {
                         foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
@@ -434,6 +438,11 @@ namespace App_Brycol.Vues
                     btntoolMurRotation.Visibility = Visibility.Hidden;
                     btntoolMurSupprimer.Visibility = Visibility.Hidden;
                     btntoolMurModifier.Visibility = Visibility.Hidden;
+                    btntoolMurDeselection.Visibility = Visibility.Hidden;
+                    btntoolRotation.Visibility = Visibility.Hidden;
+                    btntoolSupprimer.Visibility = Visibility.Hidden;
+                    btntoolModifier.Visibility = Visibility.Hidden;
+                    btntoolDeselection.Visibility = Visibility.Hidden;
                     popupMur.IsOpen = false;
                 }
                 if (Plan_VM.PlanActuel.Piece.UniteDeMesure == "Mètres")
@@ -444,9 +453,11 @@ namespace App_Brycol.Vues
                         btntoolRotation.Visibility = Visibility.Hidden;
                         btntoolSupprimer.Visibility = Visibility.Hidden;
                         btntoolModifier.Visibility = Visibility.Hidden;
+                        btntoolDeselection.Visibility = Visibility.Hidden;
                         btntoolMurRotation.Visibility = Visibility.Hidden;
                         btntoolMurSupprimer.Visibility = Visibility.Hidden;
                         btntoolMurModifier.Visibility = Visibility.Hidden;
+                        btntoolMurDeselection.Visibility = Visibility.Hidden;
                         foreach (Image child in canvasMur.Children.OfType<Image>())
                         {
                             foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
@@ -487,9 +498,11 @@ namespace App_Brycol.Vues
                         btntoolRotation.Visibility = Visibility.Hidden;
                         btntoolSupprimer.Visibility = Visibility.Hidden;
                         btntoolModifier.Visibility = Visibility.Hidden;
+                        btntoolDeselection.Visibility = Visibility.Hidden;
                         btntoolMurRotation.Visibility = Visibility.Hidden;
                         btntoolMurSupprimer.Visibility = Visibility.Hidden;
                         btntoolMurModifier.Visibility = Visibility.Hidden;
+                        btntoolMurDeselection.Visibility = Visibility.Hidden;
                         foreach (Image child in canvasMur.Children.OfType<Image>())
                         {
                             foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
@@ -533,9 +546,11 @@ namespace App_Brycol.Vues
                         btntoolRotation.Visibility = Visibility.Hidden;
                         btntoolSupprimer.Visibility = Visibility.Hidden;
                         btntoolModifier.Visibility = Visibility.Hidden;
+                        btntoolDeselection.Visibility = Visibility.Hidden;
                         btntoolMurRotation.Visibility = Visibility.Hidden;
                         btntoolMurSupprimer.Visibility = Visibility.Hidden;
                         btntoolMurModifier.Visibility = Visibility.Hidden;
+                        btntoolMurDeselection.Visibility = Visibility.Hidden;
                         foreach (Image child in canvasMur.Children.OfType<Image>())
                         {
                             foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
@@ -576,9 +591,11 @@ namespace App_Brycol.Vues
                         btntoolRotation.Visibility = Visibility.Hidden;
                         btntoolSupprimer.Visibility = Visibility.Hidden;
                         btntoolModifier.Visibility = Visibility.Hidden;
+                        btntoolDeselection.Visibility = Visibility.Hidden;
                         btntoolMurRotation.Visibility = Visibility.Hidden;
                         btntoolMurSupprimer.Visibility = Visibility.Hidden;
                         btntoolMurModifier.Visibility = Visibility.Hidden;
+                        btntoolMurDeselection.Visibility = Visibility.Hidden;
                         foreach (Image child in canvasMur.Children.OfType<Image>())
                         {
                             foreach (ItemsPlan ip in Item_VM.ItemsPlanActuel)
@@ -623,6 +640,8 @@ namespace App_Brycol.Vues
                     canvas.Children.Remove(btntoolRotation);
                     canvas.Children.Remove(btntoolSupprimer);
                     canvas.Children.Remove(btntoolModifier);
+                    canvas.Children.Remove(btntoolDeselection);
+           
                     draggedImage = image;
                     imageSelection = image;
                     
@@ -648,6 +667,9 @@ namespace App_Brycol.Vues
                                 Canvas.SetLeft(btntoolModifier, i.emplacementGauche + 224);
                                 Canvas.SetTop(btntoolModifier, i.emplacementHaut + 45);
                                 canvas.Children.Add(btntoolModifier);
+                                Canvas.SetLeft(btntoolDeselection, i.emplacementGauche + 280);
+                                Canvas.SetTop(btntoolDeselection, i.emplacementHaut + 45);
+                                canvas.Children.Add(btntoolDeselection);
                             }
                             else
                             {
@@ -662,6 +684,9 @@ namespace App_Brycol.Vues
                                     Canvas.SetLeft(btntoolModifier, i.emplacementGauche + 124);
                                     Canvas.SetTop(btntoolModifier, i.emplacementHaut -19);
                                     canvas.Children.Add(btntoolModifier);
+                                    Canvas.SetLeft(btntoolDeselection, i.emplacementGauche + 180);
+                                    Canvas.SetTop(btntoolDeselection, i.emplacementHaut - 19);
+                                    canvas.Children.Add(btntoolDeselection);
                                 }
                                 else
                                 {
@@ -674,6 +699,9 @@ namespace App_Brycol.Vues
                                     Canvas.SetLeft(btntoolModifier, i.emplacementGauche + 124);
                                     Canvas.SetTop(btntoolModifier, i.emplacementHaut + i.Item.Longueur - 15);
                                     canvas.Children.Add(btntoolModifier);
+                                    Canvas.SetLeft(btntoolDeselection, i.emplacementGauche + 180);
+                                    Canvas.SetTop(btntoolDeselection, i.emplacementHaut + i.Item.Longueur - 15);
+                                    canvas.Children.Add(btntoolDeselection);
                                 }
                                 
                             }
@@ -682,6 +710,7 @@ namespace App_Brycol.Vues
                     btntoolRotation.Visibility = Visibility.Visible;
                     btntoolSupprimer.Visibility = Visibility.Visible;
                     btntoolModifier.Visibility = Visibility.Visible;
+                    btntoolDeselection.Visibility = Visibility.Visible;
                     move = true;
                     mousePosition = e.GetPosition(canvas);
                     draggedImage = image;
@@ -748,7 +777,10 @@ namespace App_Brycol.Vues
 
                             Canvas.SetLeft(btntoolModifier, i.emplacementGauche + 224);
                             Canvas.SetTop(btntoolModifier, i.emplacementHaut + 45);
-                            }
+
+                            Canvas.SetLeft(btntoolDeselection, i.emplacementGauche + 280);
+                            Canvas.SetTop(btntoolDeselection, i.emplacementHaut + 45);
+                        }
                             else
                             {
                                 if (i.emplacementHaut > 19)
@@ -761,7 +793,10 @@ namespace App_Brycol.Vues
 
                                     Canvas.SetLeft(btntoolModifier, i.emplacementGauche + 124);
                                     Canvas.SetTop(btntoolModifier, i.emplacementHaut - 19);
-                                }
+
+                                    Canvas.SetLeft(btntoolDeselection, i.emplacementGauche + 180);
+                                    Canvas.SetTop(btntoolDeselection, i.emplacementHaut - 19);
+                            }
                                 else
                                 {
                                     Canvas.SetLeft(btntoolRotation, i.emplacementGauche + 5);
@@ -772,7 +807,10 @@ namespace App_Brycol.Vues
 
                                     Canvas.SetLeft(btntoolModifier, i.emplacementGauche + 124);
                                     Canvas.SetTop(btntoolModifier, i.emplacementHaut + i.Item.Longueur - 15);
-                                }
+
+                                    Canvas.SetLeft(btntoolDeselection, i.emplacementGauche + 180);
+                                    Canvas.SetTop(btntoolDeselection, i.emplacementHaut + i.Item.Longueur - 15);
+                            }
                             }
                         if (canvasMur.Visibility == Visibility.Hidden)
                         {
@@ -2375,6 +2413,7 @@ namespace App_Brycol.Vues
                     canvasMur.Children.Remove(btntoolMurRotation);
                     canvasMur.Children.Remove(btntoolMurSupprimer);
                     canvasMur.Children.Remove(btntoolMurModifier);
+                    canvasMur.Children.Remove(btntoolMurDeselection);
                     draggedImage = image;
                     imageSelection = image;
 
@@ -2388,35 +2427,42 @@ namespace App_Brycol.Vues
 
                         if (imageBD.Tag.ToString() == draggedImage.Tag.ToString())
                         {
-                            if (i.emplacementHaut > 19)
-                            {
-                                Canvas.SetLeft(btntoolMurRotation, i.emplacementGauche + 5);
-                                Canvas.SetTop(btntoolMurRotation, i.emplacementHaut - 19);
-                                canvasMur.Children.Add(btntoolMurRotation);
-                                Canvas.SetLeft(btntoolMurSupprimer, i.emplacementGauche + 64);
-                                Canvas.SetTop(btntoolMurSupprimer, i.emplacementHaut - 19);
-                                canvasMur.Children.Add(btntoolMurSupprimer);
-                                Canvas.SetLeft(btntoolMurModifier, i.emplacementGauche + 124);
-                                Canvas.SetTop(btntoolMurModifier, i.emplacementHaut - 19);
-                                canvasMur.Children.Add(btntoolMurModifier);
-                            }
-                            else
-                            {
-                                Canvas.SetLeft(btntoolMurRotation, i.emplacementGauche + 5);
-                                Canvas.SetTop(btntoolMurRotation, i.emplacementHaut + i.Item.Longueur - 15);
-                                canvasMur.Children.Add(btntoolMurRotation);
-                                Canvas.SetLeft(btntoolMurSupprimer, i.emplacementGauche + 64);
-                                Canvas.SetTop(btntoolMurSupprimer, i.emplacementHaut + i.Item.Longueur - 15);
-                                canvasMur.Children.Add(btntoolMurSupprimer);
-                                Canvas.SetLeft(btntoolMurModifier, i.emplacementGauche + 124);
-                                Canvas.SetTop(btntoolMurModifier, i.emplacementHaut + i.Item.Longueur - 15);
-                                canvasMur.Children.Add(btntoolMurModifier);
-                            }
+                        if (i.emplacementHaut > 19)
+                        {
+                            Canvas.SetLeft(btntoolMurRotation, i.emplacementGauche + 50);
+                            Canvas.SetTop(btntoolMurRotation, i.emplacementHaut - 19);
+                            canvasMur.Children.Add(btntoolMurRotation);
+                            Canvas.SetLeft(btntoolMurSupprimer, i.emplacementGauche + 109);
+                            Canvas.SetTop(btntoolMurSupprimer, i.emplacementHaut - 19);
+                            canvasMur.Children.Add(btntoolMurSupprimer);
+                            Canvas.SetLeft(btntoolMurModifier, i.emplacementGauche + 167);
+                            Canvas.SetTop(btntoolMurModifier, i.emplacementHaut - 19);
+                            canvasMur.Children.Add(btntoolMurModifier);
+                            Canvas.SetLeft(btntoolMurDeselection, i.emplacementGauche + 223);
+                            Canvas.SetTop(btntoolMurDeselection, i.emplacementHaut - 19);
+                            canvasMur.Children.Add(btntoolMurDeselection);
                         }
+                        else
+                        {
+                            Canvas.SetLeft(btntoolMurRotation, i.emplacementGauche + 50);
+                            Canvas.SetTop(btntoolMurRotation, i.emplacementHaut + i.Item.Longueur - 15);
+                            canvasMur.Children.Add(btntoolMurRotation);
+                            Canvas.SetLeft(btntoolMurSupprimer, i.emplacementGauche + 109);
+                            Canvas.SetTop(btntoolMurSupprimer, i.emplacementHaut + i.Item.Longueur - 15);
+                            canvasMur.Children.Add(btntoolMurSupprimer);
+                            Canvas.SetLeft(btntoolMurModifier, i.emplacementGauche + 167);
+                            Canvas.SetTop(btntoolMurModifier, i.emplacementHaut + i.Item.Longueur - 15);
+                            canvasMur.Children.Add(btntoolMurModifier);
+                            Canvas.SetLeft(btntoolMurDeselection, i.emplacementGauche + 223);
+                            Canvas.SetTop(btntoolMurDeselection, i.emplacementHaut + i.Item.Longueur - 15);
+                            canvasMur.Children.Add(btntoolMurDeselection);
+                        }
+                    }
                     }
                     btntoolMurRotation.Visibility = Visibility.Visible;
                     btntoolMurSupprimer.Visibility = Visibility.Visible;
                     btntoolMurModifier.Visibility = Visibility.Visible;
+                    btntoolMurDeselection.Visibility = Visibility.Visible;
                     move = true;
                     mousePosition = e.GetPosition(canvasMur);
                     draggedImage = image;
@@ -2453,27 +2499,31 @@ namespace App_Brycol.Vues
 
                         if (i.emplacementHaut > 19)
                         {
-                            Canvas.SetLeft(btntoolMurRotation, i.emplacementGauche + 5);
+                            Canvas.SetLeft(btntoolMurRotation, i.emplacementGauche + 50);
                             Canvas.SetTop(btntoolMurRotation, i.emplacementHaut - 19);
 
-                            Canvas.SetLeft(btntoolMurSupprimer, i.emplacementGauche + 64);
+                            Canvas.SetLeft(btntoolMurSupprimer, i.emplacementGauche + 109);
                             Canvas.SetTop(btntoolMurSupprimer, i.emplacementHaut - 19);
 
-                            Canvas.SetLeft(btntoolMurModifier, i.emplacementGauche + 124);
+                            Canvas.SetLeft(btntoolMurModifier, i.emplacementGauche + 167);
                             Canvas.SetTop(btntoolMurModifier, i.emplacementHaut - 19);
 
+                            Canvas.SetLeft(btntoolDeselection, i.emplacementGauche + 223);
+                            Canvas.SetTop(btntoolDeselection, i.emplacementHaut - 19);
                         }
                         else
                         {
-                            Canvas.SetLeft(btntoolMurRotation, i.emplacementGauche + 5);
+                            Canvas.SetLeft(btntoolMurRotation, i.emplacementGauche + 50);
                             Canvas.SetTop(btntoolMurRotation, i.emplacementHaut + i.Item.Longueur - 15);
 
-                            Canvas.SetLeft(btntoolMurSupprimer, i.emplacementGauche + 64);
+                            Canvas.SetLeft(btntoolMurSupprimer, i.emplacementGauche + 109);
                             Canvas.SetTop(btntoolMurSupprimer, i.emplacementHaut + i.Item.Longueur - 15);
 
-                            Canvas.SetLeft(btntoolMurModifier, i.emplacementGauche + 124);
+                            Canvas.SetLeft(btntoolMurModifier, i.emplacementGauche + 167);
                             Canvas.SetTop(btntoolMurModifier, i.emplacementHaut + i.Item.Longueur - 15);
 
+                            Canvas.SetLeft(btntoolMurDeselection, i.emplacementGauche + 223);
+                            Canvas.SetTop(btntoolMurDeselection, i.emplacementHaut + i.Item.Longueur - 15);
                         }
 
                         if (mousePosition == position)
@@ -2552,8 +2602,33 @@ namespace App_Brycol.Vues
                 popupText.FontFamily = new FontFamily("Times new roman");
                 codePopup.Child = popupText;
                 codePopup.PopupAnimation = PopupAnimation.Fade;
-                codePopup.PlacementTarget = btnDeselection;
-                codePopup.Placement = PlacementMode.Left;
+                codePopup.PlacementTarget = btntoolDeselection;
+                codePopup.Placement = PlacementMode.Right;
+                codePopup.StaysOpen = false;
+                codePopup.IsOpen = true;
+
+            }
+
+            itemSelectionee.Clear();
+        }
+
+        private void click_deselectMur(object sender, RoutedEventArgs e)
+        {
+            if (itemSelectionee.Count > 0)
+            {
+
+                Popup codePopup = new Popup();
+                TextBlock popupText = new TextBlock();
+                popupText.Text = "Succès";
+                popupText.Background = Brushes.LightGreen;
+                popupText.Foreground = Brushes.Black;
+                popupText.FontSize = 24;
+                popupText.FontWeight = FontWeights.ExtraBold;
+                popupText.FontFamily = new FontFamily("Times new roman");
+                codePopup.Child = popupText;
+                codePopup.PopupAnimation = PopupAnimation.Fade;
+                codePopup.PlacementTarget = btntoolMurDeselection;
+                codePopup.Placement = PlacementMode.Right;
                 codePopup.StaysOpen = false;
                 codePopup.IsOpen = true;
 
