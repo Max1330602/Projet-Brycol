@@ -97,13 +97,27 @@ namespace App_Brycol.Vues
             {
                 Bitmap img = new Bitmap(openFileDialog.FileName);
                 string path = System.Windows.Forms.Application.StartupPath;
-                string pathCorrect = path.Substring(0, path.IndexOf("bin")) + "images\\items\\";
+                string pathCorrect = path.Substring(0, path.IndexOf("Brycol")) + "images\\items\\";
                 var iReq = from i in OutilEF.brycolContexte.Meubles select i;
                 int dernierItemNum = iReq.OrderByDescending(it => it.ID).FirstOrDefault().ID;
                 dernierItemNum = dernierItemNum + 1;
-                img.Save(pathCorrect + "item" + dernierItemNum + ".png", ImageFormat.Png);
-
-                imgCat.Source = new BitmapImage(new Uri(pathCorrect + "item" + dernierItemNum + ".png"));
+                img.Save("..\\..\\images\\Items\\" + "item" + dernierItemNum + ".png", ImageFormat.Png);
+                BitmapImage bmiItem = new BitmapImage();
+                try
+                {
+                    bmiItem.BeginInit();
+                    bmiItem.CacheOption = BitmapCacheOption.OnLoad;
+                    bmiItem.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                    bmiItem.UriSource = new Uri("..\\..\\images\\Items\\item" + dernierItemNum + ".png", UriKind.Relative);
+                    bmiItem.EndInit();
+                    imgCat.Source = bmiItem;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Impossible de modifier une image ajoutée au catalogue.");
+                    return;
+                }
+                //imgCat.Source = new BitmapImage(new Uri("..\\..\\images\\Items\\" + "item" + dernierItemNum + ".png", UriKind.Relative));
             }
 
 
@@ -118,13 +132,27 @@ namespace App_Brycol.Vues
             {
                 Bitmap img = new Bitmap(openFileDialog.FileName);
                 string path = System.Windows.Forms.Application.StartupPath;
-                string pathCorrect = path.Substring(0, path.IndexOf("bin")) + "images\\items\\Top\\";
+                string pathCorrect = path.Substring(0, path.IndexOf("Brycol")) + "images\\items\\Top\\";
                 var iReq = from i in OutilEF.brycolContexte.Meubles select i;
                 int dernierItemNum = iReq.OrderByDescending(it => it.ID).FirstOrDefault().ID;
                 dernierItemNum = dernierItemNum + 1;
-                img.Save(pathCorrect + "item" + dernierItemNum + ".png", ImageFormat.Png);
-
-                imgHaut.Source = new BitmapImage(new Uri(pathCorrect + "item" + dernierItemNum + ".png"));
+                img.Save("..\\..\\images\\Items\\Top\\" + "item" + dernierItemNum + ".png", ImageFormat.Png);
+                BitmapImage bmiItem = new BitmapImage();
+                try
+                {
+                    bmiItem.BeginInit();
+                    bmiItem.CacheOption = BitmapCacheOption.OnLoad;
+                    bmiItem.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                    bmiItem.UriSource = new Uri("..\\..\\images\\Items\\Top\\item" + dernierItemNum + ".png", UriKind.Relative);
+                    bmiItem.EndInit();
+                    imgHaut.Source = bmiItem;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Impossible de modifier une image ajoutée au catalogue.");
+                    return;
+                }
+                //imgHaut.Source = new BitmapImage(new Uri("..\\..\\images\\Items\\" + "item" + dernierItemNum + ".png", UriKind.Relative));
             }
 
 

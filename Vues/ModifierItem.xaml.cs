@@ -68,28 +68,15 @@ namespace App_Brycol.Vues
                 ip.Tag = ip.ID;
                 string path = "file:///" + System.Windows.Forms.Application.StartupPath;
                 path = path.Replace("\\", "/");
-                string pathCorrect = path.Substring(0, path.IndexOf("bin")) + "images/items/Top/";
+                string pathCorrect = path.Substring(0, path.IndexOf("Brycol")) + "images/items/Top/";
 
-                if (Piece2D.toolbarImage.Source.ToString() == pathCorrect + "item" + ip.Item.ID + ".png" && Piece2D.toolbarImage.Tag.ToString() == ip.Tag.ToString())
+                if (Piece2D.toolbarImage.Source.ToString() == "..\\..\\images\\Items\\Top\\" + "item" + ip.Item.ID + ".png" && Piece2D.toolbarImage.Tag.ToString() == ip.Tag.ToString())
                 {
                     Item_VM.ItemsPlanModifie.Add(ip);
                     ip.Couleur = cmbCouleur.SelectedItem.ToString().Replace("System.Windows.Controls.ComboBoxItem: ", "");
                     OutilEF.brycolContexte.SaveChanges();
 
                     BitmapImage bmiItem = new BitmapImage();
-                    try
-                    {
-                        bmiItem.EndInit();
-                    }
-                    catch (Exception)
-                    {
-                        bmiItem = new BitmapImage();
-                        bmiItem.BeginInit();
-                        bmiItem.UriSource = new Uri("../../images/Items/item0.png", UriKind.Relative);
-                        bmiItem.EndInit();
-
-
-                    }
                     try
                     {
                         bmiItem.BeginInit();
