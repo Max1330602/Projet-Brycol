@@ -43,8 +43,8 @@
             Vous pouvez supprimer un item à l'aide de la touche DEL de votre clavier.
         </TextBlock>
 
-        <Button x:Name="btnTerminer" Grid.Row="1" Height="40" Width="80" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Click="btnTerminer_click" Grid.Column="1">
-            Terminer
+        <Button x:Name="btnRetour" Grid.Row="1" Height="40" Width="80" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Click="btnRetour_click" Grid.Column="1">
+            Retour
         </Button>
     </Grid>
 </Window>

@@ -57,7 +57,7 @@ namespace App_Brycol.Vues
 
         }
 
-        private void btnOk_Click(object sender, RoutedEventArgs e)
+        private void btnRetour_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -125,8 +125,8 @@ namespace App_Brycol.Vues
 
             grdCoutParent.Background = Brushes.White;
 
-            btnOk.Background = Brushes.White;
-            btnOk.Foreground = Brushes.Black;
+            btnRetour.Background = Brushes.White;
+            btnRetour.Foreground = Brushes.Black;
 
             btnRegistre.Background = Brushes.White;
             btnRegistre.Foreground = Brushes.Black;
@@ -161,8 +161,8 @@ namespace App_Brycol.Vues
             btnRegistre.Background = CouleurBouton;
             btnRegistre.Foreground = Brushes.White;
 
-            btnOk.Background = CouleurBouton;
-            btnOk.Foreground = Brushes.White;
+            btnRetour.Background = CouleurBouton;
+            btnRetour.Foreground = Brushes.White;
 
             btnTransaction.Background = CouleurBouton;
             btnTransaction.Foreground = Brushes.White;

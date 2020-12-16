@@ -76,7 +76,7 @@ namespace App_Brycol.Vues
             btnContinuer.SetBinding(Button.CommandProperty, new Binding("cmdPiece"));
         }
 
-        private void btnAnnuler_Click(object sender, RoutedEventArgs e)
+        private void btnRetour_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
             if (Plan_VM.PlanActuel != null)
@@ -143,8 +143,8 @@ namespace App_Brycol.Vues
         {
             grdInfoPiece.Background = Brushes.White;
 
-            btnAnnuler.Background = Brushes.White;
-            btnAnnuler.Foreground = Brushes.Black;
+            btnRetour.Background = Brushes.White;
+            btnRetour.Foreground = Brushes.Black;
 
             btnContinuer.Background = Brushes.White;
             btnContinuer.Foreground = Brushes.Black;
@@ -159,8 +159,8 @@ namespace App_Brycol.Vues
 
             grdInfoPiece.Background = CouleurArrierePlan;
 
-            btnAnnuler.Background = CouleurBouton;
-            btnAnnuler.Foreground = Brushes.White;
+            btnRetour.Background = CouleurBouton;
+            btnRetour.Foreground = Brushes.White;
 
             btnContinuer.Background = CouleurBouton;
             btnContinuer.Foreground = Brushes.White;

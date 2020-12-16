@@ -39,7 +39,7 @@ namespace App_Brycol.Vues
             this.Close();
         }
 
-        private void btnAnnuler_Click(object sender, RoutedEventArgs e)
+        private void btnRetour_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -59,8 +59,8 @@ namespace App_Brycol.Vues
             btnEnregistrer.Background = CouleurBouton;
             btnEnregistrer.Foreground = Brushes.White;
 
-            btnAnnuler.Background = CouleurBouton;
-            btnAnnuler.Foreground = Brushes.White;
+            btnRetour.Background = CouleurBouton;
+            btnRetour.Foreground = Brushes.White;
 
         }
 
@@ -72,8 +72,8 @@ namespace App_Brycol.Vues
             btnEnregistrer.Background = Brushes.White;
             btnEnregistrer.Foreground = Brushes.Black;
 
-            btnAnnuler.Background = Brushes.White;
-            btnAnnuler.Foreground = Brushes.Black;
+            btnRetour.Background = Brushes.White;
+            btnRetour.Foreground = Brushes.Black;
         }
         
     }

@@ -84,10 +84,10 @@ namespace App_Brycol.Vues
             btnModifierCatalogue.Background = Brushes.White;
             btnModifierCatalogue.Foreground = Brushes.Black;
 
-            DG_items.RowBackground = Brushes.White;
+            DG_items.RowBackground = Brushes.CornflowerBlue;
             DG_items.AlternatingRowBackground = Brushes.White;
 
-            DG_ListeItems.RowBackground = Brushes.White;
+            DG_ListeItems.RowBackground = Brushes.CornflowerBlue;
             DG_ListeItems.AlternatingRowBackground = Brushes.White;
             DG_ListeItems.Background = Brushes.White;
 

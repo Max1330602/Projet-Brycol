@@ -39,7 +39,7 @@ namespace App_Brycol.Vues
 
         private void EnleverThemeSombre()
         {
-            DG_coutItem.RowBackground = Brushes.White;
+            DG_coutItem.RowBackground = Brushes.CornflowerBlue;
             DG_coutItem.AlternatingRowBackground = Brushes.White;
 
             DG_coutItem.Background = Brushes.White;
