@@ -31,9 +31,11 @@ namespace App_Brycol.Modele
 
                 BitmapImage bmiItem = new BitmapImage();
                 bmiItem.BeginInit();
+                bmiItem.CacheOption = BitmapCacheOption.OnLoad;
+                bmiItem.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                 string path = System.Windows.Forms.Application.StartupPath;
-                string pathCorrect = path.Substring(0, path.IndexOf("bin")) + "images\\items\\";
-                bmiItem.UriSource = new Uri(pathCorrect + "item" + ID + ".png");
+                string pathCorrect = path.Substring(0, path.IndexOf("Brycol")) + "images\\items\\";
+                bmiItem.UriSource = new Uri("..\\..\\images\\Items\\" + "item" + ID + ".png", UriKind.Relative);
 
                 try
                 {
@@ -43,7 +45,7 @@ namespace App_Brycol.Modele
                 {
                         bmiItem = new BitmapImage();
                         bmiItem.BeginInit();
-                        bmiItem.UriSource = new Uri("../../images/Items/item0.png", UriKind.Relative);
+                        bmiItem.UriSource = new Uri("..\\..\\images\\Items\\item0.png", UriKind.Relative);
                         bmiItem.EndInit();
 
 
