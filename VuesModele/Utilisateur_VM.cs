@@ -85,6 +85,10 @@ namespace App_Brycol.VuesModele
             gridMW.Children.Add(cpMW);
             cpMW.Content = new UCCMenuPrincipal();
 
+            string pathDirectoryUser = "..\\..\\Factures\\" + user.Nom;
+
+            if (!Directory.Exists(pathDirectoryUser))
+                Directory.CreateDirectory(pathDirectoryUser);
 
         }
 

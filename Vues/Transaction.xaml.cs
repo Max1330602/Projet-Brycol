@@ -72,7 +72,7 @@ namespace App_Brycol.Vues
                 {
                     MessageConfirmation.Append(f.Fournisseur + ": " + f.Montant + "$\n");
                 }
-
+                MessageConfirmation.Append("Vos reçus de factures sont dans le fichier à votre nom dans le fichier Factures du projet");
                 if (lstFournisseurUnique.Count() == 0)
                     MessageBox.Show("Il n'y a rien à payer");
                 else
@@ -143,6 +143,7 @@ namespace App_Brycol.Vues
 
             string pathDirectoryUser = "..\\..\\Factures\\" + Utilisateur_VM.utilActuel.Nom;
             string pathDirectoryFacture = "..\\..\\Factures\\";
+            string pathDirectoryFournisseur = "";
 
             if (!Directory.Exists(pathDirectoryFacture))
                 Directory.CreateDirectory(pathDirectoryFacture);
@@ -153,6 +154,10 @@ namespace App_Brycol.Vues
             //   "../../Factures/" + Utilisateur_VM.utilActuel.Nom + "/" + f + "_" + date + ".pdf"
             foreach (string f in lstFournisseurUnique)
             {
+                pathDirectoryFournisseur = "..\\..\\Factures\\" + Utilisateur_VM.utilActuel.Nom + "\\" + f;
+                if (!Directory.Exists(pathDirectoryFournisseur))
+                    Directory.CreateDirectory(pathDirectoryFournisseur);
+
                 document = new Document();
                 page = new Page(PageSize.Letter, PageOrientation.Portrait, 54.0f);
                 document.Pages.Add(page);
@@ -169,7 +174,6 @@ namespace App_Brycol.Vues
                 page.Elements.Add(ItemsAchetes);
 
                 factureFournisseur = new Facture();
-
                 
                 string infoItem = "";
                 foreach (ItemsPlan ip in lstItemsPlansProjet)
@@ -181,30 +185,21 @@ namespace App_Brycol.Vues
                         factureFournisseur.Montant += ip.Item.Cout;
                         ip.EstPaye = "Oui";
                     }
-                    
-                    
-
                 }
 
-                Label item = new Label(infoItem, 0, 150, 504, 30, Font.Helvetica, 13, TextAlign.Left);
-                page.Elements.Add(item);
-
-                string sousTotalInfo = "Sous-total : " + factureFournisseur.Montant.ToString() + " $";
-                Label sousTotal = new Label(sousTotalInfo, 0, 250, 504, 30, Font.Helvetica, 13, TextAlign.Left);
-                page.Elements.Add(sousTotal);
-
+                infoItem += "\nSous-total : " + factureFournisseur.Montant.ToString() + " $";
 
                 decimal tps = Projet_VM.CalTPS(factureFournisseur.Montant);
-                Label TPS = new Label("TPS : " + tps + " $", 0, 280, 504, 30, Font.Helvetica, 13, TextAlign.Left);
-                page.Elements.Add(TPS);
+                infoItem += "\nTPS : " + tps + " $";
 
                 decimal tvq = Projet_VM.CalTVQ(factureFournisseur.Montant);
-                Label TVQ = new Label("TVQ : " + tvq + " $", 0, 310, 504, 30, Font.Helvetica, 13, TextAlign.Left);
-                page.Elements.Add(TVQ);
+                infoItem += "\nTVQ : " + tvq + " $";
 
                 factureFournisseur.Montant = Projet_VM.CalTotal(factureFournisseur.Montant, tps, tvq);
-                Label Total = new Label("Total : " + factureFournisseur.Montant + " $", 0, 340, 504, 30, Font.Helvetica, 13, TextAlign.Left);
-                page.Elements.Add(Total);
+                infoItem += "\nTotal : " + factureFournisseur.Montant + " $";
+
+                Label item = new Label(infoItem, 0, 150, 504, page.Dimensions.Height - (labelTitre.Height + ItemsAchetes.Height), Font.Helvetica, 13, TextAlign.Left);
+                page.Elements.Add(item);
 
                 factureFournisseur.Projet = Projet_VM.ProjetActuel;
                 factureFournisseur.Utilisateur = Utilisateur_VM.utilActuel;
@@ -213,7 +208,7 @@ namespace App_Brycol.Vues
                 lstFacturesCrees.Add(factureFournisseur);
                 if (factureFournisseur != null)
                     OutilEF.brycolContexte.Factures.Add(factureFournisseur);
-                document.Draw("..\\..\\Factures\\" + Utilisateur_VM.utilActuel.Nom + "\\"+ f + "_" + date.Year + "_" + date.Month + "_" + date.Day + "_" + date.Hour + "_" + date.Minute + "_" + date.Second + ".pdf");
+                document.Draw("..\\..\\Factures\\" + Utilisateur_VM.utilActuel.Nom + "\\"+ f + "\\" + f + "_" + date.Year + "_" + date.Month + "_" + date.Day + "_" + date.Hour + "_" + date.Minute + "_" + date.Second + ".pdf");
             }
             OutilEF.brycolContexte.SaveChanges();
         }
