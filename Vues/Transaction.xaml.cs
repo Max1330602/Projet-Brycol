@@ -16,6 +16,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ceTe.DynamicPDF;
+using Page = ceTe.DynamicPDF.Page;
+using Label = ceTe.DynamicPDF.PageElements.Label;
+using Image = ceTe.DynamicPDF.PageElements.Image;
+using System.IO;
 
 namespace App_Brycol.Vues
 {
@@ -120,23 +125,87 @@ namespace App_Brycol.Vues
             }
         }
 
+        string GetPath(string filePath)
+        {
+            var exePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
+            Regex appPathManager = new Regex(@"(?<!fil)[A-Za-z]:\\+[\S\s]*?(?=\\+bin)");
+            var appRoot = appPathManager.Match(exePath).Value;
+            return System.IO.Path.Combine(appRoot, filePath);
+        }
+
         private void CreerFactures()
         {
             Facture factureFournisseur;
-            foreach(string f in lstFournisseurUnique)
+            Document document;
+            Page page;
+            DateTime date = new DateTime();
+            date = DateTime.Now;
+
+            string pathDirectoryUser = "..\\..\\Factures\\" + Utilisateur_VM.utilActuel.Nom;
+            string pathDirectoryFacture = "..\\..\\Factures\\";
+
+            if (!Directory.Exists(pathDirectoryFacture))
+                Directory.CreateDirectory(pathDirectoryFacture);
+
+            if (!Directory.Exists(pathDirectoryUser))
+                Directory.CreateDirectory(pathDirectoryUser);
+
+            //   "../../Factures/" + Utilisateur_VM.utilActuel.Nom + "/" + f + "_" + date + ".pdf"
+            foreach (string f in lstFournisseurUnique)
             {
+                document = new Document();
+                page = new Page(PageSize.Letter, PageOrientation.Portrait, 54.0f);
+                document.Pages.Add(page);
+                Image logo = new Image("..\\..\\images\\logo.png", 0, 0);
+                logo.Align = Align.Right;
+                page.Elements.Add(logo);
+                string titre = "------------------------------------------------------------------------------------\n"
+                                                                                  + f +
+                                   "\n-----------------------------------------------------------------------------------\n";
+                Label labelTitre = new Label(titre, 0, 0, 504, 100, Font.Helvetica, 18, TextAlign.Center);
+                page.Elements.Add(labelTitre);
+
+                Label ItemsAchetes = new Label("Items Achetés : ", 0, 100, 504, 150, Font.Helvetica, 16, TextAlign.Left);
+                page.Elements.Add(ItemsAchetes);
+
                 factureFournisseur = new Facture();
-                foreach(ItemsPlan ip in lstItemsPlansProjet)
+
+                
+                string infoItem = "";
+                foreach (ItemsPlan ip in lstItemsPlansProjet)
                 {
                     if (ip.Item.Fournisseur == f && ip.EstPaye == "Non")
                     {
+                        infoItem += ip.Item.Nom + "          " + ip.Item.Cout + " $\n";
+
                         factureFournisseur.Montant += ip.Item.Cout;
                         ip.EstPaye = "Oui";
                     }
+                    
+                    
+
                 }
+
+                Label item = new Label(infoItem, 0, 150, 504, 30, Font.Helvetica, 13, TextAlign.Left);
+                page.Elements.Add(item);
+
+                string sousTotalInfo = "Sous-total : " + factureFournisseur.Montant.ToString() + " $";
+                Label sousTotal = new Label(sousTotalInfo, 0, 250, 504, 30, Font.Helvetica, 13, TextAlign.Left);
+                page.Elements.Add(sousTotal);
+
+
                 decimal tps = Projet_VM.CalTPS(factureFournisseur.Montant);
+                Label TPS = new Label("TPS : " + tps + " $", 0, 280, 504, 30, Font.Helvetica, 13, TextAlign.Left);
+                page.Elements.Add(TPS);
+
                 decimal tvq = Projet_VM.CalTVQ(factureFournisseur.Montant);
+                Label TVQ = new Label("TVQ : " + tvq + " $", 0, 310, 504, 30, Font.Helvetica, 13, TextAlign.Left);
+                page.Elements.Add(TVQ);
+
                 factureFournisseur.Montant = Projet_VM.CalTotal(factureFournisseur.Montant, tps, tvq);
+                Label Total = new Label("Total : " + factureFournisseur.Montant + " $", 0, 340, 504, 30, Font.Helvetica, 13, TextAlign.Left);
+                page.Elements.Add(Total);
+
                 factureFournisseur.Projet = Projet_VM.ProjetActuel;
                 factureFournisseur.Utilisateur = Utilisateur_VM.utilActuel;
                 factureFournisseur.Date = DateTime.Now;
@@ -144,6 +213,7 @@ namespace App_Brycol.Vues
                 lstFacturesCrees.Add(factureFournisseur);
                 if (factureFournisseur != null)
                     OutilEF.brycolContexte.Factures.Add(factureFournisseur);
+                document.Draw("..\\..\\Factures\\" + Utilisateur_VM.utilActuel.Nom + "\\"+ f + "_" + date.Year + "_" + date.Month + "_" + date.Day + "_" + date.Hour + "_" + date.Minute + "_" + date.Second + ".pdf");
             }
             OutilEF.brycolContexte.SaveChanges();
         }

@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace App_Brycol.VuesModele
 {
@@ -104,6 +105,10 @@ namespace App_Brycol.VuesModele
             OutilEF.brycolContexte.Utilisateurs.Add(user);
             OutilEF.brycolContexte.SaveChanges();
             utilActuel = user;
+
+            string pathDirectoryUser = "..\\..\\Factures\\" + user.Nom;
+            if (!Directory.Exists(pathDirectoryUser))
+                Directory.CreateDirectory(pathDirectoryUser);
 
             Grid gridMW = (Grid)Application.Current.MainWindow.FindName("gridMainWindow");
             ContentPresenter cpMW = (ContentPresenter)Application.Current.MainWindow.FindName("presenteurContenu");

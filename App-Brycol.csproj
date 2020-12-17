@@ -56,6 +56,9 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="DynamicPDF.NETFramework40, Version=11.3.0.42707, Culture=neutral, PublicKeyToken=09b5ce0d5c0a9d8b, processorArchitecture=MSIL">
+      <HintPath>packages\ceTe.DynamicPDF.CoreSuite.NET.11.3.0\lib\net40\DynamicPDF.NETFramework40.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -503,6 +506,8 @@
     <Resource Include="images\Items\item1.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Factures\facture2\" />
+    <Folder Include="Factures\Utilisateur\" />
     <Folder Include="images\ItemsModifies\Item24\" />
     <Folder Include="images\ItemsModifies\Item25\" />
     <Folder Include="images\ItemsModifies\Item26\" />
