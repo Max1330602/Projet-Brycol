@@ -41,6 +41,9 @@ namespace App_Brycol.Vues
             Banniere.Background = Brushes.LightGray;
             lblProjet.Background = Brushes.White;
 
+            btnRetour.Background = Brushes.White;
+            btnRetour.Foreground = Brushes.Black;
+
             if (btnOk.IsEnabled)
             {
                 btnOk.Background = Brushes.White;
@@ -64,6 +67,9 @@ namespace App_Brycol.Vues
 
             btnOk.Background = CouleurBouton;
             btnOk.Foreground = Brushes.White;
+
+            btnRetour.Background = CouleurBouton;
+            btnRetour.Foreground = Brushes.White;
 
             btnSupprimer.Background = CouleurBouton;
             btnSupprimer.Foreground = Brushes.White;
@@ -103,6 +109,11 @@ namespace App_Brycol.Vues
             gridMW.Children.Clear();
             gridMW.Children.Add(cpMW);
             cpMW.Content = new UCCMenuPrincipal();
+        }
+
+        private void btnRetour_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

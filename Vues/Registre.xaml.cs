@@ -57,7 +57,7 @@ namespace App_Brycol.Vues
             Banniere.Background = Brushes.LightGray;
             DG_factures.Background = Brushes.White;
 
-            DG_factures.RowBackground = Brushes.White;
+            DG_factures.RowBackground = Brushes.CornflowerBlue;
             DG_factures.AlternatingRowBackground = Brushes.White;
 
             Pied.Background = Brushes.White;

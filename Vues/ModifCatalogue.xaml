@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:App_Brycol.Vues"
         mc:Ignorable="d"
         Title="Modifier le catalogue" Height="450" Width="800">
@@ -51,15 +52,15 @@
             </Grid.ColumnDefinitions>
             <TextBlock Name="txtItem" Text="Item" FontSize="14" FontWeight="Bold"></TextBlock>
             <TextBlock Name="txbNom" Grid.Row="1" Text="Nom:"></TextBlock>
-            <TextBox Name="txtNom" Grid.Row="1" Grid.Column="1"></TextBox>
+            <TextBox  LostKeyboardFocus="txtNom_LostFocus" Name="txtNom" Grid.Row="1" Grid.Column="1"></TextBox>
             <TextBlock Name="txbPrix"  Grid.Row="2" Text="Prix:"></TextBlock>
-            <TextBox Name="txtPrix" TextChanged="txt_TextChanged" Grid.Column="1" Grid.Row="2"></TextBox>
+            <TextBox LostKeyboardFocus="txtPrix_LostKeyboardFocus" Name="txtPrix" Grid.Column="1" Grid.Row="2"></TextBox>
             <TextBlock Name="txbCategorie" Grid.Row="3" Text="Catégorie:"></TextBlock>
             <ComboBox Name="cboCategorie" ItemsSource="{Binding Categories}" Grid.Column="1" Grid.Row="3" SelectedValue="Tous"></ComboBox>
             <TextBlock Name="txbTypePiece" Grid.Row="4" Text="Type de pièce:"></TextBlock>
             <ComboBox Name="cboTypePiece" ItemsSource="{Binding TypesDePiece}" Grid.Column="1" Grid.Row="4" SelectedValue="Tous"></ComboBox>
             <TextBlock Name="txbFournisseur"  Grid.Row="5" Text="Fournisseur:"></TextBlock>
-            <TextBox Name="txtFournisseur" Grid.Column="1" Grid.Row="5"></TextBox>
+            <TextBox LostKeyboardFocus="txtFournisseur_LostKeyboardFocus" Name="txtFournisseur" Grid.Column="1" Grid.Row="5"></TextBox>
 
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1" Margin="10">
@@ -88,14 +89,14 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Name="txtDimensions" Text="Dimensions" FontSize="14" FontWeight="Bold"></TextBlock>
-            <TextBlock Name="txtCm" Grid.Column="1" Text="en cm" FontSize="14" FontWeight="Bold"></TextBlock>
+            <TextBlock Name="txtCm" Grid.Column="1" Text=" en cm" FontSize="14" FontWeight="Bold"></TextBlock>
 
             <TextBlock Name="txbLongeur" Grid.Row="1" Text="Longueur:"></TextBlock>
-            <TextBox Name="txtLongueur" Grid.Row="1" Grid.Column="1" Height="26" VerticalAlignment="Top"></TextBox>
+            <TextBox LostKeyboardFocus="txtLongueur_LostKeyboardFocus" Name="txtLongueur" Grid.Row="1" Grid.Column="1" Height="26" VerticalAlignment="Top"></TextBox>
             <TextBlock Name="txbLargeur" Grid.Row="2" Text="Largeur:"></TextBlock>
-            <TextBox Name="txtLargeur" Grid.Row="2" Grid.Column="1"></TextBox>
+            <TextBox LostKeyboardFocus="txtLargeur_LostKeyboardFocus" Name="txtLargeur" Grid.Row="2" Grid.Column="1"></TextBox>
             <TextBlock Name="txbHauteur" Grid.Row="3" Text="Hauteur:"></TextBlock>
-            <TextBox Name="txtHauteur" Grid.Row="3" Grid.Column="1"></TextBox>
+            <TextBox LostKeyboardFocus="txtHauteur_LostKeyboardFocus" Name="txtHauteur" Grid.Row="3" Grid.Column="1"></TextBox>
 
         </Grid>
         <Border x:Name="Pied" Grid.Row="2" Grid.ColumnSpan="3" Background="White"></Border>

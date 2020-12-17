@@ -38,7 +38,7 @@ namespace App_Brycol.Vues
 
         }
 
-        private void btnAnnuler_Click(object sender, RoutedEventArgs e)
+        private void btnRetour_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -68,11 +68,11 @@ namespace App_Brycol.Vues
         private void EnleverThemeSombre()
         {
 
-            btnAnnuler.Background = Brushes.White;
-            btnAnnuler.Foreground = Brushes.Black;
+            btnRetour.Background = Brushes.White;
+            btnRetour.Foreground = Brushes.Black;
 
             btnAppliquer.Background = Brushes.White;
-            btnAnnuler.Foreground = Brushes.Black;
+            btnRetour.Foreground = Brushes.Black;
 
             grdModifPorte.Background = Brushes.White;
 
@@ -87,8 +87,8 @@ namespace App_Brycol.Vues
             Brush CouleurArriere = (Brush)bc.ConvertFrom("#33342F");
             Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
 
-            btnAnnuler.Background = CouleurBouton;
-            btnAnnuler.Foreground = Brushes.White;
+            btnRetour.Background = CouleurBouton;
+            btnRetour.Foreground = Brushes.White;
 
             btnAppliquer.Background = CouleurBouton;
             btnAppliquer.Foreground = Brushes.White;

@@ -190,7 +190,7 @@ namespace App_Brycol.Vues
             popUp.ShowDialog();
         }
 
-        private void btnQuitter_Click(object sender, RoutedEventArgs e)
+        private void btnRetour_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -537,8 +537,8 @@ namespace App_Brycol.Vues
 
             btnThemeSombre.Background = CouleurBouton;
 
-            btnQuitter.Background = CouleurBouton;
-            btnQuitter.Foreground = Brushes.White;
+            btnRetour.Background = CouleurBouton;
+            btnRetour.Foreground = Brushes.White;
 
             txtProjet.Background = CouleurBanniere;
             Banniere.Background = CouleurBanniere;
@@ -585,8 +585,8 @@ namespace App_Brycol.Vues
 
             btnThemeSombre.Background = Brushes.White;
 
-            btnQuitter.Background = Brushes.White;
-            btnQuitter.Foreground = Brushes.Black;
+            btnRetour.Background = Brushes.White;
+            btnRetour.Foreground = Brushes.Black;
 
             txtProjet.Background = Brushes.LightGray;
             Banniere.Background = Brushes.LightGray;

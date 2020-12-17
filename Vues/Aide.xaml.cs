@@ -35,8 +35,8 @@ namespace App_Brycol.Vues
             Banniere.Background = Brushes.LightGray;
             Corps.Background = Brushes.White;
 
-            btnTerminer.Background = Brushes.White;
-            btnTerminer.Foreground = Brushes.Black;
+            btnRetour.Background = Brushes.White;
+            btnRetour.Foreground = Brushes.Black;
         }
 
         private void AppliquerThemeSombre()
@@ -49,11 +49,11 @@ namespace App_Brycol.Vues
             Banniere.Background = CouleurBanniere;
             Corps.Background = Brushes.LightGray;
 
-            btnTerminer.Background = CouleurBouton;
-            btnTerminer.Foreground = Brushes.White;
+            btnRetour.Background = CouleurBouton;
+            btnRetour.Foreground = Brushes.White;
         }
 
-        private void btnTerminer_click(object sender, RoutedEventArgs e)
+        private void btnRetour_click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
