@@ -121,6 +121,7 @@ namespace App_Brycol.Vues
 
         private void EnleverThemeSombre()
         {
+         
             Banniere.Background = Brushes.LightGray;
 
             grdCoutParent.Background = Brushes.White;

@@ -61,6 +61,7 @@ namespace App_Brycol.Vues
             Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
             Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
 
+
             BitmapImage bmiLogo = new BitmapImage();
             bmiLogo.BeginInit();
             bmiLogo.CacheOption = BitmapCacheOption.OnLoad;
@@ -89,17 +90,20 @@ namespace App_Brycol.Vues
 
         private void EnleverThemeSombre()
         {
+            BrushConverter bc = new BrushConverter();
+            Brush Couleur = (Brush)bc.ConvertFrom("#4DAFFF");
+
             btnAjouter.Background = Brushes.White;
             btnAjouter.Foreground = Brushes.Black;
 
             btnRetour.Background = Brushes.White;
             btnRetour.Foreground = Brushes.Black;
 
-            DG_items.RowBackground = Brushes.CornflowerBlue;
+            DG_items.RowBackground = Couleur;
             DG_items.AlternatingRowBackground = Brushes.White;
             DG_items.Background = Brushes.White;
 
-            DG_ListeItems.RowBackground = Brushes.CornflowerBlue;
+            DG_ListeItems.RowBackground = Couleur;
             DG_ListeItems.AlternatingRowBackground = Brushes.White;
             DG_ListeItems.Background = Brushes.White;
 

@@ -72,6 +72,9 @@ namespace App_Brycol.Vues
 
         private void EnleverThemeSombre()
         {
+            BrushConverter bc = new BrushConverter();
+            Brush Couleur = (Brush)bc.ConvertFrom("#4DAFFF");
+
             btnAjouter.Background = Brushes.White;
             btnAjouter.Foreground = Brushes.Black;
 
@@ -84,10 +87,10 @@ namespace App_Brycol.Vues
             btnModifierCatalogue.Background = Brushes.White;
             btnModifierCatalogue.Foreground = Brushes.Black;
 
-            DG_items.RowBackground = Brushes.CornflowerBlue;
+            DG_items.RowBackground = Couleur;
             DG_items.AlternatingRowBackground = Brushes.White;
 
-            DG_ListeItems.RowBackground = Brushes.CornflowerBlue;
+            DG_ListeItems.RowBackground = Couleur;
             DG_ListeItems.AlternatingRowBackground = Brushes.White;
             DG_ListeItems.Background = Brushes.White;
 
@@ -113,6 +116,8 @@ namespace App_Brycol.Vues
             Brush CouleurArriere = (Brush)bc.ConvertFrom("#33342F");
             Brush CouleurBanniere = (Brush)bc.ConvertFrom("#84857D");
             Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
+          
+           
 
             btnAjouter.Background = CouleurBouton;
             btnAjouter.Foreground = Brushes.White;

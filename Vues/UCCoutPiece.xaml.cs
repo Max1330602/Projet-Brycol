@@ -40,9 +40,12 @@ namespace App_Brycol.Vues
 
         private void EnleverThemeSombre()
         {
+            BrushConverter bc = new BrushConverter();
+            Brush Couleur = (Brush)bc.ConvertFrom("#4DAFFF");
+
             DG_coutItem.Background = Brushes.White;
 
-            DG_coutItem.RowBackground = Brushes.CornflowerBlue;
+            DG_coutItem.RowBackground = Couleur;
             DG_coutItem.AlternatingRowBackground = Brushes.White; 
         }
 

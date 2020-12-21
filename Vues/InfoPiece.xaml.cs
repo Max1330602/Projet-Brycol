@@ -55,23 +55,24 @@ namespace App_Brycol.Vues
 
         private void btnContinuer_Click(object sender, RoutedEventArgs e)
         {
-            if ((bool)chkDimensions.IsChecked)
-            {
-                this.Close();
-                btnContinuer.SetBinding(Button.CommandProperty, new Binding("cmdPiece"));
-                return;
-            }
-            if ((bool)pied.IsChecked && (Double.Parse(txtLongueur.Text) > 100 || Double.Parse(txtLongueur.Text) < 3))
+           
+            if ((bool)pied.IsChecked && ((Double.Parse(txtLongueur.Text) > 100 || Double.Parse(txtLongueur.Text) < 3) || (Double.Parse(txtLargeur.Text) > 100 || Double.Parse(txtLargeur.Text) < 3)) && chkDimensions.IsChecked == false)
             {
                 MessageBox.Show("Les dimensions ne sont pas valides. (Maximum 100 pieds et minimum de 3 pieds)");
                 return;
             }
-            else if ((bool)metre.IsChecked && (Double.Parse(txtLongueur.Text) > 30 || Double.Parse(txtLongueur.Text) < 1))
+            else if ((bool)metre.IsChecked && ((Double.Parse(txtLongueur.Text) > 30 || Double.Parse(txtLongueur.Text) < 1) || (Double.Parse(txtLargeur.Text) > 30 || Double.Parse(txtLargeur.Text) < 1)) && chkDimensions.IsChecked == false)
             {
-                MessageBox.Show("Les dimensions ne sont pas valides. (Maximum de 30 mètres et minimum de 3 mètres)");
+                MessageBox.Show("Les dimensions ne sont pas valides. (Maximum de 30 mètres et minimum de 1 mètres)");
                 return;
             }
-                   
+          /*  if ((bool)chkDimensions.IsChecked)
+            {
+                this.Close();
+                btnContinuer.SetBinding(Button.CommandProperty, new Binding("cmdPiece"));
+                return;
+            }*/
+
             this.Close();
             btnContinuer.SetBinding(Button.CommandProperty, new Binding("cmdPiece"));
         }
@@ -128,15 +129,29 @@ namespace App_Brycol.Vues
 
         private void txtLongueur_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (txtLongueur.Text != "" && txtLargeur.Text != "")
-                txtSuperf.Text = (Math.Round(Convert.ToDouble(txtLargeur.Text) * Convert.ToDouble(txtLongueur.Text), 2)).ToString();
+            if (txtLongueur.Value > 0 || txtLargeur.Value > 0)
+            { 
+                txtSuperf.Text = (Math.Round(Convert.ToDouble(txtLargeur.Value) * Convert.ToDouble(txtLongueur.Value), 2)).ToString();
+                chkDimensions.IsChecked = false;
+            }
+            else if(txtLongueur.Value == 0 && txtLargeur.Value == 0)
+            {
+                chkDimensions.IsChecked = true;
+            }
 
         }
 
         private void txtLargeur_ValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (txtLongueur.Text != "" && txtLargeur.Text != "")
-                txtSuperf.Text = (Math.Round(Convert.ToDouble(txtLargeur.Text) * Convert.ToDouble(txtLongueur.Text), 2)).ToString();
+            if (txtLongueur.Value > 0 || txtLargeur.Value >  0 )
+            {
+                txtSuperf.Text = (Math.Round(Convert.ToDouble(txtLargeur.Value) * Convert.ToDouble(txtLongueur.Value), 2)).ToString();
+                chkDimensions.IsChecked = false;
+            }
+            else if (txtLongueur.Value == 0 && txtLargeur.Value == 0)
+            {
+                chkDimensions.IsChecked = true;
+            }
         }
 
         private void EnleverThemeSombre()
@@ -168,8 +183,12 @@ namespace App_Brycol.Vues
 
         private void CheckBoxChangedON(object sender, RoutedEventArgs e)
         {
-            
-               
+            if (txtLargeur != null && txtLongueur != null)
+            {
+                txtLongueur.Value = 0;
+                txtLargeur.Value = 0;
+            }
+         
 
         }
 

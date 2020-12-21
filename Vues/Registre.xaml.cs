@@ -54,10 +54,13 @@ namespace App_Brycol.Vues
 
         private void EnleverThemeSombre()
         {
+            BrushConverter bc = new BrushConverter();
+            Brush Couleur = (Brush)bc.ConvertFrom("#4DAFFF");
+
             Banniere.Background = Brushes.LightGray;
             DG_factures.Background = Brushes.White;
 
-            DG_factures.RowBackground = Brushes.CornflowerBlue;
+            DG_factures.RowBackground = Couleur;
             DG_factures.AlternatingRowBackground = Brushes.White;
 
             Pied.Background = Brushes.White;

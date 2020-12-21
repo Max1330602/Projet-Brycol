@@ -965,14 +965,16 @@ namespace App_Brycol.Vues
                     Canvas.SetLeft(draggedImage, Canvas.GetLeft(draggedImage) + offset.X);
                     Canvas.SetTop(draggedImage, Canvas.GetTop(draggedImage) + offset.Y);
 
-                    if (itemSelectionee.Count != 0)
+                    /*if (itemSelectionee.Count != 0)
                     {
                         foreach (Image item in itemSelectionee)
                         {
                             Canvas.SetLeft(item, Canvas.GetLeft(item) + offset.X);
                             Canvas.SetTop(item, Canvas.GetTop(item) + offset.Y);
                         }
-                    }
+                    }*/
+
+               
                     
                 }
                 else
@@ -1163,6 +1165,7 @@ namespace App_Brycol.Vues
                                         btntoolRotation.Visibility = Visibility.Hidden;
                                         btntoolSupprimer.Visibility = Visibility.Hidden;
                                         btntoolModifier.Visibility = Visibility.Hidden;
+                                        btntoolDeselection.Visibility = Visibility.Hidden;
                                     }
                                 }
                                 foreach (Image image in canvasMur.Children.OfType<Image>())
@@ -1175,6 +1178,7 @@ namespace App_Brycol.Vues
                                         btntoolRotation.Visibility = Visibility.Hidden;
                                         btntoolSupprimer.Visibility = Visibility.Hidden;
                                         btntoolModifier.Visibility = Visibility.Hidden;
+                                        btntoolDeselection.Visibility = Visibility.Hidden;
                                     }
                                 }
                                 Item_VM.ItemsPlanActuel.Remove(ip);
@@ -1183,6 +1187,7 @@ namespace App_Brycol.Vues
                                 btntoolRotation.Visibility = Visibility.Hidden;
                                 btntoolSupprimer.Visibility = Visibility.Hidden;
                                 btntoolModifier.Visibility = Visibility.Hidden;
+                                btntoolDeselection.Visibility = Visibility.Hidden;
                                 OutilEF.brycolContexte.lstItems.Remove(ip);
                                 OutilEF.brycolContexte.SaveChanges();
                                 return;
@@ -1205,6 +1210,7 @@ namespace App_Brycol.Vues
                                             btntoolRotation.Visibility = Visibility.Hidden;
                                             btntoolSupprimer.Visibility = Visibility.Hidden;
                                             btntoolModifier.Visibility = Visibility.Hidden;
+                                            btntoolDeselection.Visibility = Visibility.Hidden;
                                         }
                                     }
                                     itemSelectionee.Remove(item);
@@ -1213,6 +1219,7 @@ namespace App_Brycol.Vues
                                     btntoolRotation.Visibility = Visibility.Hidden;
                                     btntoolSupprimer.Visibility = Visibility.Hidden;
                                     btntoolModifier.Visibility = Visibility.Hidden;
+                                    btntoolDeselection.Visibility = Visibility.Hidden;
                                     OutilEF.brycolContexte.lstItems.Remove(ip);
                                     OutilEF.brycolContexte.SaveChanges();
                                 }
@@ -1779,10 +1786,26 @@ namespace App_Brycol.Vues
 
         private void CanvasZoomMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+
+           
+
+
+
+
+
             if (Piece_VM.pieceActuel.Longueur == 0 && Piece_VM.pieceActuel.Largeur == 0)
             {
                 if (pieceCreer == false)
                 {
+                    if (Convert.ToSingle(rectanglePieceHeight) / pixelToM > 30 || Convert.ToSingle(rectanglePieceHeight) / pixelToM < 1 || Convert.ToSingle(rectanglePieceWidth) / pixelToM > 30 || Convert.ToSingle(rectanglePieceWidth) / pixelToM < 1)
+                    {
+                        MessageBox.Show("Les dimensions ne sont pas valides. (Maximum de 30 mètres et minimum de 1 mètres)");
+                        canvas_Zoom.Children.RemoveRange(1, 3);
+                        return;
+                    }
+
+
+
                     MessageBoxResult resultat;
                     resultat = System.Windows.MessageBox.Show("Voulez-vous vraiment créer une pièce de dimension "+ Convert.ToSingle(rectanglePieceHeight) / pixelToM + " par " + Convert.ToSingle(rectanglePieceWidth) / pixelToM + "?", "Création de la pièce", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
                     if (resultat == MessageBoxResult.Yes)
@@ -1838,6 +1861,11 @@ namespace App_Brycol.Vues
         {
             BrushConverter bc = new BrushConverter();
             Brush CouleurBouton = (Brush)bc.ConvertFrom("#45463F");
+            Brush CouleurArrierePlan = (Brush)bc.ConvertFrom("#7D7E79");
+
+            canvas_Zoom.Background = CouleurArrierePlan;
+            dimensionAffichage.Background = CouleurBouton;
+            dimensionAffichage.Foreground = Brushes.White;
 
             btnClipPieceDeclipper.Background = CouleurBouton;
             btnClipPieceDeclipper.Foreground = Brushes.White;

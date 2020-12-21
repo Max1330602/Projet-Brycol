@@ -65,7 +65,7 @@ namespace App_Brycol.Vues
             btnRetour.Background = CouleurBouton;
             btnRetour.Foreground = Brushes.White;
 
-            grdModifierCatalogue.Background = CouleurArriere;
+            grdModifierCatalogue.Background = CouleurBanniere;
             Pied.Background = CouleurArrierePlan;
         }
 
