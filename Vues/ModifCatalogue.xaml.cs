@@ -227,7 +227,7 @@ namespace App_Brycol.Vues
         private void txtNom_LostFocus(object sender, RoutedEventArgs e)
         { 
 
-            Regex reg = new Regex("^[a-zA-Z0-9]*$");
+            Regex reg = new Regex("^[a-zA-Z0-9\\-\\s]+$");
             if (txtNom.Text != "" && (txtNom.Text.Length < 2 || txtNom.Text.Length > 30))
             {
                 MessageBox.Show("La longueur du nom n'est pas valide, veuillez corriger cette erreur.");
@@ -242,8 +242,8 @@ namespace App_Brycol.Vues
 
         private void txtPrix_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            int number = 1;
-            if (txtPrix.Text != "" && !Int32.TryParse(txtPrix.Text,out number))
+            double number = 1;
+            if (txtPrix.Text != "" && !Double.TryParse(txtPrix.Text,out number))
             {
                 MessageBox.Show("Ce champ accepte seulement des chiffres, veuillez corriger cette erreur.");
                 txtPrix.Focus();
@@ -257,7 +257,7 @@ namespace App_Brycol.Vues
 
         private void txtFournisseur_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            Regex reg = new Regex("^[a-zA-Z0-9]*$");
+            Regex reg = new Regex("^[a-zA-Z0-9\\-\\s]+$");
             if (txtFournisseur.Text != "" && (txtFournisseur.Text.Length < 2 || txtFournisseur.Text.Length > 30))
             {
                 MessageBox.Show("La longueur du fournisseur n'est pas valide, veuillez corriger cette erreur.");
