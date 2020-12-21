@@ -1,6 +1,7 @@
 ﻿using App_Brycol.VuesModele;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +57,12 @@ namespace App_Brycol.Vues
         private void btnRetour_click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void ouvrirGuide(object sender, RoutedEventArgs e)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo("..\\..\\guide.pdf");
+            Process.Start(startInfo);
         }
     }
 }
